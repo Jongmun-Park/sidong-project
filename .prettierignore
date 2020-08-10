@@ -1,0 +1,15 @@
+node_modules
+package.json
+package-lock.json
+public
+next.config.js
+
+.github
+
+lib
+generated
+build
+.next
+lib
+esm
+generated
