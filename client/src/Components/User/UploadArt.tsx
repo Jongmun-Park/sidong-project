@@ -2,8 +2,6 @@ import React, { FunctionComponent } from 'react'
 import { Container, Typography, TextField, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import ImageUploader from '../ImageUploader'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,7 +28,6 @@ const UploadArt: FunctionComponent = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="subtitle1">이미지 업로드</Typography>
-          <ImageUploader />
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>xs=6</Paper>

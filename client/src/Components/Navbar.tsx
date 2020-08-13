@@ -9,7 +9,7 @@ import ToolBar from '@material-ui/core/Toolbar'
 import SignUp from './User/SignUp'
 import Login from './User/Login'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   navbar: {
     width: '100%',
     '& >div': { float: 'right' },
