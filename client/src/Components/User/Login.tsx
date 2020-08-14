@@ -11,8 +11,8 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 interface LoginProps {
-  open: boolean
-  setOpen: (arg: boolean) => any
+  openDialog: boolean
+  handleOpenDialog: (arg: boolean) => any
 }
 
 interface LoginInputProps {
@@ -28,7 +28,7 @@ const LOGIN_MUTATION = gql`
   }
 `
 
-const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
+const Login: FunctionComponent<LoginProps> = ({ openDialog, handleOpenDialog }) => {
   const [loginUser] = useMutation(LOGIN_MUTATION, {
     onError: (error) => {
       alert('이메일과 비밀번호를 확인해주세요.')
@@ -41,7 +41,7 @@ const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
   })
 
   const handleClose = () => {
-    setOpen(false)
+    handleOpenDialog(false)
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +68,7 @@ const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
   }, [inputs, loginUser])
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="login-dialog">
+    <Dialog open={openDialog} onClose={handleClose} aria-labelledby="login-dialog">
       <DialogTitle id="login-dialog">로그인</DialogTitle>
       <DialogContent>
         <TextField

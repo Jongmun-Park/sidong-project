@@ -11,8 +11,8 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 interface SignUpProps {
-  open: boolean
-  setOpen: (arg: boolean) => any
+  openDialog: boolean
+  handleOpenDialog: (arg: boolean) => any
 }
 
 interface SignUpInputProps {
@@ -33,7 +33,7 @@ const SIGN_UP_MUTATION = gql`
   }
 `
 
-const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
+const SignUp: FunctionComponent<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
   const [createUser] = useMutation(SIGN_UP_MUTATION)
   const [inputs, setInputs] = useState<SignUpInputProps>({
     email: '',
@@ -42,7 +42,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
   })
 
   const handleClose = () => {
-    setOpen(false)
+    handleOpenDialog(false)
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,13 +69,14 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
 
     if (data.createUser.success) {
       alert('회원 가입이 완료됐습니다. 감사합니다.')
+      handleOpenDialog(false)
     } else {
       alert('이미 등록된 이메일입니다.')
     }
-  }, [inputs, createUser])
+  }, [inputs, createUser, handleOpenDialog])
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="sign-up-dialog">
+    <Dialog open={openDialog} onClose={handleClose} aria-labelledby="sign-up-dialog">
       <DialogTitle id="sign-up-dialog">회원 가입</DialogTitle>
       <DialogContent>
         {/* <DialogContentText></DialogContentText> */}

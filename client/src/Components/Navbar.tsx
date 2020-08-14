@@ -3,8 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import React, { FunctionComponent, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Button } from '@material-ui/core'
-import ToolBar from '@material-ui/core/Toolbar'
+import { AppBar, Button, Toolbar } from '@material-ui/core'
 
 import SignUp from './User/SignUp'
 import Login from './User/Login'
@@ -57,7 +56,7 @@ const NavBar: FunctionComponent = () => {
 
   return (
     <AppBar color="inherit" position="static">
-      <ToolBar>
+      <Toolbar>
         <a href="/">
           <img
             alt="Brand Logo"
@@ -87,8 +86,8 @@ const NavBar: FunctionComponent = () => {
               >
                 회원 가입
               </Button>
-              {signUpOpen && <SignUp open={signUpOpen} setOpen={setSignUpOpen} />}
-              {logInOpen && <Login open={logInOpen} setOpen={setLogInOpen} />}
+              {signUpOpen && <SignUp openDialog={signUpOpen} handleOpenDialog={setSignUpOpen} />}
+              {logInOpen && <Login openDialog={logInOpen} handleOpenDialog={setLogInOpen} />}
             </div>
           ) : (
             <div>
@@ -98,7 +97,7 @@ const NavBar: FunctionComponent = () => {
             </div>
           )}
         </nav>
-      </ToolBar>
+      </Toolbar>
     </AppBar>
   )
 }
