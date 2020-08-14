@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer, useCallback } from 'react'
+import React, { FunctionComponent, ChangeEvent, useCallback, useState } from 'react'
 import {
   Button,
   TextField,
@@ -7,13 +7,18 @@ import {
   DialogContent,
   DialogTitle,
 } from '@material-ui/core'
-import { changeValueReducer } from '../../utils'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 interface SignUpProps {
   open: boolean
   setOpen: (arg: boolean) => any
+}
+
+interface SignUpInputProps {
+  email: string
+  password: string
+  passwordForCheck: string
 }
 
 const SIGN_UP_MUTATION = gql`
@@ -30,29 +35,36 @@ const SIGN_UP_MUTATION = gql`
 
 const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
   const [createUser] = useMutation(SIGN_UP_MUTATION)
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const [inputState, dispatch] = useReducer(changeValueReducer, {
+  const [inputs, setInputs] = useState<SignUpInputProps>({
     email: '',
     password: '',
     passwordForCheck: '',
   })
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   const handleJoinButton = useCallback(async () => {
-    if (inputState.password === '') {
+    if (inputs.password === '') {
       alert('비밀번호를 입력해주세요.')
       return
     }
 
-    if (inputState.password !== inputState.passwordForCheck) {
+    if (inputs.password !== inputs.passwordForCheck) {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
 
     const { data } = await createUser({
-      variables: { email: inputState.email, password: inputState.password },
+      variables: { email: inputs.email, password: inputs.password },
     })
 
     if (data.createUser.success) {
@@ -60,11 +72,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
     } else {
       alert('이미 등록된 이메일입니다.')
     }
-  }, [inputState, createUser])
-
-  const handleInputChange = useCallback((event) => {
-    dispatch(event.target)
-  }, [])
+  }, [inputs, createUser])
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="sign-up-dialog">
@@ -77,7 +85,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
           label="이메일 주소"
           type="email"
           name="email"
-          value={inputState.email}
+          value={inputs.email}
           onChange={handleInputChange}
           fullWidth
         />
@@ -86,7 +94,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
           label="비밀번호"
           type="password"
           name="password"
-          value={inputState.password}
+          value={inputs.password}
           onChange={handleInputChange}
           fullWidth
         />
@@ -95,7 +103,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ open, setOpen }) => {
           label="비밀번호 확인"
           type="password"
           name="passwordForCheck"
-          value={inputState.passwordForCheck}
+          value={inputs.passwordForCheck}
           onChange={handleInputChange}
           fullWidth
         />

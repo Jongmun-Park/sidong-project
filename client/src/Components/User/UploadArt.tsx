@@ -27,7 +27,13 @@ const UploadArt: FunctionComponent = () => {
           <TextField autoFocus margin="dense" type="text" name="artName" fullWidth />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="subtitle1">이미지 업로드</Typography>
+          <Typography variant="subtitle1">대표 이미지 선택</Typography>
+          <input
+            type="file"
+            name="thumbnail"
+            accept="image/*"
+            style={{ marginTop: '10px' }}
+          ></input>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>xs=6</Paper>

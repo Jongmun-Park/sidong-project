@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer, useCallback } from 'react'
+import React, { FunctionComponent, ChangeEvent, useCallback, useState } from 'react'
 import {
   Button,
   TextField,
@@ -7,13 +7,17 @@ import {
   DialogContent,
   DialogTitle,
 } from '@material-ui/core'
-import { changeValueReducer } from '../../utils'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 interface LoginProps {
   open: boolean
   setOpen: (arg: boolean) => any
+}
+
+interface LoginInputProps {
+  email: string
+  password: string
 }
 
 const LOGIN_MUTATION = gql`
@@ -31,34 +35,37 @@ const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
     },
   })
 
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const [inputState, dispatch] = useReducer(changeValueReducer, {
+  const [inputs, setInputs] = useState<LoginInputProps>({
     email: '',
     password: '',
   })
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   const handleLoginButton = useCallback(async () => {
-    if (inputState.password === '') {
+    if (inputs.password === '') {
       alert('비밀번호를 입력해주세요.')
       return
     }
 
     const result = await loginUser({
-      variables: { email: inputState.email, password: inputState.password },
+      variables: { email: inputs.email, password: inputs.password },
     })
 
     if (result) {
       sessionStorage.setItem('token', result.data.tokenAuth.token)
       window.location.reload()
     }
-  }, [inputState, loginUser])
-
-  const handleInputChange = useCallback((event) => {
-    dispatch(event.target)
-  }, [])
+  }, [inputs, loginUser])
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="login-dialog">
@@ -70,7 +77,7 @@ const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
           label="이메일 주소"
           type="email"
           name="email"
-          value={inputState.email}
+          value={inputs.email}
           onChange={handleInputChange}
           fullWidth
         />
@@ -79,7 +86,7 @@ const Login: FunctionComponent<LoginProps> = ({ open, setOpen }) => {
           label="비밀번호"
           type="password"
           name="password"
-          value={inputState.password}
+          value={inputs.password}
           onChange={handleInputChange}
           fullWidth
         />
