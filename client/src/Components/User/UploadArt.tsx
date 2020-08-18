@@ -1,6 +1,8 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react'
 import { Container, Typography, TextField, Grid, Paper, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -11,16 +13,37 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface UploadArtInputProps {
-  artName: string
+  name: string
   thumbnail: FileList | null
 }
 
+const UPLOAD_ART_MUTATION = gql`
+  mutation CreateArt($name: String!, $thumbnail: Upload!) {
+    createArt(name: $name, thumbnail: $thumbnail) {
+      success
+    }
+  }
+`
+
 const UploadArt: FunctionComponent = () => {
   const classes = useStyles({})
+  const [createArt] = useMutation(UPLOAD_ART_MUTATION)
   const [inputs, setInputs] = useState<UploadArtInputProps>({
-    artName: '',
+    name: '',
     thumbnail: null,
   })
+
+  const handleUpload = async () => {
+    console.log('inputs.thumbnail :', inputs.thumbnail)
+    const { data } = await createArt({
+      variables: {
+        name: inputs.name,
+        thumbnail: inputs.thumbnail,
+      },
+    })
+
+    console.log(data)
+  }
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs({
@@ -49,8 +72,8 @@ const UploadArt: FunctionComponent = () => {
             autoFocus
             margin="dense"
             type="text"
-            name="artName"
-            value={inputs.artName}
+            name="name"
+            value={inputs.name}
             onChange={handleValueChange}
             fullWidth
           />
@@ -84,7 +107,12 @@ const UploadArt: FunctionComponent = () => {
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
       </Grid>
-      <Button color="primary" variant="contained" style={{ marginTop: '25px', float: 'right' }}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={handleUpload}
+        style={{ marginTop: '25px', float: 'right' }}
+      >
         등록하기
       </Button>
     </Container>
