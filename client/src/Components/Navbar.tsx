@@ -91,8 +91,8 @@ const NavBar: FunctionComponent = () => {
             </div>
           ) : (
             <div>
-              <Button variant="outlined" color="primary" href="/upload-art">
-                작품 등록
+              <Button variant="outlined" color="primary" href="/upload-post">
+                게시글 등록
               </Button>
             </div>
           )}

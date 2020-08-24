@@ -12,32 +12,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface UploadArtInputProps {
-  name: string
+interface UploadPostInputProps {
+  title: string
   thumbnail: FileList | null
 }
 
-const UPLOAD_ART_MUTATION = gql`
-  mutation CreateArt($name: String!, $thumbnail: Upload!) {
-    createArt(name: $name, thumbnail: $thumbnail) {
+const UPLOAD_POST_MUTATION = gql`
+  mutation CreatePost($title: String!, $thumbnail: Upload!) {
+    createPost(title: $title, thumbnail: $thumbnail) {
       success
     }
   }
 `
 
-const UploadArt: FunctionComponent = () => {
+const UploadPost: FunctionComponent = () => {
   const classes = useStyles({})
-  const [createArt] = useMutation(UPLOAD_ART_MUTATION)
-  const [inputs, setInputs] = useState<UploadArtInputProps>({
-    name: '',
+  const [createPost] = useMutation(UPLOAD_POST_MUTATION)
+  const [inputs, setInputs] = useState<UploadPostInputProps>({
+    title: '',
     thumbnail: null,
   })
 
   const handleUpload = async () => {
     console.log('inputs.thumbnail :', inputs.thumbnail)
-    const { data } = await createArt({
+    const { data } = await createPost({
       variables: {
-        name: inputs.name,
+        title: inputs.title,
         thumbnail: inputs.thumbnail,
       },
     })
@@ -63,23 +63,23 @@ const UploadArt: FunctionComponent = () => {
   return (
     <Container maxWidth="md">
       <Typography variant="h5" style={{ marginTop: '30px', marginBottom: '30px' }}>
-        작품 등록
+        게시글 등록
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography variant="subtitle1">작품명</Typography>
+          <Typography variant="subtitle1">제 목</Typography>
           <TextField
             autoFocus
             margin="dense"
             type="text"
-            name="name"
-            value={inputs.name}
+            name="title"
+            value={inputs.title}
             onChange={handleValueChange}
             fullWidth
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="subtitle1">대표 이미지 선택</Typography>
+          <Typography variant="subtitle1">썸네일 이미지 선택</Typography>
           <input
             type="file"
             name="thumbnail"
@@ -119,4 +119,4 @@ const UploadArt: FunctionComponent = () => {
   )
 }
 
-export default UploadArt
+export default UploadPost
