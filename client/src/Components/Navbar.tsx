@@ -92,7 +92,7 @@ const NavBar: FunctionComponent = () => {
           ) : (
             <div>
               <Button variant="outlined" color="primary" href="/upload-post">
-                게시글 등록
+                글쓰기
               </Button>
             </div>
           )}

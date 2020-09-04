@@ -62,10 +62,7 @@ const UploadPost: FunctionComponent = () => {
   console.log('inputs:', inputs)
   return (
     <Container maxWidth="md">
-      <Typography variant="h5" style={{ marginTop: '30px', marginBottom: '30px' }}>
-        게시글 등록
-      </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{ marginTop: '23px' }}>
         <Grid item xs={12}>
           <Typography variant="subtitle1">제 목</Typography>
           <TextField
