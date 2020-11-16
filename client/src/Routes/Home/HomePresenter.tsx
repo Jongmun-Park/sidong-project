@@ -10,8 +10,8 @@ const useStyles = makeStyles({
   wrapper: {
     margin: '50px 30px 50px 30px',
     display: 'grid',
-    gridAutoRows: '400px',
-    gridTemplateColumns: 'repeat(auto-fit, 300px)',
+    gridAutoRows: '350px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 300px))',
     gridGap: '50px',
     justifyContent: 'center',
     // backgroundColor: '#25282c'
