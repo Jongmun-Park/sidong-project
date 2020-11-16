@@ -7,6 +7,38 @@ const useStyles = makeStyles({
   root: {
     marginLeft: '15px',
   },
+  wrapper: {
+    margin: '50px 30px 50px 30px',
+    display: 'grid',
+    gridAutoRows: '400px',
+    gridTemplateColumns: 'repeat(auto-fit, 300px)',
+    gridGap: '50px',
+    justifyContent: 'center',
+    // backgroundColor: '#25282c'
+    // gridAutoRows: 'minmax(100px, auto)',
+    // justifyItems: 'center',
+    // alignItems: 'center',
+  },
+  // one: {
+  //   gridColumn: '1 / 3',
+  //   gridRow: '1',
+  // },
+  // two: {
+  //   gridColumn: '2 / 4',
+  //   gridRow: '1 / 3',
+  // },
+  // three: {
+  //   gridColumn: '1',
+  //   gridRow: '2 / 5',
+  // },
+  // four: {
+  //   gridColumn: 3,
+  //   gridRow: 3,
+  // },
+  // five: {
+  //   gridColumn: 2,
+  //   gridRow: 4,
+  // },
 })
 
 interface HomeProps {
@@ -16,9 +48,9 @@ interface HomeProps {
 const HomePresenter: React.FC<HomeProps> = ({ artworks }) => {
   const classes = useStyles({})
   return (
-    <Grid className={classes.root} container spacing={2}>
+    <div className={classes.wrapper}>
       {artworks &&
-        artworks.map((artwork) => (
+        artworks.concat(artworks).map((artwork) => (
           <Poster
             key={artwork.id}
             title={artwork.title}
@@ -29,7 +61,9 @@ const HomePresenter: React.FC<HomeProps> = ({ artworks }) => {
             date={artwork.date}
           />
         ))}
-    </Grid>
+    </div>
+    // <Grid className={classes.root} container spacing={2}>
+    // </Grid>
   )
 }
 

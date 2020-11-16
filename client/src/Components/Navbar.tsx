@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import React, { FunctionComponent, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Button, Grid, Toolbar } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 
 import SignUp from './User/SignUp'
 import Login from './User/Login'
@@ -15,11 +15,6 @@ const useStyles = makeStyles(() => ({
     height: '60px',
     backgroundColor: 'rgb(255, 255, 255)',
     borderBottom: '1px solid rgb(229, 229, 229)',
-    // '& a': {
-    //   textDecoration: 'none',
-    //   padding: '10px 20px',
-    //   '&:hover': { color: '#B22222' },
-    // },
   },
   headerLogo: {
     display: 'flex',
@@ -112,8 +107,6 @@ const NavBar: FunctionComponent = () => {
         </div>
       </nav>
     </header>
-    //   </Toolbar>
-    // </AppBar>
   )
 }
 
