@@ -19,26 +19,6 @@ const useStyles = makeStyles({
     // justifyItems: 'center',
     // alignItems: 'center',
   },
-  // one: {
-  //   gridColumn: '1 / 3',
-  //   gridRow: '1',
-  // },
-  // two: {
-  //   gridColumn: '2 / 4',
-  //   gridRow: '1 / 3',
-  // },
-  // three: {
-  //   gridColumn: '1',
-  //   gridRow: '2 / 5',
-  // },
-  // four: {
-  //   gridColumn: 3,
-  //   gridRow: 3,
-  // },
-  // five: {
-  //   gridColumn: 2,
-  //   gridRow: 4,
-  // },
 })
 
 interface HomeProps {

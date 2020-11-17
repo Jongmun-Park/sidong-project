@@ -5,7 +5,7 @@ import { Grid, Paper, Typography, ButtonBase } from '@material-ui/core'
 const useStyles = makeStyles({
   paper: {
     padding: '15px',
-    backgroundColor: '#25282c'
+    backgroundColor: '#f5f6fa'
   },
   image: {
     // maxWidth: 256,

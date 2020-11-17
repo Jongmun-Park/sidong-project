@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     height: '60px',
     backgroundColor: 'rgb(255, 255, 255)',
-    borderBottom: '1px solid rgb(229, 229, 229)',
   },
   headerLogo: {
     display: 'flex',
@@ -46,7 +45,6 @@ const NavBar: FunctionComponent = () => {
   const [signUpOpen, setSignUpOpen] = useState(false)
   const [logInOpen, setLogInOpen] = useState(false)
   const { data, error } = useQuery(IS_LOGIN)
-  console.log('login data,', data)
 
   if (error) {
     console.error(error.message)
@@ -65,15 +63,7 @@ const NavBar: FunctionComponent = () => {
     <header>
       <nav className={classes.container}>
         <div className={classes.headerLogo}>
-          <div style={{ height: '45px' }}>
-            <a href="/" style={{ display: 'block' }}>
-              <img
-                alt="Header Logo"
-                style={{ width: '45px', height: '45px' }}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Artsy_logo.svg/1198px-Artsy_logo.svg.png"
-              ></img>
-            </a>
-          </div>
+          <Button href="/" size="large">JAKUPSIL</Button>
         </div>
         <div className={classes.searchBox}></div>
         <div className={classes.headerButtons}>
