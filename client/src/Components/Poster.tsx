@@ -1,17 +1,27 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Paper, Typography, ButtonBase } from '@material-ui/core'
+import { Paper, Typography, ButtonBase } from '@material-ui/core'
 
 const useStyles = makeStyles({
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
     padding: '15px',
-    backgroundColor: '#f5f6fa'
+    backgroundColor: '#f5f6fa',
+    borderRadius: '17px',
+  },
+  imageContainer: {
+    flex: '210px',
+    alignSelf: 'center',
   },
   image: {
-    // maxWidth: 256,
-    // minWidth: 64,
-    // maxHeight: 260,
-    // minHeight: 64,
+    height: '210px',
+    objectFit: 'contain',
+  },
+  posterText: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 })
 
@@ -36,32 +46,22 @@ const Poster: React.FC<PosterProps> = ({
   const classes = useStyles({})
   return (
     <Paper className={classes.paper} elevation={2}>
-      <ButtonBase className={classes.image}>
-        {/* <img src={imageUrl} /> */}
+      <ButtonBase className={classes.imageContainer}>
+        <img className={classes.image} src={imageUrl} />
       </ButtonBase>
+      <Typography className={classes.posterText} gutterBottom variant="subtitle1">
+        {title}
+      </Typography>
+      <Typography className={classes.posterText} variant="body2" gutterBottom>
+        {category}, {date}
+      </Typography>
+      <Typography className={classes.posterText} variant="body2" gutterBottom>
+        {medium}
+      </Typography>
+      <Typography className={classes.posterText} variant="body2" color="textSecondary">
+        {saleMessage}
+      </Typography>
     </Paper>
-    // <Grid item xs={2}>
-    //   <Grid container spacing={2} direction="column">
-    //     <Grid item>
-    //     </Grid>
-    //     <Grid item xs container direction="column" spacing={5}>
-    //       <Grid item xs>
-    //         <Typography gutterBottom variant="subtitle1">
-    //           {title}
-    //         </Typography>
-    //         <Typography variant="body2" gutterBottom>
-    //           {category}, {date}
-    //         </Typography>
-    //         <Typography variant="body2" gutterBottom>
-    //           {medium}
-    //         </Typography>
-    //         <Typography variant="body2" color="textSecondary">
-    //           {saleMessage}
-    //         </Typography>
-    //       </Grid>
-    //     </Grid>
-    //   </Grid>
-    // </Grid>
   )
 }
 

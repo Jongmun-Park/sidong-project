@@ -10,9 +10,9 @@ import Login from './User/Login'
 
 const useStyles = makeStyles(() => ({
   container: {
+    height: '60px',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '60px',
     backgroundColor: 'rgb(255, 255, 255)',
   },
   headerLogo: {
@@ -22,11 +22,11 @@ const useStyles = makeStyles(() => ({
     marginLeft: '20px'
   },
   headerButtons: {
-    display: 'flex',
     width: '400px',
-    marginRight: '20px',
+    display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: '20px',
   },
   searchBox: {},
 }))
