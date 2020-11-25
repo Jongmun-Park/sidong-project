@@ -45,6 +45,11 @@ const IS_LOGIN = gql`
   }
 `
 
+function logout() {
+  sessionStorage.removeItem('token')
+  window.location.reload()
+}
+
 const NavBar: FunctionComponent = () => {
   const classes = useStyles({})
   const [signUpOpen, setSignUpOpen] = useState(false)
@@ -91,7 +96,7 @@ const NavBar: FunctionComponent = () => {
             </div>
           ) : (
             <div>
-              <Button variant="outlined" href="/upload-post">
+              <Button variant="outlined" onClick={logout}>
                 LOG OUT
               </Button>
               {/* <Button variant="outlined" href="/upload-post">

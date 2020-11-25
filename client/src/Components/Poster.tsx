@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     padding: '15px',
-    backgroundColor: '#f7f1e3',
+    backgroundColor: '#f5f6fa',
     borderRadius: '17px',
   },
   imageContainer: {
