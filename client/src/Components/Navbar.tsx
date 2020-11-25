@@ -21,6 +21,11 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     marginLeft: '20px'
   },
+  headerLogoFont: {
+    color: '#722F37',
+    fontWeight: 900,
+    fontSize: 'large',
+  },
   headerButtons: {
     width: '400px',
     display: 'flex',
@@ -63,7 +68,7 @@ const NavBar: FunctionComponent = () => {
     <header>
       <nav className={classes.container}>
         <div className={classes.headerLogo}>
-          <Button href="/" size="large">JAKUPSIL</Button>
+          <Button href="/" className={classes.headerLogoFont}>JAKUPSIL</Button>
         </div>
         <div className={classes.searchBox}></div>
         <div className={classes.headerButtons}>
