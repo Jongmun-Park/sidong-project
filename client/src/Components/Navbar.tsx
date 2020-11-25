@@ -33,6 +33,10 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     marginRight: '20px',
   },
+  headerButtonFont: {
+    fontWeight: 700,
+    fontSize: 'medium',
+  },
   searchBox: {},
 }))
 
@@ -77,19 +81,19 @@ const NavBar: FunctionComponent = () => {
         </div>
         <div className={classes.searchBox}></div>
         <div className={classes.headerButtons}>
-          <Button href="/art">ART</Button>
-          <Button href="/artist">ARTIST</Button>
+          <Button className={classes.headerButtonFont} href="/art">작품</Button>
+          <Button className={classes.headerButtonFont} href="/artist">작가</Button>
           {!data?.currentUser ? (
             <div>
               <Button variant="outlined" onClick={logInClickOpen}>
-                LOG IN
+                로그인
               </Button>
               <Button
                 variant="outlined"
                 onClick={signUpClickOpen}
                 style={{ marginLeft: '15px' }}
               >
-                SIGN UP
+                회원가입
               </Button>
               {signUpOpen && <SignUp openDialog={signUpOpen} handleOpenDialog={setSignUpOpen} />}
               {logInOpen && <Login openDialog={logInOpen} handleOpenDialog={setLogInOpen} />}
