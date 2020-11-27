@@ -54,7 +54,7 @@ const Poster: React.FC<PosterProps> = ({
   return (
     <Paper className={classes.paper} elevation={2}>
       <ButtonBase className={classes.imageContainer}>
-        <img className={classes.image} src={imageUrl} />
+        <img className={classes.image} src={imageUrl} alt="artImage"/>
       </ButtonBase>
       <div className={classes.posterText}>
         <Typography gutterBottom variant="subtitle1">

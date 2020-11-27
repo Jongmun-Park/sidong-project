@@ -1,7 +1,6 @@
 import React from 'react'
 import Poster from '../../Components/Poster'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +10,7 @@ const useStyles = makeStyles({
     margin: '50px 30px 50px 30px',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, 300px)',
-    gridGap: '35px',
+    gridGap: '31px',
     justifyContent: 'center',
   },
 })

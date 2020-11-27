@@ -7,7 +7,7 @@ if (sessionStorage.getItem('artsy-token') === null) {
 }
 
 const Home: React.FC = () => {
-  const [artworks, setArtworks] = useState()
+  const [artworks, setArtworks] = useState<Array<any>>([])
 
   useEffect(() => {
     getArtworks()
