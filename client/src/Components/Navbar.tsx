@@ -35,7 +35,6 @@ const useStyles = makeStyles(() => ({
   },
   headerButtonFont: {
     fontWeight: 600,
-    fontSize: 'medium',
   },
   searchBox: {},
 }))
@@ -85,10 +84,11 @@ const NavBar: FunctionComponent = () => {
           <Button className={classes.headerButtonFont} href="/artist">작가</Button>
           {!data?.currentUser ? (
             <div>
-              <Button variant="outlined" onClick={logInClickOpen}>
+              <Button size="small" variant="outlined" onClick={logInClickOpen}>
                 로그인
               </Button>
               <Button
+                size="small"
                 variant="outlined"
                 onClick={signUpClickOpen}
                 style={{ marginLeft: '15px' }}
@@ -100,7 +100,7 @@ const NavBar: FunctionComponent = () => {
             </div>
           ) : (
             <div>
-              <Button variant="outlined" onClick={logout}>
+              <Button size="small" variant="outlined" onClick={logout}>
                 로그아웃
               </Button>
               {/* <Button variant="outlined" href="/upload-post">
