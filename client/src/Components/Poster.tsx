@@ -8,20 +8,27 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     padding: '15px',
     backgroundColor: '#f5f6fa',
-    borderRadius: '17px',
+    borderRadius: '10px',
   },
   imageContainer: {
-    flex: '210px',
-    alignSelf: 'center',
+    marginBottom: '20px',
+    // flex: '210px',
+    // alignSelf: 'center',
   },
   image: {
-    height: '210px',
-    objectFit: 'contain',
+    width: '268px',
+    height: '270px',
+    objectFit: 'cover',
+    borderRadius: '10px',
   },
   posterText: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    marginLeft: '5px',
+    '& h6': {
+      fontWeight: 'bold',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
   },
 })
 
@@ -49,18 +56,20 @@ const Poster: React.FC<PosterProps> = ({
       <ButtonBase className={classes.imageContainer}>
         <img className={classes.image} src={imageUrl} />
       </ButtonBase>
-      <Typography className={classes.posterText} gutterBottom variant="subtitle1">
-        {title}
-      </Typography>
-      <Typography className={classes.posterText} variant="body2" gutterBottom>
-        {category}, {date}
-      </Typography>
-      <Typography className={classes.posterText} variant="body2" gutterBottom>
-        {medium}
-      </Typography>
-      <Typography className={classes.posterText} variant="body2" color="textSecondary">
-        {saleMessage}
-      </Typography>
+      <div className={classes.posterText}>
+        <Typography gutterBottom variant="subtitle1">
+          {title}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          {category}, {date}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          {medium}
+        </Typography>
+        <Typography variant="body2" color="textSecondary">
+          {saleMessage ? saleMessage : 'saleStatus'}
+        </Typography>
+      </div>
     </Paper>
   )
 }

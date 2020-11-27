@@ -10,14 +10,9 @@ const useStyles = makeStyles({
   wrapper: {
     margin: '50px 30px 50px 30px',
     display: 'grid',
-    gridAutoRows: '350px',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 300px))',
-    gridGap: '50px',
+    gridTemplateColumns: 'repeat(auto-fit, 300px)',
+    gridGap: '35px',
     justifyContent: 'center',
-    // backgroundColor: '#25282c'
-    // gridAutoRows: 'minmax(100px, auto)',
-    // justifyItems: 'center',
-    // alignItems: 'center',
   },
 })
 

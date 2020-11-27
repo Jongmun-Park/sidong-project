@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
     marginRight: '20px',
   },
   headerButtonFont: {
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: 'medium',
   },
   searchBox: {},
@@ -101,7 +101,7 @@ const NavBar: FunctionComponent = () => {
           ) : (
             <div>
               <Button variant="outlined" onClick={logout}>
-                LOG OUT
+                로그아웃
               </Button>
               {/* <Button variant="outlined" href="/upload-post">
                 UPLOAD
