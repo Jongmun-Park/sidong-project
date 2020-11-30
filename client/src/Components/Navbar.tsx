@@ -15,28 +15,27 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     backgroundColor: 'rgb(255, 255, 255)',
   },
-  headerLogo: {
+  logo: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     marginLeft: '20px'
   },
-  headerLogoFont: {
+  logoFont: {
     color: '#722F37',
     fontWeight: 900,
     fontSize: 'large',
   },
-  headerButtons: {
+  buttons: {
     width: '400px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginRight: '20px',
   },
-  headerButtonFont: {
+  buttonFont: {
     fontWeight: 600,
   },
-  searchBox: {},
 }))
 
 const IS_LOGIN = gql`
@@ -75,13 +74,12 @@ const NavBar: FunctionComponent = () => {
   return (
     <header>
       <nav className={classes.container}>
-        <div className={classes.headerLogo}>
-          <Button href="/" className={classes.headerLogoFont}>JAKUPSIL</Button>
+        <div className={classes.logo}>
+          <Button href="/" className={classes.logoFont}>JAKUPSIL</Button>
         </div>
-        <div className={classes.searchBox}></div>
-        <div className={classes.headerButtons}>
-          <Button className={classes.headerButtonFont} href="/art">작품</Button>
-          <Button className={classes.headerButtonFont} href="/artist">작가</Button>
+        <div className={classes.buttons}>
+          <Button className={classes.buttonFont} href="/art">작품</Button>
+          <Button className={classes.buttonFont} href="/artist">작가</Button>
           {!data?.currentUser ? (
             <div>
               <Button size="small" variant="outlined" onClick={logInClickOpen}>

@@ -11,23 +11,27 @@ const useStyles = makeStyles({
     borderRadius: '10px',
   },
   imageContainer: {
-    marginBottom: '20px',
+    marginBottom: '16px',
     // flex: '210px',
     // alignSelf: 'center',
   },
   image: {
-    width: '268px',
-    height: '270px',
+    width: '222px',
+    height: '230px',
     objectFit: 'cover',
     borderRadius: '10px',
   },
   posterText: {
     marginLeft: '5px',
     '& h6': {
+      fontSize: '15px',
       fontWeight: 'bold',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+    },
+    '& p': {
+      fontSize: '13px',
     },
   },
 })
