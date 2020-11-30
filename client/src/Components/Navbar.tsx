@@ -13,12 +13,10 @@ const useStyles = makeStyles(() => ({
     height: '60px',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: 'rgb(255, 255, 255)',
   },
   logo: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     marginLeft: '20px'
   },
   logoFont: {

@@ -12,8 +12,6 @@ const useStyles = makeStyles({
   },
   imageContainer: {
     marginBottom: '16px',
-    // flex: '210px',
-    // alignSelf: 'center',
   },
   image: {
     width: '222px',

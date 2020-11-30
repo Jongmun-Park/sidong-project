@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   container: {
     display: 'grid',
-    gridTemplateColumns: '1fr 6.5fr',
+    gridTemplateColumns: 'minmax(150px, 1fr) 6.5fr',
   },
   leftSideBar: {
     justifySelf: 'center',
