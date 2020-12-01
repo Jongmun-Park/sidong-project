@@ -24,16 +24,21 @@ const useStyles = makeStyles(() => ({
     fontWeight: 900,
     fontSize: 'large',
   },
-  buttons: {
+  menus: {
     width: '400px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: '20px',
+    marginRight: '28px',
   },
-  buttonFont: {
+  menuFont: {
     fontWeight: 600,
   },
+  buttons: {
+    '& button:not(:first-child)': {
+      marginLeft: '15px',
+    }
+  }
 }))
 
 const IS_LOGIN = gql`
@@ -75,11 +80,11 @@ const NavBar: FunctionComponent = () => {
         <div className={classes.logo}>
           <Button href="/" className={classes.logoFont}>JAKUPSIL</Button>
         </div>
-        <div className={classes.buttons}>
-          <Button className={classes.buttonFont} href="/art">작품</Button>
-          <Button className={classes.buttonFont} href="/artist">작가</Button>
+        <div className={classes.menus}>
+          <Button className={classes.menuFont} href="/art">작품</Button>
+          <Button className={classes.menuFont} href="/artist">작가</Button>
           {!data?.currentUser ? (
-            <div>
+            <div className={classes.buttons}>
               <Button size="small" variant="outlined" onClick={logInClickOpen}>
                 로그인
               </Button>
@@ -87,7 +92,6 @@ const NavBar: FunctionComponent = () => {
                 size="small"
                 variant="outlined"
                 onClick={signUpClickOpen}
-                style={{ marginLeft: '15px' }}
               >
                 회원가입
               </Button>
@@ -95,13 +99,13 @@ const NavBar: FunctionComponent = () => {
               {logInOpen && <Login openDialog={logInOpen} handleOpenDialog={setLogInOpen} />}
             </div>
           ) : (
-            <div>
+            <div className={classes.buttons}>
+              <Button size="small" variant="contained" color="secondary" onClick={logout}>
+                작가 등록
+              </Button>
               <Button size="small" variant="outlined" onClick={logout}>
                 로그아웃
               </Button>
-              {/* <Button variant="outlined" href="/upload-post">
-                UPLOAD
-              </Button> */}
             </div>
           )}
         </div>
