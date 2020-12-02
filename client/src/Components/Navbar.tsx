@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core'
 import SignUp from './User/SignUp'
 import Login from './User/Login'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: '60px',
     display: 'flex',
@@ -35,6 +35,9 @@ const useStyles = makeStyles(() => ({
     fontWeight: 600,
   },
   buttons: {
+    '& button:first-child': {
+      backgroundColor: theme.palette.highlight.main,
+    },
     '& button:not(:first-child)': {
       marginLeft: '15px',
     }
@@ -100,7 +103,7 @@ const NavBar: FunctionComponent = () => {
             </div>
           ) : (
             <div className={classes.buttons}>
-              <Button size="small" variant="contained" color="secondary" onClick={logout}>
+              <Button size="small" variant="contained" onClick={logout}>
                 작가 등록
               </Button>
               <Button size="small" variant="outlined" onClick={logout}>
