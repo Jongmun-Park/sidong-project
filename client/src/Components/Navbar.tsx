@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: 'white',
   },
   logo: {
     marginLeft: '20px'
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   buttons: {
-    '& button:first-child': {
+    '& button:nth-child(2)': {
       backgroundColor: theme.palette.highlight.main,
     },
     '& button:not(:first-child)': {
@@ -84,16 +84,17 @@ const NavBar: FunctionComponent = () => {
           <Button href="/" className={classes.logoFont}>JAKUPSIL</Button>
         </div>
         <div className={classes.menus}>
+          <Button className={classes.menuFont} href="/about">소개</Button>
           <Button className={classes.menuFont} href="/art">작품</Button>
           <Button className={classes.menuFont} href="/artist">작가</Button>
           {!data?.currentUser ? (
             <div className={classes.buttons}>
-              <Button size="small" variant="outlined" onClick={logInClickOpen}>
+              <Button size="small" variant="contained" onClick={logInClickOpen}>
                 로그인
               </Button>
               <Button
                 size="small"
-                variant="outlined"
+                variant="contained"
                 onClick={signUpClickOpen}
               >
                 회원가입
@@ -104,10 +105,10 @@ const NavBar: FunctionComponent = () => {
           ) : (
             <div className={classes.buttons}>
               <Button size="small" variant="contained" onClick={logout}>
-                작가 등록
-              </Button>
-              <Button size="small" variant="outlined" onClick={logout}>
                 로그아웃
+              </Button>
+              <Button size="small" variant="contained" onClick={logout}>
+                작가 등록
               </Button>
             </div>
           )}

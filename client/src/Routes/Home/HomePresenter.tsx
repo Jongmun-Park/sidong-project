@@ -13,7 +13,8 @@ const useStyles = makeStyles({
   contents: {
     margin: '50px 30px 50px 30px',
     display: 'grid',
-    // mobile limit 680px ... minmax(148px, )
+    // TODO: 모바일 스타일 적용 
+    // limit 680px ... minmax(148px, )
     gridTemplateColumns: 'repeat(auto-fit, 252px)',
     gridGap: '18px',
     justifyContent: 'center',
