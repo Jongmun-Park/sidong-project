@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { Container, Typography, TextField, Grid, Paper, Button } from '@material-ui/core'
+import { Typography, TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
@@ -72,29 +72,50 @@ const RegisterArtist: FunctionComponent = () => {
 
   console.log('inputs:', inputs)
 
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data: any) => console.log(data);
-  console.log(errors);
-  
+  const { 
+    register,
+    handleSubmit,
+    control,
+    errors,
+    getValues,
+    setError,
+    clearErrors,
+  } = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    console.log('뭐냐:', getValues(['artistName', 'realName', 'phone']))
+    console.log('??????')
+  }
+  console.log('error:', errors);
+
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
-    //   <input type="text" placeholder="First name" name="First name" ref={register({required: true, maxLength: 80})} />
-    //   <input type="text" placeholder="Last name" name="Last name" ref={register({required: true, maxLength: 100})} />
-    //   <input type="text" placeholder="Email" name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
-    //   <input type="tel" placeholder="Mobile number" name="Mobile number" ref={register({required: true, minLength: 6, maxLength: 12})} />
-    //   <select name="Title" ref={register({ required: true })}>
-    //     <option value="Mr">Mr</option>
-    //     <option value="Mrs">Mrs</option>
-    //     <option value="Miss">Miss</option>
-    //     <option value="Dr">Dr</option>
-    //   </select>
-
-    //   <input name="Developer" type="radio" value="Yes" ref={register({ required: true })}/>
-    //   <input name="Developer" type="radio" value="No" ref={register({ required: true })}/>
-
-    //   <input type="submit" />
-    // </form>
     <div className={classes.centerArea}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <TextField
+        name="artistName"
+        label="필명(닉네임)"
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputRef={register({required: "필명(닉네임)을 입력해주세요.", maxLength: 64})}
+      />
+      {/* <input type="text" placeholder="필명(닉네임)" name="artistName" ref={register({required: true, maxLength: 64})} /> */}
+      <input type="text" placeholder="성명" name="realName" ref={register({required: true, maxLength: 32})} />
+      <input type="tel" placeholder="휴대전화 번호" name="phone" ref={register({required: true, minLength: 6, maxLength: 12})} />
+      {/* <select name="Title" ref={register({ required: true })}>
+        <option value="Mr">Mr</option>
+        <option value="Mrs">Mrs</option>
+        <option value="Miss">Miss</option>
+        <option value="Dr">Dr</option>
+      </select>
+
+      <input name="Developer" type="radio" value="Yes" ref={register({ required: true })}/>
+      <input name="Developer" type="radio" value="No" ref={register({ required: true })}/> */}
+
+      <input type="submit" />
+      </form>
       <Typography variant="subtitle1">제 목</Typography>
       <TextField
         autoFocus
