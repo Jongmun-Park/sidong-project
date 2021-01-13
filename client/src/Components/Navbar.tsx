@@ -40,8 +40,12 @@ const useStyles = makeStyles((theme) => ({
     },
     '& button:not(:first-child)': {
       marginLeft: '15px',
+    },
+    '& a': {
+      marginLeft: '15px',
+      backgroundColor: theme.palette.highlight.main,
     }
-  }
+  },
 }))
 
 const IS_LOGIN = gql`
@@ -107,7 +111,7 @@ const NavBar: FunctionComponent = () => {
               <Button size="small" variant="contained" onClick={logout}>
                 로그아웃
               </Button>
-              <Button size="small" variant="contained" onClick={logout}>
+              <Button size="small" variant="contained" href="/artist/register">
                 작가 등록
               </Button>
             </div>
