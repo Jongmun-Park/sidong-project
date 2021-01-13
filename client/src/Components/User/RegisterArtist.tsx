@@ -84,9 +84,10 @@ const RegisterArtist: FunctionComponent = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    console.log('뭐냐:', getValues(['artistName', 'realName', 'phone']))
     console.log('??????')
   }
+  const { artistName } = getValues(['artistName'])
+  console.log('artistName:', artistName)
   console.log('error:', errors);
 
   return (
@@ -99,7 +100,13 @@ const RegisterArtist: FunctionComponent = () => {
         InputLabelProps={{
           shrink: true,
         }}
-        inputRef={register({required: "필명(닉네임)을 입력해주세요.", maxLength: 64})}
+        inputRef={register({
+          required: "필명(닉네임)을 입력해주세요.", 
+          maxLength : {
+            value: 32,
+            message: '필명(닉네임)은 32자 이내로 입력해주세요.'
+          }
+          })}
       />
       {/* <input type="text" placeholder="필명(닉네임)" name="artistName" ref={register({required: true, maxLength: 64})} /> */}
       <input type="text" placeholder="성명" name="realName" ref={register({required: true, maxLength: 32})} />
