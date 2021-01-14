@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   logo: {
-    marginLeft: '20px'
+    marginLeft: '20px',
   },
   logoFont: {
     color: '#722F37',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     '& a': {
       marginLeft: '15px',
       backgroundColor: theme.palette.highlight.main,
-    }
+    },
   },
 }))
 
@@ -85,22 +85,26 @@ const NavBar: FunctionComponent = () => {
     <header>
       <nav className={classes.container}>
         <div className={classes.logo}>
-          <Button href="/" className={classes.logoFont}>JAKUPSIL</Button>
+          <Button href="/" className={classes.logoFont}>
+            JAKUPSIL
+          </Button>
         </div>
         <div className={classes.menus}>
-          <Button className={classes.menuFont} href="/about">소개</Button>
-          <Button className={classes.menuFont} href="/art">작품</Button>
-          <Button className={classes.menuFont} href="/artist">작가</Button>
+          <Button className={classes.menuFont} href="/about">
+            소개
+          </Button>
+          <Button className={classes.menuFont} href="/art">
+            작품
+          </Button>
+          <Button className={classes.menuFont} href="/artist">
+            작가
+          </Button>
           {!data?.currentUser ? (
             <div className={classes.buttons}>
               <Button size="small" variant="contained" onClick={logInClickOpen}>
                 로그인
               </Button>
-              <Button
-                size="small"
-                variant="contained"
-                onClick={signUpClickOpen}
-              >
+              <Button size="small" variant="contained" onClick={signUpClickOpen}>
                 회원가입
               </Button>
               {signUpOpen && <SignUp openDialog={signUpOpen} handleOpenDialog={setSignUpOpen} />}

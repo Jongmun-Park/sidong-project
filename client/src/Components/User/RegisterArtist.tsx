@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react'
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 import { Typography, TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   section: {
-    // TODO: 모바일 스타일 적용 
-    margin: '50px 80px 50px 80px'
-  }
+    // TODO: 모바일 스타일 적용
+    margin: '50px 80px 50px 80px',
+  },
 }))
 
 interface UploadPostInputProps {
@@ -72,46 +72,48 @@ const RegisterArtist: FunctionComponent = () => {
 
   console.log('inputs:', inputs)
 
-  const { 
-    register,
-    handleSubmit,
-    control,
-    errors,
-    getValues,
-    setError,
-    clearErrors,
-  } = useForm()
+  const { register, handleSubmit, control, errors, getValues, setError, clearErrors } = useForm()
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    console.log(data)
     console.log('??????')
   }
   const { artistName } = getValues(['artistName'])
   console.log('artistName:', artistName)
-  console.log('error:', errors);
+  console.log('error:', errors)
 
   return (
     <div className={classes.centerArea}>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        name="artistName"
-        label="필명(닉네임)"
-        variant="outlined"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputRef={register({
-          required: "필명(닉네임)을 입력해주세요.", 
-          maxLength : {
-            value: 32,
-            message: '필명(닉네임)은 32자 이내로 입력해주세요.'
-          }
+        <TextField
+          name="artistName"
+          label="필명(닉네임)"
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          inputRef={register({
+            required: '필명(닉네임)을 입력해주세요.',
+            maxLength: {
+              value: 32,
+              message: '필명(닉네임)은 32자 이내로 입력해주세요.',
+            },
           })}
-      />
-      {/* <input type="text" placeholder="필명(닉네임)" name="artistName" ref={register({required: true, maxLength: 64})} /> */}
-      <input type="text" placeholder="성명" name="realName" ref={register({required: true, maxLength: 32})} />
-      <input type="tel" placeholder="휴대전화 번호" name="phone" ref={register({required: true, minLength: 6, maxLength: 12})} />
-      {/* <select name="Title" ref={register({ required: true })}>
+        />
+        {/* <input type="text" placeholder="필명(닉네임)" name="artistName" ref={register({required: true, maxLength: 64})} /> */}
+        <input
+          type="text"
+          placeholder="성명"
+          name="realName"
+          ref={register({ required: true, maxLength: 32 })}
+        />
+        <input
+          type="tel"
+          placeholder="휴대전화 번호"
+          name="phone"
+          ref={register({ required: true, minLength: 10, maxLength: 11 })}
+        />
+        {/* <select name="Title" ref={register({ required: true })}>
         <option value="Mr">Mr</option>
         <option value="Mrs">Mrs</option>
         <option value="Miss">Miss</option>
@@ -121,7 +123,7 @@ const RegisterArtist: FunctionComponent = () => {
       <input name="Developer" type="radio" value="Yes" ref={register({ required: true })}/>
       <input name="Developer" type="radio" value="No" ref={register({ required: true })}/> */}
 
-      <input type="submit" />
+        <input type="submit" />
       </form>
       <Typography variant="subtitle1">제 목</Typography>
       <TextField
@@ -149,7 +151,7 @@ const RegisterArtist: FunctionComponent = () => {
       >
         등록하기
       </Button>
-  </div>
+    </div>
   )
 }
 

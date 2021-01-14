@@ -1,10 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-declare module "@material-ui/core/styles/createPalette" {
+declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    highlight: Palette['primary'];
+    highlight: Palette['primary']
   }
   interface PaletteOptions {
-    highlight: PaletteOptions['primary'];
+    highlight: PaletteOptions['primary']
   }
 }
 
@@ -26,6 +26,6 @@ const theme = createMuiTheme({
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme
