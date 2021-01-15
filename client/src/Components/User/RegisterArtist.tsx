@@ -1,14 +1,25 @@
 import React, { FunctionComponent, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Avatar, Typography, TextField, Button, TextareaAutosize } from '@material-ui/core'
+import {
+  Avatar,
+  TextField,
+  Button,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
-    height: '100vh',
+    minHeight: '100vh',
     maxWidth: '1100px',
+    // TODO: 모바일 스타일 적용
+    padding: '30px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
   },
@@ -18,15 +29,19 @@ const useStyles = makeStyles((theme) => ({
   },
   inputContainer: {
     maxWidth: '400px',
-    margin: '30px 30px 30px 60px',
+    margin: '30px',
   },
   input: {
     width: '100%',
-    marginBottom: '20px',
+    marginBottom: '1.5em',
   },
   largeAvatar: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  },
+  submitButton: {
+    float: 'right',
+    marginTop: '30px',
   },
 }))
 
@@ -47,10 +62,6 @@ const RegisterArtist: FunctionComponent = () => {
   const classes = useStyles({})
   const [imgBase64, setImgBase64] = useState('')
   const [createPost] = useMutation(UPLOAD_POST_MUTATION)
-  const [inputs, setInputs] = useState<UploadPostInputProps>({
-    title: '',
-    thumbnail: null,
-  })
 
   const handleChangeThumbnail = (e: ChangeEvent<HTMLInputElement>) => {
     let reader = new FileReader()
@@ -65,48 +76,18 @@ const RegisterArtist: FunctionComponent = () => {
     }
   }
 
-  const handleUpload = async () => {
-    console.log('inputs.thumbnail :', inputs.thumbnail)
-    const { data } = await createPost({
-      variables: {
-        title: inputs.title,
-        thumbnail: inputs.thumbnail,
-      },
-    })
-
-    console.log(data)
-  }
-
-  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.files,
-    })
-  }
-
-  console.log('inputs:', inputs)
-
-  const { register, handleSubmit, control, errors, getValues, setError, clearErrors } = useForm()
+  const { register, handleSubmit, errors } = useForm()
 
   const onSubmit = (data: any) => {
+    console.log('data:')
     console.log(data)
-    console.log('??????')
   }
-  const { artistName } = getValues(['artistName'])
-  console.log('artistName:', artistName)
   console.log('error:', errors)
 
   return (
     <div className={classes.centerArea}>
-      <h3>작가 등록</h3>
       <div className={classes.inputContainer}>
+        <h3 style={{ marginBottom: '2em' }}>&ensp;작가 등록</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             className={classes.input}
@@ -152,17 +133,49 @@ const RegisterArtist: FunctionComponent = () => {
               },
             })}
           />
-          <TextareaAutosize
+          <TextField
             className={classes.input}
-            rowsMin={5}
+            multiline
+            label="작가 소개"
+            name="description"
+            variant="outlined"
+            rows={5}
+            defaultValue=""
             placeholder="작가를 소개하는 글입니다. 작가로서 가치관, 작품 세계 등 본인의 생각을 자유롭게 표현해주세요."
-            // label="본인 소개"
-            // variant="outlined"
+            inputRef={register}
           />
-          <Typography variant="subtitle1">프로필 이미지</Typography>
-          <input type="file" name="thumbnail" accept="image/*" onChange={handleChangeThumbnail} />
-          <Avatar src={imgBase64} className={classes.largeAvatar} />
-          <Button style={{ float: 'right' }} type="submit" color="primary" variant="contained">
+          <FormControl component="fieldset" className={classes.input}>
+            <FormLabel component="legend" style={{ marginBottom: '10px' }}>
+              활동 분야
+            </FormLabel>
+            <RadioGroup name="category">
+              <FormControlLabel value="0" control={<Radio inputRef={register} />} label="화가" />
+              <FormControlLabel value="1" control={<Radio inputRef={register} />} label="조각가" />
+              <FormControlLabel value="2" control={<Radio inputRef={register} />} label="공예가" />
+              <FormControlLabel value="3" control={<Radio inputRef={register} />} label="기타" />
+            </RadioGroup>
+          </FormControl>
+          <div className={classes.input}>
+            <FormLabel component="div">프로필 이미지</FormLabel>
+            <input
+              type="file"
+              name="thumbnail"
+              accept="image/*"
+              onChange={handleChangeThumbnail}
+              ref={register}
+            />
+            <Avatar
+              style={{ display: 'inline-flex' }}
+              src={imgBase64}
+              className={classes.largeAvatar}
+            />
+          </div>
+          <Button
+            className={classes.submitButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          >
             등록하기
           </Button>
         </form>
