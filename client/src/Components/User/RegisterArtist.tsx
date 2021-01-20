@@ -77,15 +77,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface UploadPostInputProps {
-  title: string
-  thumbnail: FileList | null
-}
-
-const UPLOAD_POST_MUTATION = gql`
-  mutation CreatePost($title: String!, $thumbnail: Upload!) {
-    createPost(title: $title, thumbnail: $thumbnail) {
+const REGISTER_ARTIST_MUTATION = gql`
+  mutation CreateArtist(
+    $artistName: String!
+    $realName: String!
+    $phone: String!
+    $description: String!
+    $category: Int!
+    $residence: Int!
+    $thumbnail: Upload!
+    $representativeWork: Upload!
+  ) {
+    createArtist(
+      artistName: $artistName
+      realName: $realName
+      phone: $phone
+      description: $description
+      category: $category
+      residence: $residence
+      thumbnail: $thumbnail
+      representativeWork: $representativeWork
+    ) {
       success
+      artist {
+        id
+      }
+      msg
     }
   }
 `
@@ -94,7 +111,7 @@ const RegisterArtist: FunctionComponent = () => {
   const classes = useStyles({})
   const [thumbnailPreview, setThumbnailPreview] = useState('')
   const [representativeWorkPreview, setRepresentativeWorkPreview] = useState('')
-  const [createPost] = useMutation(UPLOAD_POST_MUTATION)
+  const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
 
   const handleChangePreview = (e: ChangeEvent<HTMLInputElement>, previewName: string) => {
     let reader = new FileReader()
@@ -115,10 +132,25 @@ const RegisterArtist: FunctionComponent = () => {
 
   const { register, handleSubmit, errors } = useForm()
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log('data:')
     console.log(data)
+    const registerResult = await registerArtist({
+      variables: {
+        artistName: data.artistName,
+        realName: data.realName,
+        phone: data.phone,
+        description: data.description,
+        category: data.category,
+        residence: data.residence,
+        thumbnail: data.thumbnail,
+        representativeWork: data.representativeWork,
+      },
+    })
+    console.log('registerResult:')
+    console.log(registerResult)
   }
+
   console.log('error:', errors)
 
   return (
@@ -265,7 +297,11 @@ const RegisterArtist: FunctionComponent = () => {
               })}
             />
             <Paper variant="outlined" className={classes.paper}>
-              <img className={classes.representativeWorkPreview} src={representativeWorkPreview} />
+              <img
+                alt="representativeWork"
+                className={classes.representativeWorkPreview}
+                src={representativeWorkPreview}
+              />
             </Paper>
           </div>
           {errors.representativeWork?.type && (
