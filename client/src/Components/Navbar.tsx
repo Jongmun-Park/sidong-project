@@ -1,6 +1,3 @@
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-
 import React, { FunctionComponent, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
@@ -8,6 +5,7 @@ import { Button, Menu, MenuItem, IconButton } from '@material-ui/core'
 
 import SignUp from './User/SignUp'
 import Login from './User/Login'
+import { useCurrentUser } from '../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,18 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const IS_LOGIN = gql`
-  {
-    currentUser {
-      id
-      username
-      artist {
-        id
-      }
-    }
-  }
-`
-
 function logout() {
   sessionStorage.removeItem('token')
   window.location.reload()
@@ -68,15 +54,10 @@ function logout() {
 
 const NavBar: FunctionComponent = () => {
   const classes = useStyles({})
+  const currentUser = useCurrentUser()
   const [openSignUp, setOpenSignUp] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const { data, error } = useQuery(IS_LOGIN)
-
-  if (error) {
-    console.error(error.message)
-    return <p>Something is wrong</p>
-  }
 
   const handleClickSignUp = () => {
     setOpenSignUp(true)
@@ -112,7 +93,7 @@ const NavBar: FunctionComponent = () => {
           <Button className={classes.menuFont} href="/artist">
             작가
           </Button>
-          {!data?.currentUser ? (
+          {!currentUser ? (
             <div className={classes.buttons}>
               <Button size="small" variant="contained" onClick={handleClickLogin}>
                 로그인
@@ -144,7 +125,7 @@ const NavBar: FunctionComponent = () => {
                 <MenuItem onClick={handleCloseAccountMenu}>계정 관리</MenuItem>
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
-              {!data?.currentUser.artist && (
+              {!currentUser.artist && (
                 <Button size="small" variant="contained" href="/artist/register">
                   작가 등록
                 </Button>

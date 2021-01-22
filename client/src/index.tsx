@@ -9,6 +9,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme'
 import App from './Components/App'
+import { CurrentUserProvider } from './Hooks/User'
 
 const link = createUploadLink({
   uri: 'http://localhost:8000/graphql/',
@@ -33,7 +34,9 @@ const BaseApp = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <CurrentUserProvider>
+        <App />
+      </CurrentUserProvider>
     </ThemeProvider>
   </ApolloProvider>
 )

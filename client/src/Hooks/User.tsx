@@ -1,0 +1,47 @@
+import React, { createContext, useContext, FunctionComponent } from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+
+interface CurrentUser {
+  id: number | null
+  username: string | null
+  artist: {
+    id: number
+  } | null
+}
+
+const CURRENT_USER = gql`
+  {
+    currentUser {
+      id
+      username
+      artist {
+        id
+      }
+    }
+  }
+`
+const CurrentUserContext = createContext<CurrentUser>({
+  id: null,
+  username: null,
+  artist: null,
+})
+
+export const CurrentUserProvider: FunctionComponent = ({ children }) => {
+  const { data, error } = useQuery(CURRENT_USER)
+
+  if (!data) {
+    return null
+  }
+  if (error) {
+    console.error(error.message)
+  }
+
+  return (
+    <CurrentUserContext.Provider value={data?.currentUser}>{children}</CurrentUserContext.Provider>
+  )
+}
+
+export function useCurrentUser(): CurrentUser {
+  return useContext(CurrentUserContext)
+}
