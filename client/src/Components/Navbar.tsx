@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button } from '@material-ui/core'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import { Button, Menu, MenuItem, IconButton } from '@material-ui/core'
 
 import SignUp from './User/SignUp'
 import Login from './User/Login'
@@ -53,6 +54,9 @@ const IS_LOGIN = gql`
     currentUser {
       id
       username
+      artist {
+        id
+      }
     }
   }
 `
@@ -64,8 +68,9 @@ function logout() {
 
 const NavBar: FunctionComponent = () => {
   const classes = useStyles({})
-  const [signUpOpen, setSignUpOpen] = useState(false)
-  const [logInOpen, setLogInOpen] = useState(false)
+  const [openSignUp, setOpenSignUp] = useState(false)
+  const [openLogin, setOpenLogin] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { data, error } = useQuery(IS_LOGIN)
 
   if (error) {
@@ -73,12 +78,20 @@ const NavBar: FunctionComponent = () => {
     return <p>Something is wrong</p>
   }
 
-  const signUpClickOpen = () => {
-    setSignUpOpen(true)
+  const handleClickSignUp = () => {
+    setOpenSignUp(true)
   }
 
-  const logInClickOpen = () => {
-    setLogInOpen(true)
+  const handleClickLogin = () => {
+    setOpenLogin(true)
+  }
+
+  const handleClickAccountMenu = (event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleCloseAccountMenu = () => {
+    setAnchorEl(null)
   }
 
   return (
@@ -101,23 +114,41 @@ const NavBar: FunctionComponent = () => {
           </Button>
           {!data?.currentUser ? (
             <div className={classes.buttons}>
-              <Button size="small" variant="contained" onClick={logInClickOpen}>
+              <Button size="small" variant="contained" onClick={handleClickLogin}>
                 로그인
               </Button>
-              <Button size="small" variant="contained" onClick={signUpClickOpen}>
+              <Button size="small" variant="contained" onClick={handleClickSignUp}>
                 회원가입
               </Button>
-              {signUpOpen && <SignUp openDialog={signUpOpen} handleOpenDialog={setSignUpOpen} />}
-              {logInOpen && <Login openDialog={logInOpen} handleOpenDialog={setLogInOpen} />}
+              {openSignUp && <SignUp openDialog={openSignUp} handleOpenDialog={setOpenSignUp} />}
+              {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
             </div>
           ) : (
             <div className={classes.buttons}>
-              <Button size="small" variant="contained" onClick={logout}>
-                로그아웃
-              </Button>
-              <Button size="small" variant="contained" href="/artist/register">
-                작가 등록
-              </Button>
+              <IconButton
+                aria-controls="account-menu"
+                aria-haspopup="true"
+                aria-label="AccountMenuButton"
+                onClick={handleClickAccountMenu}
+              >
+                <AccountCircleIcon fontSize="large" />
+              </IconButton>
+              <Menu
+                id="account-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleCloseAccountMenu}
+              >
+                <MenuItem onClick={handleCloseAccountMenu}>프로필</MenuItem>
+                <MenuItem onClick={handleCloseAccountMenu}>계정 관리</MenuItem>
+                <MenuItem onClick={logout}>로그아웃</MenuItem>
+              </Menu>
+              {!data?.currentUser.artist && (
+                <Button size="small" variant="contained" href="/artist/register">
+                  작가 등록
+                </Button>
+              )}
             </div>
           )}
         </div>

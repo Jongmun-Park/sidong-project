@@ -99,9 +99,6 @@ const REGISTER_ARTIST_MUTATION = gql`
       representativeWork: $representativeWork
     ) {
       success
-      artist {
-        id
-      }
       msg
     }
   }
@@ -133,8 +130,6 @@ const RegisterArtist: FunctionComponent = () => {
   const { register, handleSubmit, errors } = useForm()
 
   const onSubmit = async (data: any) => {
-    console.log('data:')
-    console.log(data)
     const registerResult = await registerArtist({
       variables: {
         artistName: data.artistName,
@@ -147,11 +142,12 @@ const RegisterArtist: FunctionComponent = () => {
         representativeWork: data.representativeWork,
       },
     })
-    console.log('registerResult:')
-    console.log(registerResult)
+    if (registerResult.data.createArtist.success) {
+      alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
+    } else {
+      alert(registerResult.data.createArtist.msg)
+    }
   }
-
-  console.log('error:', errors)
 
   return (
     <div className={classes.centerArea}>
