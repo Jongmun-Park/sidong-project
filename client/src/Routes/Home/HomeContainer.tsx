@@ -1,24 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import HomePresenter from './HomePresenter'
-import { _getToken, _dataApi } from '../../apis'
-
-if (sessionStorage.getItem('artsy-token') === null) {
-  _getToken()
-}
 
 const Home: React.FC = () => {
-  const [artworks, setArtworks] = useState<Array<any>>([])
-
-  useEffect(() => {
-    getArtworks()
-  }, [])
-
-  async function getArtworks() {
-    const artworksData = await _dataApi.artwork()
-    setArtworks(artworksData.data._embedded.artworks)
-  }
-
-  return <HomePresenter artworks={artworks} />
+  return <HomePresenter />
 }
 
 export default Home

@@ -9,6 +9,9 @@ const useStyles = makeStyles({
     padding: '15px',
     backgroundColor: '#f5f6fa',
     borderRadius: '10px',
+    '@media (max-width: 823px)': {
+      padding: '11px',
+    },
   },
   imageContainer: {
     marginBottom: '16px',
