@@ -4,17 +4,24 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   container: {
-    display: 'grid',
-    gridTemplateColumns: 'minmax(150px, 1fr) 6.5fr',
+    display: 'flex',
   },
   leftSideBar: {
+    '@media (max-width: 721px)': {
+      display: 'none',
+    },
     justifySelf: 'center',
+    width: '20%',
   },
   contents: {
+    '@media (max-width: 721px)': {
+      width: '100%',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(157px, auto))',
+      margin: '50px 20px 50px 20px',
+    },
+    width: '80%',
     margin: '50px 30px 50px 30px',
     display: 'grid',
-    // TODO: 모바일 스타일 적용
-    // limit 680px ... minmax(148px, )
     gridTemplateColumns: 'repeat(auto-fit, 252px)',
     gridGap: '18px',
     justifyContent: 'center',

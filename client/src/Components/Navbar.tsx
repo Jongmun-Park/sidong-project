@@ -125,11 +125,11 @@ const NavBar: FunctionComponent = () => {
                 <MenuItem onClick={handleCloseAccountMenu}>계정 관리</MenuItem>
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
-              {!currentUser.artist && (
+              {/* {!currentUser.artist && (
                 <Button size="small" variant="contained" href="/artist/register">
                   작가 등록
                 </Button>
-              )}
+              )} */}
             </div>
           )}
         </div>
