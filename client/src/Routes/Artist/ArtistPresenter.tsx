@@ -28,11 +28,11 @@ const useStyles = makeStyles({
   },
 })
 
-interface HomeProps {
-  artworks: Array<any>
+interface ArtistPresenterProps {
+  artists: Array<any>
 }
 
-const ArtistPresenter: React.FC<HomeProps> = ({ artworks }) => {
+const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
   const classes = useStyles({})
   return (
     <div className={classes.container}>
@@ -42,18 +42,15 @@ const ArtistPresenter: React.FC<HomeProps> = ({ artworks }) => {
         <br></br>- Search box<br></br>- Filter
       </div>
       <div className={classes.contents}>
-        {artworks &&
-          artworks
-            .concat(artworks)
-            .map((artwork) => (
+        {artists &&
+          artists
+            .concat(artists) // TEST CODE
+            .map((artist) => (
               <Poster
-                key={artwork.id}
-                title={artwork.title}
-                category={artwork.category}
-                medium={artwork.medium}
-                imageUrl={artwork._links.thumbnail.href}
-                saleMessage={artwork.sale_message}
-                date={artwork.date}
+                artistName={artist.artistName}
+                realName={artist.realName}
+                thumbnailUrl={artist.thumbnail.url}
+                representativeWorkUrl={artist.representativeWork.url}
               />
             ))}
       </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Paper, Typography, ButtonBase } from '@material-ui/core'
+import { Avatar, Chip, Paper, Typography, ButtonBase } from '@material-ui/core'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -13,68 +13,92 @@ const useStyles = makeStyles({
       padding: '11px',
     },
   },
-  imageContainer: {
-    marginBottom: '16px',
-  },
   image: {
     width: '100%',
     height: '230px',
     objectFit: 'cover',
     borderRadius: '10px',
-  },
-  posterText: {
-    marginLeft: '5px',
-    '& h6': {
-      fontSize: '15px',
-      fontWeight: 'bold',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-    },
-    '& p': {
-      fontSize: '13px',
+    '@media (max-width: 823px)': {
+      height: '182px',
     },
   },
-})
+  head: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  headText: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  nameSection: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  realName: {
+    // width: '58px',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  artistName: {
+    // width: '89px',
+    fontSize: '13px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  largeAvatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  chipLable: {
+    width: '52px',
+    fontWeight: 600,
+  },
+}))
 
-interface PosterProps {
-  key: number
-  title: string
-  category: string
-  medium: string
-  imageUrl: string
-  saleMessage: string
-  date: string
+interface ArtistPosterProps {
+  artistName: string
+  realName: string
+  thumbnailUrl: string
+  representativeWorkUrl: string
 }
 
-const Poster: React.FC<PosterProps> = ({
-  title,
-  medium,
-  category,
-  imageUrl,
-  saleMessage,
-  date,
+const Poster: React.FC<ArtistPosterProps> = ({
+  artistName,
+  realName,
+  thumbnailUrl,
+  representativeWorkUrl,
 }) => {
   const classes = useStyles({})
+
   return (
     <Paper className={classes.paper} elevation={2}>
-      <ButtonBase className={classes.imageContainer}>
-        <img className={classes.image} src={imageUrl} alt="artImage" />
-      </ButtonBase>
-      <div className={classes.posterText}>
-        <Typography gutterBottom variant="subtitle1">
-          {title}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          {category}, {date}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
+      <div className={classes.head}>
+        <Avatar alt="artist-thumbnail" src={thumbnailUrl} className={classes.largeAvatar} />
+        <div className={classes.headText}>
+          <div className={classes.nameSection}>
+            <Typography className={classes.realName} variant="subtitle1">
+              {realName}&ensp;
+            </Typography>
+            <Typography className={classes.artistName} variant="body2">
+              {artistName}
+            </Typography>
+          </div>
+          <Chip className={classes.chipLable} size="small" label="조각가" color="primary" />
+        </div>
+        {/* <Typography variant="body2" gutterBottom>
           {medium}
         </Typography>
         <Typography variant="body2" color="textSecondary">
           {saleMessage ? saleMessage : 'saleStatus'}
-        </Typography>
+        </Typography> */}
       </div>
+      <ButtonBase>
+        <img className={classes.image} src={representativeWorkUrl} alt="artImage" />
+      </ButtonBase>
     </Paper>
   )
 }

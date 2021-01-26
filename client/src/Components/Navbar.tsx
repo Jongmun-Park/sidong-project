@@ -7,7 +7,7 @@ import SignUp from './User/SignUp'
 import Login from './User/Login'
 import { useCurrentUser } from '../Hooks/User'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   container: {
     height: '60px',
     display: 'flex',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   menuFont: {
     fontWeight: 600,
   },
-}))
+})
 
 function logout() {
   sessionStorage.removeItem('token')

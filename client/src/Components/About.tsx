@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   centerArea: {
     height: '100vh',
     maxWidth: '1100px',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     // TODO: 모바일 스타일 적용
     margin: '50px 80px 0px 80px',
   },
-}))
+})
 
 const About: FunctionComponent = () => {
   const classes = useStyles({})

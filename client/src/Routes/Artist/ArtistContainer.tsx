@@ -1,24 +1,39 @@
 import React, { FunctionComponent, useState, useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import ArtistPresenter from './ArtistPresenter'
-import { _getToken, _dataApi } from '../../apis'
 
-if (sessionStorage.getItem('artsy-token') === null) {
-  _getToken()
-}
+const ARTISTS = gql`
+  {
+    artists {
+      id
+      artistName
+      realName
+      category
+      residence
+      thumbnail {
+        id
+        url
+      }
+      representativeWork {
+        id
+        url
+      }
+    }
+  }
+`
 
 const Artist: FunctionComponent = () => {
-  const [artworks, setArtworks] = useState<Array<any>>([])
+  const { data, error } = useQuery(ARTISTS)
 
-  useEffect(() => {
-    getArtworks()
-  }, [])
-
-  async function getArtworks() {
-    const artworksData = await _dataApi.artwork()
-    setArtworks(artworksData.data._embedded.artworks)
+  if (!data) {
+    return null
+  }
+  if (error) {
+    console.error(error.message)
   }
 
-  return <ArtistPresenter artworks={artworks} />
+  return <ArtistPresenter artists={data.artists} />
 }
 
 export default Artist
