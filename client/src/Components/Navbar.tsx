@@ -33,23 +33,15 @@ const useStyles = makeStyles((theme) => ({
   menuFont: {
     fontWeight: 600,
   },
-  buttons: {
-    '& button:nth-child(2)': {
-      backgroundColor: theme.palette.highlight.main,
-    },
-    '& button:not(:first-child)': {
-      marginLeft: '15px',
-    },
-    '& a': {
-      marginLeft: '15px',
-      backgroundColor: theme.palette.highlight.main,
-    },
-  },
 }))
 
 function logout() {
   sessionStorage.removeItem('token')
   window.location.reload()
+}
+
+function redirectToRegisterArtistPage() {
+  window.location.href = '/artist/register'
 }
 
 const NavBar: FunctionComponent = () => {
@@ -93,45 +85,40 @@ const NavBar: FunctionComponent = () => {
           <Button className={classes.menuFont} href="/artist">
             작가
           </Button>
-          {!currentUser ? (
-            <div className={classes.buttons}>
-              <Button size="small" variant="contained" onClick={handleClickLogin}>
-                로그인
-              </Button>
-              <Button size="small" variant="contained" onClick={handleClickSignUp}>
-                회원가입
-              </Button>
-              {openSignUp && <SignUp openDialog={openSignUp} handleOpenDialog={setOpenSignUp} />}
-              {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
-            </div>
-          ) : (
-            <div className={classes.buttons}>
-              <IconButton
-                aria-controls="account-menu"
-                aria-haspopup="true"
-                aria-label="AccountMenuButton"
-                onClick={handleClickAccountMenu}
-              >
-                <AccountCircleIcon fontSize="large" />
-              </IconButton>
-              <Menu
-                id="account-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleCloseAccountMenu}
-              >
-                <MenuItem onClick={handleCloseAccountMenu}>프로필</MenuItem>
-                <MenuItem onClick={handleCloseAccountMenu}>계정 관리</MenuItem>
-                <MenuItem onClick={logout}>로그아웃</MenuItem>
-              </Menu>
-              {/* {!currentUser.artist && (
-                <Button size="small" variant="contained" href="/artist/register">
-                  작가 등록
-                </Button>
-              )} */}
-            </div>
-          )}
+          {openSignUp && <SignUp openDialog={openSignUp} handleOpenDialog={setOpenSignUp} />}
+          {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
+          <div>
+            <IconButton
+              aria-controls="account-menu"
+              aria-haspopup="true"
+              aria-label="AccountMenuButton"
+              onClick={handleClickAccountMenu}
+            >
+              <AccountCircleIcon fontSize="large" />
+            </IconButton>
+            <Menu
+              id="account-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleCloseAccountMenu}
+            >
+              {!currentUser ? (
+                <>
+                  <MenuItem onClick={handleClickLogin}>로그인</MenuItem>
+                  <MenuItem onClick={handleClickSignUp}>회원 가입</MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={handleCloseAccountMenu}>프로필</MenuItem>
+                  {!currentUser.artist && (
+                    <MenuItem onClick={redirectToRegisterArtistPage}>작가 등록</MenuItem>
+                  )}
+                  <MenuItem onClick={logout}>로그아웃</MenuItem>
+                </>
+              )}
+            </Menu>
+          </div>
         </div>
       </nav>
     </header>
