@@ -104,18 +104,18 @@ const NavBar: FunctionComponent = () => {
               onClose={handleCloseAccountMenu}
             >
               {!currentUser ? (
-                <>
+                <div>
                   <MenuItem onClick={handleClickLogin}>로그인</MenuItem>
                   <MenuItem onClick={handleClickSignUp}>회원 가입</MenuItem>
-                </>
+                </div>
               ) : (
-                <>
+                <div>
                   <MenuItem onClick={handleCloseAccountMenu}>프로필</MenuItem>
                   {!currentUser.artist && (
                     <MenuItem onClick={redirectToRegisterArtistPage}>작가 등록</MenuItem>
                   )}
                   <MenuItem onClick={logout}>로그아웃</MenuItem>
-                </>
+                </div>
               )}
             </Menu>
           </div>

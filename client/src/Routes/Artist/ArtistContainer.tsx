@@ -10,7 +10,6 @@ const ARTISTS = gql`
       artistName
       realName
       category
-      residence
       thumbnail {
         id
         url

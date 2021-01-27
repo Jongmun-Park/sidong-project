@@ -45,6 +45,7 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
         {artists &&
           artists.map((artist) => (
             <Poster
+              key={artist.id}
               artistName={artist.artistName}
               realName={artist.realName}
               thumbnailUrl={artist.thumbnail.url}

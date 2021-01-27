@@ -15,13 +15,19 @@ const useStyles = makeStyles((theme) => ({
       padding: '11px',
     },
   },
+  buttonBase: {
+    height: '230px',
+    '@media (max-width: 823px)': {
+      height: '182px',
+    },
+  },
   image: {
     width: '100%',
-    height: '230px',
+    maxHeight: '230px',
     objectFit: 'cover',
     borderRadius: '10px',
     '@media (max-width: 823px)': {
-      height: '182px',
+      maxHeight: '182px',
     },
   },
   head: {
@@ -87,7 +93,13 @@ const Poster: React.FC<ArtistPosterProps> = ({
   return (
     <Paper className={classes.paper} elevation={2}>
       <div className={classes.head}>
-        <Avatar alt="artist-thumbnail" src={thumbnailUrl} className={classes.largeAvatar} />
+        <Avatar
+          alt="artist-thumbnail"
+          // TEST CODE
+          src="https://www.pngitem.com/pimgs/m/498-4982261_img-kobe-face-png-transparent-png.png"
+          // src={thumbnailUrl}
+          className={classes.largeAvatar}
+        />
         <div className={classes.headText}>
           <Typography className={classes.realName} variant="subtitle1">
             {realName}
@@ -101,15 +113,15 @@ const Poster: React.FC<ArtistPosterProps> = ({
             label={translateArtistCategory(category)}
           />
         </div>
-        {/* <Typography variant="body2" gutterBottom>
-          {medium}
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          {saleMessage ? saleMessage : 'saleStatus'}
-        </Typography> */}
       </div>
-      <ButtonBase>
-        <img className={classes.image} src={representativeWorkUrl} alt="artImage" />
+      <ButtonBase className={classes.buttonBase}>
+        <img
+          className={classes.image}
+          // TEST CODE
+          src="https://i.pinimg.com/originals/6e/2f/16/6e2f169a7a3fc92ec3b9d35c4bf570e4.jpg"
+          // src={representativeWorkUrl}
+          alt="artImage"
+        />
       </ButtonBase>
     </Paper>
   )
