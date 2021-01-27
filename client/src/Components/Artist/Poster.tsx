@@ -1,6 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Chip, Paper, Typography, ButtonBase } from '@material-ui/core'
+import { ArtistCategory } from '../../types'
+import { translateArtistCategory } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,36 +27,43 @@ const useStyles = makeStyles((theme) => ({
   head: {
     display: 'flex',
     justifyContent: 'space-around',
+    marginBottom: '11px',
   },
   headText: {
     display: 'flex',
     flexDirection: 'column',
   },
-  nameSection: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   realName: {
-    // width: '58px',
-    fontSize: '15px',
+    fontSize: '14px',
     fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+    },
   },
   artistName: {
-    // width: '89px',
-    fontSize: '13px',
+    maxWidth: '103px',
+    fontSize: '12px',
+    marginBottom: '5px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    '@media (max-width: 823px)': {
+      fontSize: '10px',
+      maxWidth: '70px',
+    },
   },
   largeAvatar: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+    alignSelf: 'center',
+    '@media (max-width: 823px)': {
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+    },
   },
   chipLable: {
-    width: '52px',
+    width: '43px',
+    fontSize: '9px',
     fontWeight: 600,
   },
 }))
@@ -64,6 +73,7 @@ interface ArtistPosterProps {
   realName: string
   thumbnailUrl: string
   representativeWorkUrl: string
+  category: ArtistCategory
 }
 
 const Poster: React.FC<ArtistPosterProps> = ({
@@ -71,23 +81,25 @@ const Poster: React.FC<ArtistPosterProps> = ({
   realName,
   thumbnailUrl,
   representativeWorkUrl,
+  category,
 }) => {
   const classes = useStyles({})
-
   return (
     <Paper className={classes.paper} elevation={2}>
       <div className={classes.head}>
         <Avatar alt="artist-thumbnail" src={thumbnailUrl} className={classes.largeAvatar} />
         <div className={classes.headText}>
-          <div className={classes.nameSection}>
-            <Typography className={classes.realName} variant="subtitle1">
-              {realName}&ensp;
-            </Typography>
-            <Typography className={classes.artistName} variant="body2">
-              {artistName}
-            </Typography>
-          </div>
-          <Chip className={classes.chipLable} size="small" label="조각가" color="primary" />
+          <Typography className={classes.realName} variant="subtitle1">
+            {realName}
+          </Typography>
+          <Typography className={classes.artistName} variant="body2">
+            {artistName}
+          </Typography>
+          <Chip
+            className={classes.chipLable}
+            size="small"
+            label={translateArtistCategory(category)}
+          />
         </div>
         {/* <Typography variant="body2" gutterBottom>
           {medium}

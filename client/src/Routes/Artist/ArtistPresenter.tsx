@@ -17,11 +17,11 @@ const useStyles = makeStyles({
     width: '100%',
     margin: '50px 0px 50px 0px',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, 252px)',
+    gridTemplateColumns: 'repeat(auto-fill, 252px)',
     gridGap: '18px',
     justifyContent: 'center',
     '@media (max-width: 823px)': {
-      gridTemplateColumns: 'repeat(auto-fit, minmax(157px, auto))',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
       margin: '20px 10px 20px 10px',
       gridGap: '10px',
     },
@@ -43,16 +43,15 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
       </div>
       <div className={classes.contents}>
         {artists &&
-          artists
-            .concat(artists) // TEST CODE
-            .map((artist) => (
-              <Poster
-                artistName={artist.artistName}
-                realName={artist.realName}
-                thumbnailUrl={artist.thumbnail.url}
-                representativeWorkUrl={artist.representativeWork.url}
-              />
-            ))}
+          artists.map((artist) => (
+            <Poster
+              artistName={artist.artistName}
+              realName={artist.realName}
+              thumbnailUrl={artist.thumbnail.url}
+              representativeWorkUrl={artist.representativeWork.url}
+              category={artist.category}
+            />
+          ))}
       </div>
     </div>
   )

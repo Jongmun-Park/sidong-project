@@ -107,7 +107,9 @@ const REGISTER_ARTIST_MUTATION = gql`
 const RegisterArtist: FunctionComponent = () => {
   const classes = useStyles({})
   const [thumbnailPreview, setThumbnailPreview] = useState('')
-  const [representativeWorkPreview, setRepresentativeWorkPreview] = useState('')
+  const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
+    'http://i.imgur.com/I86rTVl.jpg'
+  )
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
 
   const handleChangePreview = (e: ChangeEvent<HTMLInputElement>, previewName: string) => {
