@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent, useCallback, useState } from 'react'
+import React, { FunctionComponent, ChangeEvent, useState } from 'react'
 import {
   Button,
   TextField,
@@ -48,7 +48,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ openDialog, handleOpenDialog }
     })
   }
 
-  const handleJoinButton = useCallback(async () => {
+  const handleJoinButton = async () => {
     if (inputs.password === '') {
       alert('비밀번호를 입력해주세요.')
       return
@@ -69,7 +69,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ openDialog, handleOpenDialog }
     } else {
       alert('이미 등록된 이메일입니다.')
     }
-  }, [inputs, createUser, handleOpenDialog])
+  }
 
   return (
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="sign-up-dialog">

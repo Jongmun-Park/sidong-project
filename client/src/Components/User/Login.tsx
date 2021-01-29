@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent, useCallback, useState } from 'react'
+import React, { FunctionComponent, ChangeEvent, useState } from 'react'
 import {
   Button,
   TextField,
@@ -51,7 +51,7 @@ const Login: FunctionComponent<LoginProps> = ({ openDialog, handleOpenDialog }) 
     })
   }
 
-  const handleLoginButton = useCallback(async () => {
+  const handleLoginButton = async () => {
     if (inputs.password === '') {
       alert('비밀번호를 입력해주세요.')
       return
@@ -65,7 +65,7 @@ const Login: FunctionComponent<LoginProps> = ({ openDialog, handleOpenDialog }) 
       sessionStorage.setItem('token', result.data.tokenAuth.token)
       window.location.reload()
     }
-  }, [inputs, loginUser])
+  }
 
   return (
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="login-dialog">

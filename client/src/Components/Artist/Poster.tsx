@@ -118,7 +118,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
         <img
           className={classes.image}
           // TEST CODE
-          src="https://i.pinimg.com/originals/6e/2f/16/6e2f169a7a3fc92ec3b9d35c4bf570e4.jpg"
+          src="https://s3.us-east-1.amazonaws.com/pem-org/images/exhibition/landing/_width647Height728/exsouthasiangallLK_REP_002.jpg"
           // src={representativeWorkUrl}
           alt="artImage"
         />
