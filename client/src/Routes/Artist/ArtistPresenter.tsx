@@ -1,6 +1,6 @@
 import React from 'react'
-import Poster from '../../Components/Artist/Poster'
 import { makeStyles } from '@material-ui/core/styles'
+import Poster from '../../Components/Artist/Poster'
 
 const useStyles = makeStyles({
   container: {
@@ -13,18 +13,23 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
-  contents: {
-    width: '100%',
-    margin: '50px 0px 50px 0px',
+  posters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 252px)',
     gridGap: '18px',
     justifyContent: 'center',
+    marginBottom: '32px',
     '@media (max-width: 823px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
       margin: '20px 10px 20px 10px',
       gridGap: '10px',
     },
+  },
+  contentSection: {
+    width: '100%',
+    margin: '50px 0px 50px 0px',
+    display: 'flex',
+    flexDirection: 'column',
   },
 })
 
@@ -34,6 +39,7 @@ interface ArtistPresenterProps {
 
 const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
   const classes = useStyles({})
+
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
@@ -41,9 +47,9 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
         <b>left side bar</b>
         <br></br>- Search box<br></br>- Filter
       </div>
-      <div className={classes.contents}>
-        {artists &&
-          artists.map((artist) => (
+      <div className={classes.contentSection}>
+        <div className={classes.posters}>
+          {artists.map((artist) => (
             <Poster
               key={artist.id}
               artistName={artist.artistName}
@@ -53,6 +59,7 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
               category={artist.category}
             />
           ))}
+        </div>
       </div>
     </div>
   )

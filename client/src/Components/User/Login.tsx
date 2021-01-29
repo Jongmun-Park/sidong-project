@@ -21,7 +21,7 @@ interface LoginInputProps {
 }
 
 const LOGIN_MUTATION = gql`
-  mutation LoginUser($email: String!, $password: String!) {
+  mutation($email: String!, $password: String!) {
     tokenAuth(username: $email, password: $password) {
       token
     }

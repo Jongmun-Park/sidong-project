@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const REGISTER_ARTIST_MUTATION = gql`
-  mutation CreateArtist(
+  mutation(
     $artistName: String!
     $realName: String!
     $phone: String!
