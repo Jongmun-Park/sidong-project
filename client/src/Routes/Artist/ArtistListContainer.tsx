@@ -24,17 +24,27 @@ const ARTISTS = gql`
 
 const ArtistList: FunctionComponent = () => {
   const { data, error } = useQuery(ARTISTS)
+  const [artists, setArtists] = useState<Array<any>>([])
+  const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
   const [loadMoreArtist, { data: fetchedData, error: fetchError }] = useLazyQuery(ARTISTS)
   const [lastArtistId, setLastArtistId] = useState('')
 
   useEffect(() => {
-    console.log('useEffect')
     if (fetchedData) {
       const fetchedArtists = fetchedData.artists
-      setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
-    } else if (data) {
+      if (fetchedArtists.length === 0) {
+        alert('더 불러올 작가가 없습니다.')
+        setNoMoreArtist(true)
+      } else {
+        setArtists([...artists, ...fetchedArtists])
+        setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
+      }
+    } else if (artists.length === 0 && data) {
+      const { artists } = data
+      setArtists(artists)
       setLastArtistId(artists[artists.length - 1].id)
     }
+    // eslint-disable-next-line
   }, [data, fetchedData])
 
   if (!data) {
@@ -47,20 +57,17 @@ const ArtistList: FunctionComponent = () => {
     console.error(fetchError.message)
   }
 
-  const { artists } = data
-
   const handleLoadMore = () => {
-    console.log('handleLoadMore')
+    if (noMoreArtist) {
+      alert('더 불러올 작가가 없습니다.')
+      return
+    }
     loadMoreArtist({
       variables: {
         lastArtistId: lastArtistId,
       },
     })
   }
-
-  console.log('data:', data)
-  console.log('lastArtistId:', lastArtistId)
-  console.log('fetchedData:', fetchedData)
 
   return (
     <>
