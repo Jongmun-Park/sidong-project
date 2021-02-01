@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import ArtistPresenter from './ArtistPresenter'
-import { Button } from '@material-ui/core'
+import ArtistListPresenter from './ArtistListPresenter'
 
 const ARTISTS = gql`
   query($lastArtistId: ID, $pageSize: Int) {
@@ -23,7 +22,7 @@ const ARTISTS = gql`
   }
 `
 
-const Artist: FunctionComponent = () => {
+const ArtistList: FunctionComponent = () => {
   const { data, error } = useQuery(ARTISTS)
   const [loadMoreArtist, { data: newData, error: newError }] = useLazyQuery(ARTISTS)
   const handleLoadMore = () => {
@@ -45,10 +44,9 @@ const Artist: FunctionComponent = () => {
 
   return (
     <>
-      <ArtistPresenter artists={artists} />
-      <Button onClick={handleLoadMore}>더 보기</Button>
+      <ArtistListPresenter artists={artists} handleLoadMore={handleLoadMore} />
     </>
   )
 }
 
-export default Artist
+export default ArtistList

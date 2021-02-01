@@ -79,10 +79,10 @@ const NavBar: FunctionComponent = () => {
           <Button className={classes.menuFont} href="/about">
             소개
           </Button>
-          <Button className={classes.menuFont} href="/art">
+          <Button className={classes.menuFont} href="/arts">
             작품
           </Button>
-          <Button className={classes.menuFont} href="/artist">
+          <Button className={classes.menuFont} href="/artists">
             작가
           </Button>
           {openSignUp && <SignUp openDialog={openSignUp} handleOpenDialog={setOpenSignUp} />}

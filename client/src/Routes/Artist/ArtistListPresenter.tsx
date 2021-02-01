@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Poster from '../../Components/Artist/Poster'
+import { Button } from '@material-ui/core'
+import { MemoizedPoster } from '../../Components/Artist/Poster'
 
 const useStyles = makeStyles({
   container: {
@@ -33,11 +34,12 @@ const useStyles = makeStyles({
   },
 })
 
-interface ArtistPresenterProps {
+interface ArtistListPresenterProps {
   artists: Array<any>
+  handleLoadMore: () => void
 }
 
-const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
+const ArtistListPresenter: React.FC<ArtistListPresenterProps> = ({ artists, handleLoadMore }) => {
   const classes = useStyles({})
 
   return (
@@ -50,7 +52,7 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
       <div className={classes.contentSection}>
         <div className={classes.posters}>
           {artists.map((artist) => (
-            <Poster
+            <MemoizedPoster
               key={artist.id}
               artistName={artist.artistName}
               realName={artist.realName}
@@ -60,9 +62,10 @@ const ArtistPresenter: React.FC<ArtistPresenterProps> = ({ artists }) => {
             />
           ))}
         </div>
+        <Button onClick={handleLoadMore}>더 보기</Button>
       </div>
     </div>
   )
 }
 
-export default ArtistPresenter
+export default ArtistListPresenter

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Chip, Paper, Typography, ButtonBase } from '@material-ui/core'
 import { ArtistCategory } from '../../types'
@@ -128,4 +128,4 @@ const Poster: React.FC<ArtistPosterProps> = ({
   )
 }
 
-export default Poster
+export const MemoizedPoster = memo(Poster)
