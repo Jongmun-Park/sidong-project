@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 })
 
-const About: FunctionComponent = () => {
+const About: FC = () => {
   const classes = useStyles({})
 
   return (

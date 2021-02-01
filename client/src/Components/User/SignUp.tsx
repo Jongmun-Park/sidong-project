@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent, useState } from 'react'
+import React, { FC, ChangeEvent, useState } from 'react'
 import {
   Button,
   TextField,
@@ -29,7 +29,7 @@ const SIGN_UP_MUTATION = gql`
   }
 `
 
-const SignUp: FunctionComponent<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
+const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
   const [createUser] = useMutation(SIGN_UP_MUTATION)
   const [inputs, setInputs] = useState<SignUpInputProps>({
     email: '',

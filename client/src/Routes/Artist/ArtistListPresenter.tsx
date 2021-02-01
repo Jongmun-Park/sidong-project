@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { MemoizedPoster } from '../../Components/Artist/Poster'
@@ -39,7 +39,7 @@ interface ArtistListPresenterProps {
   handleLoadMore: () => void
 }
 
-const ArtistListPresenter: React.FC<ArtistListPresenterProps> = ({ artists, handleLoadMore }) => {
+const ArtistListPresenter: FC<ArtistListPresenterProps> = ({ artists, handleLoadMore }) => {
   const classes = useStyles({})
 
   return (

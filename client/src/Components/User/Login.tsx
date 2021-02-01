@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent, useState } from 'react'
+import React, { FC, ChangeEvent, useState } from 'react'
 import {
   Button,
   TextField,
@@ -28,7 +28,7 @@ const LOGIN_MUTATION = gql`
   }
 `
 
-const Login: FunctionComponent<LoginProps> = ({ openDialog, handleOpenDialog }) => {
+const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
   const [loginUser] = useMutation(LOGIN_MUTATION, {
     onError: (error) => {
       alert('이메일과 비밀번호를 확인해주세요.')

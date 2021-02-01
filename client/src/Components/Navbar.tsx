@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, MouseEvent } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { Button, Menu, MenuItem, IconButton } from '@material-ui/core'
@@ -44,7 +44,7 @@ function redirectToRegisterArtistPage() {
   window.location.href = '/artist/register'
 }
 
-const NavBar: FunctionComponent = () => {
+const NavBar: FC = () => {
   const classes = useStyles({})
   const currentUser = useCurrentUser()
   const [openSignUp, setOpenSignUp] = useState(false)

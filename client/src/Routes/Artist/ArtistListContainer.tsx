@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import ArtistListPresenter from './ArtistListPresenter'
@@ -22,12 +22,13 @@ const ARTISTS = gql`
   }
 `
 
-const ArtistList: FunctionComponent = () => {
+const ArtistList: FC = () => {
   const { data, error } = useQuery(ARTISTS)
-  const [artists, setArtists] = useState<Array<any>>([])
-  const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
   const [loadMoreArtist, { data: fetchedData, error: fetchError }] = useLazyQuery(ARTISTS)
+
+  const [artists, setArtists] = useState<Array<any>>([])
   const [lastArtistId, setLastArtistId] = useState('')
+  const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
 
   useEffect(() => {
     if (fetchedData) {

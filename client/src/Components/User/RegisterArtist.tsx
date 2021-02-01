@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ChangeEvent, useState } from 'react'
+import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Avatar,
@@ -104,7 +104,7 @@ const REGISTER_ARTIST_MUTATION = gql`
   }
 `
 
-const RegisterArtist: FunctionComponent = () => {
+const RegisterArtist: FC = () => {
   const classes = useStyles({})
   const [thumbnailPreview, setThumbnailPreview] = useState('')
   const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
