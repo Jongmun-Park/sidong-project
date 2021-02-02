@@ -24,11 +24,22 @@ const ARTISTS = gql`
 
 const ArtistList: FC = () => {
   const { data, error } = useQuery(ARTISTS)
-  const [loadMoreArtist, { data: fetchedData, error: fetchError }] = useLazyQuery(ARTISTS)
+  const [
+    loadMoreArtist,
+    { data: fetchedData, error: fetchError, loading: fetchLoading },
+  ] = useLazyQuery(ARTISTS)
 
   const [artists, setArtists] = useState<Array<any>>([])
-  const [lastArtistId, setLastArtistId] = useState('')
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
+  const [lastArtistId, setLastArtistId] = useState<string>('')
+
+  useEffect(() => {
+    if (data) {
+      const { artists } = data
+      setArtists(artists)
+      setLastArtistId(artists[artists.length - 1].id)
+    }
+  }, [data])
 
   useEffect(() => {
     if (fetchedData) {
@@ -40,13 +51,9 @@ const ArtistList: FC = () => {
         setArtists([...artists, ...fetchedArtists])
         setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
       }
-    } else if (artists.length === 0 && data) {
-      const { artists } = data
-      setArtists(artists)
-      setLastArtistId(artists[artists.length - 1].id)
     }
     // eslint-disable-next-line
-  }, [data, fetchedData])
+  }, [fetchLoading])
 
   if (!data) {
     return null
@@ -58,18 +65,18 @@ const ArtistList: FC = () => {
     console.error(fetchError.message)
   }
 
-  const handleLoadMore = () => {
+  const handleLoadMore = async () => {
     if (noMoreArtist) {
       alert('더 불러올 작가가 없습니다.')
       return
     }
-    loadMoreArtist({
+    await loadMoreArtist({
       variables: {
         lastArtistId: lastArtistId,
       },
     })
   }
-
+  console.log('artistListContainer rendered..')
   return (
     <>
       <ArtistListPresenter artists={artists} handleLoadMore={handleLoadMore} />

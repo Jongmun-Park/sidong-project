@@ -213,7 +213,7 @@ const RegisterArtist: FC = () => {
             label="작가 소개"
             name="description"
             variant="outlined"
-            rows={5}
+            rows={7}
             defaultValue=""
             placeholder="작가를 소개하는 글입니다. 작가로서 가치관, 작품 세계 등 본인의 생각을 자유롭게 표현해주세요."
             inputRef={register}
