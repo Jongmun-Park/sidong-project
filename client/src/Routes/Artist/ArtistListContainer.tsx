@@ -53,7 +53,7 @@ const ArtistList: FC = () => {
       }
     }
     // eslint-disable-next-line
-  }, [fetchLoading])
+  }, [fetchedData])
 
   if (!data) {
     return null
