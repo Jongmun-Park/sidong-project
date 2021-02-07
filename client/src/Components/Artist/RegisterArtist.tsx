@@ -13,6 +13,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import { handleImagePreview } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -111,23 +112,6 @@ const RegisterArtist: FC = () => {
     'http://i.imgur.com/I86rTVl.jpg'
   )
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
-
-  const handleChangePreview = (e: ChangeEvent<HTMLInputElement>, previewName: string) => {
-    let reader = new FileReader()
-    if (e.target.files?.[0]) {
-      reader.readAsDataURL(e.target.files?.[0])
-      reader.onload = () => {
-        const base64 = reader.result
-        if (base64) {
-          if (previewName === 'thumbnail') {
-            setThumbnailPreview(base64.toString())
-          } else {
-            setRepresentativeWorkPreview(base64.toString())
-          }
-        }
-      }
-    }
-  }
 
   const { register, handleSubmit, errors } = useForm()
 
@@ -263,7 +247,7 @@ const RegisterArtist: FC = () => {
               name="thumbnail"
               accept="image/*"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleChangePreview(e, 'thumbnail')
+                handleImagePreview(e, setThumbnailPreview)
               }}
               ref={register({
                 required: '프로필 이미지를 등록해주세요.',
@@ -288,7 +272,7 @@ const RegisterArtist: FC = () => {
               name="representativeWork"
               accept="image/*"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleChangePreview(e, 'representativeWork')
+                handleImagePreview(e, setRepresentativeWorkPreview)
               }}
               ref={register({
                 required: '대표 작품을 등록해주세요.',

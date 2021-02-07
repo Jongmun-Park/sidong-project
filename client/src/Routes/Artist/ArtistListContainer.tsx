@@ -24,10 +24,7 @@ const ARTISTS = gql`
 
 const ArtistList: FC = () => {
   const { data, error } = useQuery(ARTISTS)
-  const [
-    loadMoreArtist,
-    { data: fetchedData, error: fetchError, loading: fetchLoading },
-  ] = useLazyQuery(ARTISTS)
+  const [loadMoreArtist, { data: fetchedData, error: fetchError }] = useLazyQuery(ARTISTS)
 
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)

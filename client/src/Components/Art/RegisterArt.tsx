@@ -1,18 +1,10 @@
 import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import {
-  Avatar,
-  TextField,
-  Button,
-  FormLabel,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Paper,
-} from '@material-ui/core'
+import { Avatar, TextField, Button, FormLabel, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
+import { handleImagePreview } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -112,23 +104,6 @@ const RegisterArt: FC = () => {
   )
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
 
-  const handleChangePreview = (e: ChangeEvent<HTMLInputElement>, previewName: string) => {
-    let reader = new FileReader()
-    if (e.target.files?.[0]) {
-      reader.readAsDataURL(e.target.files?.[0])
-      reader.onload = () => {
-        const base64 = reader.result
-        if (base64) {
-          if (previewName === 'thumbnail') {
-            setThumbnailPreview(base64.toString())
-          } else {
-            setRepresentativeWorkPreview(base64.toString())
-          }
-        }
-      }
-    }
-  }
-
   const { register, handleSubmit, errors } = useForm()
 
   const onSubmit = async (data: any) => {
@@ -159,99 +134,99 @@ const RegisterArt: FC = () => {
           <TextField
             className={classes.inputBox}
             autoFocus
-            name="artistName"
-            label="필명(닉네임)"
-            placeholder="필명(닉네임)"
+            name="name"
+            label="작품명"
+            placeholder="작품명"
             variant="outlined"
             required={true}
             inputRef={register({
               maxLength: {
-                value: 32,
-                message: '필명(닉네임)은 32자 이내로 입력해주세요.',
+                value: 128,
+                message: '작품명은 128자 이내로 입력해주세요.',
               },
             })}
           />
-          {errors.artistName?.type && (
-            <p className={classes.errorMessage}>{errors.artistName?.message}</p>
-          )}
-          <TextField
-            className={classes.inputBox}
-            name="realName"
-            label="성명"
-            placeholder="성명"
-            variant="outlined"
-            required={true}
-            inputRef={register({
-              maxLength: {
-                value: 32,
-                message: '성명은 32자 이내로 입력해주세요.',
-              },
-            })}
-          />
-          {errors.realName?.type && (
-            <p className={classes.errorMessage}>{errors.realName?.message}</p>
-          )}
-          <TextField
-            className={classes.inputBox}
-            name="phone"
-            type="tel"
-            label="휴대전화 번호"
-            placeholder="휴대전화 번호"
-            variant="outlined"
-            required={true}
-            inputRef={register({
-              minLength: {
-                value: 10,
-                message: '휴대전화 번호는 10자 이상으로 입력해주세요.',
-              },
-            })}
-          />
-          {errors.phone?.type && <p className={classes.errorMessage}>{errors.phone?.message}</p>}
+          {errors.name?.type && <p className={classes.errorMessage}>{errors.name?.message}</p>}
           <TextField
             className={classes.inputBox}
             multiline
-            label="작가 소개"
+            label="작품 설명"
             name="description"
             variant="outlined"
             rows={7}
             defaultValue=""
-            placeholder="작가를 소개하는 글입니다. 작가로서 가치관, 작품 세계 등 본인의 생각을 자유롭게 표현해주세요."
+            placeholder="작품에 대해 설명해주세요."
             inputRef={register}
           />
           <div className={classes.inputDiv}>
             <FormLabel component="div" className={classes.formLabel}>
-              거주 지역
+              매체
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="residence" required={true} ref={register}>
-              <option value="0">서울특별시</option>
-              <option value="1">부산광역시</option>
-              <option value="2">대구광역시</option>
-              <option value="3">인천광역시</option>
-              <option value="4">광주광역시</option>
-              <option value="5">대전광역시</option>
-              <option value="6">울산광역시</option>
-              <option value="7">세종특별자치시</option>
-              <option value="8">경기도</option>
-              <option value="9">강원도</option>
-              <option value="10">충청북도</option>
-              <option value="11">충청남도</option>
-              <option value="12">전라북도</option>
-              <option value="13">전라남도</option>
-              <option value="14">경상북도</option>
-              <option value="15">경상남도</option>
-              <option value="16">제주특별자치도</option>
+            <select style={{ marginTop: '10px' }} name="medium" required={true} ref={register}>
+              <option value="0">회화</option>
+              <option value="1">조각</option>
+              <option value="2">소묘</option>
+              <option value="3">판화</option>
+              <option value="4">종이</option>
+              <option value="5">섬유</option>
+              <option value="6">기타 매체</option>
             </select>
           </div>
           <div className={classes.inputDiv}>
             <FormLabel component="div" className={classes.formLabel}>
-              분야
+              주제
             </FormLabel>
-            <RadioGroup name="category" defaultValue="0">
-              <FormControlLabel value="0" control={<Radio inputRef={register} />} label="화가" />
-              <FormControlLabel value="1" control={<Radio inputRef={register} />} label="조각가" />
-              <FormControlLabel value="2" control={<Radio inputRef={register} />} label="공예가" />
-              <FormControlLabel value="3" control={<Radio inputRef={register} />} label="기타" />
-            </RadioGroup>
+            <select style={{ marginTop: '10px' }} name="theme" required={true} ref={register}>
+              <option value="0">회화</option>
+              <option value="1">조각</option>
+              <option value="2">소묘</option>
+              <option value="3">판화</option>
+              <option value="4">종이</option>
+              <option value="5">섬유</option>
+              <option value="6">기타 매체</option>
+            </select>
+          </div>
+          <div className={classes.inputDiv}>
+            <FormLabel component="div" className={classes.formLabel}>
+              스타일
+            </FormLabel>
+            <select style={{ marginTop: '10px' }} name="style" required={true} ref={register}>
+              <option value="0">회화</option>
+              <option value="1">조각</option>
+              <option value="2">소묘</option>
+              <option value="3">판화</option>
+              <option value="4">종이</option>
+              <option value="5">섬유</option>
+              <option value="6">기타 매체</option>
+            </select>
+          </div>
+          <div className={classes.inputDiv}>
+            <FormLabel component="div" className={classes.formLabel}>
+              기법
+            </FormLabel>
+            <select style={{ marginTop: '10px' }} name="technique" required={true} ref={register}>
+              <option value="0">회화</option>
+              <option value="1">조각</option>
+              <option value="2">소묘</option>
+              <option value="3">판화</option>
+              <option value="4">종이</option>
+              <option value="5">섬유</option>
+              <option value="6">기타 매체</option>
+            </select>
+          </div>
+          <div className={classes.inputDiv}>
+            <FormLabel component="div" className={classes.formLabel}>
+              판매 여부
+            </FormLabel>
+            <select style={{ marginTop: '10px' }} name="saleStatus" required={true} ref={register}>
+              <option value="0">회화</option>
+              <option value="1">조각</option>
+              <option value="2">소묘</option>
+              <option value="3">판화</option>
+              <option value="4">종이</option>
+              <option value="5">섬유</option>
+              <option value="6">기타 매체</option>
+            </select>
           </div>
           <div className={classes.inputDiv}>
             <FormLabel component="div" className={classes.formLabel}>
@@ -263,7 +238,7 @@ const RegisterArt: FC = () => {
               name="thumbnail"
               accept="image/*"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleChangePreview(e, 'thumbnail')
+                handleImagePreview(e, setThumbnailPreview)
               }}
               ref={register({
                 required: '프로필 이미지를 등록해주세요.',
@@ -288,7 +263,7 @@ const RegisterArt: FC = () => {
               name="representativeWork"
               accept="image/*"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleChangePreview(e, 'representativeWork')
+                handleImagePreview(e, setRepresentativeWorkPreview)
               }}
               ref={register({
                 required: '대표 작품을 등록해주세요.',

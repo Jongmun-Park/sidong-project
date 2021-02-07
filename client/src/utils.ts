@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import { ArtistCategory } from './types'
 import get from 'lodash/get'
 
@@ -10,4 +11,20 @@ const ARTIST_CATEGORY = {
 
 export function translateArtistCategory(path: string) {
   return get(ARTIST_CATEGORY, path)
+}
+
+export const handleImagePreview = (
+  e: ChangeEvent<HTMLInputElement>,
+  onChange: (arg0: string) => void
+) => {
+  let reader = new FileReader()
+  if (e.target.files?.[0]) {
+    reader.readAsDataURL(e.target.files?.[0])
+    reader.onload = () => {
+      const base64 = reader.result
+      if (base64) {
+        onChange(base64.toString())
+      }
+    }
+  }
 }
