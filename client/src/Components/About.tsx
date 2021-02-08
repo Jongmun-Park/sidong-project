@@ -10,12 +10,16 @@ const useStyles = makeStyles({
   },
   firstSection: {
     paddingTop: '32px',
-    // TODO: 모바일 스타일 적용
     margin: '0px 80px 0px 80px',
+    '@media (max-width: 823px)': {
+      margin: '0px 45px 0px 45px',
+    },
   },
   section: {
-    // TODO: 모바일 스타일 적용
     margin: '50px 80px 0px 80px',
+    '@media (max-width: 823px)': {
+      margin: '50px 45px 0px 45px',
+    },
   },
 })
 

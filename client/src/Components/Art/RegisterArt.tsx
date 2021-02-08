@@ -21,15 +21,12 @@ const useStyles = makeStyles((theme) => ({
   centerArea: {
     minHeight: '100vh',
     maxWidth: '550px',
-    // TODO: 모바일 스타일 적용
     padding: '30px 60px 100px 60px',
-    // TODO: 모바일 스타일 적용
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
-  },
-  section: {
-    // TODO: 모바일 스타일 적용
-    margin: '50px 80px 50px 80px',
+    '@media (max-width: 823px)': {
+      padding: '20px 45px 100px 45px',
+    },
   },
   inputContainer: {
     maxWidth: '400px',
