@@ -1,11 +1,21 @@
 import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Avatar, TextField, Button, FormLabel, Paper } from '@material-ui/core'
+import {
+  Avatar,
+  TextField,
+  Button,
+  FormControlLabel,
+  FormLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Switch,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreview } from '../../utils'
-import { Medium } from '../../types'
+import { Medium, SaleStatus, Orientation } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -25,17 +35,21 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '400px',
     margin: 'auto',
   },
-  inputBox: {
+  textBox: {
     width: '100%',
     marginTop: '1em',
   },
-  inputDiv: {
+  inputBox: {
     width: '100%',
     marginTop: '1em',
     padding: '18.5px 14px',
     border: '1px solid',
     borderRadius: '4px',
     borderColor: 'rgba(0, 0, 0, 0.23)',
+  },
+  inputElement: {
+    marginTop: '10px',
+    textAlign: 'right',
   },
   inputFile: {
     marginTop: '10px',
@@ -125,6 +139,8 @@ const REGISTER_ARTIST_MUTATION = gql`
 const RegisterArt: FC = () => {
   console.log('registerArt rendered')
   const classes = useStyles({})
+  const [isForSale, setIsForSale] = useState<boolean>(false)
+  const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [thumbnailPreview, setThumbnailPreview] = useState('')
   const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
@@ -188,13 +204,29 @@ const RegisterArt: FC = () => {
     })
   }
 
+  const handleSaleStatus = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === SaleStatus.ON_SALE.toString()) {
+      setIsForSale(true)
+    } else {
+      setIsForSale(false)
+    }
+  }
+
+  const handleSwitch = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setIsFramed(true)
+    } else {
+      setIsFramed(false)
+    }
+  }
+
   return (
     <div className={classes.centerArea}>
       <div className={classes.inputContainer}>
         <h3>&ensp;작품 등록</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            className={classes.inputBox}
+            className={classes.textBox}
             autoFocus
             name="name"
             label="작품명"
@@ -210,7 +242,7 @@ const RegisterArt: FC = () => {
           />
           {errors.name?.type && <p className={classes.errorMessage}>{errors.name?.message}</p>}
           <TextField
-            className={classes.inputBox}
+            className={classes.textBox}
             multiline
             label="작품 설명"
             name="description"
@@ -220,72 +252,126 @@ const RegisterArt: FC = () => {
             placeholder="작품에 대해 설명해주세요."
             inputRef={register}
           />
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               매체
             </FormLabel>
-            <select
-              style={{ marginTop: '10px' }}
-              name="medium"
-              required={true}
-              ref={register}
-              onChange={handleChange}
-            >
-              <option value="0">회화</option>
-              <option value="1">조각</option>
-              <option value="2">소묘</option>
-              <option value="3">판화</option>
-              <option value="4">종이</option>
-              <option value="5">섬유</option>
-              <option value="6">기타 매체</option>
-            </select>
+            <div className={classes.inputElement}>
+              <select name="medium" required={true} ref={register} onChange={handleChange}>
+                <option value="0">회화</option>
+                <option value="1">조각</option>
+                <option value="2">소묘</option>
+                <option value="3">판화</option>
+                <option value="4">종이</option>
+                <option value="5">섬유</option>
+                <option value="6">기타 매체</option>
+              </select>
+            </div>
           </div>
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               주제
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="theme" required={true} ref={register}>
-              {artOptions?.themes.map((theme) => (
-                <option key={theme.id} value={theme.id}>
-                  {theme.name}
-                </option>
-              ))}
-            </select>
+            <div className={classes.inputElement}>
+              <select name="theme" required={true} ref={register}>
+                {artOptions?.themes.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               스타일
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="style" required={true} ref={register}>
-              {artOptions?.styles.map((style) => (
-                <option key={style.id} value={style.id}>
-                  {style.name}
-                </option>
-              ))}
-            </select>
+            <div className={classes.inputElement}>
+              <select name="style" required={true} ref={register}>
+                {artOptions?.styles.map((style) => (
+                  <option key={style.id} value={style.id}>
+                    {style.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               기법
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="technique" required={true} ref={register}>
-              {artOptions?.techniques.map((technique) => (
-                <option key={technique.id} value={technique.id}>
-                  {technique.name}
-                </option>
-              ))}
-            </select>
+            <div className={classes.inputElement}>
+              <select name="technique" required={true} ref={register}>
+                {artOptions?.techniques.map((technique) => (
+                  <option key={technique.id} value={technique.id}>
+                    {technique.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               판매 여부
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="saleStatus" required={true} ref={register}>
-              <option value="0">회화</option>
-              <option value="1">조각</option>
-            </select>
+            <RadioGroup
+              name="saleStatus"
+              defaultValue={SaleStatus.NOT_FOR_SALE}
+              onChange={handleSaleStatus}
+            >
+              <FormControlLabel
+                value={SaleStatus.NOT_FOR_SALE}
+                control={<Radio inputRef={register} />}
+                label="비매품"
+              />
+              <FormControlLabel
+                value={SaleStatus.ON_SALE}
+                control={<Radio inputRef={register} />}
+                label="판매품"
+              />
+            </RadioGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isFramed}
+                  onChange={handleSwitch}
+                  name="isFramed"
+                  color="primary"
+                />
+              }
+              label={isFramed ? '액자 포함' : '액자 미포함'}
+            />
           </div>
-          <div className={classes.inputDiv}>
+          {isForSale && (
+            <div className={classes.inputBox}>
+              <FormLabel component="div" className={classes.formLabel}>
+                판매 가격 (배송비 포함)
+              </FormLabel>
+              <div className={classes.inputElement}>
+                <input type="number" name="price" min="1000"></input> 원
+              </div>
+            </div>
+          )}
+          <div className={classes.inputBox}>
+            <FormLabel component="div" className={classes.formLabel}>
+              방향 및 크기
+            </FormLabel>
+            <div className={classes.inputElement}>
+              <select name="orientation" required={true} ref={register}>
+                <option value={Orientation.LANDSCAPE}>가로가 긴 배치</option>
+                <option value={Orientation.PORTRAIT}>세로가 긴 배치</option>
+                <option value={Orientation.SQUARE}>정사각형</option>
+                <option value={Orientation.ETC}>기타</option>
+              </select>
+            </div>
+            <div className={classes.inputElement}>
+              가로 &nbsp;<input type="number" name="width" min="0"></input> cm
+            </div>
+            <div className={classes.inputElement}>
+              세로 &nbsp;<input type="number" name="height" min="0"></input> cm
+            </div>
+          </div>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               프로필 이미지
             </FormLabel>
@@ -310,7 +396,7 @@ const RegisterArt: FC = () => {
           {errors.thumbnail?.type && (
             <p className={classes.errorMessage}>{errors.thumbnail?.message}</p>
           )}
-          <div className={classes.inputDiv}>
+          <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               대표 작품 이미지
             </FormLabel>
