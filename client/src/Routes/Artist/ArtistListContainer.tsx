@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import ArtistListPresenter from './ArtistListPresenter'
@@ -23,24 +23,25 @@ const ARTISTS = gql`
 `
 
 const ArtistList: FC = () => {
-  const { data, error } = useQuery(ARTISTS)
-  const [loadMoreArtist, { data: fetchedData, error: fetchError }] = useLazyQuery(ARTISTS)
-
+  console.log('artistListContainer rendered..')
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
   const [lastArtistId, setLastArtistId] = useState<string>('')
 
-  useEffect(() => {
-    if (data) {
+  const { data } = useQuery(ARTISTS, {
+    onCompleted: (data) => {
       const { artists } = data
       setArtists(artists)
       setLastArtistId(artists[artists.length - 1].id)
-    }
-  }, [data])
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
 
-  useEffect(() => {
-    if (fetchedData) {
-      const fetchedArtists = fetchedData.artists
+  const [loadMoreArtist] = useLazyQuery(ARTISTS, {
+    onCompleted: (data) => {
+      const fetchedArtists = data.artists
       if (fetchedArtists.length === 0) {
         alert('더 불러올 작가가 없습니다.')
         setNoMoreArtist(true)
@@ -48,32 +49,28 @@ const ArtistList: FC = () => {
         setArtists([...artists, ...fetchedArtists])
         setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
       }
-    }
-    // eslint-disable-next-line
-  }, [fetchedData])
+    },
+    onError: (error) => {
+      console.log(error.message)
+    },
+  })
 
   if (!data) {
     return null
   }
-  if (error) {
-    console.error(error.message)
-  }
-  if (fetchError) {
-    console.error(fetchError.message)
-  }
 
-  const handleLoadMore = async () => {
+  const handleLoadMore = () => {
     if (noMoreArtist) {
       alert('더 불러올 작가가 없습니다.')
       return
     }
-    await loadMoreArtist({
+    loadMoreArtist({
       variables: {
         lastArtistId: lastArtistId,
       },
     })
   }
-  console.log('artistListContainer rendered..')
+
   return (
     <>
       <ArtistListPresenter artists={artists} handleLoadMore={handleLoadMore} />

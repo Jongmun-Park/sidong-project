@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreview } from '../../utils'
+import { Medium } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -69,6 +70,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+interface ArtOptions {
+  styles: Array<any>
+  techniques: Array<any>
+  themes: Array<any>
+}
+
+const ART_OPTIONS = gql`
+  query($mediumId: ID!) {
+    artOptions(mediumId: $mediumId) {
+      themes {
+        id
+        name
+      }
+      styles {
+        id
+        name
+      }
+      techniques {
+        id
+        name
+      }
+    }
+  }
+`
+
 const REGISTER_ARTIST_MUTATION = gql`
   mutation(
     $artistName: String!
@@ -97,14 +123,42 @@ const REGISTER_ARTIST_MUTATION = gql`
 `
 
 const RegisterArt: FC = () => {
+  console.log('registerArt rendered')
   const classes = useStyles({})
+  const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [thumbnailPreview, setThumbnailPreview] = useState('')
   const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
     'http://i.imgur.com/I86rTVl.jpg'
   )
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
-
   const { register, handleSubmit, errors } = useForm()
+
+  console.log(artOptions)
+
+  const { data } = useQuery(ART_OPTIONS, {
+    variables: {
+      mediumId: Medium.PAINTING,
+    },
+    onCompleted: (data) => {
+      setArtOptions(data.artOptions)
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
+    onCompleted: (data) => {
+      setArtOptions(data.artOptions)
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  if (!data) {
+    return null
+  }
 
   const onSubmit = async (data: any) => {
     const registerResult = await registerArtist({
@@ -124,6 +178,14 @@ const RegisterArt: FC = () => {
     } else {
       alert(registerResult.data.createArtist.msg)
     }
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    changeArtOptions({
+      variables: {
+        mediumId: e.target.value,
+      },
+    })
   }
 
   return (
@@ -162,7 +224,13 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               매체
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="medium" required={true} ref={register}>
+            <select
+              style={{ marginTop: '10px' }}
+              name="medium"
+              required={true}
+              ref={register}
+              onChange={handleChange}
+            >
               <option value="0">회화</option>
               <option value="1">조각</option>
               <option value="2">소묘</option>
@@ -177,13 +245,11 @@ const RegisterArt: FC = () => {
               주제
             </FormLabel>
             <select style={{ marginTop: '10px' }} name="theme" required={true} ref={register}>
-              <option value="0">회화</option>
-              <option value="1">조각</option>
-              <option value="2">소묘</option>
-              <option value="3">판화</option>
-              <option value="4">종이</option>
-              <option value="5">섬유</option>
-              <option value="6">기타 매체</option>
+              {artOptions?.themes.map((theme) => (
+                <option key={theme.id} value={theme.id}>
+                  {theme.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className={classes.inputDiv}>
@@ -191,13 +257,11 @@ const RegisterArt: FC = () => {
               스타일
             </FormLabel>
             <select style={{ marginTop: '10px' }} name="style" required={true} ref={register}>
-              <option value="0">회화</option>
-              <option value="1">조각</option>
-              <option value="2">소묘</option>
-              <option value="3">판화</option>
-              <option value="4">종이</option>
-              <option value="5">섬유</option>
-              <option value="6">기타 매체</option>
+              {artOptions?.styles.map((style) => (
+                <option key={style.id} value={style.id}>
+                  {style.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className={classes.inputDiv}>
@@ -205,13 +269,11 @@ const RegisterArt: FC = () => {
               기법
             </FormLabel>
             <select style={{ marginTop: '10px' }} name="technique" required={true} ref={register}>
-              <option value="0">회화</option>
-              <option value="1">조각</option>
-              <option value="2">소묘</option>
-              <option value="3">판화</option>
-              <option value="4">종이</option>
-              <option value="5">섬유</option>
-              <option value="6">기타 매체</option>
+              {artOptions?.techniques.map((technique) => (
+                <option key={technique.id} value={technique.id}>
+                  {technique.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className={classes.inputDiv}>
@@ -221,11 +283,6 @@ const RegisterArt: FC = () => {
             <select style={{ marginTop: '10px' }} name="saleStatus" required={true} ref={register}>
               <option value="0">회화</option>
               <option value="1">조각</option>
-              <option value="2">소묘</option>
-              <option value="3">판화</option>
-              <option value="4">종이</option>
-              <option value="5">섬유</option>
-              <option value="6">기타 매체</option>
             </select>
           </div>
           <div className={classes.inputDiv}>

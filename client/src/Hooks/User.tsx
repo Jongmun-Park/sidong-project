@@ -11,7 +11,7 @@ interface CurrentUser {
 }
 
 const CURRENT_USER = gql`
-  {
+  query {
     currentUser {
       id
       username

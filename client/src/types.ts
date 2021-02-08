@@ -4,3 +4,13 @@ export enum ArtistCategory {
   A_2 = '공예가',
   A_3 = '기타',
 }
+
+export enum Medium {
+  PAINTING,
+  SCULPTURE,
+  DRAWING,
+  PRINT,
+  PAPER,
+  TEXTILE,
+  ETC,
+}
