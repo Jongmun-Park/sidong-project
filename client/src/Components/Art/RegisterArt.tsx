@@ -1,7 +1,6 @@
 import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
-  Avatar,
   TextField,
   Button,
   FormControlLabel,
@@ -14,7 +13,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
-import { handleImagePreview } from '../../utils'
+import { handleImagePreviewList } from '../../utils'
 import { Medium, SaleStatus, Orientation } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
@@ -139,14 +138,10 @@ const RegisterArt: FC = () => {
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
-  const [thumbnailPreview, setThumbnailPreview] = useState('')
-  const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
-    'http://i.imgur.com/I86rTVl.jpg'
-  )
+  const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
+  console.log('imagePreviewList:', imagePreviewList)
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
   const { register, handleSubmit, errors } = useForm()
-
-  console.log(artOptions)
 
   const { data } = useQuery(ART_OPTIONS, {
     variables: {
@@ -182,7 +177,6 @@ const RegisterArt: FC = () => {
         description: data.description,
         category: data.category,
         residence: data.residence,
-        thumbnail: data.thumbnail,
         representativeWork: data.representativeWork,
       },
     })
@@ -227,7 +221,6 @@ const RegisterArt: FC = () => {
             autoFocus
             name="name"
             label="작품명"
-            placeholder="작품명"
             variant="outlined"
             required={true}
             inputRef={register({
@@ -246,7 +239,7 @@ const RegisterArt: FC = () => {
             variant="outlined"
             rows={7}
             defaultValue=""
-            placeholder="작품에 대해 설명해주세요."
+            helperText="작품에 대해 설명해주세요. 자세할 수록 좋습니다. :)"
             inputRef={register}
           />
           <div className={classes.inputBox}>
@@ -370,52 +363,31 @@ const RegisterArt: FC = () => {
           </div>
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              프로필 이미지
-            </FormLabel>
-            <input
-              className={classes.inputFile}
-              type="file"
-              name="thumbnail"
-              accept="image/*"
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleImagePreview(e, setThumbnailPreview)
-              }}
-              ref={register({
-                required: '프로필 이미지를 등록해주세요.',
-              })}
-            />
-            <Avatar
-              style={{ margin: 'auto' }}
-              src={thumbnailPreview}
-              className={classes.largeAvatar}
-            />
-          </div>
-          {errors.thumbnail?.type && (
-            <p className={classes.errorMessage}>{errors.thumbnail?.message}</p>
-          )}
-          <div className={classes.inputBox}>
-            <FormLabel component="div" className={classes.formLabel}>
-              대표 작품 이미지
+              작품 이미지 (최대 5개 선택 가능)
             </FormLabel>
             <input
               className={classes.inputFile}
               type="file"
               name="representativeWork"
               accept="image/*"
+              multiple
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleImagePreview(e, setRepresentativeWorkPreview)
+                console.log('files:', e.target.files)
+                handleImagePreviewList(e, setImagePreviewList)
               }}
               ref={register({
                 required: '대표 작품을 등록해주세요.',
               })}
             />
-            <Paper variant="outlined" className={classes.paper}>
-              <img
-                alt="representativeWork"
-                className={classes.representativeWorkPreview}
-                src={representativeWorkPreview}
-              />
-            </Paper>
+            {imagePreviewList.map((imagePreview, index) => (
+              <Paper key={index} variant="outlined" className={classes.paper}>
+                <img
+                  alt="representativeWork"
+                  className={classes.representativeWorkPreview}
+                  src={imagePreview}
+                />
+              </Paper>
+            ))}
           </div>
           {errors.representativeWork?.type && (
             <p className={classes.errorMessage}>{errors.representativeWork?.message}</p>

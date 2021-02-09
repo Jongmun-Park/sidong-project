@@ -127,6 +127,7 @@ const RegisterArtist: FC = () => {
     })
     if (registerResult.data.createArtist.success) {
       alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
+      window.location.href = '/artists'
     } else {
       alert(registerResult.data.createArtist.msg)
     }
@@ -142,7 +143,6 @@ const RegisterArtist: FC = () => {
             autoFocus
             name="artistName"
             label="필명(닉네임)"
-            placeholder="필명(닉네임)"
             variant="outlined"
             required={true}
             inputRef={register({
@@ -159,7 +159,6 @@ const RegisterArtist: FC = () => {
             className={classes.inputBox}
             name="realName"
             label="성명"
-            placeholder="성명"
             variant="outlined"
             required={true}
             inputRef={register({
@@ -177,7 +176,7 @@ const RegisterArtist: FC = () => {
             name="phone"
             type="tel"
             label="휴대전화 번호"
-            placeholder="휴대전화 번호"
+            helperText="작품 판매 상황을 안내 받을 휴대전화 번호를 정확히 입력해주세요."
             variant="outlined"
             required={true}
             inputRef={register({
@@ -196,7 +195,7 @@ const RegisterArtist: FC = () => {
             variant="outlined"
             rows={7}
             defaultValue=""
-            placeholder="작가를 소개하는 글입니다. 작가로서 가치관, 작품 세계 등 본인의 생각을 자유롭게 표현해주세요."
+            helperText="작가를 소개하는 글입니다. 작가로서 가치관, 작품 세계 등 본인의 생각을 자유롭게 표현해주세요."
             inputRef={register}
           />
           <div className={classes.inputDiv}>

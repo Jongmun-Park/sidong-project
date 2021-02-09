@@ -13,10 +13,10 @@ export function translateArtistCategory(path: string) {
   return get(ARTIST_CATEGORY, path)
 }
 
-export const handleImagePreview = (
+export function handleImagePreview(
   e: ChangeEvent<HTMLInputElement>,
   onChange: (arg0: string) => void
-) => {
+) {
   let reader = new FileReader()
   if (e.target.files?.[0]) {
     reader.readAsDataURL(e.target.files?.[0])
@@ -24,6 +24,29 @@ export const handleImagePreview = (
       const base64 = reader.result
       if (base64) {
         onChange(base64.toString())
+      }
+    }
+  }
+}
+
+export function handleImagePreviewList(
+  e: ChangeEvent<HTMLInputElement>,
+  onChange: (arg0: Array<string>) => void
+) {
+  const files = e.target.files
+  const previewList: Array<string> = []
+  if (files?.[0]) {
+    for (let i = 0; i < files.length; i++) {
+      let reader = new FileReader()
+      reader.readAsDataURL(files[i])
+      reader.onload = () => {
+        const base64 = reader.result
+        if (base64) {
+          previewList.push(base64.toString())
+          if (i === files.length - 1) {
+            onChange(previewList)
+          }
+        }
       }
     }
   }
