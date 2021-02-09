@@ -43,9 +43,9 @@ export function handleImagePreviewList(
         const base64 = reader.result
         if (base64) {
           previewList.push(base64.toString())
-          if (i === files.length - 1) {
-            onChange(previewList)
-          }
+        }
+        if (i === files.length - 1) {
+          onChange(previewList)
         }
       }
     }

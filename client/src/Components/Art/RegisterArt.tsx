@@ -139,7 +139,6 @@ const RegisterArt: FC = () => {
   const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
-  console.log('imagePreviewList:', imagePreviewList)
   const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
   const { register, handleSubmit, errors } = useForm()
 
@@ -372,7 +371,6 @@ const RegisterArt: FC = () => {
               accept="image/*"
               multiple
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                console.log('files:', e.target.files)
                 handleImagePreviewList(e, setImagePreviewList)
               }}
               ref={register({
