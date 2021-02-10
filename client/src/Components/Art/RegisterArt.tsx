@@ -48,15 +48,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
   },
   inputFile: {
-    marginTop: '10px',
-    marginBottom: '20px',
+    margin: '10px 0px 10px 0px',
   },
   formLabel: {
     marginBottom: '10px',
-  },
-  largeAvatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
   },
   submitButton: {
     float: 'right',
@@ -65,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     maxWidth: 'inherit',
     maxHeight: 'inherit',
-    margin: 'auto',
+    margin: '15px auto auto auto',
   },
-  representativeWorkPreview: {
+  imagePreview: {
     display: 'block',
     margin: 'auto',
     width: '-webkit-fill-available',
@@ -167,23 +162,25 @@ const RegisterArt: FC = () => {
     return null
   }
 
+  console.log('errors:', errors)
   const onSubmit = async (data: any) => {
-    const registerResult = await registerArtist({
-      variables: {
-        artistName: data.artistName,
-        realName: data.realName,
-        phone: data.phone,
-        description: data.description,
-        category: data.category,
-        residence: data.residence,
-        representativeWork: data.representativeWork,
-      },
-    })
-    if (registerResult.data.createArtist.success) {
-      alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
-    } else {
-      alert(registerResult.data.createArtist.msg)
-    }
+    console.log('data:', data)
+    // const registerResult = await registerArtist({
+    //   variables: {
+    //     artistName: data.artistName,
+    //     realName: data.realName,
+    //     phone: data.phone,
+    //     description: data.description,
+    //     category: data.category,
+    //     residence: data.residence,
+    //     representativeWork: data.representativeWork,
+    //   },
+    // })
+    // if (registerResult.data.createArtist.success) {
+    //   alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
+    // } else {
+    //   alert(registerResult.data.createArtist.msg)
+    // }
   }
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -238,7 +235,7 @@ const RegisterArt: FC = () => {
             variant="outlined"
             rows={7}
             defaultValue=""
-            helperText="작품에 대해 설명해주세요. 자세할 수록 좋습니다. :)"
+            helperText="작품에 대해 설명해주세요. 자세할수록 좋습니다. :)"
             inputRef={register}
           />
           <div className={classes.inputBox}>
@@ -246,7 +243,7 @@ const RegisterArt: FC = () => {
               매체
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="medium" required={true} ref={register} onChange={handleChange}>
+              <select name="medium" ref={register} onChange={handleChange}>
                 <option value="0">회화</option>
                 <option value="1">조각</option>
                 <option value="2">소묘</option>
@@ -262,7 +259,7 @@ const RegisterArt: FC = () => {
               주제
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="theme" required={true} ref={register}>
+              <select name="theme" ref={register}>
                 {artOptions?.themes.map((theme) => (
                   <option key={theme.id} value={theme.id}>
                     {theme.name}
@@ -276,7 +273,7 @@ const RegisterArt: FC = () => {
               스타일
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="style" required={true} ref={register}>
+              <select name="style" ref={register}>
                 {artOptions?.styles.map((style) => (
                   <option key={style.id} value={style.id}>
                     {style.name}
@@ -290,7 +287,7 @@ const RegisterArt: FC = () => {
               기법
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="technique" required={true} ref={register}>
+              <select name="technique" ref={register}>
                 {artOptions?.techniques.map((technique) => (
                   <option key={technique.id} value={technique.id}>
                     {technique.name}
@@ -326,6 +323,7 @@ const RegisterArt: FC = () => {
                   onChange={handleSwitch}
                   name="isFramed"
                   color="primary"
+                  inputRef={register}
                 />
               }
               label={isFramed ? '액자 포함' : '액자 미포함'}
@@ -337,10 +335,21 @@ const RegisterArt: FC = () => {
                 판매 가격 (배송비 포함)
               </FormLabel>
               <div className={classes.inputElement}>
-                <input type="number" name="price" min="1000"></input> 원
+                <input
+                  type="number"
+                  name="price"
+                  min="0"
+                  ref={register({
+                    validate: {
+                      positive: (value) => value > 0 || '판매 가격을 입력해주세요.',
+                    },
+                  })}
+                ></input>
+                원
               </div>
             </div>
           )}
+          {errors.price?.type && <p className={classes.errorMessage}>{errors.price?.message}</p>}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               방향 및 크기
@@ -354,12 +363,36 @@ const RegisterArt: FC = () => {
               </select>
             </div>
             <div className={classes.inputElement}>
-              가로 &nbsp;<input type="number" name="width" min="0"></input> cm
+              가로 &nbsp;
+              <input
+                ref={register({
+                  validate: {
+                    positive: (value) => value > 0 || '가로 길이를 0 보다 큰 숫자로 입력해주세요.',
+                  },
+                })}
+                type="number"
+                name="width"
+                min="0"
+              ></input>{' '}
+              cm
             </div>
             <div className={classes.inputElement}>
-              세로 &nbsp;<input type="number" name="height" min="0"></input> cm
+              세로 &nbsp;
+              <input
+                ref={register({
+                  validate: {
+                    positive: (value) => value > 0 || '세로 길이를 0 보다 큰 숫자로 입력해주세요.',
+                  },
+                })}
+                type="number"
+                name="height"
+                min="0"
+              ></input>{' '}
+              cm
             </div>
           </div>
+          {errors.width?.type && <p className={classes.errorMessage}>{errors.width?.message}</p>}
+          {errors.height?.type && <p className={classes.errorMessage}>{errors.height?.message}</p>}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               작품 이미지 (최대 5개 선택 가능)
@@ -367,28 +400,24 @@ const RegisterArt: FC = () => {
             <input
               className={classes.inputFile}
               type="file"
-              name="representativeWork"
+              name="artImages"
               accept="image/*"
               multiple
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 handleImagePreviewList(e, setImagePreviewList)
               }}
               ref={register({
-                required: '대표 작품을 등록해주세요.',
+                required: '작품 이미지를 등록해주세요.',
               })}
             />
             {imagePreviewList.map((imagePreview, index) => (
               <Paper key={index} variant="outlined" className={classes.paper}>
-                <img
-                  alt="representativeWork"
-                  className={classes.representativeWorkPreview}
-                  src={imagePreview}
-                />
+                <img alt="artImagePreview" className={classes.imagePreview} src={imagePreview} />
               </Paper>
             ))}
           </div>
-          {errors.representativeWork?.type && (
-            <p className={classes.errorMessage}>{errors.representativeWork?.message}</p>
+          {errors.artImages?.type && (
+            <p className={classes.errorMessage}>{errors.artImages?.message}</p>
           )}
           <Button
             className={classes.submitButton}

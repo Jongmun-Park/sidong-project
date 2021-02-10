@@ -202,7 +202,7 @@ const RegisterArtist: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               거주 지역
             </FormLabel>
-            <select style={{ marginTop: '10px' }} name="residence" required={true} ref={register}>
+            <select style={{ marginTop: '10px' }} name="residence" ref={register}>
               <option value="0">서울특별시</option>
               <option value="1">부산광역시</option>
               <option value="2">대구광역시</option>
