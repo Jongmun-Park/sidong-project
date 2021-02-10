@@ -22,8 +22,8 @@ export enum SaleStatus {
 }
 
 export enum Orientation {
-  LANDSCAPE = '0',
-  PORTRAIT = '1',
-  SQUARE = '2',
-  ETC = '3',
+  LANDSCAPE,
+  PORTRAIT,
+  SQUARE,
+  ETC,
 }

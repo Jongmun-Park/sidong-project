@@ -100,26 +100,36 @@ const ART_OPTIONS = gql`
   }
 `
 
-const REGISTER_ARTIST_MUTATION = gql`
+const REGISTER_ART_MUTATION = gql`
   mutation(
-    $artistName: String!
-    $realName: String!
-    $phone: String!
+    $artImages: Upload!
     $description: String!
-    $category: Int!
-    $residence: Int!
-    $thumbnail: Upload!
-    $representativeWork: Upload!
+    $height: Int!
+    $isFramed: Boolean!
+    $medium: ID!
+    $name: String!
+    $orientation: ID!
+    $price: Int!
+    $saleStatus: ID!
+    $style: ID!
+    $technique: ID!
+    $theme: ID!
+    $width: Int!
   ) {
-    createArtist(
-      artistName: $artistName
-      realName: $realName
-      phone: $phone
+    createArt(
+      artImages: $artImages
       description: $description
-      category: $category
-      residence: $residence
-      thumbnail: $thumbnail
-      representativeWork: $representativeWork
+      height: $height
+      isFramed: $isFramed
+      medium: $medium
+      name: $name
+      orientation: $orientation
+      price: $price
+      saleStatus: $saleStatus
+      style: $style
+      technique: $technique
+      theme: $theme
+      width: $width
     ) {
       success
       msg
@@ -128,13 +138,12 @@ const REGISTER_ARTIST_MUTATION = gql`
 `
 
 const RegisterArt: FC = () => {
-  console.log('registerArt rendered')
   const classes = useStyles({})
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
-  const [registerArtist] = useMutation(REGISTER_ARTIST_MUTATION)
+  const [registerArt] = useMutation(REGISTER_ART_MUTATION)
   const { register, handleSubmit, errors } = useForm()
 
   const { data } = useQuery(ART_OPTIONS, {
@@ -162,25 +171,29 @@ const RegisterArt: FC = () => {
     return null
   }
 
-  console.log('errors:', errors)
   const onSubmit = async (data: any) => {
-    console.log('data:', data)
-    // const registerResult = await registerArtist({
-    //   variables: {
-    //     artistName: data.artistName,
-    //     realName: data.realName,
-    //     phone: data.phone,
-    //     description: data.description,
-    //     category: data.category,
-    //     residence: data.residence,
-    //     representativeWork: data.representativeWork,
-    //   },
-    // })
-    // if (registerResult.data.createArtist.success) {
-    //   alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
-    // } else {
-    //   alert(registerResult.data.createArtist.msg)
-    // }
+    const registerResult = await registerArt({
+      variables: {
+        artImages: data.artImages,
+        description: data.description,
+        height: data.height,
+        isFramed: data.isFramed,
+        medium: data.medium,
+        name: data.name,
+        orientation: data.orientation,
+        price: data.price,
+        saleStatus: data.saleStatus,
+        style: data.style,
+        technique: data.technique,
+        theme: data.theme,
+        width: data.width,
+      },
+    })
+    if (registerResult.data.createArt.success) {
+      alert('작품 등록이 완료됐습니다. 감사합니다.')
+    } else {
+      alert(registerResult.data.createArt.msg)
+    }
   }
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -244,13 +257,13 @@ const RegisterArt: FC = () => {
             </FormLabel>
             <div className={classes.inputElement}>
               <select name="medium" ref={register} onChange={handleChange}>
-                <option value="0">회화</option>
-                <option value="1">조각</option>
-                <option value="2">소묘</option>
-                <option value="3">판화</option>
-                <option value="4">종이</option>
-                <option value="5">섬유</option>
-                <option value="6">기타 매체</option>
+                <option value={Medium.PAINTING}>회화</option>
+                <option value={Medium.SCULPTURE}>조각</option>
+                <option value={Medium.DRAWING}>소묘</option>
+                <option value={Medium.PRINT}>판화</option>
+                <option value={Medium.PAPER}>종이</option>
+                <option value={Medium.TEXTILE}>섬유</option>
+                <option value={Medium.ETC}>기타 매체</option>
               </select>
             </div>
           </div>
@@ -408,17 +421,21 @@ const RegisterArt: FC = () => {
               }}
               ref={register({
                 required: '작품 이미지를 등록해주세요.',
+                validate: {
+                  lessThanSix: (value) =>
+                    value.length < 6 || '작품 이미지는 최대 5개까지 등록 가능합니다.',
+                },
               })}
             />
+            {errors.artImages?.type && (
+              <p className={classes.errorMessage}>{errors.artImages?.message}</p>
+            )}
             {imagePreviewList.map((imagePreview, index) => (
               <Paper key={index} variant="outlined" className={classes.paper}>
                 <img alt="artImagePreview" className={classes.imagePreview} src={imagePreview} />
               </Paper>
             ))}
           </div>
-          {errors.artImages?.type && (
-            <p className={classes.errorMessage}>{errors.artImages?.message}</p>
-          )}
           <Button
             className={classes.submitButton}
             type="submit"
