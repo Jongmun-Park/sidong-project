@@ -96,7 +96,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
         <Avatar
           alt="artist-thumbnail"
           // TEST CODE
-          src="https://www.pngitem.com/pimgs/m/498-4982261_img-kobe-face-png-transparent-png.png"
+          src="https://img.favpng.com/22/0/21/computer-icons-user-profile-clip-art-png-favpng-MhMHJ0Fw21MJadYjpvDQbzu5S.jpg"
           // src={thumbnailUrl}
           className={classes.largeAvatar}
         />

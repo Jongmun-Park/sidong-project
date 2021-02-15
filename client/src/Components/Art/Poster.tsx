@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography, ButtonBase } from '@material-ui/core'
+import { currencyFormatter } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,38 +29,44 @@ const useStyles = makeStyles((theme) => ({
       maxHeight: '182px',
     },
   },
-  headText: {
+  textArea: {
     display: 'flex',
     flexDirection: 'column',
+    marginTop: '11px',
   },
-  realName: {
-    fontSize: '14px',
+  artName: {
+    fontSize: '15px',
     fontWeight: 'bold',
-    '@media (max-width: 823px)': {
-      fontSize: '12px',
-    },
-  },
-  artistName: {
-    maxWidth: '103px',
-    fontSize: '12px',
-    marginBottom: '5px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    marginBottom: '5px',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+      marginBottom: '3px',
+    },
+  },
+  pTag: {
+    fontSize: '12px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    marginBottom: '5px',
     '@media (max-width: 823px)': {
       fontSize: '10px',
-      maxWidth: '70px',
+      marginBottom: '3px',
     },
   },
 }))
 
 interface ArtPosterProps {
   name: string
-  width: string
-  height: string
+  width: number
+  height: number
   artistName: string
   saleStatus: string
-  price: string | null
+  price: number | null
+  representativeImageUrl: string
 }
 
 const Poster: React.FC<ArtPosterProps> = ({
@@ -69,39 +76,40 @@ const Poster: React.FC<ArtPosterProps> = ({
   artistName,
   saleStatus,
   price,
+  representativeImageUrl,
 }) => {
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
-      <div className={classes.headText}>
-        <Typography className={classes.realName} variant="subtitle1">
-          {name}
-        </Typography>
-        <Typography className={classes.artistName} variant="body2">
-          {width}x{height}cm
-        </Typography>
-        <Typography className={classes.artistName} variant="body2">
-          {artistName}
-        </Typography>
-        {price ? (
-          <Typography className={classes.artistName} variant="body2">
-            {price}원
-          </Typography>
-        ) : (
-          <Typography className={classes.artistName} variant="body2">
-            {saleStatus}
-          </Typography>
-        )}
-      </div>
       <ButtonBase className={classes.buttonBase}>
         <img
           className={classes.image}
           // TEST CODE
-          src="https://s3.us-east-1.amazonaws.com/pem-org/images/exhibition/landing/_width647Height728/exsouthasiangallLK_REP_002.jpg"
-          // src={representativeWorkUrl}
+          src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
+          // src={representativeImageUrl}
           alt="artImage"
         />
       </ButtonBase>
+      <div className={classes.textArea}>
+        <Typography className={classes.artName} variant="subtitle1">
+          {name}
+        </Typography>
+        <Typography className={classes.pTag} variant="body2">
+          {artistName}
+        </Typography>
+        <Typography className={classes.pTag} variant="body2">
+          {width}x{height}cm
+        </Typography>
+        {price ? (
+          <Typography className={classes.pTag} variant="body2">
+            {currencyFormatter(price)}원
+          </Typography>
+        ) : (
+          <Typography className={classes.pTag} variant="body2">
+            {saleStatus}
+          </Typography>
+        )}
+      </div>
     </Paper>
   )
 }

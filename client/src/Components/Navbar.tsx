@@ -15,20 +15,26 @@ const useStyles = makeStyles({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  logo: {
-    marginLeft: '20px',
-  },
   logoFont: {
+    marginLeft: '30px',
     color: '#722F37',
     fontWeight: 900,
     fontSize: 'large',
+    '@media (max-width: 823px)': {
+      fontSize: 'initial',
+      marginLeft: '10px',
+    },
   },
   menus: {
     width: '400px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: '28px',
+    marginRight: '30px',
+    '@media (max-width: 823px)': {
+      marginRight: '10px',
+      width: 'auto',
+    },
   },
   menuFont: {
     fontWeight: 600,
@@ -74,11 +80,9 @@ const NavBar: FC = () => {
   return (
     <header>
       <nav className={classes.container}>
-        <div className={classes.logo}>
-          <Button href="/" className={classes.logoFont}>
-            JAKUPSIL
-          </Button>
-        </div>
+        <Button href="/" className={classes.logoFont}>
+          작업실
+        </Button>
         <div className={classes.menus}>
           <Button className={classes.menuFont} href="/about">
             소개

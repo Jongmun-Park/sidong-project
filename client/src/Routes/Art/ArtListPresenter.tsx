@@ -63,6 +63,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) =
               artistName={art.artist.artistName}
               saleStatus={art.saleStatus}
               price={art.price}
+              representativeImageUrl={art.representativeImageUrl}
             />
           ))}
         </div>

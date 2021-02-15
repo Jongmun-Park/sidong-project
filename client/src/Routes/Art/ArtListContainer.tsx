@@ -12,7 +12,7 @@ const ARTS = gql`
       price
       width
       height
-      images
+      representativeImageUrl
       artist {
         id
         artistName

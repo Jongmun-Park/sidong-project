@@ -51,3 +51,7 @@ export function handleImagePreviewList(
     }
   }
 }
+
+export function currencyFormatter(number: number) {
+  return new Intl.NumberFormat('ko-KR').format(number)
+}
