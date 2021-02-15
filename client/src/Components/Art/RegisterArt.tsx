@@ -110,7 +110,7 @@ const REGISTER_ART_MUTATION = gql`
     $medium: ID!
     $name: String!
     $orientation: ID!
-    $price: Int!
+    $price: Int
     $saleStatus: ID!
     $style: ID!
     $technique: ID!
