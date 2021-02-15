@@ -68,7 +68,6 @@ const ArtList: FC = () => {
       },
     })
   }
-  console.log(data)
 
   return <ArtListPresenter arts={arts} handleLoadMore={handleLoadMore} />
 }
