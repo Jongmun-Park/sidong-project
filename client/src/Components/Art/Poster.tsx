@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography, ButtonBase } from '@material-ui/core'
-import { currencyFormatter } from '../../utils'
+import { currencyFormatter, translateSaleStatus } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -86,8 +86,8 @@ const Poster: React.FC<ArtPosterProps> = ({
         <img
           className={classes.image}
           // TEST CODE
-          src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
-          // src={representativeImageUrl}
+          // src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
+          src={representativeImageUrl}
           alt="artImage"
         />
       </ButtonBase>
@@ -101,15 +101,9 @@ const Poster: React.FC<ArtPosterProps> = ({
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm
         </Typography>
-        {price ? (
-          <Typography className={classes.pTag} variant="body2">
-            {currencyFormatter(price)}원
-          </Typography>
-        ) : (
-          <Typography className={classes.pTag} variant="body2">
-            {saleStatus}
-          </Typography>
-        )}
+        <Typography className={classes.pTag} variant="body2">
+          {price && currencyFormatter(price)} ({translateSaleStatus(saleStatus)})
+        </Typography>
       </div>
     </Paper>
   )

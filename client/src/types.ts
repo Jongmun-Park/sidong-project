@@ -5,6 +5,12 @@ export enum ArtistCategory {
   A_3 = '기타',
 }
 
+export enum SaleStatusKorean {
+  A_0 = '비매품',
+  A_1 = '판매품',
+  A_2 = '판매 완료',
+}
+
 export enum Medium {
   PAINTING,
   SCULPTURE,

@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { ArtistCategory } from './types'
+import { ArtistCategory, SaleStatusKorean } from './types'
 import get from 'lodash/get'
 
 const ARTIST_CATEGORY = {
@@ -9,8 +9,18 @@ const ARTIST_CATEGORY = {
   A_3: ArtistCategory.A_3,
 }
 
+const SALE_STATUS = {
+  A_0: SaleStatusKorean.A_0,
+  A_1: SaleStatusKorean.A_1,
+  A_2: SaleStatusKorean.A_2,
+}
+
 export function translateArtistCategory(path: string) {
   return get(ARTIST_CATEGORY, path)
+}
+
+export function translateSaleStatus(path: string) {
+  return get(SALE_STATUS, path)
 }
 
 export function handleImagePreview(
@@ -53,5 +63,5 @@ export function handleImagePreviewList(
 }
 
 export function currencyFormatter(number: number) {
-  return new Intl.NumberFormat('ko-KR').format(number)
+  return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(number)
 }
