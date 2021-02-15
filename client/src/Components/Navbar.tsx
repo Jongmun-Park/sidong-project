@@ -49,7 +49,7 @@ function redirectToRegisterArtPage() {
 }
 
 const NavBar: FC = () => {
-  const classes = useStyles({})
+  const classes = useStyles()
   const currentUser = useCurrentUser()
   const [openSignUp, setOpenSignUp] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)

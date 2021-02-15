@@ -32,6 +32,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
   },
+  loadMoreButton: {
+    fontWeight: 'bold',
+  },
 })
 
 interface ArtistListPresenterProps {
@@ -40,7 +43,7 @@ interface ArtistListPresenterProps {
 }
 
 const ArtistListPresenter: FC<ArtistListPresenterProps> = ({ artists, handleLoadMore }) => {
-  const classes = useStyles({})
+  const classes = useStyles()
 
   return (
     <div className={classes.container}>
@@ -62,7 +65,9 @@ const ArtistListPresenter: FC<ArtistListPresenterProps> = ({ artists, handleLoad
             />
           ))}
         </div>
-        <Button onClick={handleLoadMore}>더 보기</Button>
+        <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+          더 보기
+        </Button>
       </div>
     </div>
   )

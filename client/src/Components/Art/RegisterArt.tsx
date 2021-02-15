@@ -9,6 +9,7 @@ import {
   Radio,
   RadioGroup,
   Switch,
+  FormHelperText,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
@@ -138,7 +139,7 @@ const REGISTER_ART_MUTATION = gql`
 `
 
 const RegisterArt: FC = () => {
-  const classes = useStyles({})
+  const classes = useStyles()
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
@@ -408,8 +409,10 @@ const RegisterArt: FC = () => {
           {errors.height?.type && <p className={classes.errorMessage}>{errors.height?.message}</p>}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              작품 이미지 (최대 5개 선택 가능)
+              작품 이미지
             </FormLabel>
+            <FormHelperText>- 최대 5개 선택 가능</FormHelperText>
+            <FormHelperText>- 첫 번째 이미지가 대표 이미지로 사용됩니다.</FormHelperText>
             <input
               className={classes.inputFile}
               type="file"

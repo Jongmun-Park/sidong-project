@@ -89,8 +89,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
   representativeWorkUrl,
   category,
 }) => {
-  console.log('poster rendered', artistName)
-  const classes = useStyles({})
+  const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
       <div className={classes.head}>

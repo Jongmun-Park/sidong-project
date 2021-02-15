@@ -23,7 +23,6 @@ const ARTISTS = gql`
 `
 
 const ArtistList: FC = () => {
-  console.log('artistListContainer rendered..')
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
   const [lastArtistId, setLastArtistId] = useState<string>('')
@@ -51,7 +50,7 @@ const ArtistList: FC = () => {
       }
     },
     onError: (error) => {
-      console.log(error.message)
+      console.error(error.message)
     },
   })
 

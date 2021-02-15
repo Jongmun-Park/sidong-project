@@ -103,7 +103,7 @@ const REGISTER_ARTIST_MUTATION = gql`
 `
 
 const RegisterArtist: FC = () => {
-  const classes = useStyles({})
+  const classes = useStyles()
   const [thumbnailPreview, setThumbnailPreview] = useState('')
   const [representativeWorkPreview, setRepresentativeWorkPreview] = useState(
     'http://i.imgur.com/I86rTVl.jpg'
