@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     zIndex: 100,
     display: 'flex',
     width: '100%',
-    height: '60px',
+    height: '50px',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
