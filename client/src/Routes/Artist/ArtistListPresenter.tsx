@@ -6,6 +6,7 @@ import { MemoizedPoster } from '../../Components/Artist/Poster'
 const useStyles = makeStyles({
   container: {
     display: 'flex',
+    paddingTop: '60px',
   },
   leftSideBar: {
     justifySelf: 'center',

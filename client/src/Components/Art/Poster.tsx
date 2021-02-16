@@ -79,15 +79,14 @@ const Poster: React.FC<ArtPosterProps> = ({
   representativeImageUrl,
 }) => {
   const classes = useStyles()
-  console.log('art Poster.', name)
   return (
     <Paper className={classes.paper} elevation={2}>
       <ButtonBase className={classes.buttonBase}>
         <img
           className={classes.image}
           // TEST CODE
-          // src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
-          src={representativeImageUrl}
+          src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
+          // src={representativeImageUrl}
           alt="artImage"
         />
       </ButtonBase>

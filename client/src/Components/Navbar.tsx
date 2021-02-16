@@ -9,8 +9,11 @@ import { useCurrentUser } from '../Hooks/User'
 
 const useStyles = makeStyles({
   container: {
-    height: '60px',
+    position: 'fixed',
+    zIndex: 100,
     display: 'flex',
+    width: '100%',
+    height: '60px',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',

@@ -192,6 +192,7 @@ const RegisterArt: FC = () => {
     })
     if (registerResult.data.createArt.success) {
       alert('작품 등록이 완료됐습니다. 감사합니다.')
+      window.location.href = '/arts'
     } else {
       alert(registerResult.data.createArt.msg)
     }
