@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   centerArea: {
     minHeight: '100vh',
     maxWidth: '550px',
-    padding: '30px 60px 100px 60px',
+    padding: '80px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {

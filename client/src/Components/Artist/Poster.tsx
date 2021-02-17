@@ -95,10 +95,10 @@ const Poster: React.FC<ArtistPosterProps> = ({
       <div className={classes.head}>
         <Avatar
           alt="artist-thumbnail"
+          className={classes.largeAvatar}
           // TEST CODE
           src="https://img.favpng.com/22/0/21/computer-icons-user-profile-clip-art-png-favpng-MhMHJ0Fw21MJadYjpvDQbzu5S.jpg"
           // src={thumbnailUrl}
-          className={classes.largeAvatar}
         />
         <div className={classes.headText}>
           <Typography className={classes.realName} variant="subtitle1">
@@ -116,11 +116,11 @@ const Poster: React.FC<ArtistPosterProps> = ({
       </div>
       <ButtonBase className={classes.buttonBase}>
         <img
+          alt="artImage"
           className={classes.image}
           // TEST CODE
           src="https://s3.us-east-1.amazonaws.com/pem-org/images/exhibition/landing/_width647Height728/exsouthasiangallLK_REP_002.jpg"
           // src={representativeWorkUrl}
-          alt="artImage"
         />
       </ButtonBase>
     </Paper>

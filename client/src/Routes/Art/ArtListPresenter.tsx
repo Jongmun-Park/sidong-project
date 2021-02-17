@@ -61,6 +61,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) =
           {arts.map((art) => (
             <MemoizedPoster
               key={art.id}
+              id={art.id}
               name={art.name}
               width={art.width}
               height={art.height}

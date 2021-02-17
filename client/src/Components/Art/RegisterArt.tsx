@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   centerArea: {
     minHeight: '100vh',
     maxWidth: '550px',
-    padding: '30px 60px 100px 60px',
+    padding: '80px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {
@@ -255,23 +255,23 @@ const RegisterArt: FC = () => {
           />
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              매체
+              매체 (medium)
             </FormLabel>
             <div className={classes.inputElement}>
               <select name="medium" ref={register} onChange={handleChange}>
-                <option value={Medium.PAINTING}>회화</option>
-                <option value={Medium.SCULPTURE}>조각</option>
-                <option value={Medium.DRAWING}>소묘</option>
-                <option value={Medium.PRINT}>판화</option>
-                <option value={Medium.PAPER}>종이</option>
-                <option value={Medium.TEXTILE}>섬유</option>
+                <option value={Medium.PAINTING}>회화(painting)</option>
+                <option value={Medium.SCULPTURE}>조각(sculpture)</option>
+                <option value={Medium.DRAWING}>소묘(drawing)</option>
+                <option value={Medium.PRINT}>판화(print)</option>
+                <option value={Medium.PAPER}>종이(paper)</option>
+                <option value={Medium.TEXTILE}>섬유(textile)</option>
                 <option value={Medium.ETC}>기타 매체</option>
               </select>
             </div>
           </div>
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              주제
+              주제 (theme)
             </FormLabel>
             <div className={classes.inputElement}>
               <select name="theme" ref={register}>
@@ -285,7 +285,7 @@ const RegisterArt: FC = () => {
           </div>
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              스타일
+              스타일 (style)
             </FormLabel>
             <div className={classes.inputElement}>
               <select name="style" ref={register}>
@@ -299,7 +299,7 @@ const RegisterArt: FC = () => {
           </div>
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              기법
+              기법 (technique)
             </FormLabel>
             <div className={classes.inputElement}>
               <select name="technique" ref={register}>

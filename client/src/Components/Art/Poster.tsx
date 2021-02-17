@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   textArea: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '11px',
+    marginTop: '14px',
+    paddingLeft: '8px',
   },
   artName: {
     fontSize: '15px',
@@ -57,9 +58,14 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '3px',
     },
   },
+  aTag: {
+    textDecoration: 'none',
+    color: 'black',
+  },
 }))
 
 interface ArtPosterProps {
+  id: number
   name: string
   width: number
   height: number
@@ -70,6 +76,7 @@ interface ArtPosterProps {
 }
 
 const Poster: React.FC<ArtPosterProps> = ({
+  id,
   name,
   width,
   height,
@@ -81,18 +88,20 @@ const Poster: React.FC<ArtPosterProps> = ({
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
-      <ButtonBase className={classes.buttonBase}>
+      <ButtonBase className={classes.buttonBase} href={'/art/' + id}>
         <img
+          alt="artImage"
           className={classes.image}
           // TEST CODE
           src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
           // src={representativeImageUrl}
-          alt="artImage"
         />
       </ButtonBase>
       <div className={classes.textArea}>
         <Typography className={classes.artName} variant="subtitle1">
-          {name}
+          <a href={'/art/' + id} className={classes.aTag}>
+            {name}
+          </a>
         </Typography>
         <Typography className={classes.pTag} variant="body2">
           {artistName}
