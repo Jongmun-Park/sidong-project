@@ -41,6 +41,15 @@ const useStyles = makeStyles({
   },
   menuFont: {
     fontWeight: 600,
+    '@media (max-width: 823px)': {
+      fontSize: 'small',
+    },
+  },
+  accountCircleIcon: {
+    fontSize: 'xx-large',
+    '@media (max-width: 823px)': {
+      fontSize: 'larger',
+    },
   },
 })
 
@@ -105,7 +114,7 @@ const NavBar: FC = () => {
               aria-label="AccountMenuButton"
               onClick={handleClickAccountMenu}
             >
-              <AccountCircleIcon fontSize="large" />
+              <AccountCircleIcon className={classes.accountCircleIcon} />
             </IconButton>
             <Menu
               id="account-menu"

@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginTop: '14px',
     paddingLeft: '8px',
+    '@media (max-width: 823px)': {
+      marginTop: '10px',
+    },
   },
   artName: {
     fontSize: '15px',

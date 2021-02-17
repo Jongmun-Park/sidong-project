@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     marginBottom: '11px',
+    '@media (max-width: 823px)': {
+      marginBottom: '4px',
+    },
   },
   headText: {
     display: 'flex',

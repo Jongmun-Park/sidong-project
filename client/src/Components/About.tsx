@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
   },
   firstSection: {
-    paddingTop: '32px',
+    paddingTop: '30px',
     margin: '0px 80px 0px 80px',
     '@media (max-width: 823px)': {
       margin: '0px 45px 0px 45px',
