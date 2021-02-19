@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography, ButtonBase } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
+import { SaleStatus } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,8 +74,8 @@ interface ArtPosterProps {
   width: number
   height: number
   artistName: string
-  saleStatus: string
-  price: number | null
+  saleStatus: SaleStatus
+  price: number
   representativeImageUrl: string
 }
 
@@ -112,9 +113,15 @@ const Poster: React.FC<ArtPosterProps> = ({
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm
         </Typography>
-        <Typography className={classes.pTag} variant="body2">
-          {price && currencyFormatter(price)} ({translateSaleStatus(saleStatus)})
-        </Typography>
+        {saleStatus == SaleStatus.ON_SALE ? (
+          <Typography className={classes.pTag} variant="body2">
+            {currencyFormatter(price)}
+          </Typography>
+        ) : (
+          <Typography className={classes.pTag} variant="body2">
+            {translateSaleStatus(saleStatus)}
+          </Typography>
+        )}
       </div>
     </Paper>
   )

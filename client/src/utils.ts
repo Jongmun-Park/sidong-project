@@ -1,21 +1,20 @@
 import { ChangeEvent } from 'react'
-import { ArtistCategory, SaleStatusKorean } from './types'
 import get from 'lodash/get'
 
 const ARTIST_CATEGORY = {
-  A_0: ArtistCategory.A_0,
-  A_1: ArtistCategory.A_1,
-  A_2: ArtistCategory.A_2,
-  A_3: ArtistCategory.A_3,
+  0: '화가',
+  1: '조각가',
+  2: '공예가',
+  3: '기타',
 }
 
 const SALE_STATUS = {
-  A_0: SaleStatusKorean.A_0,
-  A_1: SaleStatusKorean.A_1,
-  A_2: SaleStatusKorean.A_2,
+  '0': '비매품',
+  '1': '판매품',
+  '2': '판매 완료',
 }
 
-export function translateArtistCategory(path: string) {
+export function translateArtistCategory(path: number) {
   return get(ARTIST_CATEGORY, path)
 }
 

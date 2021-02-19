@@ -27,7 +27,7 @@ const About: FC = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.centerArea}>
+    <main className={classes.centerArea}>
       <section className={classes.firstSection}>
         <h2>우리 모두 작가가 될 수 있습니다.</h2>
         <p>작업실은 작가의 이력이나 학력을 묻지 않습니다.</p>
@@ -50,7 +50,7 @@ const About: FC = () => {
           작가들의 목소리에 귀 기울여 작가와 소비자 모두를 만족시킬 수 있는 서비스로 발전하겠습니다.
         </p>
       </section>
-    </div>
+    </main>
   )
 }
 

@@ -1,14 +1,8 @@
 export enum ArtistCategory {
-  A_0 = '화가',
-  A_1 = '조각가',
-  A_2 = '공예가',
-  A_3 = '기타',
-}
-
-export enum SaleStatusKorean {
-  A_0 = '비매품',
-  A_1 = '판매품',
-  A_2 = '판매 완료',
+  PAINTER,
+  SCULPTOR,
+  CRAFTSMAN,
+  ETC,
 }
 
 export enum Medium {

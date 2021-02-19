@@ -36,8 +36,6 @@ const ART = gql`
       saleStatus
       isFramed
       price
-      orientation
-      size
       width
       height
       images
@@ -51,15 +49,16 @@ const ArtDetail: FC = () => {
     variables: {
       artId: artID,
     },
-    onCompleted: (data) => {
-      console.log('data::', data)
-    },
     onError: (error) => {
       console.error(error.message)
     },
   })
 
-  return <ArtDetailPresenter />
+  if (!data) {
+    return null
+  }
+
+  return <ArtDetailPresenter art={data.art} />
 }
 
 export default ArtDetail
