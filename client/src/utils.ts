@@ -14,12 +14,26 @@ const SALE_STATUS = {
   '2': '판매 완료',
 }
 
+const MEDIUM = {
+  0: '회화',
+  1: '조각',
+  2: '소묘',
+  3: '판화',
+  4: '종이',
+  5: '섬유',
+  6: '기타 매체',
+}
+
 export function translateArtistCategory(path: number) {
   return get(ARTIST_CATEGORY, path)
 }
 
 export function translateSaleStatus(path: string) {
   return get(SALE_STATUS, path)
+}
+
+export function translateMedium(path: number) {
+  return get(MEDIUM, path)
 }
 
 export function handleImagePreview(

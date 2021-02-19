@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginTop: '14px',
     paddingLeft: '8px',
+    color: '#333',
     '@media (max-width: 823px)': {
       marginTop: '10px',
     },
@@ -63,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   aTag: {
+    color: '#333',
     textDecoration: 'none',
-    color: 'black',
   },
 }))
 
@@ -113,15 +114,18 @@ const Poster: React.FC<ArtPosterProps> = ({
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm
         </Typography>
-        {saleStatus == SaleStatus.ON_SALE ? (
-          <Typography className={classes.pTag} variant="body2">
-            {currencyFormatter(price)}
-          </Typography>
-        ) : (
-          <Typography className={classes.pTag} variant="body2">
-            {translateSaleStatus(saleStatus)}
-          </Typography>
-        )}
+        {
+          // eslint-disable-next-line
+          saleStatus == SaleStatus.ON_SALE ? (
+            <Typography className={classes.pTag} variant="body2">
+              {currencyFormatter(price)}
+            </Typography>
+          ) : (
+            <Typography className={classes.pTag} variant="body2">
+              {translateSaleStatus(saleStatus)}
+            </Typography>
+          )
+        }
       </div>
     </Paper>
   )
