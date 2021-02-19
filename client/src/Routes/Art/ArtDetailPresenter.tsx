@@ -26,10 +26,13 @@ const useStyles = makeStyles({
     },
   },
   rightBox: {
+    color: '#333',
     margin: '0 30px 0 30px',
   },
+  leftBox: {
+    margin: '0 60px 0 60px',
+  },
   artName: {
-    color: '#333',
     fontWeight: 600,
     marginBottom: '20px',
   },
@@ -37,16 +40,15 @@ const useStyles = makeStyles({
     marginBottom: '20px',
   },
   th: {
+    color: '#818181',
     width: '40%',
     padding: '6px',
-    color: '#818181',
     fontSize: '0.929em',
     borderBottom: 'none',
   },
   td: {
     width: '60%',
     padding: '6px',
-    color: '#333',
     fontSize: '1em',
     fontWeight: 600,
     borderBottom: 'none',
@@ -91,10 +93,12 @@ const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
   const classes = useStyles()
   return (
     <main className={classes.container}>
-      <div className={classes.leftArea}>~~~~~~~~~~~~leftArea~~~~~~~~~~~~~~</div>
+      <div className={classes.leftArea}>
+        <div className={classes.leftBox}>image box</div>
+      </div>
       <div className={classes.rightArea}>
         <div className={classes.rightBox}>
-          <Typography className={classes.artName} variant="h5">
+          <Typography className={classes.artName} variant="h6">
             {art.name}
           </Typography>
           <Table className={classes.table}>
@@ -134,7 +138,7 @@ const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
                   크기 | Size
                 </TableCell>
                 <TableCell className={classes.td}>
-                  {art.width}x{art.height}cm (가로x세로)
+                  {art.width}x{art.height}cm
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -145,7 +149,6 @@ const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
               </TableRow>
             </TableBody>
           </Table>
-          <div></div>
           {
             // eslint-disable-next-line
             art.saleStatus == SaleStatus.ON_SALE ? (

@@ -36,13 +36,16 @@ const About: FC = () => {
           창작하는 모든 작가들에게 전시 공간이자 판매 경로가 되어 그들의 창작 환경이 개선되길
           바랍니다.
         </p>
+        <p>
+          <span style={{ backgroundColor: 'antiquewhite' }}>부담 없이 작가 등록을 해보세요.</span>
+        </p>
       </section>
       <section className={classes.section}>
         <h2>다양한 작가의 개성 있는 작품이 모인 공간을 지향합니다.</h2>
         <p>
+          이를 위해 모작 또는 대량 생산된 프린팅 제품이 아닌&nbsp;
           <span style={{ backgroundColor: 'antiquewhite' }}>
-            이를 위해 모작 또는 대량 생산된 프린팅 제품이 아닌 작가가 직접 만든 작품만 등록해주시길
-            바랍니다.
+            작가가 직접 만든 작품만 등록해주시길 바랍니다.
           </span>
         </p>
         <p>작업실은 IT 기술이 예술 시장에 투명성과 형평성을 가져올 것이라 믿습니다.</p>
