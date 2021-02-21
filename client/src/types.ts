@@ -1,4 +1,4 @@
-export type Art = {
+export interface Art {
   art: {
     id: number
     createdAt: string
