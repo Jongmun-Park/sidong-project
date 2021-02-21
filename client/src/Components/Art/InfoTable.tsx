@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Table, TableRow, TableCell, TableBody } from '@material-ui/core'
 import { translateMedium } from '../../utils'
-import { ArtDetailPresenterProps } from '../../interfaces'
+import { Art } from '../../types'
 
 const useStyles = makeStyles({
   table: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 })
 
-const ArtInfoTable: FC<ArtDetailPresenterProps> = ({ art }) => {
+const ArtInfoTable: FC<Art> = ({ art }) => {
   const classes = useStyles()
   return (
     <Table className={classes.table}>

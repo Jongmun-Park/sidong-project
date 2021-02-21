@@ -3,9 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import { SaleStatus } from '../../types'
+import { Art, SaleStatus } from '../../types'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
-import { ArtDetailPresenterProps } from '../../interfaces'
 import ArtInfoTable from '../../Components/Art/InfoTable'
 
 const useStyles = makeStyles({
@@ -43,7 +42,7 @@ const useStyles = makeStyles({
   },
 })
 
-const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
+const ArtDetailPresenter: FC<Art> = ({ art }) => {
   console.log('art:', art)
   const classes = useStyles()
   return (
