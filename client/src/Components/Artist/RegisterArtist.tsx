@@ -276,7 +276,7 @@ const RegisterArtist: FC = () => {
             />
             <Paper variant="outlined" className={classes.paper}>
               <img
-                alt="representativeWork"
+                alt="대표 작품 미리보기 이미지"
                 className={classes.representativeWorkPreview}
                 src={representativeWorkPreview}
               />

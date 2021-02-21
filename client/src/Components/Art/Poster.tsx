@@ -95,7 +95,7 @@ const Poster: React.FC<ArtPosterProps> = ({
     <Paper className={classes.paper} elevation={2}>
       <ButtonBase className={classes.buttonBase} href={'/art/' + id}>
         <img
-          alt="artImage"
+          alt="작품 이미지"
           className={classes.image}
           // TEST CODE
           src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"

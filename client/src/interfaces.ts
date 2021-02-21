@@ -30,5 +30,9 @@ export interface ArtDetailPresenterProps {
     width: number
     height: number
     images: Array<number>
+    imageUrls: {
+      id: number
+      url: string
+    }[]
   }
 }

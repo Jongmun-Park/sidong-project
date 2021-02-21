@@ -38,7 +38,10 @@ const ART = gql`
       price
       width
       height
-      images
+      imageUrls {
+        id
+        url
+      }
     }
   }
 `

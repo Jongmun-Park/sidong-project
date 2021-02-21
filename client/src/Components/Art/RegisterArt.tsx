@@ -436,7 +436,11 @@ const RegisterArt: FC = () => {
             )}
             {imagePreviewList.map((imagePreview, index) => (
               <Paper key={index} variant="outlined" className={classes.paper}>
-                <img alt="artImagePreview" className={classes.imagePreview} src={imagePreview} />
+                <img
+                  alt="작품 미리보기 이미지"
+                  className={classes.imagePreview}
+                  src={imagePreview}
+                />
               </Paper>
             ))}
           </div>

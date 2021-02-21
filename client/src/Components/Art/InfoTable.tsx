@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 })
 
-const InfoTable: FC<ArtDetailPresenterProps> = ({ art }) => {
+const ArtInfoTable: FC<ArtDetailPresenterProps> = ({ art }) => {
   const classes = useStyles()
   return (
     <Table className={classes.table}>
@@ -78,4 +78,4 @@ const InfoTable: FC<ArtDetailPresenterProps> = ({ art }) => {
   )
 }
 
-export default InfoTable
+export default ArtInfoTable

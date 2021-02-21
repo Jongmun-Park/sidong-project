@@ -98,7 +98,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
     <Paper className={classes.paper} elevation={2}>
       <div className={classes.head}>
         <Avatar
-          alt="artist-thumbnail"
+          alt="작가 프로필 사진"
           className={classes.largeAvatar}
           // TEST CODE
           src="https://img.favpng.com/22/0/21/computer-icons-user-profile-clip-art-png-favpng-MhMHJ0Fw21MJadYjpvDQbzu5S.jpg"
@@ -120,7 +120,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
       </div>
       <ButtonBase className={classes.buttonBase}>
         <img
-          alt="artImage"
+          alt="작가의 대표 작품 이미지"
           className={classes.image}
           // TEST CODE
           src="https://s3.us-east-1.amazonaws.com/pem-org/images/exhibition/landing/_width647Height728/exsouthasiangallLK_REP_002.jpg"
