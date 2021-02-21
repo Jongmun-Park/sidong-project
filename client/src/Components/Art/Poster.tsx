@@ -4,7 +4,7 @@ import { Paper, Typography, ButtonBase } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { SaleStatus } from '../../types'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#333',
     textDecoration: 'none',
   },
-}))
+})
 
 interface ArtPosterProps {
   id: number

@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Table, TableRow, TableCell, TableBody, Typography } from '@material-ui/core'
-import { SaleStatus, Medium } from '../../types'
-import { currencyFormatter, translateSaleStatus, translateMedium } from '../../utils'
+import { Typography } from '@material-ui/core'
+import { SaleStatus } from '../../types'
+import { currencyFormatter, translateSaleStatus } from '../../utils'
+import { ArtDetailPresenterProps } from '../../interfaces'
+import InfoTable from '../../Components/Art/InfoTable'
 
 const useStyles = makeStyles({
   container: {
@@ -36,57 +38,7 @@ const useStyles = makeStyles({
     fontWeight: 600,
     marginBottom: '20px',
   },
-  table: {
-    marginBottom: '20px',
-  },
-  th: {
-    color: '#818181',
-    width: '40%',
-    padding: '6px',
-    fontSize: '0.929em',
-    borderBottom: 'none',
-  },
-  td: {
-    width: '60%',
-    padding: '6px',
-    fontSize: '1em',
-    fontWeight: 600,
-    borderBottom: 'none',
-  },
 })
-
-interface ArtDetailPresenterProps {
-  art: {
-    id: number
-    createdAt: string
-    artist: {
-      id: number
-      artistName: string
-      realName: string
-    }
-    name: string
-    description: string
-    medium: Medium
-    theme: {
-      id: number
-      name: string
-    }
-    style: {
-      id: number
-      name: string
-    }
-    technique: {
-      id: number
-      name: string
-    }
-    saleStatus: SaleStatus
-    isFramed: boolean
-    price: number
-    width: number
-    height: number
-    images: Array<number>
-  }
-}
 
 const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
   console.log(art)
@@ -101,54 +53,7 @@ const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
           <Typography className={classes.artName} variant="h6">
             {art.name}
           </Typography>
-          <Table className={classes.table}>
-            <TableBody>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  작가 | Artist
-                </TableCell>
-                <TableCell className={classes.td}>{art.artist.realName}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  매체 | Medium
-                </TableCell>
-                <TableCell className={classes.td}>{translateMedium(art.medium)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  주제 | Theme
-                </TableCell>
-                <TableCell className={classes.td}>{art.theme.name}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  스타일 | Style
-                </TableCell>
-                <TableCell className={classes.td}>{art.style.name}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  기법 | Technique
-                </TableCell>
-                <TableCell className={classes.td}>{art.technique.name}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  크기 | Size
-                </TableCell>
-                <TableCell className={classes.td}>
-                  {art.width}x{art.height}cm
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className={classes.th} component="th" scope="row">
-                  액자 | Frame
-                </TableCell>
-                <TableCell className={classes.td}>{art.isFramed ? '포함' : '미포함'}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <InfoTable art={art} />
           {
             // eslint-disable-next-line
             art.saleStatus == SaleStatus.ON_SALE ? (
