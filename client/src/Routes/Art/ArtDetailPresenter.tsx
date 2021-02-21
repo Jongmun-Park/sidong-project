@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 })
 
 const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
-  console.log(art)
+  console.log('art:', art)
   const classes = useStyles()
   return (
     <main className={classes.container}>
@@ -65,14 +65,11 @@ const ArtDetailPresenter: FC<ArtDetailPresenterProps> = ({ art }) => {
             {art.name}
           </Typography>
           <ArtInfoTable art={art} />
-          {
-            // eslint-disable-next-line
-            art.saleStatus == SaleStatus.ON_SALE ? (
-              <div>{currencyFormatter(art.price)}</div>
-            ) : (
-              <div>{translateSaleStatus(art.saleStatus)}</div>
-            )
-          }
+          {art.saleStatus === SaleStatus.ON_SALE ? (
+            <div>{currencyFormatter(art.price)}</div>
+          ) : (
+            <div>{translateSaleStatus(art.saleStatus)}</div>
+          )}
         </div>
       </div>
     </main>

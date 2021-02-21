@@ -315,21 +315,9 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               판매 여부
             </FormLabel>
-            <RadioGroup
-              name="saleStatus"
-              defaultValue={SaleStatus.NOT_FOR_SALE}
-              onChange={handleSaleStatus}
-            >
-              <FormControlLabel
-                value={SaleStatus.NOT_FOR_SALE}
-                control={<Radio inputRef={register} />}
-                label="비매품"
-              />
-              <FormControlLabel
-                value={SaleStatus.ON_SALE}
-                control={<Radio inputRef={register} />}
-                label="판매품"
-              />
+            <RadioGroup name="saleStatus" defaultValue="0" onChange={handleSaleStatus}>
+              <FormControlLabel value="0" control={<Radio inputRef={register} />} label="비매품" />
+              <FormControlLabel value="1" control={<Radio inputRef={register} />} label="판매품" />
             </RadioGroup>
             <FormControlLabel
               control={

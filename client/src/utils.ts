@@ -9,9 +9,9 @@ const ARTIST_CATEGORY = {
 }
 
 const SALE_STATUS = {
-  '0': '비매품',
-  '1': '판매품',
-  '2': '판매 완료',
+  0: '비매품',
+  1: '판매품',
+  2: '판매 완료',
 }
 
 const MEDIUM = {
@@ -28,7 +28,7 @@ export function translateArtistCategory(path: number) {
   return get(ARTIST_CATEGORY, path)
 }
 
-export function translateSaleStatus(path: string) {
+export function translateSaleStatus(path: number) {
   return get(SALE_STATUS, path)
 }
 

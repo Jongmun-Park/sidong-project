@@ -114,18 +114,15 @@ const Poster: React.FC<ArtPosterProps> = ({
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm
         </Typography>
-        {
-          // eslint-disable-next-line
-          saleStatus == SaleStatus.ON_SALE ? (
-            <Typography className={classes.pTag} variant="body2">
-              {currencyFormatter(price)}
-            </Typography>
-          ) : (
-            <Typography className={classes.pTag} variant="body2">
-              {translateSaleStatus(saleStatus)}
-            </Typography>
-          )
-        }
+        {saleStatus === SaleStatus.ON_SALE ? (
+          <Typography className={classes.pTag} variant="body2">
+            {currencyFormatter(price)}
+          </Typography>
+        ) : (
+          <Typography className={classes.pTag} variant="body2">
+            {translateSaleStatus(saleStatus)}
+          </Typography>
+        )}
       </div>
     </Paper>
   )

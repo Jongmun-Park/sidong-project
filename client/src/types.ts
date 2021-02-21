@@ -16,9 +16,9 @@ export enum Medium {
 }
 
 export enum SaleStatus {
-  NOT_FOR_SALE = '0',
-  ON_SALE = '1',
-  SOLD_OUT = '2',
+  NOT_FOR_SALE,
+  ON_SALE,
+  SOLD_OUT,
 }
 
 export enum Orientation {
