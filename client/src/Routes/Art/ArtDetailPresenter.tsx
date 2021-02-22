@@ -13,9 +13,10 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     maxWidth: '1192px',
     minHeight: '100vh',
-    padding: '100px 0 100px 0',
-    margin: '0 auto 0 auto',
+    padding: '62px 0 100px 0',
+    margin: '50px auto 50px auto',
     backgroundColor: 'white',
+    borderRadius: '20px',
   },
   leftArea: {
     '@media (min-width: 823px)': {
@@ -31,14 +32,14 @@ const useStyles = makeStyles({
   },
   rightBox: {
     color: '#333',
-    margin: '0 30px 0 30px',
+    margin: '0 30px 0 0',
   },
   leftBox: {
-    margin: '0 115px 0 115px',
+    margin: '0 100px 0 100px',
   },
   artName: {
     fontWeight: 600,
-    marginBottom: '20px',
+    margin: '33px 0 25px 0',
   },
 })
 

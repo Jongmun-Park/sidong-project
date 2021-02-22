@@ -6,12 +6,12 @@ import { Art } from '../../types'
 
 const useStyles = makeStyles({
   table: {
-    marginBottom: '20px',
+    marginBottom: '33px',
   },
   th: {
     color: '#818181',
     width: '40%',
-    padding: '6px',
+    padding: '6px 6px 6px 0',
     fontSize: '0.929em',
     borderBottom: 'none',
   },
