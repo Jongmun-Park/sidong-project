@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
+import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import ArtInfoTable from '../../Components/Art/InfoTable'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     '@media (min-width: 1024px)': {
       padding: '70px 70px 100px 70px',
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     '@media (min-width: 1024px)': {
       marginLeft: '40px',
     },
-    color: '#333',
+    color: theme.palette.lightBlack.main,
   },
   leftBox: {
     maxWidth: '530px',
@@ -48,11 +48,58 @@ const useStyles = makeStyles({
     fontWeight: 600,
     margin: '5px 0 25px 0',
   },
-})
+  tabs: {
+    width: '100%',
+    marginTop: '17px',
+  },
+  tabPanel: {
+    width: '100%',
+    marginTop: '6px',
+  },
+}))
+
+interface TabPanelProps {
+  children?: React.ReactNode
+  index: any
+  value: any
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  )
+}
+
+function a11yProps(index: any) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  }
+}
 
 const ArtDetailPresenter: FC<Art> = ({ art }) => {
   console.log('art:', art)
   const classes = useStyles()
+  const [value, setValue] = useState<number>(0)
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue)
+  }
+
   return (
     <main className={classes.container}>
       <div className={classes.leftArea}>
@@ -78,6 +125,30 @@ const ArtDetailPresenter: FC<Art> = ({ art }) => {
             <div>{translateSaleStatus(art.saleStatus)}</div>
           )}
         </div>
+      </div>
+      <div className={classes.tabs}>
+        <Tabs
+          indicatorColor="primary"
+          textColor="primary"
+          value={value}
+          onChange={handleChange}
+          aria-label="작품 페이지 탭"
+        >
+          <Tab label="작가의 작품 설명" {...a11yProps(0)} />
+          <Tab label="구매 및 배송" {...a11yProps(1)} />
+          <Tab label="교환 및 환불" {...a11yProps(2)} />
+        </Tabs>
+      </div>
+      <div className={classes.tabPanel}>
+        <TabPanel value={value} index={0}>
+          {art.description}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          Item Two
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          Item Three
+        </TabPanel>
       </div>
     </main>
   )

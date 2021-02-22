@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   realName: {
-    color: '#333',
+    color: theme.palette.lightBlack.main,
     fontSize: '14px',
     fontWeight: 'bold',
     '@media (max-width: 823px)': {
