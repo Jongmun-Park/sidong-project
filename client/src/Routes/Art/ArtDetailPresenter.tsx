@@ -9,7 +9,7 @@ import ArtInfoTable from '../../Components/Art/InfoTable'
 
 const useStyles = makeStyles({
   container: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 1024px)': {
       padding: '70px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
@@ -21,20 +21,21 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
   },
   leftArea: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 1024px)': {
       flex: '0 0 66.6667%',
       maxWidth: '66.6667%',
     },
+    width: '100%',
   },
   rightArea: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 1024px)': {
       flex: '0 0 33.3333%',
       maxWidth: '33.3333%',
     },
     width: '100%',
   },
   rightBox: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 1024px)': {
       marginLeft: '40px',
     },
     color: '#333',
@@ -45,7 +46,7 @@ const useStyles = makeStyles({
   },
   artName: {
     fontWeight: 600,
-    margin: '25px 0 25px 0',
+    margin: '5px 0 25px 0',
   },
 })
 
