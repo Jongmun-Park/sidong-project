@@ -3,12 +3,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
   },
   leftSideBar: {
     justifySelf: 'center',
+    fontSize: '20px',
+    color: theme.palette.primary.main,
     minWidth: '253px',
     '@media (max-width: 823px)': {
       display: 'none',
@@ -38,7 +40,7 @@ const useStyles = makeStyles({
   loadMoreButton: {
     fontWeight: 'bold',
   },
-})
+}))
 
 interface ArtListPresenterProps {
   arts: Array<any>

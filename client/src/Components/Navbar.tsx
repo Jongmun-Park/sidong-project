@@ -7,7 +7,7 @@ import SignUp from './User/SignUp'
 import Login from './User/Login'
 import { useCurrentUser } from '../Hooks/User'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     position: 'fixed',
     zIndex: 100,
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
   logoFont: {
     marginLeft: '30px',
-    color: '#722F37',
+    color: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: 'large',
     '@media (max-width: 823px)': {
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
       fontSize: 'larger',
     },
   },
-})
+}))
 
 function logout() {
   sessionStorage.removeItem('token')

@@ -11,7 +11,7 @@ declare module '@material-ui/core/styles/createPalette' {
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#722F37',
+      main: '#6c1714',
     },
     highlight: {
       main: '#FEA47F',
@@ -21,7 +21,7 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       '@global': {
         body: {
-          backgroundColor: '#aaa69d',
+          backgroundColor: '#f0eadb',
         },
       },
     },

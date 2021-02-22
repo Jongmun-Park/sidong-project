@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   centerArea: {
     height: '100vh',
-    maxWidth: '1100px',
+    maxWidth: '1192px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
   },
