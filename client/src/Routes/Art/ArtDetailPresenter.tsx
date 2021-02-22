@@ -9,37 +9,43 @@ import ArtInfoTable from '../../Components/Art/InfoTable'
 
 const useStyles = makeStyles({
   container: {
+    '@media (min-width: 823px)': {
+      padding: '70px 70px 100px 70px',
+      margin: '0 auto 0 auto',
+    },
     display: 'flex',
     flexWrap: 'wrap',
     maxWidth: '1192px',
     minHeight: '100vh',
-    padding: '62px 0 100px 0',
-    margin: '50px auto 50px auto',
+    padding: '45px 40px 100px 40px',
     backgroundColor: 'white',
-    borderRadius: '20px',
   },
   leftArea: {
     '@media (min-width: 823px)': {
-      flex: '0 0 66%',
-      maxWidth: '66%',
+      flex: '0 0 66.6667%',
+      maxWidth: '66.6667%',
     },
   },
   rightArea: {
     '@media (min-width: 823px)': {
-      flex: '0 0 33%',
-      maxWidth: '33%',
+      flex: '0 0 33.3333%',
+      maxWidth: '33.3333%',
     },
+    width: '100%',
   },
   rightBox: {
+    '@media (min-width: 823px)': {
+      marginLeft: '40px',
+    },
     color: '#333',
-    margin: '0 30px 0 0',
   },
   leftBox: {
-    margin: '0 100px 0 100px',
+    maxWidth: '530px',
+    margin: 'auto',
   },
   artName: {
     fontWeight: 600,
-    margin: '33px 0 25px 0',
+    margin: '25px 0 25px 0',
   },
 })
 
