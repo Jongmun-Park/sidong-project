@@ -60,6 +60,7 @@ const ArtistListPresenter: FC<ArtistListPresenterProps> = ({ artists, handleLoad
           {artists.map((artist) => (
             <MemoizedPoster
               key={artist.id}
+              id={artist.id}
               artistName={artist.artistName}
               realName={artist.realName}
               thumbnailUrl={artist.thumbnail.url}

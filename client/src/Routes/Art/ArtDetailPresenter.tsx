@@ -92,7 +92,6 @@ function a11yProps(index: any) {
 }
 
 const ArtDetailPresenter: FC<Art> = ({ art }) => {
-  console.log('art:', art)
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
 

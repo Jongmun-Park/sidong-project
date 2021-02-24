@@ -1,7 +1,27 @@
+export interface Artist {
+  artist: {
+    id: number
+    realName: string
+    artistName: string
+    description: string
+    thumbnail: {
+      id: number
+      url: string
+    }
+    representativeWork: {
+      id: number
+      url: string
+    }
+    category: number
+    residence: number
+    website: string
+  }
+}
+
 export interface Art {
   art: {
     id: number
-    createdAt: string
+    createdAt: Date
     artist: {
       id: number
       artistName: string
@@ -63,4 +83,24 @@ export enum Orientation {
   PORTRAIT,
   SQUARE,
   ETC,
+}
+
+export enum Residence {
+  SEOUL,
+  PUSAN,
+  DAEGU,
+  INCHEON,
+  GWANGJU,
+  DAEJEON,
+  ULSAN,
+  SEJONG,
+  GYEONGGI,
+  GANGWON,
+  CHUNGBUK,
+  CHUNGNAM,
+  JEONBUK,
+  JEONNAM,
+  GYEONGBUK,
+  GYEONGNAM,
+  JEJU,
 }

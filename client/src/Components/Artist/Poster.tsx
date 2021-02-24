@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Chip, Paper, Typography, ButtonBase } from '@material-ui/core'
 import { ArtistCategory } from '../../types'
@@ -76,9 +76,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '9px',
     fontWeight: 600,
   },
+  aTag: {
+    color: theme.palette.lightBlack.main,
+    textDecoration: 'none',
+  },
 }))
 
 interface ArtistPosterProps {
+  id: number
   artistName: string
   realName: string
   thumbnailUrl: string
@@ -86,7 +91,8 @@ interface ArtistPosterProps {
   category: ArtistCategory
 }
 
-const Poster: React.FC<ArtistPosterProps> = ({
+const Poster: FC<ArtistPosterProps> = ({
+  id,
   artistName,
   realName,
   thumbnailUrl,
@@ -106,7 +112,9 @@ const Poster: React.FC<ArtistPosterProps> = ({
         />
         <div className={classes.headText}>
           <Typography className={classes.realName} variant="subtitle1">
-            {realName}
+            <a href={'/artist/' + id} className={classes.aTag}>
+              {realName}
+            </a>
           </Typography>
           <Typography className={classes.artistName} variant="body2">
             {artistName}
@@ -118,7 +126,7 @@ const Poster: React.FC<ArtistPosterProps> = ({
           />
         </div>
       </div>
-      <ButtonBase className={classes.buttonBase}>
+      <ButtonBase className={classes.buttonBase} href={'/artist/' + id}>
         <img
           alt="작가의 대표 작품 이미지"
           className={classes.image}

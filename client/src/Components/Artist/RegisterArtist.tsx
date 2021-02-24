@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { handleImagePreview } from '../../utils'
+import { Residence } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -218,23 +219,23 @@ const RegisterArtist: FC = () => {
               거주 지역
             </FormLabel>
             <select style={{ marginTop: '10px' }} name="residence" ref={register}>
-              <option value="0">서울특별시</option>
-              <option value="1">부산광역시</option>
-              <option value="2">대구광역시</option>
-              <option value="3">인천광역시</option>
-              <option value="4">광주광역시</option>
-              <option value="5">대전광역시</option>
-              <option value="6">울산광역시</option>
-              <option value="7">세종특별자치시</option>
-              <option value="8">경기도</option>
-              <option value="9">강원도</option>
-              <option value="10">충청북도</option>
-              <option value="11">충청남도</option>
-              <option value="12">전라북도</option>
-              <option value="13">전라남도</option>
-              <option value="14">경상북도</option>
-              <option value="15">경상남도</option>
-              <option value="16">제주특별자치도</option>
+              <option value={Residence.SEOUL}>서울특별시</option>
+              <option value={Residence.PUSAN}>부산광역시</option>
+              <option value={Residence.DAEGU}>대구광역시</option>
+              <option value={Residence.INCHEON}>인천광역시</option>
+              <option value={Residence.GWANGJU}>광주광역시</option>
+              <option value={Residence.DAEJEON}>대전광역시</option>
+              <option value={Residence.ULSAN}>울산광역시</option>
+              <option value={Residence.SEJONG}>세종특별자치시</option>
+              <option value={Residence.GYEONGGI}>경기도</option>
+              <option value={Residence.GANGWON}>강원도</option>
+              <option value={Residence.CHUNGBUK}>충청북도</option>
+              <option value={Residence.CHUNGNAM}>충청남도</option>
+              <option value={Residence.JEONBUK}>전라북도</option>
+              <option value={Residence.JEONNAM}>전라남도</option>
+              <option value={Residence.GYEONGBUK}>경상북도</option>
+              <option value={Residence.GYEONGNAM}>경상남도</option>
+              <option value={Residence.JEJU}>제주특별자치도</option>
             </select>
           </div>
           <div className={classes.inputDiv}>
