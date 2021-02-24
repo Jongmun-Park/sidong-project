@@ -79,6 +79,7 @@ const REGISTER_ARTIST_MUTATION = gql`
   mutation(
     $artistName: String!
     $realName: String!
+    $website: String!
     $phone: String!
     $description: String!
     $category: Int!
@@ -89,6 +90,7 @@ const REGISTER_ARTIST_MUTATION = gql`
     createArtist(
       artistName: $artistName
       realName: $realName
+      website: $website
       phone: $phone
       description: $description
       category: $category
@@ -123,6 +125,7 @@ const RegisterArtist: FC = () => {
         residence: data.residence,
         thumbnail: data.thumbnail,
         representativeWork: data.representativeWork,
+        website: data.website,
       },
     })
     if (registerResult.data.createArtist.success) {
@@ -171,6 +174,18 @@ const RegisterArtist: FC = () => {
           {errors.realName?.type && (
             <p className={classes.errorMessage}>{errors.realName?.message}</p>
           )}
+          <TextField
+            className={classes.inputBox}
+            name="website"
+            label="개인 웹사이트 / SNS 주소"
+            variant="outlined"
+            inputRef={register({
+              maxLength: {
+                value: 128,
+                message: '주소는 128자 이내로 입력해주세요.',
+              },
+            })}
+          />
           <TextField
             className={classes.inputBox}
             name="phone"
