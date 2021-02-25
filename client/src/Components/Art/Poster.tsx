@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtPosterProps {
   id: number
-  artistId: number
+  artistId?: number
   name: string
   width: number
   height: number
@@ -104,11 +104,17 @@ const Poster: React.FC<ArtPosterProps> = ({
             {name}
           </a>
         </Typography>
-        <Typography className={classes.pTag} variant="body2">
-          <a href={'/artist/' + artistId} className={classes.aTag}>
+        {artistId ? (
+          <Typography className={classes.pTag} variant="body2">
+            <a href={'/artist/' + artistId} className={classes.aTag}>
+              {artistName}
+            </a>
+          </Typography>
+        ) : (
+          <Typography className={classes.pTag} variant="body2">
             {artistName}
-          </a>
-        </Typography>
+          </Typography>
+        )}
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm
         </Typography>

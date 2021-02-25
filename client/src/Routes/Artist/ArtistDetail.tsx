@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Box, Typography } from '@material-ui/core'
+import { Avatar, Button, Typography } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
+import { MemoizedPoster } from '../../Components/Art/Poster'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,8 +22,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   categoryTabContainer: {
+    '@media (min-width: 823px)': {
+      margin: '20px 0 0 20px',
+    },
     width: '100%',
-    margin: '20px 0 0 20px',
+    marginTop: '20px',
   },
   categoryTab: {
     color: theme.palette.primary.main,
@@ -63,6 +67,37 @@ const useStyles = makeStyles((theme) => ({
       margin: '0 auto 0 auto',
     },
   },
+  description: {
+    '@media (min-width: 823px)': {
+      padding: '24px',
+    },
+    width: '100%',
+    wordBreak: 'break-word',
+    padding: '15px 10px 15px 10px',
+  },
+  posters: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, 252px)',
+    gridGap: '18px',
+    justifyContent: 'center',
+    marginBottom: '32px',
+    '@media (max-width: 823px)': {
+      gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
+      gridGap: '15px',
+    },
+  },
+  artSection: {
+    width: '100%',
+    margin: '50px 0px 50px 0px',
+    display: 'flex',
+    flexDirection: 'column',
+    '@media (max-width: 823px)': {
+      margin: '25px 0px 25px 0px',
+    },
+  },
+  loadMoreButton: {
+    fontWeight: 'bold',
+  },
 }))
 interface ArtistDetailParams {
   artistID: string
@@ -79,10 +114,6 @@ const ARTIST = gql`
         id
         url
       }
-      representativeWork {
-        id
-        url
-      }
       category
       residence
       website
@@ -90,12 +121,41 @@ const ARTIST = gql`
   }
 `
 
+const ARTS_BY_ARTIST = gql`
+  query($artistId: ID!, $lastArtId: ID) {
+    artsByArtist(artistId: $artistId, lastArtId: $lastArtId) {
+      id
+      name
+      saleStatus
+      price
+      width
+      height
+      representativeImageUrl
+    }
+  }
+`
+
 const ArtistDetail: FC = () => {
   const classes = useStyles()
   const { artistID } = useParams<ArtistDetailParams>()
+  const [arts, setArts] = useState<Array<any>>([])
   const { data } = useQuery(ARTIST, {
     variables: {
       artistId: artistID,
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  useQuery(ARTS_BY_ARTIST, {
+    variables: {
+      artistId: artistID,
+    },
+    onCompleted: (data) => {
+      const { artsByArtist } = data
+      setArts(artsByArtist)
+      // setLastArtId(arts[arts.length - 1].id)
     },
     onError: (error) => {
       console.error(error.message)
@@ -106,7 +166,7 @@ const ArtistDetail: FC = () => {
     return null
   }
   const { artist } = data
-  console.log('artist:', artist)
+
   return (
     <main className={classes.container}>
       <div className={classes.avatarContainer}>
@@ -117,13 +177,26 @@ const ArtistDetail: FC = () => {
       </div>
       <div className={classes.categoryTabContainer}>
         <div className={classes.categoryTab}>작가의 말</div>
-        {/* <Tabs indicatorColor="primary" textColor="primary" aria-label="작가 소개 탭" value="0">
-          <Tab label="작가의 말" />
-        </Tabs> */}
       </div>
-      <Box p={3}>
-        <Typography>{artist.description}</Typography>
-      </Box>
+      <Typography className={classes.description}>{artist.description}</Typography>
+      <div className={classes.artSection}>
+        <div className={classes.posters}>
+          {arts?.map((art) => (
+            <MemoizedPoster
+              key={art.id}
+              id={art.id}
+              name={art.name}
+              width={art.width}
+              height={art.height}
+              artistName={artist.artistName}
+              saleStatus={art.saleStatus}
+              price={art.price}
+              representativeImageUrl={art.representativeImageUrl}
+            />
+          ))}
+        </div>
+        <Button className={classes.loadMoreButton}>더 보기</Button>
+      </div>
     </main>
   )
 }
