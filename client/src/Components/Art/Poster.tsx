@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtPosterProps {
   id: number
+  artistId: number
   name: string
   width: number
   height: number
@@ -82,6 +83,7 @@ interface ArtPosterProps {
 
 const Poster: React.FC<ArtPosterProps> = ({
   id,
+  artistId,
   name,
   width,
   height,
@@ -94,13 +96,7 @@ const Poster: React.FC<ArtPosterProps> = ({
   return (
     <Paper className={classes.paper} elevation={2}>
       <ButtonBase className={classes.buttonBase} href={'/art/' + id}>
-        <img
-          alt="작품 이미지"
-          className={classes.image}
-          // TEST CODE
-          src="https://i.pinimg.com/564x/09/fa/e9/09fae987d6aad479084a1585df692527.jpg"
-          // src={representativeImageUrl}
-        />
+        <img alt="작품 이미지" className={classes.image} src={representativeImageUrl} />
       </ButtonBase>
       <div className={classes.textArea}>
         <Typography className={classes.artName} variant="subtitle1">
@@ -109,7 +105,9 @@ const Poster: React.FC<ArtPosterProps> = ({
           </a>
         </Typography>
         <Typography className={classes.pTag} variant="body2">
-          {artistName}
+          <a href={'/artist/' + artistId} className={classes.aTag}>
+            {artistName}
+          </a>
         </Typography>
         <Typography className={classes.pTag} variant="body2">
           {width}x{height}cm

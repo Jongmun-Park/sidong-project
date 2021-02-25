@@ -103,13 +103,7 @@ const Poster: FC<ArtistPosterProps> = ({
   return (
     <Paper className={classes.paper} elevation={2}>
       <div className={classes.head}>
-        <Avatar
-          alt="작가 프로필 사진"
-          className={classes.largeAvatar}
-          // TEST CODE
-          src="https://img.favpng.com/22/0/21/computer-icons-user-profile-clip-art-png-favpng-MhMHJ0Fw21MJadYjpvDQbzu5S.jpg"
-          // src={thumbnailUrl}
-        />
+        <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
         <div className={classes.headText}>
           <Typography className={classes.realName} variant="subtitle1">
             <a href={'/artist/' + id} className={classes.aTag}>
@@ -127,13 +121,7 @@ const Poster: FC<ArtistPosterProps> = ({
         </div>
       </div>
       <ButtonBase className={classes.buttonBase} href={'/artist/' + id}>
-        <img
-          alt="작가의 대표 작품 이미지"
-          className={classes.image}
-          // TEST CODE
-          src="https://s3.us-east-1.amazonaws.com/pem-org/images/exhibition/landing/_width647Height728/exsouthasiangallLK_REP_002.jpg"
-          // src={representativeWorkUrl}
-        />
+        <img alt="작가의 대표 작품 이미지" className={classes.image} src={representativeWorkUrl} />
       </ButtonBase>
     </Paper>
   )

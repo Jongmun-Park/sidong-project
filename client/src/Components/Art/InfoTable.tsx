@@ -4,12 +4,12 @@ import { Table, TableRow, TableCell, TableBody } from '@material-ui/core'
 import { translateMedium } from '../../utils'
 import { Art } from '../../types'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     marginBottom: '33px',
   },
   th: {
-    color: '#818181',
+    color: theme.palette.greyFont.main,
     width: '40%',
     padding: '6px 6px 6px 0',
     fontSize: '0.929em',
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     fontWeight: 600,
     borderBottom: 'none',
   },
-})
+}))
 
 const ArtInfoTable: FC<Art> = ({ art }) => {
   const classes = useStyles()

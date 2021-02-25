@@ -1,77 +1,72 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Table, TableRow, TableCell, TableBody } from '@material-ui/core'
-import { translateMedium } from '../../utils'
-import { Art } from '../../types'
+import { translateResidence, translateArtistCategory } from '../../utils'
+import { Artist } from '../../types'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
-    marginBottom: '33px',
+    '@media (min-width: 823px)': {
+      marginLeft: '50px',
+    },
   },
   th: {
-    color: '#818181',
-    width: '40%',
+    '@media (min-width: 823px)': {
+      width: '15%',
+    },
+    width: '35%',
+    minWidth: '63px',
+    color: theme.palette.greyFont.main,
     padding: '6px 6px 6px 0',
     fontSize: '0.929em',
     borderBottom: 'none',
   },
   td: {
-    width: '60%',
-    padding: '6px',
+    '@media (min-width: 823px)': {
+      width: '85%',
+    },
+    width: '65%',
+    padding: '6px 0 6px 6px',
     fontSize: '1em',
     fontWeight: 600,
     borderBottom: 'none',
   },
-})
+}))
 
-const ArtistInfoTable: FC<Art> = ({ art }) => {
+const ArtistInfoTable: FC<Artist> = ({ artist }) => {
   const classes = useStyles()
   return (
     <Table className={classes.table}>
       <TableBody>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            작가 | Artist
+            성명
           </TableCell>
-          <TableCell className={classes.td}>{art.artist.realName}</TableCell>
+          <TableCell className={classes.td}>{artist.realName}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            매체 | Medium
+            필명
           </TableCell>
-          <TableCell className={classes.td}>{translateMedium(art.medium)}</TableCell>
+          <TableCell className={classes.td}>{artist.artistName}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            주제 | Theme
+            활동 분야
           </TableCell>
-          <TableCell className={classes.td}>{art.theme.name}</TableCell>
+          <TableCell className={classes.td}>{translateArtistCategory(artist.category)}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            스타일 | Style
+            활동 지역
           </TableCell>
-          <TableCell className={classes.td}>{art.style.name}</TableCell>
+          <TableCell className={classes.td}>{translateResidence(artist.residence)}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            기법 | Technique
+            웹 사이트
           </TableCell>
-          <TableCell className={classes.td}>{art.technique.name}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className={classes.th} component="th" scope="row">
-            크기 | Size
-          </TableCell>
-          <TableCell className={classes.td}>
-            {art.width}x{art.height}cm
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className={classes.th} component="th" scope="row">
-            액자 | Frame
-          </TableCell>
-          <TableCell className={classes.td}>{art.isFramed ? '포함' : '미포함'}</TableCell>
+          <TableCell className={classes.td}>{artist.website}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
