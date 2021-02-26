@@ -25,7 +25,7 @@ class Router extends React.Component {
 
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/artist/register" component={RegisterArtist} />
-          <Route exact path="/artist/:artistID" component={ArtistDetail} />
+          <Route exact path="/artist/:artistId" component={ArtistDetail} />
 
           <Redirect from="*" to="/" />
         </Switch>

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button, Typography } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       padding: '24px',
     },
     width: '100%',
-    wordBreak: 'break-word',
+    wordBreak: 'break-all',
     padding: '15px 10px 15px 10px',
   },
   posters: {
@@ -98,9 +98,14 @@ const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
     fontWeight: 'bold',
   },
+  pTag: {
+    width: '100%',
+    textAlign: 'center',
+    marginTop: '63px',
+  },
 }))
 interface ArtistDetailParams {
-  artistID: string
+  artistId: string
 }
 
 const ARTIST = gql`
@@ -137,11 +142,14 @@ const ARTS_BY_ARTIST = gql`
 
 const ArtistDetail: FC = () => {
   const classes = useStyles()
-  const { artistID } = useParams<ArtistDetailParams>()
+  const { artistId } = useParams<ArtistDetailParams>()
   const [arts, setArts] = useState<Array<any>>([])
+  const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
+  const [lastArtId, setLastArtId] = useState<string>('')
+
   const { data } = useQuery(ARTIST, {
     variables: {
-      artistId: artistID,
+      artistId: artistId,
     },
     onError: (error) => {
       console.error(error.message)
@@ -150,12 +158,30 @@ const ArtistDetail: FC = () => {
 
   useQuery(ARTS_BY_ARTIST, {
     variables: {
-      artistId: artistID,
+      artistId: artistId,
     },
     onCompleted: (data) => {
       const { artsByArtist } = data
       setArts(artsByArtist)
-      // setLastArtId(arts[arts.length - 1].id)
+      if (artsByArtist) {
+        setLastArtId(artsByArtist[artsByArtist.length - 1].id)
+      }
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  const [loadMoreArts] = useLazyQuery(ARTS_BY_ARTIST, {
+    onCompleted: (data) => {
+      const fetchedArts = data.artsByArtist
+      if (fetchedArts.length === 0) {
+        alert('더 불러올 작품이 없습니다.')
+        setNoMoreArts(true)
+      } else {
+        setArts([...arts, ...fetchedArts])
+        setLastArtId(fetchedArts[fetchedArts.length - 1].id)
+      }
     },
     onError: (error) => {
       console.error(error.message)
@@ -166,6 +192,18 @@ const ArtistDetail: FC = () => {
     return null
   }
   const { artist } = data
+  const handleLoadMore = () => {
+    if (noMoreArts) {
+      alert('더 불러올 작품이 없습니다.')
+      return
+    }
+    loadMoreArts({
+      variables: {
+        artistId: artistId,
+        lastArtId: lastArtId,
+      },
+    })
+  }
 
   return (
     <main className={classes.container}>
@@ -179,24 +217,30 @@ const ArtistDetail: FC = () => {
         <div className={classes.categoryTab}>작가의 말</div>
       </div>
       <Typography className={classes.description}>{artist.description}</Typography>
-      <div className={classes.artSection}>
-        <div className={classes.posters}>
-          {arts?.map((art) => (
-            <MemoizedPoster
-              key={art.id}
-              id={art.id}
-              name={art.name}
-              width={art.width}
-              height={art.height}
-              artistName={artist.artistName}
-              saleStatus={art.saleStatus}
-              price={art.price}
-              representativeImageUrl={art.representativeImageUrl}
-            />
-          ))}
+      {arts ? (
+        <div className={classes.artSection}>
+          <div className={classes.posters}>
+            {arts.map((art) => (
+              <MemoizedPoster
+                key={art.id}
+                id={art.id}
+                name={art.name}
+                width={art.width}
+                height={art.height}
+                artistName={artist.artistName}
+                saleStatus={art.saleStatus}
+                price={art.price}
+                representativeImageUrl={art.representativeImageUrl}
+              />
+            ))}
+          </div>
+          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+            더 보기
+          </Button>
         </div>
-        <Button className={classes.loadMoreButton}>더 보기</Button>
-      </div>
+      ) : (
+        <p className={classes.pTag}>아직 등록된 작품이 없습니다.</p>
+      )}
     </main>
   )
 }

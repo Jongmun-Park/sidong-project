@@ -7,6 +7,7 @@ interface CurrentUser {
   username: string | null
   artist: {
     id: number
+    isApproved: boolean
   } | null
 }
 
@@ -17,6 +18,7 @@ const CURRENT_USER = gql`
       username
       artist {
         id
+        isApproved
       }
     }
   }

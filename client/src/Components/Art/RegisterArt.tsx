@@ -16,6 +16,7 @@ import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreviewList } from '../../utils'
 import { Medium, SaleStatus, Orientation } from '../../types'
+import { useCurrentUser } from '../..//Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {
@@ -140,6 +141,7 @@ const REGISTER_ART_MUTATION = gql`
 
 const RegisterArt: FC = () => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
@@ -432,14 +434,21 @@ const RegisterArt: FC = () => {
               </Paper>
             ))}
           </div>
-          <Button
-            className={classes.submitButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-          >
-            등록하기
-          </Button>
+          {currentUser?.artist?.isApproved ? (
+            <Button
+              className={classes.submitButton}
+              type="submit"
+              color="primary"
+              variant="contained"
+            >
+              등록하기
+            </Button>
+          ) : (
+            <div style={{ textAlign: 'center', marginTop: '28px' }}>
+              <p>승인된 작가만 작품 등록이 가능합니다.</p>
+              <p>관리자에게 문의해주세요.</p>
+            </div>
+          )}
         </form>
       </div>
     </div>
