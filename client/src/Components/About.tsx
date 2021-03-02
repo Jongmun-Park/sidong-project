@@ -52,6 +52,11 @@ const About: FC = () => {
         <p>
           작가들의 목소리에 귀 기울여 작가와 소비자 모두를 만족시킬 수 있는 서비스로 발전하겠습니다.
         </p>
+        <p>
+          불편 사항은 <u style={{ backgroundColor: 'lavender' }}>jakupsilcs@gmail.com</u>로
+          남겨주시면 검토하겠습니다.
+        </p>
+        이용해주셔서 감사합니다.
       </section>
     </main>
   )
