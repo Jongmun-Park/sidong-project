@@ -103,7 +103,11 @@ const ArtDetailPresenter: FC<Art> = ({ art }) => {
     <main className={classes.container}>
       <div className={classes.leftArea}>
         <div className={classes.leftBox}>
-          <Carousel>
+          <Carousel
+            onClickItem={(index) => {
+              window.open(art.imageUrls[index].url)
+            }}
+          >
             {art.imageUrls.map((image) => (
               <div key={image.id}>
                 <img alt="작품 이미지" src={image.url} />
