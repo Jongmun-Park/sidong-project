@@ -9,16 +9,22 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
   },
   firstSection: {
-    paddingTop: '30px',
-    margin: '0px 80px 0px 80px',
+    paddingTop: '35px',
+    margin: '0px 100px 0px 100px',
     '@media (max-width: 823px)': {
+      paddingTop: '16px',
       margin: '0px 45px 0px 45px',
     },
   },
   section: {
-    margin: '50px 80px 0px 80px',
+    margin: '60px 100px 0px 100px',
     '@media (max-width: 823px)': {
       margin: '50px 45px 0px 45px',
+    },
+  },
+  h2: {
+    '@media (max-width: 823px)': {
+      fontSize: '1.4em',
     },
   },
 })
@@ -29,7 +35,7 @@ const About: FC = () => {
   return (
     <main className={classes.centerArea}>
       <section className={classes.firstSection}>
-        <h2>우리 모두 작가가 될 수 있습니다.</h2>
+        <h2 className={classes.h2}>우리 모두 작가가 될 수 있습니다.</h2>
         <p>작업실은 작가의 이력이나 학력을 묻지 않습니다.</p>
         <p>창작은 그 자체 만으로 가치가 있습니다.</p>
         <p>
@@ -41,7 +47,7 @@ const About: FC = () => {
         </p>
       </section>
       <section className={classes.section}>
-        <h2>다양한 작가의 개성 있는 작품이 모인 공간을 지향합니다.</h2>
+        <h2 className={classes.h2}>다양한 작가의 개성 있는 작품이 모인 공간을 지향합니다.</h2>
         <p>
           이를 위해 모작 또는 대량 생산된 프린팅 제품이 아닌&nbsp;
           <span style={{ backgroundColor: 'antiquewhite' }}>
