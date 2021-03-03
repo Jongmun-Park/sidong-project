@@ -10,7 +10,7 @@ import ArtInfoTable from '../../Components/Art/InfoTable'
 const useStyles = makeStyles((theme) => ({
   container: {
     '@media (min-width: 1024px)': {
-      padding: '70px 70px 100px 70px',
+      padding: '60px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
     display: 'flex',

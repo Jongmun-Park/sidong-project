@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     display: 'flex',
     width: '100%',
-    height: '57px',
+    height: '51px',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',

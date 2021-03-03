@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
-    margin: '50px 0px 50px 0px',
-    minWidth: '283px',
+    margin: '35px 0px 50px 0px',
+    minWidth: '300px',
     '@media (max-width: 823px)': {
       display: 'none',
       margin: '10px 0px 10px 0px',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    margin: '50px 0px 50px 0px',
+    margin: '39px 0px 50px 0px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
   },
   filterContainer: {
     boxSizing: 'border-box',
-    minWidth: '283px',
-    paddingLeft: '20px',
+    minWidth: '300px',
+    paddingLeft: '33px',
     position: 'fixed',
     zIndex: 1,
     overflowX: 'scroll',
