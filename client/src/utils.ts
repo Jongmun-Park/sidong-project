@@ -92,6 +92,7 @@ export function handleImagePreviewList(
           previewList.push(base64.toString())
         }
         if (i === files.length - 1) {
+          // 마지막에 onChange 실행
           onChange(previewList)
         }
       }

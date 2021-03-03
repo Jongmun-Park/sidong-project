@@ -339,18 +339,21 @@ const RegisterArt: FC = () => {
               <FormLabel component="div" className={classes.formLabel}>
                 판매 가격 (배송비 포함)
               </FormLabel>
+              <FormHelperText>- 판매 가격은 10,000원 ~ 5,000,000원 까지</FormHelperText>
               <div className={classes.inputElement}>
                 <input
+                  style={{ width: '85px' }}
                   type="number"
                   name="price"
-                  min="0"
+                  min="10000"
+                  max="5000000"
                   ref={register({
                     validate: {
                       positive: (value) => value > 0 || '판매 가격을 입력해주세요.',
                     },
                   })}
                 ></input>
-                원
+                &nbsp;원
               </div>
             </div>
           )}
@@ -359,6 +362,7 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               방향 및 크기
             </FormLabel>
+            <FormHelperText>- 가로, 세로 최대 길이는 500cm</FormHelperText>
             <div className={classes.inputElement}>
               <select name="orientation" required={true} ref={register}>
                 <option value={Orientation.LANDSCAPE}>가로가 긴 배치</option>
@@ -370,40 +374,34 @@ const RegisterArt: FC = () => {
             <div className={classes.inputElement}>
               가로 &nbsp;
               <input
-                ref={register({
-                  validate: {
-                    positive: (value) => value > 0 || '가로 길이를 0 보다 큰 숫자로 입력해주세요.',
-                  },
-                })}
+                ref={register}
                 type="number"
                 name="width"
-                min="0"
-              ></input>{' '}
-              cm
+                required={true}
+                min="1"
+                max="500"
+              ></input>
+              &nbsp;cm
             </div>
             <div className={classes.inputElement}>
               세로 &nbsp;
               <input
-                ref={register({
-                  validate: {
-                    positive: (value) => value > 0 || '세로 길이를 0 보다 큰 숫자로 입력해주세요.',
-                  },
-                })}
+                ref={register}
                 type="number"
                 name="height"
-                min="0"
-              ></input>{' '}
-              cm
+                required={true}
+                min="1"
+                max="500"
+              ></input>
+              &nbsp;cm
             </div>
           </div>
-          {errors.width?.type && <p className={classes.errorMessage}>{errors.width?.message}</p>}
-          {errors.height?.type && <p className={classes.errorMessage}>{errors.height?.message}</p>}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               작품 이미지
             </FormLabel>
             <FormHelperText>- 최대 5개 선택 가능</FormHelperText>
-            <FormHelperText>- 첫 번째 이미지가 대표 이미지로 사용됩니다.</FormHelperText>
+            <FormHelperText>- 첫 번째 미리보기 이미지가 대표 이미지로 사용됩니다.</FormHelperText>
             <input
               className={classes.inputFile}
               type="file"

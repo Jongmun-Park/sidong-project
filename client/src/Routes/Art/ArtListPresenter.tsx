@@ -8,12 +8,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   leftSideBar: {
-    justifySelf: 'center',
-    fontSize: '20px',
-    color: theme.palette.primary.main,
+    color: theme.palette.lightBlack.main,
+    margin: '50px 0px 50px 0px',
     minWidth: '253px',
     '@media (max-width: 823px)': {
       display: 'none',
+      margin: '10px 0px 10px 0px',
     },
   },
   posters: {
@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
     fontWeight: 'bold',
   },
+  filters: {
+    minWidth: '250px',
+    position: 'fixed',
+    zIndex: 1,
+    overflowX: 'scroll',
+  },
 }))
 
 interface ArtListPresenterProps {
@@ -53,9 +59,17 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) =
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <br></br>
-        <b>left side bar</b>
-        <br></br>- Search box<br></br>- Filter
+        <div className={classes.filters}>
+          <br />- Price
+          <br />- Medium
+          <br />- Theme
+          <br />- Style
+          <br />- Technique
+          <br />- saleStatus
+          <br />- isFramed
+          <br />- size
+          <br />- orientation
+        </div>
       </div>
       <div className={classes.contentSection}>
         <div className={classes.posters}>
