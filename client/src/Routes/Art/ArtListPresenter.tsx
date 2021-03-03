@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { MemoizedPoster } from '../../Components/Art/Poster'
+import FilterContainer from '../../Components/Art/FilterContainer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   leftSideBar: {
     color: theme.palette.lightBlack.main,
     margin: '50px 0px 50px 0px',
-    minWidth: '253px',
+    minWidth: '283px',
     '@media (max-width: 823px)': {
       display: 'none',
       margin: '10px 0px 10px 0px',
@@ -40,8 +41,10 @@ const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
     fontWeight: 'bold',
   },
-  filters: {
-    minWidth: '250px',
+  filterContainer: {
+    boxSizing: 'border-box',
+    minWidth: '283px',
+    paddingLeft: '20px',
     position: 'fixed',
     zIndex: 1,
     overflowX: 'scroll',
@@ -59,16 +62,8 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) =
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <div className={classes.filters}>
-          <br />- Price
-          <br />- Medium
-          <br />- Theme
-          <br />- Style
-          <br />- Technique
-          <br />- saleStatus
-          <br />- isFramed
-          <br />- size
-          <br />- orientation
+        <div className={classes.filterContainer}>
+          <FilterContainer />
         </div>
       </div>
       <div className={classes.contentSection}>
