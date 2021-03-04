@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     display: 'flex',
     width: '100%',
-    height: '51px',
+    height: '53px',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
   },
   logoFont: {
-    marginLeft: '30px',
+    marginLeft: '60px',
     color: theme.palette.primary.main,
     fontWeight: 900,
-    fontSize: 'large',
+    fontSize: '21px',
     '@media (max-width: 823px)': {
       fontSize: 'initial',
       marginLeft: '10px',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: '30px',
+    marginRight: '60px',
     '@media (max-width: 823px)': {
       marginRight: '10px',
       width: 'auto',

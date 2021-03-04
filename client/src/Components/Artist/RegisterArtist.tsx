@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {
-      padding: '20px 45px 100px 45px',
+      padding: '20px 36px 100px 36px',
     },
   },
   inputContainer: {

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
-    margin: '35px 0px 50px 0px',
+    margin: '28px 0px 50px 0px',
     minWidth: '300px',
     '@media (max-width: 823px)': {
       display: 'none',
