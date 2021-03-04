@@ -1,14 +1,25 @@
 import React, { FC, useState } from 'react'
-import { Chip, Collapse, List, ListItem, ListItemText, Slider, Typography } from '@material-ui/core'
+import {
+  Chip,
+  Collapse,
+  List,
+  ListItem,
+  ListItemText,
+  MenuItem,
+  Select,
+  Slider,
+  Typography,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import { currencyFormatter } from '../../utils'
+import { Medium } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   list: {
     width: '100%',
     '& .MuiTypography-body1': {
-      fontSize: '15px',
+      fontSize: '13px',
       fontWeight: 600,
     },
   },
@@ -18,6 +29,14 @@ const useStyles = makeStyles((theme) => ({
     '& div.inactive': {
       backgroundColor: theme.palette.greyFont.main,
     },
+    '& .MuiChip-root': {
+      fontSize: '12px',
+    },
+  },
+  select: {
+    float: 'right',
+    width: '180px',
+    margin: '5px 20px 10px 0',
   },
   slider: {
     width: '90%',
@@ -25,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
   priceBox: {
     textAlign: 'right',
     paddingRight: '30px',
+  },
+  priceCollapse: {
+    paddingLeft: '18px',
+    marginBottom: '15px',
   },
 }))
 
@@ -37,7 +60,12 @@ const FilterContainer: FC = () => {
   })
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(true)
-  const [price, setPrice] = useState<number[]>([10000, 1000000])
+  const [price, setPrice] = useState<number[]>([10000, 2500000])
+  const [medium, setMedium] = useState(Medium.PAINTING.toString())
+
+  const handleMedium = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setMedium(event.target.value as string)
+  }
 
   const handlePriceRange = (event: any, newValue: number | number[]) => {
     setPrice(newValue as number[])
@@ -45,6 +73,27 @@ const FilterContainer: FC = () => {
 
   return (
     <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
+      <ListItem>
+        <ListItemText primary="매체 | Medium" />
+      </ListItem>
+      <Select className={classes.select} value={medium} onChange={handleMedium}>
+        <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
+        <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
+        <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
+        <MenuItem value={Medium.PRINT}>판화 (Print)</MenuItem>
+        <MenuItem value={Medium.PAPER}>종이 (Paper)</MenuItem>
+        <MenuItem value={Medium.TEXTILE}>섬유 (Textile)</MenuItem>
+        <MenuItem value={Medium.ETC}>기타 매체</MenuItem>
+      </Select>
+      <ListItem>
+        <ListItemText primary="주제 | Theme" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="스타일 | Style" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="기법 | Technique" />
+      </ListItem>
       <ListItem
         button
         onClick={() => {
@@ -104,7 +153,7 @@ const FilterContainer: FC = () => {
         <ListItemText primary="판매 가격" />
         {openPrice ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse style={{ paddingLeft: '18px' }} in={openPrice} timeout="auto" unmountOnExit>
+      <Collapse className={classes.priceCollapse} in={openPrice} timeout="auto" unmountOnExit>
         <Slider
           className={classes.slider}
           value={price}
@@ -120,10 +169,6 @@ const FilterContainer: FC = () => {
           <Typography variant="caption"> {currencyFormatter(price[1])}</Typography>
         </div>
       </Collapse>
-      <br />- Medium
-      <br />- Theme
-      <br />- Style
-      <br />- Technique
       <br />- size
       <br />- orientation
       <br />- isFramed

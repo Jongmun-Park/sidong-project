@@ -22,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '60px',
     color: theme.palette.primary.main,
     fontWeight: 900,
-    fontSize: '21px',
+    fontSize: '19px',
+    letterSpacing: '3px',
     '@media (max-width: 823px)': {
       fontSize: 'initial',
       marginLeft: '10px',
+      letterSpacing: '0px',
     },
   },
   menus: {

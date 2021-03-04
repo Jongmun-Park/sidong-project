@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
-    margin: '28px 0px 50px 0px',
-    minWidth: '300px',
+    margin: '28px 0px 50px 30px',
+    minWidth: '267px',
     '@media (max-width: 823px)': {
       display: 'none',
       margin: '10px 0px 10px 0px',
@@ -43,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   filterContainer: {
     boxSizing: 'border-box',
-    minWidth: '300px',
-    paddingLeft: '33px',
+    width: '267px',
     position: 'fixed',
     zIndex: 1,
     overflowX: 'scroll',
