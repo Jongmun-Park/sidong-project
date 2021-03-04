@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '267px',
     '@media (max-width: 823px)': {
       display: 'none',
-      margin: '10px 0px 10px 0px',
     },
   },
   posters: {
@@ -44,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
   filterContainer: {
     boxSizing: 'border-box',
     width: '267px',
+    height: '-webkit-fill-available',
     position: 'fixed',
     zIndex: 1,
-    overflowX: 'scroll',
+    overflow: 'scroll',
   },
 }))
 

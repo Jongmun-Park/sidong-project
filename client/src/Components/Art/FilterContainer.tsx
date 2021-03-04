@@ -169,9 +169,15 @@ const FilterContainer: FC = () => {
           <Typography variant="caption"> {currencyFormatter(price[1])}</Typography>
         </div>
       </Collapse>
-      <br />- size
-      <br />- orientation
-      <br />- isFramed
+      <ListItem>
+        <ListItemText primary="크기" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="방향" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="액자 유무" />
+      </ListItem>
     </List>
   )
 }
