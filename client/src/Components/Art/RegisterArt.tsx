@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   imagePreview: {
     display: 'block',
     margin: 'auto',
-    width: '-webkit-fill-available',
+    width: '100%',
     maxHeight: '370px',
     objectFit: 'contain',
     borderRadius: '4px',

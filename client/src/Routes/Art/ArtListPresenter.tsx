@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   filterContainer: {
     boxSizing: 'border-box',
     width: '267px',
-    height: '-webkit-fill-available',
+    height: '100%',
     position: 'fixed',
     zIndex: 1,
     overflow: 'scroll',

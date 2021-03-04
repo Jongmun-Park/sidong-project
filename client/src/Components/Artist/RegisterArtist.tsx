@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   representativeWorkPreview: {
     display: 'block',
     margin: 'auto',
-    width: '-webkit-fill-available',
+    width: '100%',
     maxHeight: '370px',
     objectFit: 'contain',
     borderRadius: '4px',
