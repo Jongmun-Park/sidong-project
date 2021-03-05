@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    margin: '39px 0px 50px 0px',
+    margin: '39px 10px 50px 10px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
