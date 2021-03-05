@@ -27,6 +27,9 @@ const theme = createMuiTheme({
       '@global': {
         body: {
           backgroundColor: '#f0eadb',
+          '& .MuiMenuItem-root': {
+            fontSize: '12px',
+          },
         },
       },
     },

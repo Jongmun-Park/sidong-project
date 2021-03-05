@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useLazyQuery } from '@apollo/react-hooks'
 import {
   Chip,
   Collapse,
@@ -13,7 +14,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import { currencyFormatter } from '../../utils'
-import { Medium } from '../../types'
+import { ArtOptions, Medium } from '../../types'
+import { ART_OPTIONS } from '../../querys'
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     float: 'right',
     width: '180px',
     margin: '5px 20px 10px 0',
+    fontSize: '13px',
   },
   slider: {
     width: '90%',
@@ -53,30 +56,55 @@ const useStyles = makeStyles((theme) => ({
 
 const FilterContainer: FC = () => {
   const classes = useStyles()
+  const [openSaleStatus, setOpenSaleStatus] = useState(true)
+  const [openPrice, setOpenPrice] = useState(true)
+  const [openArtOptions, setOpenArtOptions] = useState(false)
+  const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [saleStatus, setSaleStatus] = useState({
     onSale: true,
     soldOut: true,
     notForSale: true,
   })
-  const [openSaleStatus, setOpenSaleStatus] = useState(true)
-  const [openPrice, setOpenPrice] = useState(true)
-  const [price, setPrice] = useState<number[]>([10000, 2500000])
-  const [medium, setMedium] = useState(Medium.PAINTING.toString())
+  const [price, setPrice] = useState<number[]>([10000, 5000000])
+  const [medium, setMedium] = useState<Medium | string>('none')
+  const [theme, setTheme] = useState<string>('none')
 
-  const handleMedium = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setMedium(event.target.value as string)
-  }
+  const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
+    onCompleted: (data) => {
+      setArtOptions(data.artOptions)
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
 
   const handlePriceRange = (event: any, newValue: number | number[]) => {
     setPrice(newValue as number[])
   }
 
+  const handleMedium = (e: React.ChangeEvent<{ value: unknown }>) => {
+    setMedium(e.target.value as Medium | string)
+    if (e.target.value !== 'none') {
+      changeArtOptions({
+        variables: {
+          mediumId: e.target.value,
+        },
+      })
+      setOpenArtOptions(true)
+    } else {
+      setOpenArtOptions(false)
+      setTheme('none')
+    }
+  }
+  console.log(medium)
+  console.log(theme)
   return (
     <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
       <ListItem>
         <ListItemText primary="매체 | Medium" />
       </ListItem>
       <Select className={classes.select} value={medium} onChange={handleMedium}>
+        <MenuItem value={'none'}>선택 안함</MenuItem>
         <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
         <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
         <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
@@ -85,15 +113,33 @@ const FilterContainer: FC = () => {
         <MenuItem value={Medium.TEXTILE}>섬유 (Textile)</MenuItem>
         <MenuItem value={Medium.ETC}>기타 매체</MenuItem>
       </Select>
-      <ListItem>
-        <ListItemText primary="주제 | Theme" />
-      </ListItem>
-      <ListItem>
-        <ListItemText primary="스타일 | Style" />
-      </ListItem>
-      <ListItem>
-        <ListItemText primary="기법 | Technique" />
-      </ListItem>
+      {openArtOptions && (
+        <div>
+          <ListItem>
+            <ListItemText primary="주제 | Theme" />
+          </ListItem>
+          <Select
+            className={classes.select}
+            value={theme}
+            onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              setTheme(e.target.value as string)
+            }}
+          >
+            <MenuItem value={'none'}>선택 안함</MenuItem>
+            {artOptions?.themes.map((theme) => (
+              <MenuItem key={theme.id} value={theme.id}>
+                {theme.name}
+              </MenuItem>
+            ))}
+          </Select>
+          <ListItem>
+            <ListItemText primary="스타일 | Style" />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="기법 | Technique" />
+          </ListItem>
+        </div>
+      )}
       <ListItem
         button
         onClick={() => {

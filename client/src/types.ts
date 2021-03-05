@@ -55,6 +55,21 @@ export interface Art {
   }
 }
 
+export interface ArtOptions {
+  styles: Array<{
+    id: number
+    name: string
+  }>
+  techniques: Array<{
+    id: number
+    name: string
+  }>
+  themes: Array<{
+    id: number
+    name: string
+  }>
+}
+
 export enum ArtistCategory {
   PAINTER,
   SCULPTOR,

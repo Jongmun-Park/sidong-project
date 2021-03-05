@@ -15,7 +15,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreviewList } from '../../utils'
-import { Medium, SaleStatus, Orientation } from '../../types'
+import { Medium, SaleStatus, Orientation, ArtOptions } from '../../types'
+import { ART_OPTIONS } from '../../querys'
 import { useCurrentUser } from '../..//Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
@@ -77,31 +78,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface ArtOptions {
-  styles: Array<any>
-  techniques: Array<any>
-  themes: Array<any>
-}
-
-const ART_OPTIONS = gql`
-  query($mediumId: ID!) {
-    artOptions(mediumId: $mediumId) {
-      themes {
-        id
-        name
-      }
-      styles {
-        id
-        name
-      }
-      techniques {
-        id
-        name
-      }
-    }
-  }
-`
-
 const REGISTER_ART_MUTATION = gql`
   mutation(
     $artImages: Upload!
@@ -149,7 +125,7 @@ const RegisterArt: FC = () => {
   const [registerArt] = useMutation(REGISTER_ART_MUTATION)
   const { register, handleSubmit, errors } = useForm()
 
-  const { data } = useQuery(ART_OPTIONS, {
+  const { data: artOptionData } = useQuery(ART_OPTIONS, {
     variables: {
       mediumId: Medium.PAINTING,
     },
@@ -170,7 +146,7 @@ const RegisterArt: FC = () => {
     },
   })
 
-  if (!data) {
+  if (!artOptionData) {
     return null
   }
 
