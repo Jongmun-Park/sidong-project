@@ -68,6 +68,8 @@ const FilterContainer: FC = () => {
   const [price, setPrice] = useState<number[]>([10000, 5000000])
   const [medium, setMedium] = useState<Medium | string>('none')
   const [theme, setTheme] = useState<string>('none')
+  const [style, setStyle] = useState<string>('none')
+  const [technique, setTechnique] = useState<string>('none')
 
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
@@ -94,10 +96,11 @@ const FilterContainer: FC = () => {
     } else {
       setOpenArtOptions(false)
       setTheme('none')
+      setStyle('none')
+      setTechnique('none')
     }
   }
-  console.log(medium)
-  console.log(theme)
+
   return (
     <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
       <ListItem>
@@ -135,9 +138,37 @@ const FilterContainer: FC = () => {
           <ListItem>
             <ListItemText primary="스타일 | Style" />
           </ListItem>
+          <Select
+            className={classes.select}
+            value={style}
+            onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              setStyle(e.target.value as string)
+            }}
+          >
+            <MenuItem value={'none'}>선택 안함</MenuItem>
+            {artOptions?.styles.map((style) => (
+              <MenuItem key={style.id} value={style.id}>
+                {style.name}
+              </MenuItem>
+            ))}
+          </Select>
           <ListItem>
             <ListItemText primary="기법 | Technique" />
           </ListItem>
+          <Select
+            className={classes.select}
+            value={technique}
+            onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              setTechnique(e.target.value as string)
+            }}
+          >
+            <MenuItem value={'none'}>선택 안함</MenuItem>
+            {artOptions?.techniques.map((technique) => (
+              <MenuItem key={technique.id} value={technique.id}>
+                {technique.name}
+              </MenuItem>
+            ))}
+          </Select>
         </div>
       )}
       <ListItem
