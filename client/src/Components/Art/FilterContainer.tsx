@@ -61,6 +61,7 @@ const FilterContainer: FC = () => {
   const [openPrice, setOpenPrice] = useState(true)
   const [openArtOptions, setOpenArtOptions] = useState(false)
   const [openSize, setOpenSize] = useState(false)
+  const [openOrientation, setOpenOrientation] = useState(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [saleStatus, setSaleStatus] = useState({
     onSale: true,
@@ -71,6 +72,12 @@ const FilterContainer: FC = () => {
     small: true,
     medium: true,
     large: true,
+  })
+  const [orientation, setOrientation] = useState({
+    landscape: true,
+    portrait: true,
+    square: true,
+    etc: true,
   })
   const [price, setPrice] = useState<number[]>([10000, 5000000])
   const [medium, setMedium] = useState<Medium | string>('none')
@@ -303,9 +310,69 @@ const FilterContainer: FC = () => {
           }}
         />
       </Collapse>
-      <ListItem>
+      <ListItem
+        button
+        onClick={() => {
+          setOpenOrientation(!openOrientation)
+        }}
+      >
         <ListItemText primary="방향" />
+        {openOrientation ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse className={classes.chips} in={openOrientation} timeout="auto" unmountOnExit>
+        <Chip
+          className={orientation.landscape ? '' : 'inactive'}
+          label="가로가 긴 배치"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setOrientation({ ...orientation, landscape: true })
+          }}
+          onDelete={() => {
+            setOrientation({ ...orientation, landscape: false })
+          }}
+        />
+        <Chip
+          className={orientation.portrait ? '' : 'inactive'}
+          label="세로가 긴 배치"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setOrientation({ ...orientation, portrait: true })
+          }}
+          onDelete={() => {
+            setOrientation({ ...orientation, portrait: false })
+          }}
+        />
+        <Chip
+          className={orientation.square ? '' : 'inactive'}
+          label="정사각형"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setOrientation({ ...orientation, square: true })
+          }}
+          onDelete={() => {
+            setOrientation({ ...orientation, square: false })
+          }}
+        />
+        <Chip
+          className={orientation.etc ? '' : 'inactive'}
+          label="기타"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setOrientation({ ...orientation, etc: true })
+          }}
+          onDelete={() => {
+            setOrientation({ ...orientation, etc: false })
+          }}
+        />
+      </Collapse>
       <ListItem>
         <ListItemText primary="액자 유무" />
       </ListItem>
