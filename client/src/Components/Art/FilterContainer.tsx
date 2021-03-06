@@ -26,13 +26,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   chips: {
-    margin: '5px 0 15px 0',
+    margin: '5px 0 13px 0',
     paddingLeft: '18px',
     '& div.inactive': {
       backgroundColor: theme.palette.greyFont.main,
     },
     '& .MuiChip-root': {
       fontSize: '12px',
+      marginBottom: '2px',
     },
   },
   select: {
@@ -59,11 +60,17 @@ const FilterContainer: FC = () => {
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(true)
   const [openArtOptions, setOpenArtOptions] = useState(false)
+  const [openSize, setOpenSize] = useState(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [saleStatus, setSaleStatus] = useState({
     onSale: true,
     soldOut: true,
     notForSale: true,
+  })
+  const [size, setSize] = useState({
+    small: true,
+    medium: true,
+    large: true,
   })
   const [price, setPrice] = useState<number[]>([10000, 5000000])
   const [medium, setMedium] = useState<Medium | string>('none')
@@ -246,9 +253,56 @@ const FilterContainer: FC = () => {
           <Typography variant="caption"> {currencyFormatter(price[1])}</Typography>
         </div>
       </Collapse>
-      <ListItem>
+      <ListItem
+        button
+        onClick={() => {
+          setOpenSize(!openSize)
+        }}
+      >
         <ListItemText primary="크기" />
+        {openSize ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse className={classes.chips} in={openSize} timeout="auto" unmountOnExit>
+        <Chip
+          className={size.small ? '' : 'inactive'}
+          label="50cm 미만"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setSize({ ...size, small: true })
+          }}
+          onDelete={() => {
+            setSize({ ...size, small: false })
+          }}
+        />
+        <Chip
+          className={size.medium ? '' : 'inactive'}
+          label="50~150cm"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setSize({ ...size, medium: true })
+          }}
+          onDelete={() => {
+            setSize({ ...size, medium: false })
+          }}
+        />
+        <Chip
+          className={size.large ? '' : 'inactive'}
+          label="150cm 초과"
+          clickable
+          color="primary"
+          size="small"
+          onClick={() => {
+            setSize({ ...size, large: true })
+          }}
+          onDelete={() => {
+            setSize({ ...size, large: false })
+          }}
+        />
+      </Collapse>
       <ListItem>
         <ListItemText primary="방향" />
       </ListItem>
