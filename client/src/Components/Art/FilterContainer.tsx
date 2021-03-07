@@ -373,9 +373,6 @@ const FilterContainer: FC = () => {
           }}
         />
       </Collapse>
-      <ListItem>
-        <ListItemText primary="액자 유무" />
-      </ListItem>
     </List>
   )
 }

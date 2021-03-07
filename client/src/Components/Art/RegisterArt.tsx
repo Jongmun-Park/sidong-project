@@ -338,7 +338,7 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               방향 및 크기
             </FormLabel>
-            <FormHelperText>- 가로, 세로 최대 길이는 500cm</FormHelperText>
+            <FormHelperText>- 가로/세로 최대 길이는 500cm</FormHelperText>
             <div className={classes.inputElement}>
               <select name="orientation" required={true} ref={register}>
                 <option value={Orientation.LANDSCAPE}>가로가 긴 배치</option>
