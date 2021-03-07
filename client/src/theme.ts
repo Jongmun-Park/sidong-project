@@ -3,10 +3,12 @@ declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     greyFont: Palette['primary']
     lightBlack: Palette['primary']
+    lightYellow: Palette['primary']
   }
   interface PaletteOptions {
     greyFont: PaletteOptions['primary']
     lightBlack: PaletteOptions['primary']
+    lightYellow: PaletteOptions['primary']
   }
 }
 
@@ -20,6 +22,10 @@ const theme = createMuiTheme({
     },
     lightBlack: {
       main: '#333333',
+      light: '#808080',
+    },
+    lightYellow: {
+      main: '#f0eadb',
     },
   },
   overrides: {

@@ -54,6 +54,15 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '18px',
     marginBottom: '5px',
   },
+  button: {
+    float: 'right',
+    margin: '22px 20px 15px 0',
+    backgroundColor: theme.palette.lightBlack.main,
+    color: theme.palette.lightYellow.main,
+    '&.MuiButton-contained:hover': {
+      backgroundColor: theme.palette.lightBlack.light,
+    },
+  },
 }))
 
 const FilterContainer: FC = () => {
@@ -374,7 +383,7 @@ const FilterContainer: FC = () => {
           }}
         />
       </Collapse>
-      <Button color="primary" variant="contained" size="small">
+      <Button className={classes.button} variant="contained" size="small">
         적용하기
       </Button>
     </List>
