@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme) => ({
   loadMoreButton: {
     fontWeight: 'bold',
   },
-  filterContainer: {
-    boxSizing: 'border-box',
-    width: '267px',
-    height: '80%',
-    position: 'fixed',
-    zIndex: 1,
-    overflowY: 'auto',
-  },
+  // filterContainer: {
+  //   width: '267px',
+  //   height: '80%',
+  //   boxSizing: 'border-box',
+  //   position: 'fixed',
+  //   zIndex: 1,
+  //   overflowY: 'auto',
+  // },
 }))
 
 interface ArtListPresenterProps {
@@ -61,9 +61,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) =
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <div className={classes.filterContainer}>
-          <FilterContainer />
-        </div>
+        <FilterContainer />
       </div>
       <div className={classes.contentSection}>
         <div className={classes.posters}>

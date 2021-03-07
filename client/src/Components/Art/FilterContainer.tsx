@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
 import {
+  Button,
   Chip,
   Collapse,
   List,
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   chips: {
-    margin: '5px 0 13px 0',
+    margin: '5px 0 8px 0',
     paddingLeft: '18px',
     '& div.inactive': {
       backgroundColor: theme.palette.greyFont.main,
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   select: {
     float: 'right',
     width: '180px',
-    margin: '5px 20px 10px 0',
+    margin: '0 20px 5px 0',
     fontSize: '13px',
   },
   slider: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   priceCollapse: {
     paddingLeft: '18px',
-    marginBottom: '15px',
+    marginBottom: '5px',
   },
 }))
 
@@ -373,6 +374,9 @@ const FilterContainer: FC = () => {
           }}
         />
       </Collapse>
+      <Button color="primary" variant="contained" size="small">
+        적용하기
+      </Button>
     </List>
   )
 }
