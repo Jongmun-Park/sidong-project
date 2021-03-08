@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    margin: '39px 10px 50px 10px',
+    margin: '39px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
   loadMoreButton: {
     fontWeight: 'bold',
+  },
+  pTag: {
+    textAlign: 'center',
+    fontSize: '16px',
+    fontWeight: 500,
   },
   // filterContainer: {
   //   width: '267px',
@@ -64,7 +69,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
       <div className={classes.leftSideBar}>
         <FilterContainer setFilters={setFilters} />
       </div>
-      {arts.length > 0 ? (
+      {arts ? (
         <div className={classes.contentSection}>
           <div className={classes.posters}>
             {arts.map((art) => (
@@ -87,7 +92,9 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
           </Button>
         </div>
       ) : (
-        <div className={classes.contentSection}>해당 검색 결과가 없습니다.</div>
+        <div className={classes.contentSection}>
+          <p className={classes.pTag}>해당 검색 결과가 없습니다.</p>
+        </div>
       )}
     </div>
   )

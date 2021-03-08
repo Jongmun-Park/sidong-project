@@ -31,7 +31,9 @@ const ArtList: FC = () => {
     onCompleted: (data) => {
       const { arts } = data
       setArts(arts)
-      setLastArtId(arts[arts.length - 1].id)
+      if (arts) {
+        setLastArtId(arts[arts.length - 1].id)
+      }
     },
     onError: (error) => {
       console.error(error.message)
@@ -58,7 +60,9 @@ const ArtList: FC = () => {
     onCompleted: (data) => {
       const filteredArts = data.arts
       setArts(filteredArts)
-      setLastArtId(filteredArts[filteredArts.length - 1].id)
+      if (filteredArts) {
+        setLastArtId(filteredArts[filteredArts.length - 1].id)
+      }
     },
     onError: (error) => {
       console.error(error.message)
@@ -74,7 +78,7 @@ const ArtList: FC = () => {
       })
       setNoMoreArts(false)
     }
-  }, [filters])
+  }, [filters, filterArts])
 
   if (!data) {
     return null

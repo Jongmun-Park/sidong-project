@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   contentSection: {
     width: '100%',
-    margin: '39px 10px 50px 10px',
+    margin: '39px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
