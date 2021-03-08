@@ -300,7 +300,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
       <Collapse className={classes.chips} in={openSize} timeout="auto" unmountOnExit>
         <Chip
           className={size.small ? '' : 'inactive'}
-          label="50cm 미만"
+          label="50cm 이하"
           clickable
           color="primary"
           size="small"

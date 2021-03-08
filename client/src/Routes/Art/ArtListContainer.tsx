@@ -4,8 +4,30 @@ import gql from 'graphql-tag'
 import ArtListPresenter from './ArtListPresenter'
 
 const ARTS = gql`
-  query($lastArtId: ID, $pageSize: Int, $saleStatus: SaleStatusType) {
-    arts(lastArtId: $lastArtId, pageSize: $pageSize, saleStatus: $saleStatus) {
+  query(
+    $lastArtId: ID
+    $pageSize: Int
+    $saleStatus: SaleStatusInput
+    $orientation: OrientationInput
+    $size: ArtSizeInput
+    $price: [Int]
+    $medium: String
+    $style: String
+    $technique: String
+    $theme: String
+  ) {
+    arts(
+      lastArtId: $lastArtId
+      pageSize: $pageSize
+      saleStatus: $saleStatus
+      orientation: $orientation
+      size: $size
+      price: $price
+      medium: $medium
+      style: $style
+      technique: $technique
+      theme: $theme
+    ) {
       id
       name
       saleStatus
@@ -74,6 +96,13 @@ const ArtList: FC = () => {
       filterArts({
         variables: {
           saleStatus: filters.saleStatus,
+          orientation: filters.orientation,
+          size: filters.size,
+          price: filters.price,
+          medium: filters.medium,
+          style: filters.style,
+          technique: filters.technique,
+          theme: filters.theme,
         },
       })
       setNoMoreArts(false)
@@ -100,11 +129,18 @@ const ArtList: FC = () => {
         variables: {
           lastArtId,
           saleStatus: filters.saleStatus,
+          orientation: filters.orientation,
+          size: filters.size,
+          price: filters.price,
+          medium: filters.medium,
+          style: filters.style,
+          technique: filters.technique,
+          theme: filters.theme,
         },
       })
     }
   }
-  console.log('filters:', filters)
+
   return <ArtListPresenter arts={arts} setFilters={setFilters} handleLoadMore={handleLoadMore} />
 }
 
