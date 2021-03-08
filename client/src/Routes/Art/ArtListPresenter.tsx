@@ -64,27 +64,31 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
       <div className={classes.leftSideBar}>
         <FilterContainer setFilters={setFilters} />
       </div>
-      <div className={classes.contentSection}>
-        <div className={classes.posters}>
-          {arts.map((art) => (
-            <MemoizedPoster
-              key={art.id}
-              id={art.id}
-              artistId={art.artist.id}
-              name={art.name}
-              width={art.width}
-              height={art.height}
-              artistName={art.artist.artistName}
-              saleStatus={art.saleStatus}
-              price={art.price}
-              representativeImageUrl={art.representativeImageUrl}
-            />
-          ))}
+      {arts.length > 0 ? (
+        <div className={classes.contentSection}>
+          <div className={classes.posters}>
+            {arts.map((art) => (
+              <MemoizedPoster
+                key={art.id}
+                id={art.id}
+                artistId={art.artist.id}
+                name={art.name}
+                width={art.width}
+                height={art.height}
+                artistName={art.artist.artistName}
+                saleStatus={art.saleStatus}
+                price={art.price}
+                representativeImageUrl={art.representativeImageUrl}
+              />
+            ))}
+          </div>
+          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+            더 보기
+          </Button>
         </div>
-        <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-          더 보기
-        </Button>
-      </div>
+      ) : (
+        <div className={classes.contentSection}>해당 검색 결과가 없습니다.</div>
+      )}
     </div>
   )
 }

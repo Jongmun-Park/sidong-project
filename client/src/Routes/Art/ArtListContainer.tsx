@@ -26,6 +26,7 @@ const ArtList: FC = () => {
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
   const [filters, setFilters] = useState<any>(null)
   const [lastArtId, setLastArtId] = useState<string>('')
+
   const { data } = useQuery(ARTS, {
     onCompleted: (data) => {
       const { arts } = data
@@ -53,14 +54,25 @@ const ArtList: FC = () => {
     },
   })
 
+  const [filterArts] = useLazyQuery(ARTS, {
+    onCompleted: (data) => {
+      const filteredArts = data.arts
+      setArts(filteredArts)
+      setLastArtId(filteredArts[filteredArts.length - 1].id)
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
   useEffect(() => {
     if (filters) {
-      loadMoreArts({
+      filterArts({
         variables: {
-          lastArtId,
           saleStatus: filters.saleStatus,
         },
       })
+      setNoMoreArts(false)
     }
   }, [filters])
 
@@ -73,11 +85,20 @@ const ArtList: FC = () => {
       alert('더 불러올 작품이 없습니다.')
       return
     }
-    loadMoreArts({
-      variables: {
-        lastArtId: lastArtId,
-      },
-    })
+    if (!filters) {
+      loadMoreArts({
+        variables: {
+          lastArtId,
+        },
+      })
+    } else {
+      loadMoreArts({
+        variables: {
+          lastArtId,
+          saleStatus: filters.saleStatus,
+        },
+      })
+    }
   }
   console.log('filters:', filters)
   return <ArtListPresenter arts={arts} setFilters={setFilters} handleLoadMore={handleLoadMore} />
