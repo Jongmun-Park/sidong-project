@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 823px)': {
       display: 'none',
     },
+    '@media (min-width: 1713px)': {
+      margin: '28px 0px 50px 57px',
+    },
   },
   posters: {
     display: 'grid',
