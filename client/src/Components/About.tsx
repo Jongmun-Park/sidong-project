@@ -43,7 +43,9 @@ const About: FC = () => {
           바랍니다.
         </p>
         <p>
-          <span style={{ backgroundColor: 'antiquewhite' }}>부담 없이 작가 등록을 해보세요.</span>
+          <span style={{ backgroundColor: 'antiquewhite' }}>
+            회원 가입 후, 작가 등록을 해보세요.
+          </span>
         </p>
       </section>
       <section className={classes.section}>

@@ -52,16 +52,17 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtListPresenterProps {
   arts: Array<any>
+  setFilters: (arg0: any) => void
   handleLoadMore: () => void
 }
 
-const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, handleLoadMore }) => {
+const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleLoadMore }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <FilterContainer />
+        <FilterContainer setFilters={setFilters} />
       </div>
       <div className={classes.contentSection}>
         <div className={classes.posters}>

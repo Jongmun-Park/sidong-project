@@ -65,7 +65,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const FilterContainer: FC = () => {
+interface FilterContainerProps {
+  setFilters: (arg0: any) => void
+}
+
+const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
   const classes = useStyles()
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(true)
@@ -73,6 +77,7 @@ const FilterContainer: FC = () => {
   const [openSize, setOpenSize] = useState(false)
   const [openOrientation, setOpenOrientation] = useState(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
+
   const [saleStatus, setSaleStatus] = useState({
     onSale: true,
     soldOut: true,
@@ -123,6 +128,19 @@ const FilterContainer: FC = () => {
       setStyle('none')
       setTechnique('none')
     }
+  }
+
+  const handleClick = () => {
+    setFilters({
+      saleStatus,
+      size,
+      orientation,
+      price,
+      medium,
+      theme,
+      style,
+      technique,
+    })
   }
 
   return (
@@ -383,7 +401,7 @@ const FilterContainer: FC = () => {
           }}
         />
       </Collapse>
-      <Button className={classes.button} variant="contained" size="small">
+      <Button onClick={handleClick} className={classes.button} variant="contained" size="small">
         적용하기
       </Button>
     </List>

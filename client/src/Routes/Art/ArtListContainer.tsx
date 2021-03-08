@@ -1,11 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import ArtListPresenter from './ArtListPresenter'
 
 const ARTS = gql`
-  query($lastArtId: ID, $pageSize: Int) {
-    arts(lastArtId: $lastArtId, pageSize: $pageSize) {
+  query($lastArtId: ID, $pageSize: Int, $saleStatus: SaleStatusType) {
+    arts(lastArtId: $lastArtId, pageSize: $pageSize, saleStatus: $saleStatus) {
       id
       name
       saleStatus
@@ -24,8 +24,8 @@ const ARTS = gql`
 const ArtList: FC = () => {
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
+  const [filters, setFilters] = useState<any>(null)
   const [lastArtId, setLastArtId] = useState<string>('')
-
   const { data } = useQuery(ARTS, {
     onCompleted: (data) => {
       const { arts } = data
@@ -53,6 +53,17 @@ const ArtList: FC = () => {
     },
   })
 
+  useEffect(() => {
+    if (filters) {
+      loadMoreArts({
+        variables: {
+          lastArtId,
+          saleStatus: filters.saleStatus,
+        },
+      })
+    }
+  }, [filters])
+
   if (!data) {
     return null
   }
@@ -68,8 +79,8 @@ const ArtList: FC = () => {
       },
     })
   }
-
-  return <ArtListPresenter arts={arts} handleLoadMore={handleLoadMore} />
+  console.log('filters:', filters)
+  return <ArtListPresenter arts={arts} setFilters={setFilters} handleLoadMore={handleLoadMore} />
 }
 
 export default ArtList
