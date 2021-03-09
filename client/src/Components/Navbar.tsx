@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderBottom: '1px solid rgb(229, 229, 229)',
   },
   logoFont: {
     marginLeft: '60px',
