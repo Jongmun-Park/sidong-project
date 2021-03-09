@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList'
@@ -62,13 +62,14 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     backgroundColor: theme.palette.lightYellow.main,
     borderBottom: '1px solid rgb(229, 229, 229)',
-  },
-  mobileFilter: {
-    display: 'none',
-    '@media (min-width: 823px)': {},
+    '& .mobileFilter': {
+      marginTop: '10px',
+      '&.inactive': {
+        display: 'none',
+      },
+    },
   },
   filterButton: {
-    backgroundColor: theme.palette.action.active,
     padding: '3px 18px',
     fontSize: '11px',
     alignItems: 'end',
@@ -86,6 +87,7 @@ interface ArtListPresenterProps {
 
 const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleLoadMore }) => {
   const classes = useStyles()
+  const [openMobileFilter, setOpenMobileFilter] = useState<boolean>(false)
 
   return (
     <div className={classes.container}>
@@ -99,12 +101,13 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
           variant="contained"
           size="small"
           color="primary"
+          onClick={() => setOpenMobileFilter(!openMobileFilter)}
         >
           검색 조건
         </Button>
-      </div>
-      <div className={classes.mobileFilter}>
-        <FilterContainer setFilters={setFilters} />
+        <div className={`mobileFilter ${openMobileFilter ? '' : 'inactive'}`}>
+          <FilterContainer setFilters={setFilters} setOpenMobileFilter={setOpenMobileFilter} />
+        </div>
       </div>
       {arts ? (
         <div className={classes.contentSection}>

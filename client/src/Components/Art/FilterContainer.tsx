@@ -67,9 +67,10 @@ const useStyles = makeStyles((theme) => ({
 
 interface FilterContainerProps {
   setFilters: (arg0: any) => void
+  setOpenMobileFilter?: (arg0: boolean) => void
 }
 
-const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
+const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFilter }) => {
   const classes = useStyles()
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(true)
@@ -130,7 +131,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
     }
   }
 
-  const handleClick = () => {
+  const handleApply = () => {
     setFilters({
       saleStatus,
       size,
@@ -141,6 +142,9 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
       style,
       technique,
     })
+    if (setOpenMobileFilter) {
+      setOpenMobileFilter(false)
+    }
   }
 
   return (
@@ -401,7 +405,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters }) => {
           }}
         />
       </Collapse>
-      <Button onClick={handleClick} className={classes.button} variant="contained" size="small">
+      <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
         적용하기
       </Button>
     </List>
