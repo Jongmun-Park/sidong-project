@@ -1,12 +1,16 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+import FilterListIcon from '@material-ui/icons/FilterList'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 import FilterContainer from '../../Components/Art/FilterContainer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
+    '@media (max-width: 823px)': {
+      flexDirection: 'column',
+    },
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
@@ -27,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '32px',
     '@media (max-width: 823px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
-      margin: '20px 10px 20px 10px',
+      margin: '10px 10px 20px 10px',
       gridGap: '10px',
     },
   },
@@ -37,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
-      margin: '10px 0px 10px 0px',
+      margin: '0px 0px 30px 0px',
     },
   },
   loadMoreButton: {
@@ -48,14 +52,30 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 500,
   },
-  // filterContainer: {
-  //   width: '267px',
-  //   height: '80%',
-  //   boxSizing: 'border-box',
-  //   position: 'fixed',
-  //   zIndex: 1,
-  //   overflowY: 'auto',
-  // },
+  mobileFilterController: {
+    '@media (min-width: 823px)': {
+      display: 'none',
+    },
+    padding: '10px 27px 10px 27px',
+    top: '49px',
+    position: 'sticky',
+    zIndex: 1,
+    backgroundColor: theme.palette.lightYellow.main,
+    borderBottom: '1px solid rgb(229, 229, 229)',
+  },
+  mobileFilter: {
+    display: 'none',
+    '@media (min-width: 823px)': {},
+  },
+  filterButton: {
+    backgroundColor: theme.palette.action.active,
+    padding: '3px 18px',
+    fontSize: '11px',
+    alignItems: 'end',
+    '& .MuiButton-startIcon': {
+      marginRight: '5px',
+    },
+  },
 }))
 
 interface ArtListPresenterProps {
@@ -70,6 +90,20 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
+        <FilterContainer setFilters={setFilters} />
+      </div>
+      <div className={classes.mobileFilterController}>
+        <Button
+          startIcon={<FilterListIcon />}
+          className={classes.filterButton}
+          variant="contained"
+          size="small"
+          color="primary"
+        >
+          검색 조건
+        </Button>
+      </div>
+      <div className={classes.mobileFilter}>
         <FilterContainer setFilters={setFilters} />
       </div>
       {arts ? (

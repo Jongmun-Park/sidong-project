@@ -13,10 +13,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     display: 'flex',
     width: '100%',
-    height: '53px',
+    height: '49px',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
+    borderBottom: '1px solid rgb(229, 229, 229)',
   },
   logoFont: {
     marginLeft: '60px',
