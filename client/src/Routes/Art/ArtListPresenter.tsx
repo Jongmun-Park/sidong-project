@@ -64,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgb(229, 229, 229)',
     '& .mobileFilter': {
       marginTop: '10px',
+      height: '460px',
+      overflowY: 'auto',
       '&.inactive': {
         display: 'none',
       },
