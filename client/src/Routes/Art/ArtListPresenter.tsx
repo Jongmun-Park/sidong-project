@@ -63,8 +63,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.lightYellow.main,
     '& .mobileFilter': {
       marginTop: '10px',
-      height: '430px',
-      overflowY: 'auto',
       '&.inactive': {
         display: 'none',
       },
