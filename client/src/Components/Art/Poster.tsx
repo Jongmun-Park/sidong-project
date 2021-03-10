@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   aTag: {
+    cursor: 'pointer',
     color: theme.palette.lightBlack.main,
     textDecoration: 'none',
   },
@@ -95,18 +96,33 @@ const Poster: React.FC<ArtPosterProps> = ({
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
-      <ButtonBase className={classes.buttonBase} href={'/art/' + id}>
+      <ButtonBase
+        className={classes.buttonBase}
+        onClick={() => {
+          window.open('/art/' + id)
+        }}
+      >
         <img alt="작품 이미지" className={classes.image} src={representativeImageUrl} />
       </ButtonBase>
       <div className={classes.textArea}>
         <Typography className={classes.artName} variant="subtitle1">
-          <a href={'/art/' + id} className={classes.aTag}>
+          <a
+            onClick={() => {
+              window.open('/art/' + id)
+            }}
+            className={classes.aTag}
+          >
             {name}
           </a>
         </Typography>
         {artistId ? (
           <Typography className={classes.pTag} variant="body2">
-            <a href={'/artist/' + artistId} className={classes.aTag}>
+            <a
+              onClick={() => {
+                window.open('/artist/' + artistId)
+              }}
+              className={classes.aTag}
+            >
               {artistName}
             </a>
           </Typography>

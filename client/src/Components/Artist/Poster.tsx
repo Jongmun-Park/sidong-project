@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   aTag: {
+    cursor: 'pointer',
     color: theme.palette.lightBlack.main,
     textDecoration: 'none',
   },
@@ -106,7 +107,12 @@ const Poster: FC<ArtistPosterProps> = ({
         <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
         <div className={classes.headText}>
           <Typography className={classes.realName} variant="subtitle1">
-            <a href={'/artist/' + id} className={classes.aTag}>
+            <a
+              onClick={() => {
+                window.open('/artist/' + id)
+              }}
+              className={classes.aTag}
+            >
               {realName}
             </a>
           </Typography>
@@ -120,7 +126,12 @@ const Poster: FC<ArtistPosterProps> = ({
           />
         </div>
       </div>
-      <ButtonBase className={classes.buttonBase} href={'/artist/' + id}>
+      <ButtonBase
+        className={classes.buttonBase}
+        onClick={() => {
+          window.open('/artist/' + id)
+        }}
+      >
         <img alt="작가의 대표 작품 이미지" className={classes.image} src={representativeWorkUrl} />
       </ButtonBase>
     </Paper>
