@@ -58,9 +58,11 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '18px',
     marginBottom: '5px',
   },
-  button: {
+  buttonWrapper: {
+    margin: '12px 22px 5px 0px',
     float: 'right',
-    margin: '22px 20px 15px 0',
+  },
+  button: {
     backgroundColor: theme.palette.lightBlack.main,
     color: theme.palette.lightYellow.main,
     '&.MuiButton-contained:hover': {
@@ -411,20 +413,21 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
           />
         </Collapse>
       </List>
-      <div>
+      <div className={classes.buttonWrapper}>
+        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
+          적용하기
+        </Button>
         {setOpenMobileFilter && (
           <Button
             onClick={() => setOpenMobileFilter(false)}
             className={classes.button}
+            style={{ marginLeft: '5px' }}
             variant="contained"
             size="small"
           >
             닫 기
           </Button>
         )}
-        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
-          적용하기
-        </Button>
       </div>
     </div>
   )

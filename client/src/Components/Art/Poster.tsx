@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     marginBottom: '5px',
+    cursor: 'pointer',
     '@media (max-width: 823px)': {
       fontSize: '12px',
       marginBottom: '3px',
@@ -62,11 +63,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '10px',
       marginBottom: '3px',
     },
-  },
-  aTag: {
-    cursor: 'pointer',
-    color: theme.palette.lightBlack.main,
-    textDecoration: 'none',
   },
 }))
 
@@ -105,26 +101,25 @@ const Poster: React.FC<ArtPosterProps> = ({
         <img alt="작품 이미지" className={classes.image} src={representativeImageUrl} />
       </ButtonBase>
       <div className={classes.textArea}>
-        <Typography className={classes.artName} variant="subtitle1">
-          <a
-            onClick={() => {
-              window.open('/art/' + id)
-            }}
-            className={classes.aTag}
-          >
-            {name}
-          </a>
+        <Typography
+          className={classes.artName}
+          variant="subtitle1"
+          onClick={() => {
+            window.open('/art/' + id)
+          }}
+        >
+          {name}
         </Typography>
         {artistId ? (
-          <Typography className={classes.pTag} variant="body2">
-            <a
-              onClick={() => {
-                window.open('/artist/' + artistId)
-              }}
-              className={classes.aTag}
-            >
-              {artistName}
-            </a>
+          <Typography
+            className={classes.pTag}
+            style={{ cursor: 'pointer' }}
+            variant="body2"
+            onClick={() => {
+              window.open('/artist/' + artistId)
+            }}
+          >
+            {artistName}
           </Typography>
         ) : (
           <Typography className={classes.pTag} variant="body2">

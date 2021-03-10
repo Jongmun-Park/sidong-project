@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   realName: {
     color: theme.palette.lightBlack.main,
+    cursor: 'pointer',
     fontSize: '14px',
     fontWeight: 'bold',
     '@media (max-width: 823px)': {
@@ -76,11 +77,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '9px',
     fontWeight: 600,
   },
-  aTag: {
-    cursor: 'pointer',
-    color: theme.palette.lightBlack.main,
-    textDecoration: 'none',
-  },
 }))
 
 interface ArtistPosterProps {
@@ -106,15 +102,14 @@ const Poster: FC<ArtistPosterProps> = ({
       <div className={classes.head}>
         <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
         <div className={classes.headText}>
-          <Typography className={classes.realName} variant="subtitle1">
-            <a
-              onClick={() => {
-                window.open('/artist/' + id)
-              }}
-              className={classes.aTag}
-            >
-              {realName}
-            </a>
+          <Typography
+            className={classes.realName}
+            variant="subtitle1"
+            onClick={() => {
+              window.open('/artist/' + id)
+            }}
+          >
+            {realName}
           </Typography>
           <Typography className={classes.artistName} variant="body2">
             {artistName}
