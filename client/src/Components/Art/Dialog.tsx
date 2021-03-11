@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     '& .MuiDialog-paperWidthSm': {
       width: '95%',
       maxWidth: 'none',
+      '@media (min-width: 1024px)': {
+        width: '80%',
+      },
     },
     '& .MuiDialog-paper': {
       margin: '0',

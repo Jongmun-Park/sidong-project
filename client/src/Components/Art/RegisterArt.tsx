@@ -17,7 +17,7 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreviewList } from '../../utils'
 import { Medium, SaleStatus, Orientation, ArtOptions } from '../../types'
 import { ART_OPTIONS } from '../../querys'
-import { useCurrentUser } from '../..//Hooks/User'
+import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   centerArea: {

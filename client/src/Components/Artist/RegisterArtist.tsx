@@ -6,6 +6,7 @@ import {
   Button,
   FormLabel,
   FormControlLabel,
+  FormHelperText,
   Radio,
   RadioGroup,
   Paper,
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {
-      padding: '20px 36px 100px 36px',
+      padding: '20px 27px 100px 27px',
     },
   },
   inputContainer: {
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submitButton: {
     float: 'right',
-    marginTop: '30px',
+    marginTop: '20px',
   },
   paper: {
     maxWidth: 'inherit',
@@ -130,7 +131,7 @@ const RegisterArtist: FC = () => {
       },
     })
     if (registerResult.data.createArtist.success) {
-      alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인하겠습니다.')
+      alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인 후 승인하겠습니다.')
       window.location.href = '/artists'
     } else {
       alert(registerResult.data.createArtist.msg)
@@ -301,14 +302,22 @@ const RegisterArtist: FC = () => {
           {errors.representativeWork?.type && (
             <p className={classes.errorMessage}>{errors.representativeWork?.message}</p>
           )}
-          <Button
-            className={classes.submitButton}
-            type="submit"
-            color="primary"
-            variant="contained"
-          >
-            등록하기
-          </Button>
+          <div className={classes.inputDiv} style={{ minHeight: '183px' }}>
+            <FormHelperText>- 작가 등록 후, 승인된 작가는 작품 등록이 가능합니다.</FormHelperText>
+            <FormHelperText>- 관리자가 24시간 내로 최대한 빠르게 승인하겠습니다.</FormHelperText>
+            <FormHelperText>
+              - 작가 승인 절차는 부적합한 컨텐츠를 방지하기 위함입니다.
+            </FormHelperText>
+            <FormHelperText>- 양해 부탁드립니다. 감사합니다.</FormHelperText>
+            <Button
+              className={classes.submitButton}
+              type="submit"
+              color="primary"
+              variant="contained"
+            >
+              등록하기
+            </Button>
+          </div>
         </form>
       </div>
     </div>

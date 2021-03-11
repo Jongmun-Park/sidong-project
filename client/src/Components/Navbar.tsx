@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 823px)': {
       fontSize: 'initial',
       marginLeft: '10px',
-      letterSpacing: '0px',
+      letterSpacing: '1px',
     },
   },
   menus: {
@@ -43,8 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
   menuFont: {
     fontWeight: 600,
+    letterSpacing: '2px',
     '@media (max-width: 823px)': {
       fontSize: 'small',
+      letterSpacing: '1px',
     },
   },
   accountCircleIcon: {
