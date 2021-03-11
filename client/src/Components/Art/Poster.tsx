@@ -1,8 +1,9 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography, ButtonBase } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { SaleStatus } from '../../types'
+import ArtDialog from './Dialog'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -90,57 +91,62 @@ const Poster: React.FC<ArtPosterProps> = ({
   representativeImageUrl,
 }) => {
   const classes = useStyles()
+  const [openDialog, setOpenDialog] = useState(false)
   return (
-    <Paper className={classes.paper} elevation={2}>
-      <ButtonBase
-        className={classes.buttonBase}
-        onClick={() => {
-          window.open('/art/' + id)
-        }}
-      >
-        <img alt="작품 이미지" className={classes.image} src={representativeImageUrl} />
-      </ButtonBase>
-      <div className={classes.textArea}>
-        <Typography
-          className={classes.artName}
-          variant="subtitle1"
+    <div>
+      <Paper className={classes.paper} elevation={2}>
+        <ButtonBase
+          className={classes.buttonBase}
           onClick={() => {
-            window.open('/art/' + id)
+            setOpenDialog(true)
           }}
         >
-          {name}
-        </Typography>
-        {artistId ? (
+          <img alt="작품 이미지" className={classes.image} src={representativeImageUrl} />
+        </ButtonBase>
+        <div className={classes.textArea}>
           <Typography
-            className={classes.pTag}
-            style={{ cursor: 'pointer' }}
-            variant="body2"
+            className={classes.artName}
+            variant="subtitle1"
             onClick={() => {
-              window.open('/artist/' + artistId)
+              window.open('/art/' + id)
             }}
           >
-            {artistName}
+            {name}
           </Typography>
-        ) : (
+          {artistId ? (
+            <Typography
+              className={classes.pTag}
+              style={{ cursor: 'pointer' }}
+              variant="body2"
+              onClick={() => {
+                window.open('/artist/' + artistId)
+              }}
+            >
+              {artistName}
+            </Typography>
+          ) : (
+            <Typography className={classes.pTag} variant="body2">
+              {artistName}
+            </Typography>
+          )}
           <Typography className={classes.pTag} variant="body2">
-            {artistName}
+            {width}x{height}cm
           </Typography>
-        )}
-        <Typography className={classes.pTag} variant="body2">
-          {width}x{height}cm
-        </Typography>
-        {saleStatus === SaleStatus.ON_SALE ? (
-          <Typography className={classes.pTag} variant="body2">
-            {currencyFormatter(price)}
-          </Typography>
-        ) : (
-          <Typography className={classes.pTag} variant="body2">
-            {translateSaleStatus(saleStatus)}
-          </Typography>
-        )}
-      </div>
-    </Paper>
+          {saleStatus === SaleStatus.ON_SALE ? (
+            <Typography className={classes.pTag} variant="body2">
+              {currencyFormatter(price)}
+            </Typography>
+          ) : (
+            <Typography className={classes.pTag} variant="body2">
+              {translateSaleStatus(saleStatus)}
+            </Typography>
+          )}
+        </div>
+      </Paper>
+      <ArtDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
+    </div>
   )
 }
 
 export const MemoizedPoster = memo(Poster)
+export default Poster

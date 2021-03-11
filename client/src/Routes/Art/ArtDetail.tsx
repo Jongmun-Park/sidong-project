@@ -1,4 +1,7 @@
 import React, { FC, useState } from 'react'
+import gql from 'graphql-tag'
+import { useParams } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -63,6 +66,47 @@ interface TabPanelProps {
   index: any
   value: any
 }
+interface ArtDetailParams {
+  artID: string
+}
+
+const ART = gql`
+  query($artId: ID!) {
+    art(artId: $artId) {
+      id
+      createdAt
+      artist {
+        id
+        artistName
+        realName
+      }
+      name
+      description
+      medium
+      theme {
+        id
+        name
+      }
+      style {
+        id
+        name
+      }
+      technique {
+        id
+        name
+      }
+      saleStatus
+      isFramed
+      price
+      width
+      height
+      imageUrls {
+        id
+        url
+      }
+    }
+  }
+`
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
@@ -91,9 +135,24 @@ function a11yProps(index: any) {
   }
 }
 
-const ArtDetailPresenter: FC<Art> = ({ art }) => {
+const ArtDetail: FC = () => {
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
+  const { artID } = useParams<ArtDetailParams>()
+  const { data }: { data: Art | undefined } = useQuery(ART, {
+    variables: {
+      artId: artID,
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  if (!data) {
+    return null
+  }
+
+  const { art } = data
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
@@ -157,4 +216,4 @@ const ArtDetailPresenter: FC<Art> = ({ art }) => {
   )
 }
 
-export default ArtDetailPresenter
+export default ArtDetail

@@ -134,3 +134,4 @@ const Poster: FC<ArtistPosterProps> = ({
 }
 
 export const MemoizedPoster = memo(Poster)
+export default Poster
