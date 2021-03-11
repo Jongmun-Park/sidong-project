@@ -108,7 +108,7 @@ const Poster: React.FC<ArtPosterProps> = ({
             className={classes.artName}
             variant="subtitle1"
             onClick={() => {
-              window.open('/art/' + id)
+              setOpenDialog(true)
             }}
           >
             {name}
@@ -143,7 +143,7 @@ const Poster: React.FC<ArtPosterProps> = ({
           )}
         </div>
       </Paper>
-      <ArtDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
+      <ArtDialog openDialog={openDialog} setOpenDialog={setOpenDialog} artID={id} artName={name} />
     </div>
   )
 }

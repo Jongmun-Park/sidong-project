@@ -2,10 +2,10 @@ import React from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import About from './About'
 import ArtList from '../Routes/Art/ArtListContainer'
-import ArtDetail from '../Routes/Art/ArtDetail'
+import ArtDetailPage from '../Routes/Art/ArtDetailPage'
 import RegisterArt from './Art/RegisterArt'
 import ArtistList from '../Routes/Artist/ArtistListContainer'
-import ArtistDetail from '../Routes/Artist/ArtistDetail'
+import ArtistDetailPage from '../Routes/Artist/ArtistDetailPage'
 import RegisterArtist from './Artist/RegisterArtist'
 
 class Router extends React.Component {
@@ -18,11 +18,11 @@ class Router extends React.Component {
 
           <Route exact path="/arts" component={ArtList} />
           <Route exact path="/art/register" component={RegisterArt} />
-          <Route exact path="/art/:artID" component={ArtDetail} />
+          <Route exact path="/art/:artID" component={ArtDetailPage} />
 
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/artist/register" component={RegisterArtist} />
-          <Route exact path="/artist/:artistId" component={ArtistDetail} />
+          <Route exact path="/artist/:artistId" component={ArtistDetailPage} />
 
           <Redirect from="*" to="/" />
         </Switch>

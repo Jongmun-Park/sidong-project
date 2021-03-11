@@ -5,9 +5,12 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  Typography,
+  IconButton,
 } from '@material-ui/core/'
+import { Close } from '@material-ui/icons'
+import ArtDetail from './ArtDetail'
 
 const useStyles = makeStyles({
   dialog: {
@@ -15,15 +18,30 @@ const useStyles = makeStyles({
       width: '95%',
       maxWidth: 'none',
     },
+    '& .MuiDialog-paper': {
+      margin: '0',
+    },
+    '& .MuiDialogContent-dividers': {
+      borderTop: 'none',
+    },
+    '& .MuiTypography-h6': {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    '& .MuiIconButton-root': {
+      padding: '0',
+    },
   },
 })
 
 interface ArtDialogProps {
   openDialog: boolean
   setOpenDialog: (arg0: boolean) => void
+  artID: number
+  artName: string
 }
 
-const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog }) => {
+const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artID, artName }) => {
   const classes = useStyles()
   const handleClose = () => {
     setOpenDialog(false)
@@ -35,21 +53,16 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog }) => {
       open={openDialog}
       onClose={handleClose}
       scroll="paper"
-      aria-labelledby="scroll-dialog-title"
-      aria-describedby="scroll-dialog-description"
+      aria-labelledby="art-dialog-title"
     >
-      <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+      <DialogTitle id="art-dialog-title">
+        <Typography variant="h6">{artName}</Typography>
+        <IconButton onClick={handleClose}>
+          <Close />
+        </IconButton>
+      </DialogTitle>
       <DialogContent dividers={true}>
-        <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-          {[...new Array(50)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-            )
-            .join('\n')}
-        </DialogContentText>
+        <ArtDetail artID={artID} />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">

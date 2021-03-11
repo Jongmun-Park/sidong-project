@@ -140,7 +140,7 @@ const ARTS_BY_ARTIST = gql`
   }
 `
 
-const ArtistDetail: FC = () => {
+const ArtistDetailPage: FC = () => {
   const classes = useStyles()
   const { artistId } = useParams<ArtistDetailParams>()
   const [arts, setArts] = useState<Array<any>>([])
@@ -245,4 +245,4 @@ const ArtistDetail: FC = () => {
   )
 }
 
-export default ArtistDetail
+export default ArtistDetailPage

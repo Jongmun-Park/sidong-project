@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import gql from 'graphql-tag'
-import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
@@ -13,14 +12,12 @@ import ArtInfoTable from '../../Components/Art/InfoTable'
 const useStyles = makeStyles((theme) => ({
   container: {
     '@media (min-width: 1024px)': {
-      padding: '60px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
     display: 'flex',
     flexWrap: 'wrap',
     maxWidth: '1192px',
     minHeight: '100vh',
-    padding: '45px 40px 100px 40px',
     backgroundColor: 'white',
   },
   leftArea: {
@@ -67,7 +64,7 @@ interface TabPanelProps {
   value: any
 }
 interface ArtDetailParams {
-  artID: string
+  artID: number
 }
 
 const ART = gql`
@@ -135,10 +132,10 @@ function a11yProps(index: any) {
   }
 }
 
-const ArtDetail: FC = () => {
+const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
-  const { artID } = useParams<ArtDetailParams>()
+
   const { data }: { data: Art | undefined } = useQuery(ART, {
     variables: {
       artId: artID,
