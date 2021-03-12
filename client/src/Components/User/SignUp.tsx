@@ -75,7 +75,6 @@ const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="sign-up-dialog">
       <DialogTitle id="sign-up-dialog">회원 가입</DialogTitle>
       <DialogContent>
-        {/* <DialogContentText></DialogContentText> */}
         <TextField
           autoFocus
           margin="dense"

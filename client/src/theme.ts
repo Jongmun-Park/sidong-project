@@ -34,7 +34,7 @@ const theme = createMuiTheme({
         body: {
           backgroundColor: '#f0eadb',
           '& .MuiMenuItem-root': {
-            fontSize: '12px',
+            fontSize: '14px',
             minHeight: 'auto',
           },
         },

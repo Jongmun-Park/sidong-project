@@ -71,7 +71,6 @@ const ART = gql`
   query($artId: ID!) {
     art(artId: $artId) {
       id
-      createdAt
       artist {
         id
         artistName

@@ -1,9 +1,10 @@
-import React, { memo, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography, ButtonBase } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { SaleStatus } from '../../types'
 import ArtDialog from './Dialog'
+import Like from './Like'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +41,20 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 823px)': {
       marginTop: '10px',
     },
+    '& p': {
+      fontSize: '12px',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      marginBottom: '5px',
+      '@media (max-width: 823px)': {
+        fontSize: '10px',
+        marginBottom: '3px',
+      },
+      '&:last-child': {
+        marginBottom: '0',
+      },
+    },
   },
   artName: {
     fontSize: '15px',
@@ -51,17 +66,6 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '@media (max-width: 823px)': {
       fontSize: '12px',
-      marginBottom: '3px',
-    },
-  },
-  pTag: {
-    fontSize: '12px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    marginBottom: '5px',
-    '@media (max-width: 823px)': {
-      fontSize: '10px',
       marginBottom: '3px',
     },
   },
@@ -77,9 +81,10 @@ interface ArtPosterProps {
   saleStatus: SaleStatus
   price: number
   representativeImageUrl: string
+  currentUserLikesThis: boolean
 }
 
-const Poster: React.FC<ArtPosterProps> = ({
+const Poster: FC<ArtPosterProps> = ({
   id,
   artistId,
   name,
@@ -89,6 +94,7 @@ const Poster: React.FC<ArtPosterProps> = ({
   saleStatus,
   price,
   representativeImageUrl,
+  currentUserLikesThis,
 }) => {
   const classes = useStyles()
   const [openDialog, setOpenDialog] = useState(false)
@@ -115,7 +121,6 @@ const Poster: React.FC<ArtPosterProps> = ({
           </Typography>
           {artistId ? (
             <Typography
-              className={classes.pTag}
               style={{ cursor: 'pointer' }}
               variant="body2"
               onClick={() => {
@@ -125,20 +130,20 @@ const Poster: React.FC<ArtPosterProps> = ({
               {artistName}
             </Typography>
           ) : (
-            <Typography className={classes.pTag} variant="body2">
-              {artistName}
-            </Typography>
+            <Typography variant="body2">{artistName}</Typography>
           )}
-          <Typography className={classes.pTag} variant="body2">
+          <Typography variant="body2">
             {width}x{height}cm
           </Typography>
           {saleStatus === SaleStatus.ON_SALE ? (
-            <Typography className={classes.pTag} variant="body2">
+            <Typography variant="body2">
               {currencyFormatter(price)}
+              <Like artId={id} currentUserLikesThis={currentUserLikesThis} />
             </Typography>
           ) : (
-            <Typography className={classes.pTag} variant="body2">
+            <Typography variant="body2">
               {translateSaleStatus(saleStatus)}
+              <Like artId={id} currentUserLikesThis={currentUserLikesThis} />
             </Typography>
           )}
         </div>

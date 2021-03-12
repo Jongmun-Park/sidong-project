@@ -33,7 +33,15 @@ const ArtInfoTable: FC<Art> = ({ art }) => {
           <TableCell className={classes.th} component="th" scope="row">
             작가 | Artist
           </TableCell>
-          <TableCell className={classes.td}>{art.artist.realName}</TableCell>
+          <TableCell
+            onClick={() => {
+              window.open(`/artist/${art.artist.id}`)
+            }}
+            className={classes.td}
+            style={{ cursor: 'pointer' }}
+          >
+            {art.artist.realName}
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">

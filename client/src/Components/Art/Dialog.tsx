@@ -30,6 +30,9 @@ const useStyles = makeStyles({
     '& .MuiTypography-h6': {
       display: 'flex',
       justifyContent: 'space-between',
+      '@media (max-width: 823px)': {
+        fontSize: '1rem',
+      },
     },
     '& .MuiIconButton-root': {
       padding: '0',
