@@ -22,7 +22,7 @@ interface SignUpInputProps {
 }
 
 const SIGN_UP_MUTATION = gql`
-  mutation($email: String!, $password: String!) {
+  mutation SignUp($email: String!, $password: String!) {
     createUser(email: $email, password: $password) {
       success
     }

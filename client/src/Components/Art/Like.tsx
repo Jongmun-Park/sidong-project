@@ -22,7 +22,7 @@ interface LikeProps {
 }
 
 const LIKE_ART_MUTATION = gql`
-  mutation($artId: ID!) {
+  mutation LikeArt($artId: ID!) {
     likeArt(artId: $artId) {
       success
     }
@@ -30,7 +30,7 @@ const LIKE_ART_MUTATION = gql`
 `
 
 const CANCEL_LIKE_ART_MUTATION = gql`
-  mutation($artId: ID!) {
+  mutation CancelLikeArt($artId: ID!) {
     cancelLikeArt(artId: $artId) {
       success
     }

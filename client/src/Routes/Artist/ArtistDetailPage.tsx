@@ -109,7 +109,7 @@ interface ArtistDetailParams {
 }
 
 const ARTIST = gql`
-  query($artistId: ID!) {
+  query Artist($artistId: ID!) {
     artist(artistId: $artistId) {
       id
       realName
@@ -127,7 +127,7 @@ const ARTIST = gql`
 `
 
 const ARTS_BY_ARTIST = gql`
-  query($artistId: ID!, $lastArtId: ID) {
+  query ArtsByArtist($artistId: ID!, $lastArtId: ID) {
     artsByArtist(artistId: $artistId, lastArtId: $lastArtId) {
       id
       name

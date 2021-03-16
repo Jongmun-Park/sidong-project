@@ -6,7 +6,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Typography,
   IconButton,
 } from '@material-ui/core/'
 import { Close } from '@material-ui/icons'
@@ -62,7 +61,7 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artID, artNa
       aria-labelledby="art-dialog-title"
     >
       <DialogTitle id="art-dialog-title">
-        <Typography variant="h6">{artName}</Typography>
+        <span>{artName}</span>
         <IconButton onClick={handleClose}>
           <Close />
         </IconButton>

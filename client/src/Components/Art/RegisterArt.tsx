@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const REGISTER_ART_MUTATION = gql`
-  mutation(
+  mutation RegisterArt(
     $artImages: Upload!
     $description: String!
     $height: Int!

@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
   artName: {
     fontWeight: 600,
     margin: '5px 0 25px 0',
+    '@media (max-width: 823px)': {
+      fontSize: '18px',
+    },
   },
   tabs: {
     width: '100%',
@@ -76,7 +79,7 @@ interface ArtDetailParams {
 }
 
 const ART = gql`
-  query($artId: ID!) {
+  query Art($artId: ID!) {
     art(artId: $artId) {
       id
       artist {

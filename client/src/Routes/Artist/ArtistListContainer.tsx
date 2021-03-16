@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import ArtistListPresenter from './ArtistListPresenter'
 
 const ARTISTS = gql`
-  query($lastArtistId: ID, $pageSize: Int) {
+  query Artists($lastArtistId: ID, $pageSize: Int) {
     artists(lastArtistId: $lastArtistId, pageSize: $pageSize) {
       id
       artistName
