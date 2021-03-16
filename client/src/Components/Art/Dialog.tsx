@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     '& .MuiDialogContent-dividers': {
       borderTop: 'none',
     },
-    '& .MuiTypography-h6': {
+    '& h2': {
       display: 'flex',
       justifyContent: 'space-between',
       '@media (max-width: 823px)': {

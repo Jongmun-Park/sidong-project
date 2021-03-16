@@ -10,11 +10,9 @@ const useStyles = makeStyles({
   like: {
     float: 'right',
     cursor: 'pointer',
+    alignSelf: 'center',
     '& .MuiSvgIcon-root': {
       fontSize: '1.25rem',
-      '@media (max-width: 823px)': {
-        fontSize: '1rem',
-      },
     },
   },
 })
@@ -69,17 +67,17 @@ const Like: FC<LikeProps> = ({ currentUserLikesThis, artId }) => {
   }
 
   return (
-    <div className={classes.like}>
+    <span className={classes.like}>
       {like ? (
-        <div onClick={cancelLike}>
+        <span onClick={cancelLike}>
           <FavoriteIcon />
-        </div>
+        </span>
       ) : (
-        <div onClick={handleLike}>
+        <span onClick={handleLike}>
           <FavoriteBorderIcon />
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   )
 }
 

@@ -8,6 +8,7 @@ import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import ArtInfoTable from '../../Components/Art/InfoTable'
+import Like from '../../Components/Art/Like'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '40px',
     },
     color: theme.palette.lightBlack.main,
+  },
+  rightBoxHeader: {
+    '@media (min-width: 823px)': {
+      paddingRight: '27px',
+    },
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   leftBox: {
     maxWidth: '530px',
@@ -100,6 +108,7 @@ const ART = gql`
         id
         url
       }
+      currentUserLikesThis
     }
   }
 `
@@ -173,9 +182,12 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
       </div>
       <div className={classes.rightArea}>
         <div className={classes.rightBox}>
-          <Typography className={classes.artName} variant="h6">
-            {art.name}
-          </Typography>
+          <div className={classes.rightBoxHeader}>
+            <Typography className={classes.artName} variant="h6">
+              {art.name}
+            </Typography>
+            <Like artId={artID} currentUserLikesThis={art.currentUserLikesThis} />
+          </div>
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (
             <div>{currencyFormatter(art.price)}</div>
