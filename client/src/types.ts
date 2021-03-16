@@ -1,60 +1,56 @@
 export interface Artist {
-  artist: {
+  id: number
+  realName: string
+  artistName: string
+  description: string
+  thumbnail: {
     id: number
-    realName: string
-    artistName: string
-    description: string
-    thumbnail: {
-      id: number
-      url: string
-    }
-    representativeWork: {
-      id: number
-      url: string
-    }
-    category: number
-    residence: number
-    website: string
+    url: string
   }
+  representativeWork: {
+    id: number
+    url: string
+  }
+  category: number
+  residence: number
+  website: string
 }
 
 export interface Art {
-  art: {
+  id: number
+  createdAt: Date
+  artist: {
     id: number
-    createdAt: Date
-    artist: {
-      id: number
-      artistName: string
-      realName: string
-    }
-    name: string
-    description: string
-    medium: Medium
-    theme: {
-      id: number
-      name: string
-    }
-    style: {
-      id: number
-      name: string
-    }
-    technique: {
-      id: number
-      name: string
-    }
-    saleStatus: SaleStatus
-    isFramed: boolean
-    price: number
-    width: number
-    height: number
-    currentUserLikesThis: boolean
-    representativeImageUrl: string
-    images: Array<number>
-    imageUrls: {
-      id: number
-      url: string
-    }[]
+    artistName: string
+    realName: string
   }
+  name: string
+  description: string
+  medium: Medium
+  theme: {
+    id: number
+    name: string
+  }
+  style: {
+    id: number
+    name: string
+  }
+  technique: {
+    id: number
+    name: string
+  }
+  saleStatus: SaleStatus
+  isFramed: boolean
+  price: number
+  width: number
+  height: number
+  currentUserLikesThis: boolean
+  representativeImageUrl: string
+  images: Array<number>
+  imageUrls: {
+    id: number
+    url: string
+  }[]
 }
 
 export interface ArtOptions {

@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ArtistInfoTable: FC<Artist> = ({ artist }) => {
+interface ArtistInfoTableProps {
+  artist: Artist
+}
+
+const ArtistInfoTable: FC<ArtistInfoTableProps> = ({ artist }) => {
   const classes = useStyles()
   return (
     <Table className={classes.table}>

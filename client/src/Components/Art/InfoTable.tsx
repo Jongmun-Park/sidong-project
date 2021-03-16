@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ArtInfoTable: FC<Art> = ({ art }) => {
+interface ArtInfoTableProps {
+  art: Art
+}
+
+const ArtInfoTable: FC<ArtInfoTableProps> = ({ art }) => {
   const classes = useStyles()
   return (
     <Table className={classes.table}>

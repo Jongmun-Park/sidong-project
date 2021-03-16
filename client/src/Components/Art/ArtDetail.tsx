@@ -147,7 +147,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
 
-  const { data }: { data: Art | undefined } = useQuery(ART, {
+  const { data, refetch } = useQuery(ART, {
     variables: {
       artId: artID,
     },
@@ -160,7 +160,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
     return null
   }
 
-  const { art } = data
+  const { art }: { art: Art } = data
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
