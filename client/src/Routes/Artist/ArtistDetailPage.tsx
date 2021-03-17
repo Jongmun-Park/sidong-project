@@ -136,7 +136,6 @@ const ARTS_BY_ARTIST = gql`
       width
       height
       representativeImageUrl
-      currentUserLikesThis
     }
   }
 `
@@ -232,7 +231,6 @@ const ArtistDetailPage: FC = () => {
                 saleStatus={art.saleStatus}
                 price={art.price}
                 representativeImageUrl={art.representativeImageUrl}
-                currentUserLikesThis={art.currentUserLikesThis}
               />
             ))}
           </div>

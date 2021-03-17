@@ -81,7 +81,6 @@ interface ArtPosterProps {
   saleStatus: SaleStatus
   price: number
   representativeImageUrl: string
-  currentUserLikesThis: boolean
 }
 
 const Poster: FC<ArtPosterProps> = ({
@@ -94,7 +93,6 @@ const Poster: FC<ArtPosterProps> = ({
   saleStatus,
   price,
   representativeImageUrl,
-  currentUserLikesThis,
 }) => {
   const classes = useStyles()
   const [openDialog, setOpenDialog] = useState(false)
@@ -138,12 +136,12 @@ const Poster: FC<ArtPosterProps> = ({
           {saleStatus === SaleStatus.ON_SALE ? (
             <Typography variant="body2">
               {currencyFormatter(price)}
-              <Like artId={id} currentUserLikesThis={currentUserLikesThis} />
+              <Like artId={id} />
             </Typography>
           ) : (
             <Typography variant="body2">
               {translateSaleStatus(saleStatus)}
-              <Like artId={id} currentUserLikesThis={currentUserLikesThis} />
+              <Like artId={id} />
             </Typography>
           )}
         </div>

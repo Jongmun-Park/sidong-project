@@ -151,7 +151,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
             <Typography className={classes.artName} variant="h6">
               {art.name}
             </Typography>
-            <Like artId={artID} currentUserLikesThis={art.currentUserLikesThis} />
+            <Like artId={artID} />
           </div>
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (

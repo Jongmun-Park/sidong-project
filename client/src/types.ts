@@ -44,7 +44,6 @@ export interface Art {
   price: number
   width: number
   height: number
-  currentUserLikesThis: boolean
   representativeImageUrl: string
   images: Array<number>
   imageUrls: {

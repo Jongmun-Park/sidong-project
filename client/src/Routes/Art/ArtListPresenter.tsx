@@ -123,7 +123,6 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
                 saleStatus={art.saleStatus}
                 price={art.price}
                 representativeImageUrl={art.representativeImageUrl}
-                currentUserLikesThis={art.currentUserLikesThis}
               />
             ))}
           </div>

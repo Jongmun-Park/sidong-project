@@ -35,7 +35,6 @@ const ARTS = gql`
       width
       height
       representativeImageUrl
-      currentUserLikesThis
       artist {
         id
         artistName

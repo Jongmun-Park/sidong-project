@@ -52,7 +52,6 @@ export const ART = gql`
         id
         url
       }
-      currentUserLikesThis
     }
   }
 `

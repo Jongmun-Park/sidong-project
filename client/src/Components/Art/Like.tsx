@@ -1,11 +1,10 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/styles'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { useCurrentUser } from '../../Hooks/User'
-import { ART } from '../../querys'
 
 const useStyles = makeStyles({
   like: {
@@ -18,9 +17,17 @@ const useStyles = makeStyles({
   },
 })
 interface LikeProps {
-  currentUserLikesThis: boolean
   artId: number
 }
+
+const CURRENT_USER_LIKES_THIS_ART = gql`
+  query CurrentUserLikesThisArt($artId: ID!) {
+    art(artId: $artId) {
+      id
+      currentUserLikesThis
+    }
+  }
+`
 
 const LIKE_ART_MUTATION = gql`
   mutation LikeArt($artId: ID!) {
@@ -38,32 +45,26 @@ const CANCEL_LIKE_ART_MUTATION = gql`
   }
 `
 
-const Like: FC<LikeProps> = ({ currentUserLikesThis, artId }) => {
+const Like: FC<LikeProps> = ({ artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const [like, setLike] = useState<boolean>(currentUserLikesThis)
-  const [likeArt] = useMutation(LIKE_ART_MUTATION, {
-    update: (cache) => {
-      const previous: any = cache.readQuery({
-        query: ART,
-        variables: { artId },
-      })
-
-      console.log('previous:', previous)
-      cache.writeQuery({
-        query: ART,
-        variables: { artId },
-        data: {
-          art: {
-            ...previous.art,
-            currentUserLikesThis: true,
-          },
-        },
-      })
-    },
-  })
-
+  const [likeArt] = useMutation(LIKE_ART_MUTATION)
   const [cancelLikeArt] = useMutation(CANCEL_LIKE_ART_MUTATION)
+  const { data, refetch } = useQuery(CURRENT_USER_LIKES_THIS_ART, {
+    variables: { artId },
+    onError: (error) => console.error(error.message),
+  })
+  const [like, setLike] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (data) {
+      setLike(data.art.currentUserLikesThis)
+    }
+  }, [data])
+
+  if (!data) {
+    return null
+  }
 
   const handleLike = async () => {
     if (!currentUser) {
@@ -74,7 +75,7 @@ const Like: FC<LikeProps> = ({ currentUserLikesThis, artId }) => {
       variables: { artId },
     })
     if (data.likeArt.success) {
-      setLike(true)
+      refetch()
     }
   }
 
@@ -83,7 +84,7 @@ const Like: FC<LikeProps> = ({ currentUserLikesThis, artId }) => {
       variables: { artId },
     })
     if (data.cancelLikeArt.success) {
-      setLike(false)
+      refetch()
     }
   }
 
