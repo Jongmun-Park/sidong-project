@@ -18,3 +18,41 @@ export const ART_OPTIONS = gql`
     }
   }
 `
+
+export const ART = gql`
+  query Art($artId: ID!) {
+    art(artId: $artId) {
+      id
+      artist {
+        id
+        artistName
+        realName
+      }
+      name
+      description
+      medium
+      theme {
+        id
+        name
+      }
+      style {
+        id
+        name
+      }
+      technique {
+        id
+        name
+      }
+      saleStatus
+      isFramed
+      price
+      width
+      height
+      imageUrls {
+        id
+        url
+      }
+      currentUserLikesThis
+    }
+  }
+`

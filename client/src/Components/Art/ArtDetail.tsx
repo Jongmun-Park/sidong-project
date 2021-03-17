@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react'
-import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
+import { ART } from '../../querys'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import ArtInfoTable from '../../Components/Art/InfoTable'
 import Like from '../../Components/Art/Like'
@@ -78,44 +78,6 @@ interface ArtDetailParams {
   artID: number
 }
 
-const ART = gql`
-  query Art($artId: ID!) {
-    art(artId: $artId) {
-      id
-      artist {
-        id
-        artistName
-        realName
-      }
-      name
-      description
-      medium
-      theme {
-        id
-        name
-      }
-      style {
-        id
-        name
-      }
-      technique {
-        id
-        name
-      }
-      saleStatus
-      isFramed
-      price
-      width
-      height
-      imageUrls {
-        id
-        url
-      }
-      currentUserLikesThis
-    }
-  }
-`
-
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
 
@@ -147,7 +109,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
 
-  const { data, refetch } = useQuery(ART, {
+  const { data } = useQuery(ART, {
     variables: {
       artId: artID,
     },

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { useCurrentUser } from '../../Hooks/User'
+import { ART } from '../../querys'
 
 const useStyles = makeStyles({
   like: {
@@ -41,7 +42,27 @@ const Like: FC<LikeProps> = ({ currentUserLikesThis, artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const [like, setLike] = useState<boolean>(currentUserLikesThis)
-  const [likeArt] = useMutation(LIKE_ART_MUTATION)
+  const [likeArt] = useMutation(LIKE_ART_MUTATION, {
+    update: (cache) => {
+      const previous: any = cache.readQuery({
+        query: ART,
+        variables: { artId },
+      })
+
+      console.log('previous:', previous)
+      cache.writeQuery({
+        query: ART,
+        variables: { artId },
+        data: {
+          art: {
+            ...previous.art,
+            currentUserLikesThis: true,
+          },
+        },
+      })
+    },
+  })
+
   const [cancelLikeArt] = useMutation(CANCEL_LIKE_ART_MUTATION)
 
   const handleLike = async () => {
