@@ -1,11 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+import FilterListIcon from '@material-ui/icons/FilterList'
 import { MemoizedPoster } from '../../Components/Artist/Poster'
+import FilterContainer from '../../Components/Artist/FilterContainer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
+    '@media (max-width: 823px)': {
+      flexDirection: 'column',
+    },
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
@@ -26,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '32px',
     '@media (max-width: 823px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
-      margin: '20px 10px 20px 10px',
+      margin: '10px 10px 20px 10px',
       gridGap: '10px',
     },
   },
@@ -36,47 +41,101 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
-      margin: '10px 0px 10px 0px',
+      margin: '0px 0px 30px 0px',
     },
   },
   loadMoreButton: {
     fontWeight: 'bold',
   },
+  pTag: {
+    textAlign: 'center',
+    fontSize: '16px',
+    fontWeight: 500,
+  },
+  mobileFilterController: {
+    '@media (min-width: 823px)': {
+      display: 'none',
+    },
+    padding: '10px 27px 10px 27px',
+    top: '49px',
+    position: 'sticky',
+    zIndex: 1,
+    backgroundColor: theme.palette.lightYellow.main,
+    '& .mobileFilter': {
+      marginTop: '10px',
+      '&.inactive': {
+        display: 'none',
+      },
+    },
+  },
+  filterButton: {
+    padding: '3px 18px',
+    fontSize: '11px',
+    alignItems: 'end',
+    '& .MuiButton-startIcon': {
+      marginRight: '5px',
+    },
+  },
 }))
 
 interface ArtistListPresenterProps {
   artists: Array<any>
+  setFilters: (arg0: any) => void
   handleLoadMore: () => void
 }
 
-const ArtistListPresenter: FC<ArtistListPresenterProps> = ({ artists, handleLoadMore }) => {
+const ArtistListPresenter: FC<ArtistListPresenterProps> = ({
+  artists,
+  setFilters,
+  handleLoadMore,
+}) => {
   const classes = useStyles()
+  const [openMobileFilter, setOpenMobileFilter] = useState<boolean>(false)
 
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <br></br>
-        <b>left side bar</b>
-        <br></br>- Search box<br></br>- Filter
+        <FilterContainer setFilters={setFilters} />
       </div>
-      <div className={classes.contentSection}>
-        <div className={classes.posters}>
-          {artists.map((artist) => (
-            <MemoizedPoster
-              key={artist.id}
-              id={artist.id}
-              artistName={artist.artistName}
-              realName={artist.realName}
-              thumbnailUrl={artist.thumbnail.url}
-              representativeWorkUrl={artist.representativeWork.url}
-              category={artist.category}
-            />
-          ))}
-        </div>
-        <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-          더 보기
+      <div className={classes.mobileFilterController}>
+        <Button
+          startIcon={<FilterListIcon />}
+          className={classes.filterButton}
+          variant="contained"
+          size="small"
+          color="primary"
+          onClick={() => setOpenMobileFilter(!openMobileFilter)}
+        >
+          검색 조건
         </Button>
+        <div className={`mobileFilter ${openMobileFilter ? '' : 'inactive'}`}>
+          <FilterContainer setFilters={setFilters} setOpenMobileFilter={setOpenMobileFilter} />
+        </div>
       </div>
+      {artists ? (
+        <div className={classes.contentSection}>
+          <div className={classes.posters}>
+            {artists.map((artist) => (
+              <MemoizedPoster
+                key={artist.id}
+                id={artist.id}
+                artistName={artist.artistName}
+                realName={artist.realName}
+                thumbnailUrl={artist.thumbnail.url}
+                representativeWorkUrl={artist.representativeWork.url}
+                category={artist.category}
+              />
+            ))}
+          </div>
+          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+            더 보기
+          </Button>
+        </div>
+      ) : (
+        <div className={classes.contentSection}>
+          <p className={classes.pTag}>해당 검색 결과가 없습니다.</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -102,10 +102,10 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
     etc: true,
   })
   const [price, setPrice] = useState<number[]>([10000, 5000000])
-  const [medium, setMedium] = useState<Medium | string>('none')
-  const [theme, setTheme] = useState<string>('none')
-  const [style, setStyle] = useState<string>('none')
-  const [technique, setTechnique] = useState<string>('none')
+  const [medium, setMedium] = useState<Medium | string>('all')
+  const [theme, setTheme] = useState<string>('all')
+  const [style, setStyle] = useState<string>('all')
+  const [technique, setTechnique] = useState<string>('all')
 
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
@@ -122,7 +122,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
 
   const handleMedium = (e: React.ChangeEvent<{ value: unknown }>) => {
     setMedium(e.target.value as Medium | string)
-    if (e.target.value !== 'none') {
+    if (e.target.value !== 'all') {
       changeArtOptions({
         variables: {
           mediumId: e.target.value,
@@ -131,9 +131,9 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
       setOpenArtOptions(true)
     } else {
       setOpenArtOptions(false)
-      setTheme('none')
-      setStyle('none')
-      setTechnique('none')
+      setTheme('all')
+      setStyle('all')
+      setTechnique('all')
     }
   }
 
@@ -160,7 +160,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
           <ListItemText primary="매체 | Medium" />
         </ListItem>
         <Select className={classes.select} value={medium} onChange={handleMedium}>
-          <MenuItem value={'none'}>선택 안함</MenuItem>
+          <MenuItem value={'all'}>전 체</MenuItem>
           <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
           <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
           <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
@@ -181,7 +181,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
                 setTheme(e.target.value as string)
               }}
             >
-              <MenuItem value={'none'}>선택 안함</MenuItem>
+              <MenuItem value={'all'}>전 체</MenuItem>
               {artOptions?.themes.map((theme) => (
                 <MenuItem key={theme.id} value={theme.id}>
                   {theme.name}
@@ -198,7 +198,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
                 setStyle(e.target.value as string)
               }}
             >
-              <MenuItem value={'none'}>선택 안함</MenuItem>
+              <MenuItem value={'all'}>전 체</MenuItem>
               {artOptions?.styles.map((style) => (
                 <MenuItem key={style.id} value={style.id}>
                   {style.name}
@@ -215,7 +215,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
                 setTechnique(e.target.value as string)
               }}
             >
-              <MenuItem value={'none'}>선택 안함</MenuItem>
+              <MenuItem value={'all'}>전 체</MenuItem>
               {artOptions?.techniques.map((technique) => (
                 <MenuItem key={technique.id} value={technique.id}>
                   {technique.name}

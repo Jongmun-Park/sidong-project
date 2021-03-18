@@ -1,11 +1,16 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import ArtistListPresenter from './ArtistListPresenter'
 
 const ARTISTS = gql`
-  query Artists($lastArtistId: ID, $pageSize: Int) {
-    artists(lastArtistId: $lastArtistId, pageSize: $pageSize) {
+  query Artists($lastArtistId: ID, $pageSize: Int, $category: String, $residence: String) {
+    artists(
+      lastArtistId: $lastArtistId
+      pageSize: $pageSize
+      category: $category
+      residence: $residence
+    ) {
       id
       artistName
       realName
@@ -25,6 +30,7 @@ const ARTISTS = gql`
 const ArtistList: FC = () => {
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
+  const [filters, setFilters] = useState<any>(null)
   const [lastArtistId, setLastArtistId] = useState<string>('')
 
   const { data } = useQuery(ARTISTS, {
@@ -54,6 +60,31 @@ const ArtistList: FC = () => {
     },
   })
 
+  const [filterArtists] = useLazyQuery(ARTISTS, {
+    onCompleted: (data) => {
+      const filteredArtists = data.artists
+      setArtists(filteredArtists)
+      if (filteredArtists) {
+        setLastArtistId(filteredArtists[filteredArtists.length - 1].id)
+      }
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
+
+  useEffect(() => {
+    if (filters) {
+      filterArtists({
+        variables: {
+          category: filters.category,
+          residence: filters.residence,
+        },
+      })
+      setNoMoreArtist(false)
+    }
+  }, [filters, filterArtists])
+
   if (!data) {
     return null
   }
@@ -63,16 +94,30 @@ const ArtistList: FC = () => {
       alert('더 불러올 작가가 없습니다.')
       return
     }
-    loadMoreArtist({
-      variables: {
-        lastArtistId: lastArtistId,
-      },
-    })
+    if (!filters) {
+      loadMoreArtist({
+        variables: {
+          lastArtistId,
+        },
+      })
+    } else {
+      loadMoreArtist({
+        variables: {
+          lastArtistId,
+          category: filters.category,
+          residence: filters.residence,
+        },
+      })
+    }
   }
 
   return (
     <>
-      <ArtistListPresenter artists={artists} handleLoadMore={handleLoadMore} />
+      <ArtistListPresenter
+        artists={artists}
+        setFilters={setFilters}
+        handleLoadMore={handleLoadMore}
+      />
     </>
   )
 }
