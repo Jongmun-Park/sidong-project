@@ -6,59 +6,59 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { useCurrentUser } from '../../Hooks/User'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   like: {
-    float: 'right',
     cursor: 'pointer',
-    alignSelf: 'center',
+    color: theme.palette.lightBlack.main,
     '& .MuiSvgIcon-root': {
       fontSize: '1.25rem',
     },
   },
-})
+}))
+
 interface LikeProps {
-  artId: number
+  artistId: number
 }
 
-const CURRENT_USER_LIKES_THIS_ART = gql`
-  query CurrentUserLikesThisArt($artId: ID!) {
-    art(artId: $artId) {
+const CURRENT_USER_LIKES_THIS_ARTIST = gql`
+  query CurrentUserLikesThisArtist($artistId: ID!) {
+    artist(artistId: $artistId) {
       id
-      currentUserLikesThis
+      currentUserLikesThisArtist
     }
   }
 `
 
-const LIKE_ART_MUTATION = gql`
-  mutation LikeArt($artId: ID!) {
-    likeArt(artId: $artId) {
+const LIKE_ARTIST_MUTATION = gql`
+  mutation LikeArtist($artistId: ID!) {
+    likeArtist(artistId: $artistId) {
       success
     }
   }
 `
 
-const CANCEL_LIKE_ART_MUTATION = gql`
-  mutation CancelLikeArt($artId: ID!) {
-    cancelLikeArt(artId: $artId) {
+const CANCEL_LIKE_ARTIST_MUTATION = gql`
+  mutation CancelLikeArtist($artistId: ID!) {
+    cancelLikeArtist(artistId: $artistId) {
       success
     }
   }
 `
 
-const Like: FC<LikeProps> = ({ artId }) => {
+const Like: FC<LikeProps> = ({ artistId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const [likeArt] = useMutation(LIKE_ART_MUTATION)
-  const [cancelLikeArt] = useMutation(CANCEL_LIKE_ART_MUTATION)
-  const { data, refetch } = useQuery(CURRENT_USER_LIKES_THIS_ART, {
-    variables: { artId },
+  const [likeArtist] = useMutation(LIKE_ARTIST_MUTATION)
+  const [cancelLikeArtist] = useMutation(CANCEL_LIKE_ARTIST_MUTATION)
+  const { data, refetch } = useQuery(CURRENT_USER_LIKES_THIS_ARTIST, {
+    variables: { artistId },
     onError: (error) => console.error(error.message),
   })
   const [like, setLike] = useState<boolean>(false)
 
   useEffect(() => {
     if (data) {
-      setLike(data.art.currentUserLikesThis)
+      setLike(data.artist.currentUserLikesThisArtist)
     }
   }, [data])
 
@@ -71,19 +71,19 @@ const Like: FC<LikeProps> = ({ artId }) => {
       alert('로그인이 필요합니다.')
       return
     }
-    const { data } = await likeArt({
-      variables: { artId },
+    const { data } = await likeArtist({
+      variables: { artistId },
     })
-    if (data.likeArt.success) {
+    if (data.likeArtist.success) {
       refetch()
     }
   }
 
   const cancelLike = async () => {
-    const { data } = await cancelLikeArt({
-      variables: { artId },
+    const { data } = await cancelLikeArtist({
+      variables: { artistId },
     })
-    if (data.cancelLikeArt.success) {
+    if (data.cancelLikeArtist.success) {
       refetch()
     }
   }

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Chip, Paper, Typography, ButtonBase } from '@material-ui/core'
 import { ArtistCategory } from '../../types'
 import { translateArtistCategory } from '../../utils'
+import Like from './Like'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,7 +43,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  realNameBox: {
+    width: '103px',
+    '@media (max-width: 823px)': {
+      width: '70px',
+    },
+  },
   realName: {
+    display: 'inline',
     color: theme.palette.lightBlack.main,
     cursor: 'pointer',
     fontSize: '14px',
@@ -99,6 +107,7 @@ const Poster: FC<ArtistPosterProps> = ({
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
+      <Like artistId={id} />
       <div className={classes.head}>
         <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
         <div className={classes.headText}>
