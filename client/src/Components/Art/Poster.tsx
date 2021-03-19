@@ -69,6 +69,14 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '3px',
     },
   },
+  like: {
+    float: 'right',
+    cursor: 'pointer',
+    alignSelf: 'center',
+    '& .MuiSvgIcon-root': {
+      fontSize: '1.25rem',
+    },
+  },
 }))
 
 interface ArtPosterProps {
@@ -136,12 +144,16 @@ const Poster: FC<ArtPosterProps> = ({
           {saleStatus === SaleStatus.ON_SALE ? (
             <Typography variant="body2">
               {currencyFormatter(price)}
-              <Like artId={id} />
+              <span className={classes.like}>
+                <Like artId={id} />
+              </span>
             </Typography>
           ) : (
             <Typography variant="body2">
               {translateSaleStatus(saleStatus)}
-              <Like artId={id} />
+              <span className={classes.like}>
+                <Like artId={id} />
+              </span>
             </Typography>
           )}
         </div>

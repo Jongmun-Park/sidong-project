@@ -42,9 +42,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.lightBlack.main,
   },
   rightBoxHeader: {
-    '@media (min-width: 823px)': {
-      paddingRight: '27px',
-    },
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -66,6 +63,18 @@ const useStyles = makeStyles((theme) => ({
   tabPanel: {
     width: '100%',
     marginTop: '6px',
+  },
+  like: {
+    '@media (min-width: 823px)': {
+      position: 'relative',
+      right: '30px',
+    },
+    float: 'right',
+    cursor: 'pointer',
+    alignSelf: 'center',
+    '& .MuiSvgIcon-root': {
+      fontSize: '1.25rem',
+    },
   },
 }))
 
@@ -151,7 +160,9 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
             <Typography className={classes.artName} variant="h6">
               {art.name}
             </Typography>
-            <Like artId={artID} />
+            <span className={classes.like}>
+              <Like artId={artID} />
+            </span>
           </div>
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (
