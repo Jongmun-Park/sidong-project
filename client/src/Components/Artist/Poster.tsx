@@ -7,13 +7,11 @@ import Like from './Like'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '15px',
+    padding: '0 15px 15px 15px',
     backgroundColor: '#f5f6fa',
     borderRadius: '10px',
     '@media (max-width: 823px)': {
-      padding: '11px',
+      padding: '0 11px 11px 11px',
     },
   },
   buttonBase: {

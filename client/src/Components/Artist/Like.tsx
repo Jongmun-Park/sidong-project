@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   like: {
     cursor: 'pointer',
     color: theme.palette.lightBlack.main,
+    position: 'relative',
+    top: '10px',
+    left: '-1px',
     '& .MuiSvgIcon-root': {
       fontSize: '1.25rem',
     },
