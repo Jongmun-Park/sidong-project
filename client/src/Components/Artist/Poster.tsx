@@ -83,6 +83,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '9px',
     fontWeight: 600,
   },
+  like: {
+    cursor: 'pointer',
+    color: theme.palette.lightBlack.main,
+    position: 'relative',
+    top: '10px',
+    left: '-1px',
+    '& .MuiSvgIcon-root': {
+      fontSize: '1.25rem',
+    },
+  },
 }))
 
 interface ArtistPosterProps {
@@ -105,7 +115,9 @@ const Poster: FC<ArtistPosterProps> = ({
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={2}>
-      <Like artistId={id} />
+      <span className={classes.like}>
+        <Like artistId={id} />
+      </span>
       <div className={classes.head}>
         <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
         <div className={classes.headText}>

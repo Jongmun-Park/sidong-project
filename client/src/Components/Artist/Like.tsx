@@ -1,23 +1,9 @@
 import React, { FC, useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { makeStyles } from '@material-ui/core/styles'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { useCurrentUser } from '../../Hooks/User'
-
-const useStyles = makeStyles((theme) => ({
-  like: {
-    cursor: 'pointer',
-    color: theme.palette.lightBlack.main,
-    position: 'relative',
-    top: '10px',
-    left: '-1px',
-    '& .MuiSvgIcon-root': {
-      fontSize: '1.25rem',
-    },
-  },
-}))
 
 interface LikeProps {
   artistId: number
@@ -49,7 +35,6 @@ const CANCEL_LIKE_ARTIST_MUTATION = gql`
 `
 
 const Like: FC<LikeProps> = ({ artistId }) => {
-  const classes = useStyles()
   const currentUser = useCurrentUser()
   const [likeArtist] = useMutation(LIKE_ARTIST_MUTATION)
   const [cancelLikeArtist] = useMutation(CANCEL_LIKE_ARTIST_MUTATION)
@@ -92,7 +77,7 @@ const Like: FC<LikeProps> = ({ artistId }) => {
   }
 
   return (
-    <span className={classes.like}>
+    <>
       {like ? (
         <span onClick={cancelLike}>
           <FavoriteIcon />
@@ -102,7 +87,7 @@ const Like: FC<LikeProps> = ({ artistId }) => {
           <FavoriteBorderIcon />
         </span>
       )}
-    </span>
+    </>
   )
 }
 

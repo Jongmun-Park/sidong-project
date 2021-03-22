@@ -5,6 +5,7 @@ import { Avatar, Button, Typography } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
+import Like from '../../Components/Artist/Like'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 
 const useStyles = makeStyles((theme) => ({
@@ -102,6 +103,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     textAlign: 'center',
     marginTop: '63px',
+  },
+  like: {
+    float: 'right',
+    cursor: 'pointer',
+    color: theme.palette.lightBlack.main,
+    '& .MuiSvgIcon-root': {
+      fontSize: '1.25rem',
+    },
   },
 }))
 interface ArtistDetailParams {
@@ -209,6 +218,9 @@ const ArtistDetailPage: FC = () => {
     <main className={classes.container}>
       <div className={classes.avatarContainer}>
         <Avatar alt="작가 프로필 사진" className={classes.avatar} src={artist.thumbnail.url} />
+        <span className={classes.like}>
+          <Like artistId={artist.id} />
+        </span>
       </div>
       <div className={classes.artistInfo}>
         <ArtistInfoTable artist={artist} />
