@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
-import About from './About'
+import About from '../Routes/About'
 import ArtList from '../Routes/Art/ArtListContainer'
 import ArtDetailPage from '../Routes/Art/ArtDetailPage'
-import RegisterArt from './Art/RegisterArt'
+import RegisterArt from '../Routes/Art/RegisterArt'
 import ArtistList from '../Routes/Artist/ArtistListContainer'
 import ArtistDetailPage from '../Routes/Artist/ArtistDetailPage'
-import RegisterArtist from './Artist/RegisterArtist'
+import RegisterArtist from '../Routes/Artist/RegisterArtist'
 
 class Router extends React.Component {
   render() {
