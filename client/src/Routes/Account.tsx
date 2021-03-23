@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
@@ -46,9 +47,15 @@ interface TabPanelProps {
   index: any
   value: any
 }
-interface ArtDetailParams {
-  artID: number
-}
+
+const USER_LIKING_CONTENTS = gql`
+  query UserLikingContents($email: String!) {
+    userLikingContents(email: $email) {
+      likingArtsCount
+      likingArtistsCount
+    }
+  }
+`
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
@@ -77,7 +84,7 @@ function a11yProps(index: any) {
   }
 }
 
-const Account: FC<ArtDetailParams> = ({ artID }) => {
+const Account: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const [value, setValue] = useState<number>(0)
@@ -87,23 +94,20 @@ const Account: FC<ArtDetailParams> = ({ artID }) => {
     window.history.back()
   }
 
-  //   const { data } = useQuery(ART, {
-  //     variables: {
-  //       artId: artID,
-  //     },
-  //     onError: (error) => {
-  //       console.error(error.message)
-  //     },
-  //   })
+  const { data } = useQuery(USER_LIKING_CONTENTS, {
+    variables: {
+      email: currentUser.username,
+    },
+    onError: (error) => {
+      console.error(error.message)
+    },
+  })
 
-  //   if (!data) {
-  //     return null
-  //   }
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
 
+  console.log(data)
   return (
     <main className={classes.container}>
       <Typography className={classes.userName} variant="h6">
@@ -114,7 +118,7 @@ const Account: FC<ArtDetailParams> = ({ artID }) => {
         indicatorColor="primary"
         textColor="primary"
         value={value}
-        onChange={handleChange}
+        onChange={handleChangeTab}
         aria-label="내 계정 탭"
       >
         <Tab label="좋아요" {...a11yProps(0)} />
