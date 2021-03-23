@@ -19,7 +19,7 @@ import { Medium, SaleStatus, Orientation, ArtOptions } from '../../types'
 import { ART_OPTIONS } from '../../querys'
 import { useCurrentUser } from '../../Hooks/User'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   centerArea: {
     minHeight: '100vh',
     maxWidth: '550px',
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   errorMessage: {
     color: 'red',
   },
-}))
+})
 
 const REGISTER_ART_MUTATION = gql`
   mutation RegisterArt(

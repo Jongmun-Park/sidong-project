@@ -1,11 +1,10 @@
 import React, { FC, useState } from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
+import LikeContents from '../Components/User/LikesContents'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   container: {
     '@media (min-width: 1024px)': {
       margin: '0 auto 0 auto',
@@ -34,28 +33,19 @@ const useStyles = makeStyles((theme) => ({
   tabPanel: {
     width: '100%',
     '& .MuiBox-root': {
-      padding: '48px 60px 48px 60px',
+      padding: '20px 50px 20px 50px',
       '@media (max-width: 823px)': {
-        padding: '30px 15px 30px 15px',
+        padding: '15px',
       },
     },
   },
-}))
+})
 
 interface TabPanelProps {
   children?: React.ReactNode
   index: any
   value: any
 }
-
-const USER_LIKING_CONTENTS = gql`
-  query UserLikingContents($email: String!) {
-    userLikingContents(email: $email) {
-      likingArtsCount
-      likingArtistsCount
-    }
-  }
-`
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
@@ -94,20 +84,10 @@ const Account: FC = () => {
     window.history.back()
   }
 
-  const { data } = useQuery(USER_LIKING_CONTENTS, {
-    variables: {
-      email: currentUser.username,
-    },
-    onError: (error) => {
-      console.error(error.message)
-    },
-  })
-
   const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
 
-  console.log(data)
   return (
     <main className={classes.container}>
       <Typography className={classes.userName} variant="h6">
@@ -126,7 +106,7 @@ const Account: FC = () => {
       </Tabs>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={0}>
-          Item One
+          <LikeContents email={currentUser.username} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two

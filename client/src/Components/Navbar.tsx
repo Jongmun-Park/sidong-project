@@ -2,7 +2,6 @@ import React, { FC, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { Button, Menu, MenuItem, IconButton } from '@material-ui/core'
-
 import SignUp from './User/SignUp'
 import Login from './User/Login'
 import { useCurrentUser } from '../Hooks/User'
