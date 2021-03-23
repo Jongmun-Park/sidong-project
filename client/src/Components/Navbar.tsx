@@ -70,6 +70,10 @@ function redirectToRegisterArtPage() {
   window.location.href = '/art/register'
 }
 
+function redirectToAccountPage() {
+  window.location.href = '/account'
+}
+
 const NavBar: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
@@ -129,7 +133,7 @@ const NavBar: FC = () => {
             >
               {currentUser ? (
                 <div>
-                  <MenuItem onClick={handleCloseAccountMenu}>프로필</MenuItem>
+                  <MenuItem onClick={redirectToAccountPage}>내 계정</MenuItem>
                   {currentUser.artist ? (
                     <MenuItem onClick={redirectToRegisterArtPage}>작품 등록</MenuItem>
                   ) : (
