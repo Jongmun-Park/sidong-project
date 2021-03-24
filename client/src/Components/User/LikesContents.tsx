@@ -108,7 +108,7 @@ const LikesContents: FC = () => {
         lastLikeId,
       },
       updateQuery: (previousResult: any, { fetchMoreResult }) => {
-        const previousArts = previousResult.userLikingArts
+        const previousUserLikingArts = previousResult.userLikingArts
         const newArts = fetchMoreResult.userLikingArts.arts
         const newLastLikeId = fetchMoreResult.userLikingArts.lastLikeId
 
@@ -116,7 +116,6 @@ const LikesContents: FC = () => {
           alert('더 불러올 작품이 없습니다.')
           setNoMoreLikingArts(true)
         } else {
-          // setLikingArts([...likingArts, ...newArts])
           setLastLikeId(newLastLikeId)
         }
 
@@ -125,8 +124,8 @@ const LikesContents: FC = () => {
               userLikingArts: {
                 id: userId,
                 lastLikeId: newLastLikeId,
-                arts: [...previousArts.arts, ...newArts],
-                __typename: previousArts.__typename,
+                arts: [...previousUserLikingArts.arts, ...newArts],
+                __typename: previousUserLikingArts.__typename,
               },
             }
           : previousResult
