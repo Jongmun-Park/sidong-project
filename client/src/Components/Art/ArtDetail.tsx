@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 1024px)': {
       marginLeft: '40px',
     },
+    width: '88%',
+    margin: 'auto',
     color: theme.palette.lightBlack.main,
   },
   rightBoxHeader: {
