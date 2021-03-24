@@ -7,7 +7,7 @@ import { Artist } from '../../types'
 const useStyles = makeStyles((theme) => ({
   table: {
     '@media (min-width: 823px)': {
-      marginLeft: '50px',
+      marginLeft: '82px',
     },
   },
   th: {

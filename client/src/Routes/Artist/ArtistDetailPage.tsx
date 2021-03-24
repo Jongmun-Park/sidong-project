@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignContent: 'flex-start',
     flexWrap: 'wrap',
-    maxWidth: '1192px',
+    maxWidth: '1213px',
     minHeight: '100vh',
     padding: '45px 40px 100px 40px',
     backgroundColor: 'white',
@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 823px)': {
       flex: '0 0 20%',
       maxWidth: '20%',
-      marginTop: '11px',
     },
     width: '100%',
     minHeight: '160px',

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     display: 'flex',
     flexWrap: 'wrap',
-    maxWidth: '1192px',
+    maxWidth: '1213px',
     minHeight: '100vh',
     backgroundColor: 'white',
   },
