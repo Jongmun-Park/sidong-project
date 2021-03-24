@@ -159,9 +159,7 @@ const ArtistDetailPage: FC = () => {
     variables: {
       artistId: artistId,
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   useQuery(ARTS_BY_ARTIST, {
@@ -175,9 +173,7 @@ const ArtistDetailPage: FC = () => {
         setLastArtId(artsByArtist[artsByArtist.length - 1].id)
       }
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   const [loadMoreArts] = useLazyQuery(ARTS_BY_ARTIST, {
@@ -191,9 +187,7 @@ const ArtistDetailPage: FC = () => {
         setLastArtId(fetchedArts[fetchedArts.length - 1].id)
       }
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   if (!data) {

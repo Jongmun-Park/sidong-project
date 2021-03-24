@@ -60,7 +60,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -106,7 +106,7 @@ const Account: FC = () => {
       </Tabs>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={0}>
-          <LikeContents email={currentUser.username} />
+          <LikeContents userId={currentUser.id} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two

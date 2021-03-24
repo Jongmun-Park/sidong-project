@@ -124,9 +124,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
     variables: {
       artId: artID,
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   if (!data) {

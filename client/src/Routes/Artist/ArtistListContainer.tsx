@@ -39,9 +39,7 @@ const ArtistList: FC = () => {
       setArtists(artists)
       setLastArtistId(artists[artists.length - 1].id)
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   const [loadMoreArtist] = useLazyQuery(ARTISTS, {
@@ -55,9 +53,7 @@ const ArtistList: FC = () => {
         setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
       }
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   const [filterArtists] = useLazyQuery(ARTISTS, {
@@ -68,9 +64,7 @@ const ArtistList: FC = () => {
         setLastArtistId(filteredArtists[filteredArtists.length - 1].id)
       }
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   useEffect(() => {

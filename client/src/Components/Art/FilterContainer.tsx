@@ -111,9 +111,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
     onCompleted: (data) => {
       setArtOptions(data.artOptions)
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   const handlePriceRange = (event: any, newValue: number | number[]) => {

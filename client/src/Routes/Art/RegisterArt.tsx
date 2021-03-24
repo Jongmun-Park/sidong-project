@@ -132,18 +132,14 @@ const RegisterArt: FC = () => {
     onCompleted: (data) => {
       setArtOptions(data.artOptions)
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
       setArtOptions(data.artOptions)
     },
-    onError: (error) => {
-      console.error(error.message)
-    },
+    onError: (error) => console.error(error.message),
   })
 
   if (!artOptionData) {
