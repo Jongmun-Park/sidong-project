@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+import { useCurrentUser } from '../../Hooks/User'
 import { MemoizedPoster } from '../Art/Poster'
 
 const useStyles = makeStyles((theme) => ({
@@ -37,10 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface LikesContentsProps {
-  userId: number | null
-}
-
 const USER_LIKES_COUNT = gql`
   query UserLikesCount($userId: ID!) {
     user(id: $userId) {
@@ -54,6 +51,7 @@ const USER_LIKES_COUNT = gql`
 const USER_LIKING_ARTS = gql`
   query UserLikingArts($userId: ID!, $lastLikeId: ID) {
     userLikingArts(userId: $userId, lastLikeId: $lastLikeId) {
+      id
       lastLikeId
       arts {
         id
@@ -72,8 +70,10 @@ const USER_LIKING_ARTS = gql`
   }
 `
 
-const LikesContents: FC<LikesContentsProps> = ({ userId }) => {
+const LikesContents: FC = () => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
+  const userId = currentUser.id
   const [contentType, setContentType] = useState<string>('art')
   const [likingArts, setLikingArts] = useState<Array<any>>([])
   const [noMoreLikingArts, setNoMoreLikingArts] = useState<boolean>(false)
@@ -112,7 +112,7 @@ const LikesContents: FC<LikesContentsProps> = ({ userId }) => {
         lastLikeId,
       },
       updateQuery: (previousResult: any, { fetchMoreResult }) => {
-        const previousArts = previousResult.userLikingArts.arts
+        const previousArts = previousResult.userLikingArts
         const newArts = fetchMoreResult.userLikingArts.arts
         const newLastLikeId = fetchMoreResult.userLikingArts.lastLikeId
 
@@ -120,19 +120,20 @@ const LikesContents: FC<LikesContentsProps> = ({ userId }) => {
           alert('더 불러올 작품이 없습니다.')
           setNoMoreLikingArts(true)
         } else {
-          setLikingArts([...likingArts, ...newArts])
+          // setLikingArts([...likingArts, ...newArts])
           setLastLikeId(newLastLikeId)
         }
 
-        // return newArts.length
-        //   ? {
-        //       userLikingArts: {
-        //         lastLikeId: newLastLikeId,
-        //         arts: [...previousArts, ...newArts],
-        //         __typename: previousArts.__typename,
-        //       },
-        //     }
-        //   : previousResult
+        return newArts.length
+          ? {
+              userLikingArts: {
+                id: userId,
+                lastLikeId: newLastLikeId,
+                arts: [...previousArts.arts, ...newArts],
+                __typename: previousArts.__typename,
+              },
+            }
+          : previousResult
       },
     })
   }

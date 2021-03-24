@@ -106,7 +106,7 @@ const Account: FC = () => {
       </Tabs>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={0}>
-          <LikeContents userId={currentUser.id} />
+          <LikeContents />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
