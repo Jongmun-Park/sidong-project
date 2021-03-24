@@ -75,27 +75,24 @@ const LikesContents: FC = () => {
   const currentUser = useCurrentUser()
   const userId = currentUser.id
   const [contentType, setContentType] = useState<string>('art')
-  const [likingArts, setLikingArts] = useState<Array<any>>([])
   const [noMoreLikingArts, setNoMoreLikingArts] = useState<boolean>(false)
   const [lastLikeId, setLastLikeId] = useState<string | null>(null)
-  const { data } = useQuery(USER_LIKES_COUNT, {
+  const { data: countInfo } = useQuery(USER_LIKES_COUNT, {
     variables: {
       userId,
     },
     onError: (error) => console.error(error.message),
   })
 
-  const { fetchMore } = useQuery(USER_LIKING_ARTS, {
+  const { data: likingArts, fetchMore } = useQuery(USER_LIKING_ARTS, {
     variables: { userId, lastLikeId: null },
     onCompleted: (data) => {
-      console.log('first;', lastLikeId)
-      setLikingArts(data.userLikingArts.arts)
       setLastLikeId(data.userLikingArts.lastLikeId)
     },
     onError: (error) => console.error(error.message),
   })
 
-  if (!data) {
+  if (!countInfo) {
     return null
   }
 
@@ -104,7 +101,6 @@ const LikesContents: FC = () => {
       alert('더 불러올 작품이 없습니다.')
       return
     }
-    console.log('updateQuery:', lastLikeId)
     fetchMore({
       query: USER_LIKING_ARTS,
       variables: {
@@ -138,8 +134,6 @@ const LikesContents: FC = () => {
     })
   }
 
-  console.log('likingArts:', likingArts.length)
-
   return (
     <>
       <Button
@@ -148,7 +142,7 @@ const LikesContents: FC = () => {
           setContentType('art')
         }}
       >
-        작품({data.user.likingArtsCount})
+        작품({countInfo.user.likingArtsCount})
       </Button>
       <Button
         className={classes.button}
@@ -156,12 +150,12 @@ const LikesContents: FC = () => {
           setContentType('artist')
         }}
       >
-        작가({data.user.likingArtistsCount})
+        작가({countInfo.user.likingArtistsCount})
       </Button>
       {likingArts ? (
         <div className={classes.posterContainer}>
           <div className={classes.posters}>
-            {likingArts.map((art) => (
+            {likingArts.userLikingArts.arts.map((art: any) => (
               <MemoizedPoster
                 key={art.id}
                 id={art.id}
