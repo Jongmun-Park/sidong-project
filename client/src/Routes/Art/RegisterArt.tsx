@@ -374,10 +374,17 @@ const RegisterArt: FC = () => {
           </div>
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              작품 이미지
+              작품 사진
             </FormLabel>
-            <FormHelperText>- 최대 5개 선택 가능</FormHelperText>
-            <FormHelperText>- 첫 번째 미리보기 이미지가 대표 이미지로 사용됩니다.</FormHelperText>
+            <FormHelperText style={{ color: 'crimson' }}>
+              - 최대 5개의 이미지 파일 선택 가능
+            </FormHelperText>
+            <FormHelperText>- 각 파일 용량은 10MB까지</FormHelperText>
+            <FormHelperText>- 첫 번째 미리보기 사진이 대표 사진으로 사용됩니다.</FormHelperText>
+            <FormHelperText>
+              - 대표 사진과{' '}
+              <span style={{ color: 'crimson' }}>사진 순서는 등록 후 수정 가능합니다.</span>
+            </FormHelperText>
             <input
               className={classes.inputFile}
               type="file"
