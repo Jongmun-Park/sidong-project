@@ -15,7 +15,10 @@ class Router extends React.Component {
         <Switch>
           <Route exact path="/" component={ArtList} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/account" component={Account} />
           <Route exact path="/account/likes" component={Account} />
+          <Route exact path="/account/orders" component={Account} />
+          <Route exact path="/account/arts" component={Account} />
 
           <Route exact path="/arts" component={ArtList} />
           <Route exact path="/art/register" component={RegisterArt} />
@@ -25,7 +28,6 @@ class Router extends React.Component {
           <Route exact path="/artist/register" component={RegisterArtist} />
           <Route exact path="/artist/:artistId" component={ArtistDetailPage} />
 
-          <Redirect from="/account" to="/account/likes" />
           <Redirect from="*" to="/" />
         </Switch>
       </BrowserRouter>

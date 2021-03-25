@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, ChangeEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
@@ -77,14 +77,17 @@ function a11yProps(index: any) {
 const Account: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const [value, setValue] = useState<number>(0)
+  const isApprovedArtist = currentUser.artist?.isApproved
+  const pathName = window.location.pathname.split('/account/')[1]
+  const [value, setValue] = useState<string>(pathName ? pathName : 'likes')
 
   if (!currentUser) {
     alert('로그인이 필요합니다.')
-    window.history.back()
+    window.location.href = '/'
+    return null
   }
 
-  const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChangeTab = (e: ChangeEvent<{}>, newValue: string) => {
     setValue(newValue)
   }
 
@@ -101,16 +104,22 @@ const Account: FC = () => {
         onChange={handleChangeTab}
         aria-label="내 계정 탭"
       >
-        <Tab label="좋아요" {...a11yProps(0)} />
-        <Tab label="주문 관리" {...a11yProps(1)} />
+        <Tab label="좋아요" value={'likes'} {...a11yProps('likes')} />
+        <Tab label="주문 관리" value={'orders'} {...a11yProps('orders')} />
+        {isApprovedArtist && <Tab label="작품 관리" value={'arts'} {...a11yProps('arts')} />}
       </Tabs>
       <div className={classes.tabPanel}>
-        <TabPanel value={value} index={0}>
-          <LikeContents />
+        <TabPanel value={value} index={'likes'}>
+          {value === 'likes' && <LikeContents />}
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          준비 중입니다. 빠른 시일 내로 오픈 예정입니다!
+        <TabPanel value={value} index={'orders'}>
+          {value === 'orders' && <p>주문 관리</p>}
         </TabPanel>
+        {isApprovedArtist && (
+          <TabPanel value={value} index={'arts'}>
+            {value === 'arts' && <p>작품 관리</p>}
+          </TabPanel>
+        )}
       </div>
     </main>
   )
