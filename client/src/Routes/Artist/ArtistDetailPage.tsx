@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '32px',
     '@media (max-width: 823px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
-      gridGap: '15px',
+      gridGap: '12px',
     },
   },
   artSection: {

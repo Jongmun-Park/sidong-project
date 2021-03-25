@@ -109,7 +109,7 @@ const Account: FC = () => {
           <LikeContents />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          준비 중입니다. 빠른 시일 내로 오픈 예정입니다!
         </TabPanel>
       </div>
     </main>
