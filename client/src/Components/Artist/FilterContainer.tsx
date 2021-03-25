@@ -104,20 +104,20 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
         </Select>
       </List>
       <div className={classes.buttonWrapper}>
-        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
-          적용하기
-        </Button>
         {setOpenMobileFilter && (
           <Button
             onClick={() => setOpenMobileFilter(false)}
             className={classes.button}
-            style={{ marginLeft: '5px' }}
+            style={{ marginRight: '14px' }}
             variant="contained"
             size="small"
           >
             닫 기
           </Button>
         )}
+        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
+          적용하기
+        </Button>
       </div>
     </div>
   )

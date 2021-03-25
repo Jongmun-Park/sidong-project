@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
-import LikeContents from '../Components/User/LikesContents'
+import LikeContents from '../Components/User/LikingContents'
 
 const useStyles = makeStyles({
   container: {
