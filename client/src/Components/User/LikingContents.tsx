@@ -29,12 +29,11 @@ const USER_LIKES_COUNT = gql`
 const LikesContents: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const userId = currentUser.id
   const [contentType, setContentType] = useState<string>('art')
 
   const { data } = useQuery(USER_LIKES_COUNT, {
     variables: {
-      userId,
+      userId: currentUser.id,
     },
     onError: (error) => console.error(error.message),
   })
