@@ -133,7 +133,7 @@ const LikingArtists: FC = () => {
           </Button>
         </div>
       ) : (
-        <p style={{ padding: '15px' }}>좋아요한 작가가 없습니다.</p>
+        <p style={{ padding: '15px' }}>관심 작가가 없습니다.</p>
       )}
     </>
   )

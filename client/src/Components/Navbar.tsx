@@ -61,21 +61,10 @@ function logout() {
   window.location.reload()
 }
 
-function redirectToRegisterArtistPage() {
-  window.location.href = '/artist/register'
-}
-
-function redirectToRegisterArtPage() {
-  window.location.href = '/art/register'
-}
-
-function redirectToAccountPage() {
-  window.location.href = '/account'
-}
-
 const NavBar: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
+  const isApprovedArtist = currentUser?.artist?.isApproved
   const [openSignUp, setOpenSignUp] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -132,11 +121,23 @@ const NavBar: FC = () => {
             >
               {currentUser ? (
                 <div>
-                  <MenuItem onClick={redirectToAccountPage}>내 계정</MenuItem>
-                  {currentUser.artist ? (
-                    <MenuItem onClick={redirectToRegisterArtPage}>작품 등록</MenuItem>
+                  <MenuItem onClick={() => (window.location.href = '/account')}>내 계정</MenuItem>
+                  <MenuItem onClick={() => (window.location.href = '/account/likes')}>
+                    관심 목록
+                  </MenuItem>
+                  {isApprovedArtist ? (
+                    <>
+                      <MenuItem onClick={() => (window.location.href = '/art/register')}>
+                        작품 등록
+                      </MenuItem>
+                      <MenuItem onClick={() => (window.location.href = '/account/arts')}>
+                        작품 관리
+                      </MenuItem>
+                    </>
                   ) : (
-                    <MenuItem onClick={redirectToRegisterArtistPage}>작가 등록</MenuItem>
+                    <MenuItem onClick={() => (window.location.href = '/artist/register')}>
+                      작가 등록
+                    </MenuItem>
                   )}
                   <MenuItem onClick={logout}>로그아웃</MenuItem>
                 </div>

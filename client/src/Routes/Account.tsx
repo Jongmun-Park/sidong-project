@@ -77,7 +77,7 @@ function a11yProps(index: any) {
 const Account: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const isApprovedArtist = currentUser.artist?.isApproved
+  const isApprovedArtist = currentUser?.artist?.isApproved
   const pathName = window.location.pathname.split('/account/')[1]
   const [value, setValue] = useState<string>(pathName ? pathName : 'likes')
 
@@ -104,7 +104,7 @@ const Account: FC = () => {
         onChange={handleChangeTab}
         aria-label="내 계정 탭"
       >
-        <Tab label="좋아요" value={'likes'} {...a11yProps('likes')} />
+        <Tab label="관심 목록" value={'likes'} {...a11yProps('likes')} />
         <Tab label="주문 관리" value={'orders'} {...a11yProps('orders')} />
         {isApprovedArtist && <Tab label="작품 관리" value={'arts'} {...a11yProps('arts')} />}
       </Tabs>
