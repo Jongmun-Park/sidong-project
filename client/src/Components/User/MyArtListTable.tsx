@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    cursor: 'pointer',
   },
 })
 
@@ -110,7 +111,12 @@ const MyArtListTable: FC = () => {
                   <TableRow hover tabIndex={-1} key={art.id}>
                     <TableCell align="center">{art.id}</TableCell>
                     <TableCell align="center">{art.createdAt}</TableCell>
-                    <TableCell className={classes.artName}>{art.name}</TableCell>
+                    <TableCell
+                      onClick={() => window.open(`/art/${art.id}`)}
+                      className={classes.artName}
+                    >
+                      {art.name}
+                    </TableCell>
                     <TableCell align="center">{currencyFormatter(art.price)}</TableCell>
                     <TableCell align="center">{translateSaleStatus(art.saleStatus)}</TableCell>
                     <TableCell align="center">

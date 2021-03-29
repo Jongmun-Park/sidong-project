@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import About from '../Routes/About'
 import Account from '../Routes/Account'
 import ArtList from '../Routes/Art/ArtListContainer'
+import ArtDetailPage from '../Routes/Art/ArtDetailPage'
 import RegisterArt from '../Routes/Art/RegisterArt'
 import ArtistList from '../Routes/Artist/ArtistListContainer'
 import ArtistDetailPage from '../Routes/Artist/ArtistDetailPage'
@@ -22,7 +23,7 @@ class Router extends React.Component {
 
           <Route exact path="/arts" component={ArtList} />
           <Route exact path="/art/register" component={RegisterArt} />
-          {/* <Route exact path="/art/:artID" component={ArtDetailPage} /> */}
+          <Route exact path="/art/:artID" component={ArtDetailPage} />
 
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/artist/register" component={RegisterArtist} />
