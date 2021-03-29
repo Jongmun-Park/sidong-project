@@ -84,7 +84,7 @@ interface TabPanelProps {
   value: any
 }
 interface ArtDetailParams {
-  artID: number
+  artId: number
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -114,13 +114,13 @@ function a11yProps(index: any) {
   }
 }
 
-const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
+const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
   const [value, setValue] = useState<number>(0)
 
   const { data } = useQuery(ART, {
     variables: {
-      artId: artID,
+      artId,
     },
     onError: (error) => console.error(error.message),
   })
@@ -159,7 +159,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artID }) => {
               {art.name}
             </Typography>
             <span className={classes.like}>
-              <Like artId={artID} />
+              <Like artId={artId} />
             </span>
           </div>
           <ArtInfoTable art={art} />

@@ -158,7 +158,7 @@ const Poster: FC<ArtPosterProps> = ({
           )}
         </div>
       </Paper>
-      <ArtDialog openDialog={openDialog} setOpenDialog={setOpenDialog} artID={id} artName={name} />
+      <ArtDialog openDialog={openDialog} setOpenDialog={setOpenDialog} artId={id} artName={name} />
     </div>
   )
 }

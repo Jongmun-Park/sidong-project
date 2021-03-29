@@ -120,7 +120,12 @@ const MyArtListTable: FC = () => {
                     <TableCell align="center">{currencyFormatter(art.price)}</TableCell>
                     <TableCell align="center">{translateSaleStatus(art.saleStatus)}</TableCell>
                     <TableCell align="center">
-                      <IconButton size="small" onClick={() => {}}>
+                      <IconButton
+                        size="small"
+                        onClick={() => {
+                          window.location.href = `/art/update/${art.id}`
+                        }}
+                      >
                         <Edit />
                       </IconButton>
                     </TableCell>

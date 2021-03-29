@@ -1,5 +1,6 @@
-import React, { FC, ChangeEvent, useState } from 'react'
+import React, { FC, ChangeEvent, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 import {
   TextField,
   Button,
@@ -15,8 +16,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreviewList } from '../../utils'
-import { Medium, SaleStatus, Orientation, ArtOptions } from '../../types'
-import { ART_OPTIONS } from '../../querys'
+import { Medium, SaleStatus, Orientation, ArtOptions, Art } from '../../types'
+import { ART_OPTIONS, ART } from '../../querys'
 import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles({
@@ -115,19 +116,28 @@ const REGISTER_ART_MUTATION = gql`
   }
 `
 
-const RegisterArt: FC = () => {
+const UpdateArt: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
+  const { artId } = useParams<{ artId: string }>()
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
+  const [theme, setTheme] = useState<string | undefined>()
+  const [style, setStyle] = useState<string | undefined>()
+  const [technique, setTechnique] = useState<string | undefined>()
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
   const [registerArt] = useMutation(REGISTER_ART_MUTATION)
   const { register, handleSubmit, errors } = useForm()
 
-  const { data: artOptionData } = useQuery(ART_OPTIONS, {
+  const { data } = useQuery(ART, {
+    variables: { artId },
+    onError: (error) => console.error(error.message),
+  })
+
+  useQuery(ART_OPTIONS, {
     variables: {
-      mediumId: Medium.PAINTING,
+      mediumId: data?.art.medium,
     },
     onCompleted: (data) => {
       setArtOptions(data.artOptions)
@@ -142,9 +152,22 @@ const RegisterArt: FC = () => {
     onError: (error) => console.error(error.message),
   })
 
-  if (!artOptionData) {
+  useEffect(() => {
+    if (data) {
+      const { art } = data
+      setTheme(art.theme.id)
+      setStyle(art.style.id)
+      setTechnique(art.technique.id)
+      setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
+    }
+  }, [data])
+
+  if (!data) {
     return null
   }
+
+  const { art }: { art: Art } = data
+  console.log('art:', art)
 
   const onSubmit = async (data: any) => {
     const registerResult = await registerArt({
@@ -165,7 +188,7 @@ const RegisterArt: FC = () => {
       },
     })
     if (registerResult.data.createArt.success) {
-      alert('작품 등록이 완료됐습니다. 감사합니다.')
+      alert('작품 수정이 완료됐습니다. 감사합니다.')
       window.location.href = '/account/arts'
     } else {
       alert(registerResult.data.createArt.msg)
@@ -199,7 +222,7 @@ const RegisterArt: FC = () => {
   return (
     <div className={classes.centerArea}>
       <div className={classes.inputContainer}>
-        <h3>&ensp;작품 등록</h3>
+        <h3>&ensp;작품 수정</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             className={classes.textBox}
@@ -208,6 +231,7 @@ const RegisterArt: FC = () => {
             label="작품명"
             variant="outlined"
             required={true}
+            value={art.name}
             inputRef={register({
               maxLength: {
                 value: 128,
@@ -223,7 +247,7 @@ const RegisterArt: FC = () => {
             name="description"
             variant="outlined"
             rows={7}
-            defaultValue=""
+            defaultValue={art.description}
             helperText="작품에 대해 설명해주세요. 자세할수록 좋습니다. :)"
             inputRef={register}
           />
@@ -232,7 +256,12 @@ const RegisterArt: FC = () => {
               매체 (medium)
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="medium" ref={register} onChange={handleChange}>
+              <select
+                name="medium"
+                ref={register}
+                onChange={handleChange}
+                defaultValue={art.medium}
+              >
                 <option value={Medium.PAINTING}>회화(painting)</option>
                 <option value={Medium.SCULPTURE}>조각(sculpture)</option>
                 <option value={Medium.DRAWING}>소묘(drawing)</option>
@@ -248,7 +277,14 @@ const RegisterArt: FC = () => {
               주제 (theme)
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="theme" ref={register}>
+              <select
+                name="theme"
+                ref={register}
+                value={theme}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  setTheme(e.target.value)
+                }}
+              >
                 {artOptions?.themes.map((theme) => (
                   <option key={theme.id} value={theme.id}>
                     {theme.name}
@@ -262,7 +298,14 @@ const RegisterArt: FC = () => {
               스타일 (style)
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="style" ref={register}>
+              <select
+                name="style"
+                ref={register}
+                value={style}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  setStyle(e.target.value)
+                }}
+              >
                 {artOptions?.styles.map((style) => (
                   <option key={style.id} value={style.id}>
                     {style.name}
@@ -276,7 +319,14 @@ const RegisterArt: FC = () => {
               기법 (technique)
             </FormLabel>
             <div className={classes.inputElement}>
-              <select name="technique" ref={register}>
+              <select
+                name="technique"
+                ref={register}
+                value={technique}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  setTechnique(e.target.value)
+                }}
+              >
                 {artOptions?.techniques.map((technique) => (
                   <option key={technique.id} value={technique.id}>
                     {technique.name}
@@ -289,7 +339,11 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               판매 여부
             </FormLabel>
-            <RadioGroup name="saleStatus" defaultValue="0" onChange={handleSaleStatus}>
+            <RadioGroup
+              name="saleStatus"
+              defaultValue={art.saleStatus.toString()}
+              onChange={handleSaleStatus}
+            >
               <FormControlLabel value="0" control={<Radio inputRef={register} />} label="비매품" />
               <FormControlLabel value="1" control={<Radio inputRef={register} />} label="판매품" />
             </RadioGroup>
@@ -432,4 +486,4 @@ const RegisterArt: FC = () => {
   )
 }
 
-export default RegisterArt
+export default UpdateArt

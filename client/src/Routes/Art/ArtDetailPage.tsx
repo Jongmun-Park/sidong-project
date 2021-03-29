@@ -19,16 +19,16 @@ const useStyles = makeStyles({
 })
 
 interface ArtDetailPageParams {
-  artID: string
+  artId: string
 }
 
 const ArtDetailPage: FC = () => {
   const classes = useStyles()
-  const { artID } = useParams<ArtDetailPageParams>()
+  const { artId } = useParams<ArtDetailPageParams>()
 
   return (
     <div className={classes.artDetailPage}>
-      <ArtDetail artID={Number(artID)} />
+      <ArtDetail artId={Number(artId)} />
     </div>
   )
 }

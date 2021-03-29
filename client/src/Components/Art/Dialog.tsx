@@ -42,11 +42,11 @@ const useStyles = makeStyles({
 interface ArtDialogProps {
   openDialog: boolean
   setOpenDialog: (arg0: boolean) => void
-  artID: number
+  artId: number
   artName: string
 }
 
-const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artID, artName }) => {
+const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artId, artName }) => {
   const classes = useStyles()
   const handleClose = () => {
     setOpenDialog(false)
@@ -67,7 +67,7 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artID, artNa
         </IconButton>
       </DialogTitle>
       <DialogContent dividers={true}>
-        <ArtDetail artID={artID} />
+        <ArtDetail artId={artId} />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
