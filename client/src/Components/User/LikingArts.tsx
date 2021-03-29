@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    margin: '23px 0px 35px 0px',
+    margin: '20px 0px 35px 0px',
     '@media (max-width: 823px)': {
       margin: '11px 0px 25px 0px',
     },

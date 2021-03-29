@@ -11,16 +11,28 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  IconButton,
 } from '@material-ui/core'
+import { Edit, Delete } from '@material-ui/icons'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { Art } from '../../types'
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    marginTop: '20px',
+    '@media (max-width: 823px)': {
+      marginTop: '10px',
+    },
   },
   container: {
-    maxHeight: 440,
+    maxHeight: '470px',
+  },
+  artName: {
+    maxWidth: '160px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 })
 
@@ -68,11 +80,27 @@ const MyArtListTable: FC = () => {
         <Table aria-label="나의 작품 목록" size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">등록일</TableCell>
-              <TableCell align="center">작품명</TableCell>
-              <TableCell align="center">가격</TableCell>
-              <TableCell align="center">판매 상태</TableCell>
+              <TableCell align="center" style={{ width: '7%' }}>
+                ID
+              </TableCell>
+              <TableCell align="center" style={{ width: '14%' }}>
+                등록일
+              </TableCell>
+              <TableCell align="center" style={{ width: '40%', maxWidth: '160px' }}>
+                작품명
+              </TableCell>
+              <TableCell align="center" style={{ width: '14%' }}>
+                가격
+              </TableCell>
+              <TableCell align="center" style={{ width: '11%' }}>
+                상태
+              </TableCell>
+              <TableCell align="center" style={{ width: '7%' }}>
+                수정
+              </TableCell>
+              <TableCell align="center" style={{ width: '7%' }}>
+                삭제
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -80,11 +108,21 @@ const MyArtListTable: FC = () => {
               arts.map((art: Art) => {
                 return (
                   <TableRow hover tabIndex={-1} key={art.id}>
-                    <TableCell>{art.id}</TableCell>
-                    <TableCell>{art.createdAt}</TableCell>
-                    <TableCell>{art.name}</TableCell>
-                    <TableCell>{currencyFormatter(art.price)}</TableCell>
-                    <TableCell>{translateSaleStatus(art.saleStatus)}</TableCell>
+                    <TableCell align="center">{art.id}</TableCell>
+                    <TableCell align="center">{art.createdAt}</TableCell>
+                    <TableCell className={classes.artName}>{art.name}</TableCell>
+                    <TableCell align="center">{currencyFormatter(art.price)}</TableCell>
+                    <TableCell align="center">{translateSaleStatus(art.saleStatus)}</TableCell>
+                    <TableCell align="center">
+                      <IconButton size="small" onClick={() => {}}>
+                        <Edit />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="center">
+                      <IconButton size="small" onClick={() => {}}>
+                        <Delete />
+                      </IconButton>
+                    </TableCell>
                   </TableRow>
                 )
               })}

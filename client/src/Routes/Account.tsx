@@ -106,7 +106,7 @@ const Account: FC = () => {
         aria-label="내 계정 탭"
       >
         <Tab label="관심 목록" value={'likes'} {...a11yProps('likes')} />
-        <Tab label="주문 관리" value={'orders'} {...a11yProps('orders')} />
+        <Tab label="주문 내역" value={'orders'} {...a11yProps('orders')} />
         {isApprovedArtist && <Tab label="작품 관리" value={'arts'} {...a11yProps('arts')} />}
       </Tabs>
       <div className={classes.tabPanel}>
@@ -114,7 +114,7 @@ const Account: FC = () => {
           {value === 'likes' && <LikeContents />}
         </TabPanel>
         <TabPanel value={value} index={'orders'}>
-          {value === 'orders' && <p>주문 관리</p>}
+          {value === 'orders' && <p>주문 내역</p>}
         </TabPanel>
         {isApprovedArtist && (
           <TabPanel value={value} index={'arts'}>
