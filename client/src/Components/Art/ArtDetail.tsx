@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
   rightBoxHeader: {
     display: 'flex',
     justifyContent: 'space-between',
+    margin: '5px 0 25px 0',
+    maxWidth: '300px',
   },
   leftBox: {
     maxWidth: '530px',
@@ -53,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   artName: {
     fontWeight: 600,
-    margin: '5px 0 25px 0',
+    maxWidth: '267px',
     '@media (max-width: 823px)': {
       fontSize: '18px',
     },
@@ -67,10 +69,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '6px',
   },
   like: {
-    '@media (min-width: 823px)': {
-      position: 'relative',
-      right: '30px',
-    },
     float: 'right',
     cursor: 'pointer',
     alignSelf: 'center',
