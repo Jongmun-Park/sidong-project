@@ -159,6 +159,7 @@ const UpdateArt: FC = () => {
       setStyle(art.style.id)
       setTechnique(art.technique.id)
       setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
+      setIsFramed(art.isFramed)
     }
   }, [data])
 
@@ -373,6 +374,7 @@ const UpdateArt: FC = () => {
                   name="price"
                   min="10000"
                   max="5000000"
+                  defaultValue={art.price}
                   ref={register({
                     validate: {
                       positive: (value) => value > 0 || '판매 가격을 입력해주세요.',
@@ -390,7 +392,12 @@ const UpdateArt: FC = () => {
             </FormLabel>
             <FormHelperText>- 가로/세로 최대 길이는 500cm</FormHelperText>
             <div className={classes.inputElement}>
-              <select name="orientation" required={true} ref={register}>
+              <select
+                name="orientation"
+                required={true}
+                ref={register}
+                defaultValue={art.orientation}
+              >
                 <option value={Orientation.LANDSCAPE}>가로가 긴 배치</option>
                 <option value={Orientation.PORTRAIT}>세로가 긴 배치</option>
                 <option value={Orientation.SQUARE}>정사각형</option>
@@ -406,6 +413,7 @@ const UpdateArt: FC = () => {
                 required={true}
                 min="1"
                 max="500"
+                defaultValue={art.width}
               ></input>
               &nbsp;cm
             </div>
@@ -418,6 +426,7 @@ const UpdateArt: FC = () => {
                 required={true}
                 min="1"
                 max="500"
+                defaultValue={art.height}
               ></input>
               &nbsp;cm
             </div>

@@ -27,6 +27,7 @@ export interface Art {
   name: string
   description: string
   medium: Medium
+  orientation: Orientation
   theme: {
     id: number
     name: string

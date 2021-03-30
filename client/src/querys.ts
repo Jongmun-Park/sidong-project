@@ -45,6 +45,7 @@ export const ART = gql`
       }
       saleStatus
       isFramed
+      orientation
       price
       width
       height
