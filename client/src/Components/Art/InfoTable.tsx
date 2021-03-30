@@ -44,7 +44,7 @@ const ArtInfoTable: FC<ArtInfoTableProps> = ({ art }) => {
             className={classes.td}
             style={{ cursor: 'pointer' }}
           >
-            {art.artist.realName}
+            {art.artist.realName} ({art.artist.artistName})
           </TableCell>
         </TableRow>
         <TableRow>

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import {
   Paper,
@@ -52,13 +52,24 @@ const CURRENT_USER_ARTS = gql`
   }
 `
 
+const DELETE_ART = gql`
+  mutation DeleteArt($artId: ID!) {
+    deleteArt(artId: $artId) {
+      success
+      msg
+    }
+  }
+`
+
 const MyArtListTable: FC = () => {
   const classes = useStyles()
   const [page, setPage] = useState<number>(0)
   const [totalCount, setTotalCount] = useState<number>(30)
   const [arts, setArts] = useState<Array<Art> | null>(null)
 
+  const [deleteArt] = useMutation(DELETE_ART)
   const { data, refetch } = useQuery(CURRENT_USER_ARTS, {
+    notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
       setArts(data.currentUserArtsOffsetBased.arts)
       setTotalCount(data.currentUserArtsOffsetBased.totalCount)
@@ -73,6 +84,20 @@ const MyArtListTable: FC = () => {
   const handleChangePage = (e: unknown, newPage: number) => {
     refetch({ page: newPage })
     setPage(newPage)
+  }
+
+  const handleDeleteButton = async (artId: number) => {
+    if (window.confirm('정말로 삭제하시겠습니까?')) {
+      const result = await deleteArt({
+        variables: { artId },
+      })
+      if (result.data.deleteArt.success) {
+        alert('작품 삭제가 완료됐습니다.')
+        refetch({ page })
+      } else {
+        alert(result.data.deleteArt.msg)
+      }
+    }
   }
 
   return (
@@ -130,7 +155,7 @@ const MyArtListTable: FC = () => {
                       </IconButton>
                     </TableCell>
                     <TableCell align="center">
-                      <IconButton size="small" onClick={() => {}}>
+                      <IconButton size="small" onClick={() => handleDeleteButton(art.id)}>
                         <Delete />
                       </IconButton>
                     </TableCell>

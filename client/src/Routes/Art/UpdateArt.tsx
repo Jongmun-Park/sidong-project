@@ -197,7 +197,7 @@ const UpdateArt: FC = () => {
       },
     })
     if (result.data.updateArt.success) {
-      alert('작품 수정이 완료됐습니다. 감사합니다.')
+      alert('작품 수정이 완료됐습니다.')
       window.location.href = '/account/arts'
     } else {
       alert(result.data.updateArt.msg)
