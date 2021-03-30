@@ -1,6 +1,9 @@
 import React, { FC, ChangeEvent, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   TextField,
   Button,
@@ -12,13 +15,9 @@ import {
   Switch,
   FormHelperText,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import gql from 'graphql-tag'
-import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
-import { handleImagePreviewList } from '../../utils'
 import { Medium, SaleStatus, Orientation, ArtOptions, Art } from '../../types'
 import { ART_OPTIONS, ART } from '../../querys'
-import { useCurrentUser } from '../../Hooks/User'
+import { ArrowUpward, ArrowDownward } from '@material-ui/icons'
 
 const useStyles = makeStyles({
   centerArea: {
@@ -62,14 +61,13 @@ const useStyles = makeStyles({
     marginTop: '30px',
   },
   paper: {
-    maxWidth: 'inherit',
-    maxHeight: 'inherit',
+    display: 'flex',
     margin: '15px auto auto auto',
   },
   imagePreview: {
     display: 'block',
-    margin: 'auto',
-    width: '100%',
+    margin: '9px',
+    width: '87%',
     maxHeight: '370px',
     objectFit: 'contain',
     borderRadius: '4px',
@@ -77,11 +75,18 @@ const useStyles = makeStyles({
   errorMessage: {
     color: 'red',
   },
+  arrowDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    marginRight: '9px',
+  },
 })
 
-const REGISTER_ART_MUTATION = gql`
-  mutation RegisterArt(
-    $artImages: Upload!
+const UPDATE_ART_MUTATION = gql`
+  mutation UpdateArt(
+    $artId: ID!
+    $artImages: [ID]!
     $description: String!
     $height: Int!
     $isFramed: Boolean!
@@ -95,7 +100,8 @@ const REGISTER_ART_MUTATION = gql`
     $theme: ID!
     $width: Int!
   ) {
-    createArt(
+    updateArt(
+      artId: $artId
       artImages: $artImages
       description: $description
       height: $height
@@ -118,7 +124,6 @@ const REGISTER_ART_MUTATION = gql`
 
 const UpdateArt: FC = () => {
   const classes = useStyles()
-  const currentUser = useCurrentUser()
   const { artId } = useParams<{ artId: string }>()
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
@@ -126,8 +131,8 @@ const UpdateArt: FC = () => {
   const [style, setStyle] = useState<string | undefined>()
   const [technique, setTechnique] = useState<string | undefined>()
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
-  const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
-  const [registerArt] = useMutation(REGISTER_ART_MUTATION)
+  const [imagePreviewList, setImagePreviewList] = useState<Array<any>>([])
+  const [updateArt] = useMutation(UPDATE_ART_MUTATION)
   const { register, handleSubmit, errors } = useForm()
 
   const { data } = useQuery(ART, {
@@ -160,6 +165,7 @@ const UpdateArt: FC = () => {
       setTechnique(art.technique.id)
       setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
       setIsFramed(art.isFramed)
+      setImagePreviewList(art.imageUrls)
     }
   }, [data])
 
@@ -168,12 +174,14 @@ const UpdateArt: FC = () => {
   }
 
   const { art }: { art: Art } = data
-  console.log('art:', art)
 
   const onSubmit = async (data: any) => {
-    const registerResult = await registerArt({
+    const result = await updateArt({
       variables: {
-        artImages: data.artImages,
+        artId,
+        artImages: imagePreviewList.map((image) => {
+          return image.id
+        }),
         description: data.description,
         height: data.height,
         isFramed: data.isFramed,
@@ -188,11 +196,11 @@ const UpdateArt: FC = () => {
         width: data.width,
       },
     })
-    if (registerResult.data.createArt.success) {
+    if (result.data.updateArt.success) {
       alert('작품 수정이 완료됐습니다. 감사합니다.')
       window.location.href = '/account/arts'
     } else {
-      alert(registerResult.data.createArt.msg)
+      alert(result.data.updateArt.msg)
     }
   }
 
@@ -232,7 +240,7 @@ const UpdateArt: FC = () => {
             label="작품명"
             variant="outlined"
             required={true}
-            value={art.name}
+            defaultValue={art.name}
             inputRef={register({
               maxLength: {
                 value: 128,
@@ -435,60 +443,51 @@ const UpdateArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               작품 사진
             </FormLabel>
-            <FormHelperText style={{ color: 'crimson' }}>
-              - 최대 5개의 이미지 파일 선택 가능
-            </FormHelperText>
-            <FormHelperText>- 각 파일 용량은 10MB까지</FormHelperText>
-            <FormHelperText>- 첫 번째 미리보기 사진이 대표 사진으로 사용됩니다.</FormHelperText>
+            <FormHelperText>- 현재는 사진 순서만 변경 가능합니다.</FormHelperText>
             <FormHelperText>
-              - 대표 사진과{' '}
-              <span style={{ color: 'crimson' }}>사진 순서는 등록 후 수정 가능합니다.</span>
+              - 빠른 시일 내로 파일 추가와 삭제 기능을 추가하겠습니다.
             </FormHelperText>
-            <input
-              className={classes.inputFile}
-              type="file"
-              name="artImages"
-              accept="image/*"
-              multiple
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleImagePreviewList(e, setImagePreviewList)
-              }}
-              ref={register({
-                required: '작품 이미지를 등록해주세요.',
-                validate: {
-                  lessThanSix: (value) =>
-                    value.length < 6 || '작품 이미지는 최대 5개까지 등록 가능합니다.',
-                },
-              })}
-            />
-            {errors.artImages?.type && (
-              <p className={classes.errorMessage}>{errors.artImages?.message}</p>
-            )}
+            <FormHelperText>- 양해 부탁드립니다. 감사합니다.</FormHelperText>
             {imagePreviewList.map((imagePreview, index) => (
               <Paper key={index} variant="outlined" className={classes.paper}>
-                <img
-                  alt="작품 미리보기 이미지"
-                  className={classes.imagePreview}
-                  src={imagePreview}
-                />
+                <img alt="작품 사진" className={classes.imagePreview} src={imagePreview.url} />
+                <div className={classes.arrowDiv}>
+                  {index !== 0 && (
+                    <ArrowUpward
+                      fontSize="small"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        const copyList = [...imagePreviewList]
+                        copyList[index] = imagePreviewList[index - 1]
+                        copyList[index - 1] = imagePreviewList[index]
+                        setImagePreviewList(copyList)
+                      }}
+                    />
+                  )}
+                  {imagePreviewList.length - 1 !== index && (
+                    <ArrowDownward
+                      fontSize="small"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        const copyList = [...imagePreviewList]
+                        copyList[index] = imagePreviewList[index + 1]
+                        copyList[index + 1] = imagePreviewList[index]
+                        setImagePreviewList(copyList)
+                      }}
+                    />
+                  )}
+                </div>
               </Paper>
             ))}
           </div>
-          {currentUser?.artist?.isApproved ? (
-            <Button
-              className={classes.submitButton}
-              type="submit"
-              color="primary"
-              variant="contained"
-            >
-              등록하기
-            </Button>
-          ) : (
-            <div style={{ textAlign: 'center', marginTop: '28px' }}>
-              <p>승인된 작가만 작품 등록이 가능합니다.</p>
-              <p>관리자에게 문의해주세요.</p>
-            </div>
-          )}
+          <Button
+            className={classes.submitButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          >
+            수정하기
+          </Button>
         </form>
       </div>
     </div>
