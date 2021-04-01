@@ -50,7 +50,7 @@ const ArtistInfoTable: FC<ArtistInfoTableProps> = ({ artist }) => {
         </TableRow>
         <TableRow>
           <TableCell className={classes.th} component="th" scope="row">
-            필명
+            예명
           </TableCell>
           <TableCell className={classes.td}>{artist.artistName}</TableCell>
         </TableRow>

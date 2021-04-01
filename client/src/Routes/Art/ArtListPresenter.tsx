@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 import FilterContainer from '../../Components/Art/FilterContainer'
+import OrderFilter from '../../Components/Art/OrderFilter'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    margin: '39px 25px 50px 25px',
+    margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
@@ -110,6 +111,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
       </div>
       {arts ? (
         <div className={classes.contentSection}>
+          <OrderFilter />
           <div className={classes.posters}>
             {arts.map((art) => (
               <MemoizedPoster

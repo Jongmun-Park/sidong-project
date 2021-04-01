@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     float: 'right',
-    width: '180px',
+    width: '150px',
     margin: '0 20px 5px 0',
     fontSize: '13px',
   },

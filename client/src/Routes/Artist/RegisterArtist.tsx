@@ -147,13 +147,13 @@ const RegisterArtist: FC = () => {
             className={classes.inputBox}
             autoFocus
             name="artistName"
-            label="필명(닉네임)"
+            label="예명(닉네임)"
             variant="outlined"
             required={true}
             inputRef={register({
               maxLength: {
                 value: 32,
-                message: '필명(닉네임)은 32자 이내로 입력해주세요.',
+                message: '예명(닉네임)은 32자 이내로 입력해주세요.',
               },
             })}
           />

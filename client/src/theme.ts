@@ -37,6 +37,9 @@ const theme = createMuiTheme({
             fontSize: '14px',
             minHeight: 'auto',
           },
+          '& .MuiSelect-select.MuiSelect-select': {
+            textAlign: 'center',
+          },
         },
       },
     },
