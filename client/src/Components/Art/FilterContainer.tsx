@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { useLazyQuery } from '@apollo/react-hooks'
 import {
   Button,
@@ -123,8 +123,12 @@ const FilterContainer: FC<FilterContainerProps> = ({
     setPrice(newValue as number[])
   }
 
-  const handleMedium = (e: React.ChangeEvent<{ value: unknown }>) => {
+  const handleMedium = (e: ChangeEvent<{ value: unknown }>) => {
     setMedium(e.target.value as Medium | string)
+    setTheme('all')
+    setStyle('all')
+    setTechnique('all')
+
     if (e.target.value !== 'all') {
       changeArtOptions({
         variables: {
@@ -134,9 +138,6 @@ const FilterContainer: FC<FilterContainerProps> = ({
       setOpenArtOptions(true)
     } else {
       setOpenArtOptions(false)
-      setTheme('all')
-      setStyle('all')
-      setTechnique('all')
     }
   }
 
@@ -181,7 +182,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             <Select
               className={classes.select}
               value={theme}
-              onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              onChange={(e: ChangeEvent<{ value: unknown }>) => {
                 setTheme(e.target.value as string)
               }}
             >
@@ -198,7 +199,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             <Select
               className={classes.select}
               value={style}
-              onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              onChange={(e: ChangeEvent<{ value: unknown }>) => {
                 setStyle(e.target.value as string)
               }}
             >
@@ -215,7 +216,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             <Select
               className={classes.select}
               value={technique}
-              onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
+              onChange={(e: ChangeEvent<{ value: unknown }>) => {
                 setTechnique(e.target.value as string)
               }}
             >
