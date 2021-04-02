@@ -70,7 +70,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     alignSelf: 'center',
     '& .MuiSvgIcon-root': {
-      fontSize: '1.25rem',
+      fontSize: '19px',
+      '@media (max-width: 823px)': {
+        fontSize: '1rem',
+      },
     },
   },
 }))

@@ -90,7 +90,10 @@ const useStyles = makeStyles((theme) => ({
     top: '10px',
     left: '-1px',
     '& .MuiSvgIcon-root': {
-      fontSize: '1.25rem',
+      fontSize: '19px',
+      '@media (max-width: 823px)': {
+        fontSize: '1rem',
+      },
     },
   },
 }))
