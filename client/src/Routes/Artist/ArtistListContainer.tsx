@@ -4,12 +4,12 @@ import gql from 'graphql-tag'
 import ArtistListPresenter from './ArtistListPresenter'
 
 const ARTISTS = gql`
-  query Artists($lastArtistId: ID, $pageSize: Int, $category: String, $residence: String) {
+  query Artists($page: Int, $category: String, $residence: String, $orderingPriority: [String]) {
     artists(
-      lastArtistId: $lastArtistId
-      pageSize: $pageSize
+      page: $page
       category: $category
       residence: $residence
+      orderingPriority: $orderingPriority
     ) {
       id
       artistName
@@ -31,13 +31,15 @@ const ArtistList: FC = () => {
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
   const [filters, setFilters] = useState<any>(null)
-  const [lastArtistId, setLastArtistId] = useState<string>('')
+  const [page, setPage] = useState<number>(0)
 
   const { data } = useQuery(ARTISTS, {
     onCompleted: (data) => {
       const { artists } = data
       setArtists(artists)
-      setLastArtistId(artists[artists.length - 1].id)
+      if (artists) {
+        setPage(1)
+      }
     },
     onError: (error) => console.error(error.message),
   })
@@ -50,7 +52,7 @@ const ArtistList: FC = () => {
         setNoMoreArtist(true)
       } else {
         setArtists([...artists, ...fetchedArtists])
-        setLastArtistId(fetchedArtists[fetchedArtists.length - 1].id)
+        setPage(page + 1)
       }
     },
     onError: (error) => console.error(error.message),
@@ -61,7 +63,7 @@ const ArtistList: FC = () => {
       const filteredArtists = data.artists
       setArtists(filteredArtists)
       if (filteredArtists) {
-        setLastArtistId(filteredArtists[filteredArtists.length - 1].id)
+        setPage(1)
       }
     },
     onError: (error) => console.error(error.message),
@@ -73,6 +75,7 @@ const ArtistList: FC = () => {
         variables: {
           category: filters.category,
           residence: filters.residence,
+          orderingPriority: filters.orderingPriority,
         },
       })
       setNoMoreArtist(false)
@@ -91,15 +94,16 @@ const ArtistList: FC = () => {
     if (!filters) {
       loadMoreArtist({
         variables: {
-          lastArtistId,
+          page,
         },
       })
     } else {
       loadMoreArtist({
         variables: {
-          lastArtistId,
+          page,
           category: filters.category,
           residence: filters.residence,
+          orderingPriority: filters.orderingPriority,
         },
       })
     }
@@ -109,6 +113,7 @@ const ArtistList: FC = () => {
     <>
       <ArtistListPresenter
         artists={artists}
+        filters={filters}
         setFilters={setFilters}
         handleLoadMore={handleLoadMore}
       />

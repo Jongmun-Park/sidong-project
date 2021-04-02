@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { MemoizedPoster } from '../../Components/Artist/Poster'
 import FilterContainer from '../../Components/Artist/FilterContainer'
+import OrderFilter from '../../Components/Artist/OrderFilter'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
       margin: '28px 0px 50px 57px',
     },
   },
+  orderFilterWrapper: {
+    alignSelf: 'flex-end',
+    '@media (max-width: 823px)': {
+      display: 'none',
+    },
+  },
   posters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 252px)',
@@ -37,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    margin: '39px 25px 50px 25px',
+    maxWidth: '1500px',
+    margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 823px)': {
@@ -56,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 823px)': {
       display: 'none',
     },
-    padding: '10px 27px 10px 27px',
+    padding: '10px 27px 12px 27px',
     top: '49px',
     position: 'sticky',
     zIndex: 1,
@@ -67,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'none',
       },
     },
+  },
+  mobileFilterHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   filterButton: {
     padding: '3px 18px',
@@ -80,12 +92,14 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtistListPresenterProps {
   artists: Array<any>
+  filters: any
   setFilters: (arg0: any) => void
   handleLoadMore: () => void
 }
 
 const ArtistListPresenter: FC<ArtistListPresenterProps> = ({
   artists,
+  filters,
   setFilters,
   handleLoadMore,
 }) => {
@@ -95,25 +109,35 @@ const ArtistListPresenter: FC<ArtistListPresenterProps> = ({
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <FilterContainer setFilters={setFilters} />
+        <FilterContainer filters={filters} setFilters={setFilters} />
       </div>
       <div className={classes.mobileFilterWrapper}>
-        <Button
-          startIcon={<FilterListIcon />}
-          className={classes.filterButton}
-          variant="contained"
-          size="small"
-          color="primary"
-          onClick={() => setOpenMobileFilter(!openMobileFilter)}
-        >
-          검색 조건
-        </Button>
+        <div className={classes.mobileFilterHeader}>
+          <Button
+            startIcon={<FilterListIcon />}
+            className={classes.filterButton}
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={() => setOpenMobileFilter(!openMobileFilter)}
+          >
+            검색 조건
+          </Button>
+          <OrderFilter filters={filters} setFilters={setFilters} />
+        </div>
         <div className={`mobileFilter ${openMobileFilter ? '' : 'inactive'}`}>
-          <FilterContainer setFilters={setFilters} setOpenMobileFilter={setOpenMobileFilter} />
+          <FilterContainer
+            filters={filters}
+            setFilters={setFilters}
+            setOpenMobileFilter={setOpenMobileFilter}
+          />
         </div>
       </div>
       {artists ? (
         <div className={classes.contentSection}>
+          <div className={classes.orderFilterWrapper}>
+            <OrderFilter filters={filters} setFilters={setFilters} />
+          </div>
           <div className={classes.posters}>
             {artists.map((artist) => (
               <MemoizedPoster

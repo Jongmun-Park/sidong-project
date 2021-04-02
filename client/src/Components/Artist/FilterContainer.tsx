@@ -6,12 +6,12 @@ import { ArtistCategory, Residence } from '../../types'
 const useStyles = makeStyles((theme) => ({
   list: {
     width: '100%',
+    height: '200px',
     '& .MuiTypography-body1': {
       fontSize: '13px',
       fontWeight: 600,
     },
     '@media (max-width: 823px)': {
-      height: '200px',
       overflowY: 'auto',
     },
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '13px',
   },
   buttonWrapper: {
-    margin: '12px 22px 5px 0px',
+    margin: '0 22px 5px 0',
     float: 'right',
   },
   button: {
@@ -35,17 +35,23 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface FilterContainerProps {
+  filters: any
   setFilters: (arg0: any) => void
   setOpenMobileFilter?: (arg0: boolean) => void
 }
 
-const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFilter }) => {
+const FilterContainer: FC<FilterContainerProps> = ({
+  filters,
+  setFilters,
+  setOpenMobileFilter,
+}) => {
   const classes = useStyles()
   const [category, setCategory] = useState<ArtistCategory | string>('all')
   const [residence, setResidence] = useState<Residence | string>('all')
 
   const handleApply = () => {
     setFilters({
+      ...filters,
       category,
       residence,
     })
