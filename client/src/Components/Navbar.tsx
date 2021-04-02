@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: '19px',
-    letterSpacing: '3px',
+    letterSpacing: '2px',
     '@media (max-width: 823px)': {
-      fontSize: 'initial',
+      fontSize: '15px',
       marginLeft: '10px',
       letterSpacing: '1px',
     },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginRight: '60px',
     '@media (max-width: 823px)': {
-      marginRight: '10px',
+      marginRight: '3px',
       width: 'auto',
     },
   },
@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     letterSpacing: '2px',
     '@media (max-width: 823px)': {
-      fontSize: 'small',
+      fontSize: '12px',
       letterSpacing: '1px',
     },
   },
   accountCircleIcon: {
     fontSize: 'xx-large',
     '@media (max-width: 823px)': {
-      fontSize: 'larger',
+      fontSize: '27px',
     },
   },
 }))
@@ -89,7 +89,7 @@ const NavBar: FC = () => {
     <header>
       <nav className={classes.container}>
         <Button href="/" className={classes.logoFont}>
-          작업터
+          Jakupteo
         </Button>
         <div className={classes.menus}>
           <Button className={classes.menuFont} href="/about">
