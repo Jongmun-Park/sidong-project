@@ -72,11 +72,16 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface FilterContainerProps {
+  filters: any
   setFilters: (arg0: any) => void
   setOpenMobileFilter?: (arg0: boolean) => void
 }
 
-const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFilter }) => {
+const FilterContainer: FC<FilterContainerProps> = ({
+  filters,
+  setFilters,
+  setOpenMobileFilter,
+}) => {
   const classes = useStyles()
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(true)
@@ -101,7 +106,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
     square: true,
     etc: true,
   })
-  const [price, setPrice] = useState<number[]>([10000, 5000000])
+  const [price, setPrice] = useState<number[]>([0, 5000000])
   const [medium, setMedium] = useState<Medium | string>('all')
   const [theme, setTheme] = useState<string>('all')
   const [style, setStyle] = useState<string>('all')
@@ -137,6 +142,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
 
   const handleApply = () => {
     setFilters({
+      ...filters,
       saleStatus,
       size,
       orientation,
@@ -285,7 +291,7 @@ const FilterContainer: FC<FilterContainerProps> = ({ setFilters, setOpenMobileFi
           <Slider
             className={classes.slider}
             value={price}
-            min={10000}
+            min={0}
             max={5000000}
             step={100000}
             onChange={handlePriceRange}

@@ -36,7 +36,7 @@ const About: FC = () => {
     <main className={classes.centerArea}>
       <section className={classes.firstSection}>
         <h2 className={classes.h2}>우리 모두 작가가 될 수 있습니다.</h2>
-        <p>작업실은 작가의 이력이나 학력을 묻지 않습니다.</p>
+        <p>작업터는 작가의 이력이나 학력을 묻지 않습니다.</p>
         <p>창작은 그 자체 만으로 가치가 있습니다.</p>
         <p>
           창작하는 모든 작가들에게 전시 공간이자 판매 경로가 되어 그들의 창작 환경이 개선되길
@@ -56,13 +56,13 @@ const About: FC = () => {
             작가가 직접 만든 작품만 등록해주시길 바랍니다.
           </span>
         </p>
-        <p>작업실은 IT 기술이 예술 시장에 투명성과 형평성을 가져올 것이라 믿습니다.</p>
+        <p>작업터는 IT 기술이 예술 시장에 투명성과 형평성을 가져올 것이라 믿습니다.</p>
         <p>
           작가들의 목소리에 귀 기울여 작가와 대중 모두를 만족시킬 수 있는 서비스로 발전하겠습니다.
         </p>
         <p>
-          불편 사항은 <u style={{ backgroundColor: 'lavender' }}>jakupsilcs@gmail.com</u>로
-          남겨주시면 검토하여 반영하겠습니다.
+          불편 사항은 <u style={{ backgroundColor: 'lavender' }}>jakupteo@gmail.com</u>로 남겨주시면
+          검토하여 반영하겠습니다.
         </p>
         이용해주셔서 감사합니다.
       </section>

@@ -5,18 +5,43 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   select: {
     width: '100px',
-    margin: '0px 30px 18px 0px',
     alignSelf: 'flex-end',
+    margin: '0px 30px 18px 0px',
     fontSize: '13px',
+    '@media (min-width: 1500px)': {
+      margin: '0px 100px 18px 0px',
+    },
   },
 })
 
-const OrderFilter: FC = () => {
+interface OrderFilterProps {
+  filters: any
+  setFilters: (arg0: any) => void
+}
+
+const OrderFilter: FC<OrderFilterProps> = ({ filters, setFilters }) => {
   const classes = useStyles()
-  const [orderBy, setOrderBy] = useState('latest')
+  const [orderBy, setOrderBy] = useState<string>('latest')
 
   const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
-    setOrderBy(event.target.value as string)
+    const value = event.target.value as string
+    let orderingPriority: Array<string> = []
+    setOrderBy(value)
+    if (value === 'latest') {
+      orderingPriority = ['-id']
+    } else if (value === 'oldest') {
+      orderingPriority = ['id']
+    } else if (value === 'likeCount') {
+      orderingPriority = ['-like_count', '-id']
+    } else if (value === 'lowPrice') {
+      orderingPriority = ['price', '-id']
+    } else if (value === 'highPrice') {
+      orderingPriority = ['-price', '-id']
+    }
+    setFilters({
+      ...filters,
+      orderingPriority,
+    })
   }
 
   return (
@@ -28,7 +53,7 @@ const OrderFilter: FC = () => {
     >
       <MenuItem value="latest">최신순</MenuItem>
       <MenuItem value="oldest">오래된 순</MenuItem>
-      <MenuItem value="like">좋아요순</MenuItem>
+      <MenuItem value="likeCount">좋아요순</MenuItem>
       <MenuItem value="lowPrice">낮은 가격순</MenuItem>
       <MenuItem value="highPrice">높은 가격순</MenuItem>
     </Select>

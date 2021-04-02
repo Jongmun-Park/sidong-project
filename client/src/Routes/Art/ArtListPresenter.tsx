@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
+    // maxWidth: '1500px',
     margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
@@ -81,18 +82,24 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtListPresenterProps {
   arts: Array<any>
+  filters: any
   setFilters: (arg0: any) => void
   handleLoadMore: () => void
 }
 
-const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleLoadMore }) => {
+const ArtListPresenter: FC<ArtListPresenterProps> = ({
+  arts,
+  filters,
+  setFilters,
+  handleLoadMore,
+}) => {
   const classes = useStyles()
   const [openMobileFilter, setOpenMobileFilter] = useState<boolean>(false)
 
   return (
     <div className={classes.container}>
       <div className={classes.leftSideBar}>
-        <FilterContainer setFilters={setFilters} />
+        <FilterContainer filters={filters} setFilters={setFilters} />
       </div>
       <div className={classes.mobileFilterController}>
         <Button
@@ -106,12 +113,16 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({ arts, setFilters, handleL
           검색 조건
         </Button>
         <div className={`mobileFilter ${openMobileFilter ? '' : 'inactive'}`}>
-          <FilterContainer setFilters={setFilters} setOpenMobileFilter={setOpenMobileFilter} />
+          <FilterContainer
+            filters={filters}
+            setFilters={setFilters}
+            setOpenMobileFilter={setOpenMobileFilter}
+          />
         </div>
       </div>
       {arts ? (
         <div className={classes.contentSection}>
-          <OrderFilter />
+          <OrderFilter filters={filters} setFilters={setFilters} />
           <div className={classes.posters}>
             {arts.map((art) => (
               <MemoizedPoster

@@ -5,8 +5,7 @@ import ArtListPresenter from './ArtListPresenter'
 
 const ARTS = gql`
   query Arts(
-    $lastArtId: ID
-    $pageSize: Int
+    $page: Int
     $saleStatus: SaleStatusInput
     $orientation: OrientationInput
     $size: ArtSizeInput
@@ -15,10 +14,10 @@ const ARTS = gql`
     $style: String
     $technique: String
     $theme: String
+    $orderingPriority: [String]
   ) {
     arts(
-      lastArtId: $lastArtId
-      pageSize: $pageSize
+      page: $page
       saleStatus: $saleStatus
       orientation: $orientation
       size: $size
@@ -27,6 +26,7 @@ const ARTS = gql`
       style: $style
       technique: $technique
       theme: $theme
+      orderingPriority: $orderingPriority
     ) {
       id
       name
@@ -47,14 +47,14 @@ const ArtList: FC = () => {
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
   const [filters, setFilters] = useState<any>(null)
-  const [lastArtId, setLastArtId] = useState<string>('')
+  const [page, setPage] = useState<number>(0)
 
   const { data } = useQuery(ARTS, {
     onCompleted: (data) => {
       const { arts } = data
       setArts(arts)
       if (arts) {
-        setLastArtId(arts[arts.length - 1].id)
+        setPage(1)
       }
     },
     onError: (error) => console.error(error.message),
@@ -68,7 +68,7 @@ const ArtList: FC = () => {
         setNoMoreArts(true)
       } else {
         setArts([...arts, ...fetchedArts])
-        setLastArtId(fetchedArts[fetchedArts.length - 1].id)
+        setPage(page + 1)
       }
     },
     onError: (error) => console.error(error.message),
@@ -79,7 +79,7 @@ const ArtList: FC = () => {
       const filteredArts = data.arts
       setArts(filteredArts)
       if (filteredArts) {
-        setLastArtId(filteredArts[filteredArts.length - 1].id)
+        setPage(1)
       }
     },
     onError: (error) => console.error(error.message),
@@ -97,6 +97,7 @@ const ArtList: FC = () => {
           style: filters.style,
           technique: filters.technique,
           theme: filters.theme,
+          orderingPriority: filters.orderingPriority,
         },
       })
       setNoMoreArts(false)
@@ -115,13 +116,13 @@ const ArtList: FC = () => {
     if (!filters) {
       loadMoreArts({
         variables: {
-          lastArtId,
+          page,
         },
       })
     } else {
       loadMoreArts({
         variables: {
-          lastArtId,
+          page,
           saleStatus: filters.saleStatus,
           orientation: filters.orientation,
           size: filters.size,
@@ -130,12 +131,20 @@ const ArtList: FC = () => {
           style: filters.style,
           technique: filters.technique,
           theme: filters.theme,
+          orderingPriority: filters.orderingPriority,
         },
       })
     }
   }
 
-  return <ArtListPresenter arts={arts} setFilters={setFilters} handleLoadMore={handleLoadMore} />
+  return (
+    <ArtListPresenter
+      arts={arts}
+      filters={filters}
+      setFilters={setFilters}
+      handleLoadMore={handleLoadMore}
+    />
+  )
 }
 
 export default ArtList

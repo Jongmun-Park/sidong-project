@@ -89,7 +89,7 @@ const NavBar: FC = () => {
     <header>
       <nav className={classes.container}>
         <Button href="/" className={classes.logoFont}>
-          작업실
+          작업터
         </Button>
         <div className={classes.menus}>
           <Button className={classes.menuFont} href="/about">

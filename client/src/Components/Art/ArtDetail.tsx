@@ -23,22 +23,19 @@ const useStyles = makeStyles((theme) => ({
   },
   leftArea: {
     '@media (min-width: 1024px)': {
-      flex: '0 0 66.6667%',
-      maxWidth: '66.6667%',
+      flex: '0 0 60%',
+      maxWidth: '60%',
     },
     width: '100%',
   },
   rightArea: {
     '@media (min-width: 1024px)': {
-      flex: '0 0 33.3333%',
-      maxWidth: '33.3333%',
+      flex: '0 0 40%',
+      maxWidth: '40%',
     },
     width: '100%',
   },
   rightBox: {
-    '@media (min-width: 1024px)': {
-      marginLeft: '40px',
-    },
     width: '88%',
     margin: 'auto',
     color: theme.palette.lightBlack.main,
