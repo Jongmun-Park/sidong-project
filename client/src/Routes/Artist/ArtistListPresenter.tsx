@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 500,
   },
-  mobileFilterController: {
+  mobileFilterWrapper: {
     '@media (min-width: 823px)': {
       display: 'none',
     },
@@ -97,7 +97,7 @@ const ArtistListPresenter: FC<ArtistListPresenterProps> = ({
       <div className={classes.leftSideBar}>
         <FilterContainer setFilters={setFilters} />
       </div>
-      <div className={classes.mobileFilterController}>
+      <div className={classes.mobileFilterWrapper}>
         <Button
           startIcon={<FilterListIcon />}
           className={classes.filterButton}

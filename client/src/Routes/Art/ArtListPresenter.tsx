@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
       margin: '28px 0px 50px 57px',
     },
   },
+  orderFilterWrapper: {
+    alignSelf: 'flex-end',
+    '@media (max-width: 823px)': {
+      display: 'none',
+    },
+  },
   posters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 252px)',
@@ -38,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    // maxWidth: '1500px',
+    maxWidth: '1500px',
     margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
@@ -54,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 500,
   },
-  mobileFilterController: {
+  mobileFilterWrapper: {
     '@media (min-width: 823px)': {
       display: 'none',
     },
@@ -69,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'none',
       },
     },
+  },
+  mobileFilterHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   filterButton: {
     padding: '3px 18px',
@@ -101,17 +111,20 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({
       <div className={classes.leftSideBar}>
         <FilterContainer filters={filters} setFilters={setFilters} />
       </div>
-      <div className={classes.mobileFilterController}>
-        <Button
-          startIcon={<FilterListIcon />}
-          className={classes.filterButton}
-          variant="contained"
-          size="small"
-          color="primary"
-          onClick={() => setOpenMobileFilter(!openMobileFilter)}
-        >
-          검색 조건
-        </Button>
+      <div className={classes.mobileFilterWrapper}>
+        <div className={classes.mobileFilterHeader}>
+          <Button
+            startIcon={<FilterListIcon />}
+            className={classes.filterButton}
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={() => setOpenMobileFilter(!openMobileFilter)}
+          >
+            검색 조건
+          </Button>
+          <OrderFilter filters={filters} setFilters={setFilters} />
+        </div>
         <div className={`mobileFilter ${openMobileFilter ? '' : 'inactive'}`}>
           <FilterContainer
             filters={filters}
@@ -122,7 +135,9 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({
       </div>
       {arts ? (
         <div className={classes.contentSection}>
-          <OrderFilter filters={filters} setFilters={setFilters} />
+          <div className={classes.orderFilterWrapper}>
+            <OrderFilter filters={filters} setFilters={setFilters} />
+          </div>
           <div className={classes.posters}>
             {arts.map((art) => (
               <MemoizedPoster

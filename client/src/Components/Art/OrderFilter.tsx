@@ -5,11 +5,13 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   select: {
     width: '100px',
-    alignSelf: 'flex-end',
     margin: '0px 30px 18px 0px',
     fontSize: '13px',
     '@media (min-width: 1500px)': {
       margin: '0px 100px 18px 0px',
+    },
+    '@media (max-width: 823px)': {
+      margin: '0px',
     },
   },
 })
