@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     margin: '5px 0 25px 0',
-    maxWidth: '300px',
+    '@media (max-width: 823px)': {
+      margin: '5px 0 13px 0',
+    },
   },
   leftBox: {
     maxWidth: '530px',
@@ -52,9 +54,9 @@ const useStyles = makeStyles((theme) => ({
   },
   artName: {
     fontWeight: 600,
-    maxWidth: '267px',
+    marginRight: '12px',
     '@media (max-width: 823px)': {
-      fontSize: '18px',
+      fontSize: '17px',
     },
   },
   tabs: {
