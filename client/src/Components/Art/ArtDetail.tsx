@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  description: {
+    whiteSpace: 'pre',
+  },
 }))
 
 interface TabPanelProps {
@@ -136,7 +139,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
-
+  console.log(art)
   return (
     <main className={classes.container}>
       <div className={classes.leftArea}>
@@ -187,7 +190,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
       </div>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={0}>
-          {art.description}
+          <div className={classes.description}>{art.description}</div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
