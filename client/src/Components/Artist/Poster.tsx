@@ -15,14 +15,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonBase: {
-    height: '230px',
+    height: '200px',
     '@media (max-width: 823px)': {
       height: '182px',
     },
   },
   image: {
     width: '100%',
-    maxHeight: '230px',
+    maxHeight: '200px',
     objectFit: 'cover',
     borderRadius: '10px',
     '@media (max-width: 823px)': {
