@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   description: {
-    whiteSpace: 'pre',
+    whiteSpace: 'pre-line',
   },
 }))
 

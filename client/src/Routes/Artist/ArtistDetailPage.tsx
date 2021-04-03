@@ -72,8 +72,7 @@ const useStyles = makeStyles((theme) => ({
       padding: '24px',
     },
     width: '100%',
-    wordBreak: 'break-all',
-    whiteSpace: 'pre',
+    whiteSpace: 'pre-line',
     padding: '15px 10px 15px 10px',
   },
   posters: {
