@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   buttonBase: {
     height: '200px',
     '@media (max-width: 823px)': {
-      height: '182px',
+      height: '140px',
     },
   },
   image: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
     borderRadius: '10px',
     '@media (max-width: 823px)': {
-      maxHeight: '182px',
+      maxHeight: '140px',
     },
   },
   textArea: {
