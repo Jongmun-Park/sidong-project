@@ -42,7 +42,7 @@ const ArtInfoTable: FC<ArtInfoTableProps> = ({ art }) => {
               window.open(`/artist/${art.artist.id}`)
             }}
             className={classes.td}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
             {art.artist.realName} ({art.artist.artistName})
           </TableCell>

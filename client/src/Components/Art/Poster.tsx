@@ -130,7 +130,7 @@ const Poster: FC<ArtPosterProps> = ({
           </Typography>
           {artistId ? (
             <Typography
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', textDecoration: 'underline' }}
               variant="body2"
               onClick={() => {
                 window.open('/artist/' + artistId)
