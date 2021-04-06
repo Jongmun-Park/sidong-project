@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {
-      padding: '20px 36px 100px 36px',
+      padding: '20px 23px 100px 23px',
     },
   },
   inputContainer: {
@@ -312,6 +312,7 @@ const RegisterArt: FC = () => {
                 판매 가격 (배송비 포함)
               </FormLabel>
               <FormHelperText>- 판매 가격은 10,000원 ~ 5,000,000원 까지</FormHelperText>
+              <FormHelperText>- 배송비를 포함한 가격으로 책정해주세요 :)</FormHelperText>
               <div className={classes.inputElement}>
                 <input
                   style={{ width: '85px' }}
@@ -380,6 +381,9 @@ const RegisterArt: FC = () => {
             <FormHelperText>
               - 대표 사진과{' '}
               <span style={{ color: 'crimson' }}>사진 순서는 등록 후 수정 가능합니다.</span>
+            </FormHelperText>
+            <FormHelperText>
+              - 앞, 뒤, 옆면 등 다양한 각도에서 작품을 보여주면 좋습니다 :)
             </FormHelperText>
             <input
               className={classes.inputFile}

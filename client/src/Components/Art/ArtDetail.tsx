@@ -108,7 +108,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -142,7 +142,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
-  console.log(art)
+
   return (
     <main className={classes.container}>
       <div className={classes.leftArea}>
