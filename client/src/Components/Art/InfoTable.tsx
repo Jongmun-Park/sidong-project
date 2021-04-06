@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     padding: '6px 6px 6px 0',
     fontSize: '0.929em',
     borderBottom: 'none',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+    },
   },
   td: {
     width: '60%',
@@ -21,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1em',
     fontWeight: 600,
     borderBottom: 'none',
+    '@media (max-width: 823px)': {
+      fontSize: '12.4px',
+    },
   },
 }))
 

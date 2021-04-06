@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     },
     '@media (max-width: 823px)': {
       margin: '0px',
+      fontSize: '11px',
     },
   },
 })

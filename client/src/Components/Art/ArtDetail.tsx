@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Tabs, Tab, Typography } from '@material-ui/core'
+import { Button, Box, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
@@ -62,13 +62,18 @@ const useStyles = makeStyles((theme) => ({
   tabs: {
     width: '100%',
     margin: '0px 30px 0px 30px',
-    '@media (max-width: 823px)': {
-      margin: '17px 17px 0px 17px',
+    '@media (max-width: 1024px)': {
+      margin: '22px 17px 0px 17px',
     },
   },
   tabPanel: {
     width: '100%',
     marginTop: '6px',
+  },
+  tab: {
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+    },
   },
   like: {
     float: 'right',
@@ -83,6 +88,12 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     whiteSpace: 'pre-line',
+  },
+  price: {
+    fontSize: '15px',
+    fontWeight: 500,
+    textAlign: 'right',
+    marginBottom: '18px',
   },
 }))
 
@@ -172,7 +183,12 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           </div>
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (
-            <div>{currencyFormatter(art.price)}</div>
+            <div>
+              <div className={classes.price}>{currencyFormatter(art.price)}</div>
+              <Button onClick={() => {}} variant="contained" color="primary" fullWidth>
+                구매하기
+              </Button>
+            </div>
           ) : (
             <div>{translateSaleStatus(art.saleStatus)}</div>
           )}
@@ -186,9 +202,9 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           onChange={handleChange}
           aria-label="작품 페이지 탭"
         >
-          <Tab label="작가의 작품 설명" {...a11yProps(0)} />
-          <Tab label="구매 및 배송" {...a11yProps(1)} />
-          <Tab label="교환 및 환불" {...a11yProps(2)} />
+          <Tab className={classes.tab} label="작가의 작품 설명" {...a11yProps(0)} />
+          <Tab className={classes.tab} label="구매 및 배송" {...a11yProps(1)} />
+          <Tab className={classes.tab} label="교환 및 환불" {...a11yProps(2)} />
         </Tabs>
       </div>
       <div className={classes.tabPanel}>
