@@ -64,7 +64,7 @@ const LikingArts: FC = () => {
   const { data, fetchMore } = useQuery(USER_LIKING_ARTS, {
     variables: { userId, lastLikeId: null },
     onCompleted: (data) => {
-      setLastLikeId(data.userLikingArts.lastLikeId)
+      setLastLikeId(data.userLikingArts?.lastLikeId)
     },
     onError: (error) => console.error(error.message),
   })
@@ -112,7 +112,7 @@ const LikingArts: FC = () => {
 
   return (
     <>
-      {data ? (
+      {data.userLikingArts ? (
         <div className={classes.posterContainer}>
           <div className={classes.posters}>
             {data.userLikingArts.arts.map((art: any) => (

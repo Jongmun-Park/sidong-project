@@ -61,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     width: '100%',
-    marginTop: '17px',
+    margin: '0px 30px 0px 30px',
+    '@media (max-width: 823px)': {
+      margin: '17px 17px 0px 17px',
+    },
   },
   tabPanel: {
     width: '100%',
