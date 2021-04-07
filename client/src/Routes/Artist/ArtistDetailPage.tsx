@@ -115,9 +115,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-interface ArtistDetailParams {
-  artistId: string
-}
 
 const ARTIST = gql`
   query Artist($artistId: ID!) {
@@ -153,7 +150,7 @@ const ARTS_BY_ARTIST = gql`
 
 const ArtistDetailPage: FC = () => {
   const classes = useStyles()
-  const { artistId } = useParams<ArtistDetailParams>()
+  const { artistId } = useParams<{ artistId: string }>()
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
   const [lastArtId, setLastArtId] = useState<string>('')

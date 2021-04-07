@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   leftBox: {
     maxWidth: '530px',
+    width: '92%',
     margin: 'auto',
   },
   artName: {

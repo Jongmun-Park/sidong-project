@@ -6,6 +6,7 @@ import ArtList from '../Routes/Art/ArtListContainer'
 import ArtDetailPage from '../Routes/Art/ArtDetailPage'
 import RegisterArt from '../Routes/Art/RegisterArt'
 import UpdateArt from '../Routes/Art/UpdateArt'
+import OrderArt from '../Routes/Art/OrderArt'
 import ArtistList from '../Routes/Artist/ArtistListContainer'
 import ArtistDetailPage from '../Routes/Artist/ArtistDetailPage'
 import RegisterArtist from '../Routes/Artist/RegisterArtist'
@@ -26,6 +27,7 @@ class Router extends React.Component {
           <Route exact path="/art/register" component={RegisterArt} />
           <Route exact path="/art/update/:artId" component={UpdateArt} />
           <Route exact path="/art/:artId" component={ArtDetailPage} />
+          <Route exact path="/order/:artId" component={OrderArt} />
 
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/artist/register" component={RegisterArtist} />
