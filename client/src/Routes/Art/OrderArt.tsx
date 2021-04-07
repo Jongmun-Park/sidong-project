@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   main: {
     minHeight: '100vh',
-    maxWidth: '550px',
+    maxWidth: '650px',
     padding: '30px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 823px)': {
       fontSize: '14px',
     },
-  },
-  wrapper: {
-    maxWidth: '400px',
-    margin: 'auto',
   },
   artInfo: {
     marginTop: '45px',
@@ -106,26 +102,24 @@ const OrderArt: FC = () => {
 
   return (
     <main className={classes.main}>
-      <div className={classes.wrapper}>
-        <h3 className={classes.h3}>&ensp;작품 구매</h3>
-        <div className={classes.artInfo}>
-          <figure className={classes.figure}>
-            <div className={classes.representativeImageWrapper}>
-              <img alt="작품 이미지" className={classes.image} src={art.representativeImageUrl} />
-            </div>
-            <figcaption className={classes.figcaption}>
-              <p className={classes.artName}>
-                <a href={`/art/${art.id}`}>{art.name}</a>
-              </p>
-              <p className={classes.pTag}>
-                {art.artist.realName}({art.artist.artistName})
-              </p>
-              <p className={classes.pTag}>
-                {art.width}x{art.height}cm
-              </p>
-            </figcaption>
-          </figure>
-        </div>
+      <h3 className={classes.h3}>&ensp;작품 구매</h3>
+      <div className={classes.artInfo}>
+        <figure className={classes.figure}>
+          <div className={classes.representativeImageWrapper}>
+            <img alt="작품 이미지" className={classes.image} src={art.representativeImageUrl} />
+          </div>
+          <figcaption className={classes.figcaption}>
+            <p className={classes.artName}>
+              <a href={`/art/${art.id}`}>{art.name}</a>
+            </p>
+            <p className={classes.pTag}>
+              {art.artist.realName}({art.artist.artistName})
+            </p>
+            <p className={classes.pTag}>
+              {art.width}x{art.height}cm
+            </p>
+          </figcaption>
+        </figure>
       </div>
     </main>
   )
