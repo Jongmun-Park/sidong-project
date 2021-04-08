@@ -1,9 +1,21 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import gql from 'graphql-tag'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
+import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button } from '@material-ui/core'
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TextField,
+} from '@material-ui/core'
+import { useCurrentUser } from '../../Hooks/User'
+import { currencyFormatter } from '../../utils'
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -38,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
   image: {
     width: '80%',
     height: 'auto',
-    boxShadow: '4px 4px 10px 0 rgb(0 0 0 / 30%)',
+    maxHeight: '170px',
+    objectFit: 'contain',
+    border: '4px double',
+    borderRadius: '13px',
+    borderColor: theme.palette.primary.light,
+    boxShadow: '4px 4px 10px 0 rgb(0 0 0 / 25%)',
   },
   figcaption: {
     display: 'inline-block',
@@ -47,13 +64,12 @@ const useStyles = makeStyles((theme) => ({
   artName: {
     fontSize: '16px',
     fontWeight: 500,
-    margin: '3px 0 5px 0',
+    margin: '10px 0',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     '@media (max-width: 823px)': {
       fontSize: '13px',
-      margin: '0 0 5px 0',
     },
   },
   pTag: {
@@ -64,6 +80,54 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     '@media (max-width: 823px)': {
       fontSize: '11px',
+    },
+  },
+  inputBox: {
+    width: '100%',
+    marginTop: '1em',
+  },
+  form: {
+    marginTop: '30px',
+  },
+  errorMessage: {
+    color: 'red',
+  },
+  submitButton: {
+    width: '100%',
+    marginTop: '23px',
+    '@media (max-width: 823px)': {
+      marginTop: '16px',
+      fontSize: '13px',
+    },
+  },
+  checkBox: {
+    '& .MuiTypography-body1': {
+      fontSize: '12px',
+    },
+  },
+  table: {
+    width: '100%',
+  },
+  th: {
+    color: theme.palette.greyFont.main,
+    width: '60%',
+    padding: '6px 6px 6px 0',
+    fontSize: '0.929em',
+    borderBottom: 'none',
+    textAlign: 'right',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+    },
+  },
+  td: {
+    width: '40%',
+    padding: '6px',
+    fontSize: '1em',
+    fontWeight: 400,
+    borderBottom: 'none',
+    textAlign: 'right',
+    '@media (max-width: 823px)': {
+      fontSize: '12.4px',
     },
   },
 }))
@@ -88,7 +152,10 @@ const ART_FOR_ORDER = gql`
 
 const OrderArt: FC = () => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
   const { artId } = useParams<{ artId: string }>()
+  const [checkedSave, setCheckedSave] = useState<boolean>(false)
+  const { register, handleSubmit, errors } = useForm()
   const { data } = useQuery(ART_FOR_ORDER, {
     variables: { artId },
     onError: (error) => console.error(error.message),
@@ -99,6 +166,8 @@ const OrderArt: FC = () => {
   }
 
   const { art } = data
+  const { userinfo } = currentUser
+  const onSubmit = async (data: any) => {}
 
   return (
     <main className={classes.main}>
@@ -121,6 +190,99 @@ const OrderArt: FC = () => {
           </figcaption>
         </figure>
       </div>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          autoFocus
+          name="name"
+          label="성명"
+          variant="outlined"
+          defaultValue={userinfo?.name}
+          required={true}
+          inputRef={register({
+            maxLength: {
+              value: 8,
+              message: '성명은 8자 이내로 입력해주세요.',
+            },
+            minLength: {
+              value: 2,
+              message: '성명은 2자 이상 입력해주세요.',
+            },
+          })}
+        />
+        {errors.name?.type && <p className={classes.errorMessage}>{errors.name?.message}</p>}
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          name="phone"
+          type="tel"
+          label="휴대전화 번호"
+          helperText="주문 진행 상태를 안내 받을 번호로 정확히 입력해주세요."
+          variant="outlined"
+          defaultValue={userinfo?.phone}
+          required={true}
+          inputRef={register({
+            minLength: {
+              value: 10,
+              message: '휴대전화 번호는 10자 이상으로 입력해주세요.',
+            },
+          })}
+        />
+        {errors.phone?.type && <p className={classes.errorMessage}>{errors.phone?.message}</p>}
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          name="address"
+          label="배송지"
+          variant="outlined"
+          multiline
+          defaultValue={userinfo?.address}
+          required={true}
+          inputRef={register}
+        />
+        <FormControlLabel
+          className={classes.checkBox}
+          control={
+            <Checkbox
+              size="small"
+              checked={checkedSave}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setCheckedSave(event.target.checked)
+              }}
+              name="checkedSave"
+              color="primary"
+              inputRef={register}
+            />
+          }
+          label="배송 정보 저장"
+        />
+        <Table className={classes.table}>
+          <TableBody>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                작품 가격
+              </TableCell>
+              <TableCell className={classes.td}>{currencyFormatter(art.price)}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                배송비
+              </TableCell>
+              <TableCell className={classes.td}>{currencyFormatter(0)}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                총 금액
+              </TableCell>
+              <TableCell className={classes.td}>{currencyFormatter(art.price)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Button type="submit" color="primary" variant="contained" className={classes.submitButton}>
+          결제하기
+        </Button>
+      </form>
     </main>
   )
 }

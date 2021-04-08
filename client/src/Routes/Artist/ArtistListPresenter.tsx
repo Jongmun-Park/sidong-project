@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     top: '49px',
     position: 'sticky',
     zIndex: 1,
-    backgroundColor: theme.palette.lightYellow.main,
+    backgroundColor: theme.palette.primary.light,
     '& .mobileFilter': {
       marginTop: '10px',
       '&.inactive': {

@@ -9,6 +9,12 @@ interface CurrentUser {
     id: number
     isApproved: boolean
   } | null
+  userinfo: {
+    id: number
+    name: string
+    phone: string
+    address: string
+  } | null
 }
 
 const CURRENT_USER = gql`
@@ -20,6 +26,12 @@ const CURRENT_USER = gql`
         id
         isApproved
       }
+      userinfo {
+        id
+        name
+        phone
+        address
+      }
     }
   }
 `
@@ -27,6 +39,7 @@ const CurrentUserContext = createContext<CurrentUser>({
   id: null,
   username: null,
   artist: null,
+  userinfo: null,
 })
 
 export const CurrentUserProvider: FC = ({ children }) => {

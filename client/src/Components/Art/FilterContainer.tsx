@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     backgroundColor: theme.palette.lightBlack.main,
-    color: theme.palette.lightYellow.main,
+    color: theme.palette.primary.light,
     '&.MuiButton-contained:hover': {
       backgroundColor: theme.palette.lightBlack.light,
     },
