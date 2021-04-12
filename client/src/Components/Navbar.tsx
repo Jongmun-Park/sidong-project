@@ -125,6 +125,9 @@ const NavBar: FC = () => {
                   <MenuItem onClick={() => (window.location.href = '/account/likes')}>
                     관심 목록
                   </MenuItem>
+                  <MenuItem onClick={() => (window.location.href = '/account/orders')}>
+                    주문 내역
+                  </MenuItem>
                   {isApprovedArtist ? (
                     <>
                       <MenuItem onClick={() => (window.location.href = '/art/register')}>

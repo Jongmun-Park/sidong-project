@@ -130,6 +130,30 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '12.4px',
     },
   },
+  categoryTabContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: '20px',
+  },
+  categoryTab: {
+    color: theme.palette.primary.main,
+    borderStyle: 'none none solid none',
+    borderWidth: '2px',
+    maxWidth: '100px',
+    minWidth: '72px',
+    minHeight: '40px',
+    lineHeight: '40px',
+    textAlign: 'center',
+    fontWeight: 500,
+    letterSpacing: '0.02857em',
+    '@media (max-width: 823px)': {
+      fontSize: '13px',
+      maxWidth: '72px',
+      minHeight: '33px',
+      lineHeight: '33px',
+    },
+  },
 }))
 
 const ART_FOR_ORDER = gql`
@@ -151,20 +175,8 @@ const ART_FOR_ORDER = gql`
 `
 
 const CREATE_ORDER = gql`
-  mutation CreateOrder(
-    $artId: ID!
-    $address: String!
-    $checkedSave: Boolean!
-    $name: String!
-    $phone: String!
-  ) {
-    createOrder(
-      artId: $artId
-      address: $address
-      checkedSave: $checkedSave
-      name: $name
-      phone: $phone
-    ) {
+  mutation CreateOrder($artId: ID!, $address: String!, $name: String!, $phone: String!) {
+    createOrder(artId: $artId, address: $address, name: $name, phone: $phone) {
       success
       msg
     }
@@ -175,7 +187,7 @@ const OrderArt: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const { artId } = useParams<{ artId: string }>()
-  const [checkedSave, setCheckedSave] = useState<boolean>(false)
+  const [checkedSameInfo, setCheckedSameInfo] = useState<boolean>(false)
   const { register, handleSubmit, errors } = useForm()
   const [createOrder] = useMutation(CREATE_ORDER)
   const { data } = useQuery(ART_FOR_ORDER, {
@@ -188,6 +200,7 @@ const OrderArt: FC = () => {
   }
 
   const { art } = data
+  console.log(currentUser)
   const { userinfo } = currentUser
 
   const onSubmit = async (data: any) => {
@@ -195,7 +208,6 @@ const OrderArt: FC = () => {
       variables: {
         artId,
         address: data.address,
-        checkedSave: data.checkedSave,
         name: data.name,
         phone: data.phone,
       },
@@ -230,6 +242,9 @@ const OrderArt: FC = () => {
         </figure>
       </div>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={classes.categoryTabContainer}>
+          <div className={classes.categoryTab}>주문 정보</div>
+        </div>
         <TextField
           size="small"
           className={classes.inputBox}
@@ -280,22 +295,25 @@ const OrderArt: FC = () => {
           required={true}
           inputRef={register}
         />
-        <FormControlLabel
-          className={classes.checkBox}
-          control={
-            <Checkbox
-              size="small"
-              checked={checkedSave}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setCheckedSave(event.target.checked)
-              }}
-              name="checkedSave"
-              color="primary"
-              inputRef={register}
-            />
-          }
-          label="배송 정보 저장"
-        />
+        <div className={classes.categoryTabContainer}>
+          <div className={classes.categoryTab}>배송 정보</div>
+          <FormControlLabel
+            className={classes.checkBox}
+            control={
+              <Checkbox
+                size="small"
+                checked={checkedSameInfo}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setCheckedSameInfo(event.target.checked)
+                }}
+                name="checkedSave"
+                color="primary"
+                inputRef={register}
+              />
+            }
+            label="주문 정보와 동일"
+          />
+        </div>
         <Table className={classes.table}>
           <TableBody>
             <TableRow>

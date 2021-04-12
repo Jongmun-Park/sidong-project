@@ -64,7 +64,7 @@ const DELETE_ART = gql`
 const MyArtListTable: FC = () => {
   const classes = useStyles()
   const [page, setPage] = useState<number>(0)
-  const [totalCount, setTotalCount] = useState<number>(30)
+  const [totalCount, setTotalCount] = useState<number>(0)
   const [arts, setArts] = useState<Array<Art> | null>(null)
 
   const [deleteArt] = useMutation(DELETE_ART)

@@ -53,6 +53,22 @@ export interface Art {
   }[]
 }
 
+export interface Order {
+  id: number
+  userinfo: {
+    id: number
+    name: string
+    phone: string
+    address: string
+  }
+  artName: string
+  price: number
+  status: OrderStatus
+  createdAt: Date
+  art: Art
+  artist: Artist
+}
+
 export interface ArtOptions {
   styles: Array<{
     id: number
@@ -89,6 +105,18 @@ export enum SaleStatus {
   NOT_FOR_SALE,
   ON_SALE,
   SOLD_OUT,
+}
+
+export enum OrderStatus {
+  WAIT = 1,
+  FAIL = 2,
+  SUCCESS = 3,
+  PREPARE_DELIVERY = 4,
+  ON_DELIVERY = 5,
+  DELIVERY_COMPLETED = 6,
+  REFUND = 7,
+  REFUND_COMPLETED = 8,
+  COMPLETED = 9,
 }
 
 export enum Orientation {
