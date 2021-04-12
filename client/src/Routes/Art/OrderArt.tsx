@@ -94,9 +94,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submitButton: {
     width: '100%',
-    marginTop: '23px',
+    marginTop: '24px',
     '@media (max-width: 823px)': {
-      marginTop: '16px',
+      marginTop: '19px',
       fontSize: '13px',
     },
   },
@@ -107,6 +107,10 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     width: '100%',
+    marginTop: '24px',
+    '@media (max-width: 823px)': {
+      marginTop: '19px',
+    },
   },
   th: {
     color: theme.palette.greyFont.main,
@@ -185,9 +189,16 @@ const CREATE_ORDER = gql`
 
 const OrderArt: FC = () => {
   const classes = useStyles()
-  const currentUser = useCurrentUser()
+  const { userinfo } = useCurrentUser()
   const { artId } = useParams<{ artId: string }>()
   const [checkedSameInfo, setCheckedSameInfo] = useState<boolean>(false)
+  const [username, setUsername] = useState<string>(userinfo ? userinfo.name : '')
+  const [phone, setPhone] = useState<string>(userinfo ? userinfo.phone : '')
+  const [address, setAddress] = useState<string>(userinfo ? userinfo.address : '')
+  const [recipientUsername, setRecipientUsername] = useState<string>('')
+  const [recipientPhone, setRecipientPhone] = useState<string>('')
+  const [recipientAddress, setRecipientAddress] = useState<string>('')
+
   const { register, handleSubmit, errors } = useForm()
   const [createOrder] = useMutation(CREATE_ORDER)
   const { data } = useQuery(ART_FOR_ORDER, {
@@ -200,23 +211,32 @@ const OrderArt: FC = () => {
   }
 
   const { art } = data
-  console.log(currentUser)
-  const { userinfo } = currentUser
+  console.log('userinfo:', userinfo)
 
   const onSubmit = async (data: any) => {
-    const result = await createOrder({
-      variables: {
-        artId,
-        address: data.address,
-        name: data.name,
-        phone: data.phone,
-      },
-    })
-    if (result.data.createOrder.success) {
-      alert('작품 주문이 완료됐습니다.')
-      window.location.href = '/account/orders'
-    } else {
-      alert(result.data.createOrder.msg)
+    console.log(data)
+    // const result = await createOrder({
+    //   variables: {
+    //     artId,
+    //     address: data.address,
+    //     name: data.name,
+    //     phone: data.phone,
+    //   },
+    // })
+    // if (result.data.createOrder.success) {
+    //   alert('작품 주문이 완료됐습니다.')
+    //   window.location.href = '/account/orders'
+    // } else {
+    //   alert(result.data.createOrder.msg)
+    // }
+  }
+
+  const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckedSameInfo(event.target.checked)
+    if (event.target.checked) {
+      setRecipientUsername(username)
+      setRecipientPhone(phone)
+      setRecipientAddress(address)
     }
   }
 
@@ -252,7 +272,10 @@ const OrderArt: FC = () => {
           name="name"
           label="성명"
           variant="outlined"
-          defaultValue={userinfo?.name}
+          defaultValue={username}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setUsername(event.target.value)
+          }}
           required={true}
           inputRef={register({
             maxLength: {
@@ -274,7 +297,10 @@ const OrderArt: FC = () => {
           label="휴대전화 번호"
           helperText="주문 진행 상태를 안내 받을 번호로 정확히 입력해주세요."
           variant="outlined"
-          defaultValue={userinfo?.phone}
+          defaultValue={phone}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setPhone(event.target.value)
+          }}
           required={true}
           inputRef={register({
             minLength: {
@@ -288,10 +314,13 @@ const OrderArt: FC = () => {
           size="small"
           className={classes.inputBox}
           name="address"
-          label="배송지"
+          label="주문자 주소"
           variant="outlined"
           multiline
-          defaultValue={userinfo?.address}
+          defaultValue={address}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setAddress(event.target.value)
+          }}
           required={true}
           inputRef={register}
         />
@@ -303,17 +332,75 @@ const OrderArt: FC = () => {
               <Checkbox
                 size="small"
                 checked={checkedSameInfo}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setCheckedSameInfo(event.target.checked)
-                }}
-                name="checkedSave"
+                onChange={handleCheckBox}
                 color="primary"
-                inputRef={register}
               />
             }
             label="주문 정보와 동일"
           />
         </div>
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          name="recipientName"
+          label="받는 이의 성명"
+          variant="outlined"
+          value={recipientUsername}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setRecipientUsername(event.target.value)
+          }}
+          required={true}
+          inputRef={register({
+            maxLength: {
+              value: 8,
+              message: '성명은 8자 이내로 입력해주세요.',
+            },
+            minLength: {
+              value: 2,
+              message: '성명은 2자 이상 입력해주세요.',
+            },
+          })}
+        />
+        {errors.recipientName?.type && (
+          <p className={classes.errorMessage}>{errors.recipientName?.message}</p>
+        )}
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          name="recipientPhone"
+          type="tel"
+          label="받는 이의 휴대전화 번호"
+          helperText="배송 상황을 안내 받을 번호로 정확히 입력해주세요."
+          variant="outlined"
+          value={recipientPhone}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setRecipientPhone(event.target.value)
+          }}
+          required={true}
+          inputRef={register({
+            minLength: {
+              value: 10,
+              message: '휴대전화 번호는 10자 이상으로 입력해주세요.',
+            },
+          })}
+        />
+        {errors.recipientPhone?.type && (
+          <p className={classes.errorMessage}>{errors.recipientPhone?.message}</p>
+        )}
+        <TextField
+          size="small"
+          className={classes.inputBox}
+          name="recipientAddress"
+          label="배송지"
+          variant="outlined"
+          multiline
+          value={recipientAddress}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setRecipientAddress(event.target.value)
+          }}
+          required={true}
+          inputRef={register}
+        />
         <Table className={classes.table}>
           <TableBody>
             <TableRow>
