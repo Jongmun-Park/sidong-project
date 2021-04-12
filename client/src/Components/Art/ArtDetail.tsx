@@ -186,7 +186,14 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           {art.saleStatus === SaleStatus.ON_SALE ? (
             <div>
               <div className={classes.price}>{currencyFormatter(art.price)}</div>
-              <Button onClick={() => {}} variant="contained" color="primary" fullWidth>
+              <Button
+                onClick={() => {
+                  window.open(`/order/${art.id}`)
+                }}
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 구매하기
               </Button>
             </div>

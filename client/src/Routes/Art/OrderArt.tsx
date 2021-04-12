@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import gql from 'graphql-tag'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     width: '49%',
   },
   artName: {
-    fontSize: '16px',
+    fontSize: '17px',
     fontWeight: 500,
     margin: '10px 0',
     whiteSpace: 'nowrap',
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pTag: {
     margin: '3px 0',
-    fontSize: '12px',
+    fontSize: '13px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -150,12 +150,34 @@ const ART_FOR_ORDER = gql`
   }
 `
 
+const CREATE_ORDER = gql`
+  mutation CreateOrder(
+    $artId: ID!
+    $address: String!
+    $checkedSave: Boolean!
+    $name: String!
+    $phone: String!
+  ) {
+    createOrder(
+      artId: $artId
+      address: $address
+      checkedSave: $checkedSave
+      name: $name
+      phone: $phone
+    ) {
+      success
+      msg
+    }
+  }
+`
+
 const OrderArt: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const { artId } = useParams<{ artId: string }>()
   const [checkedSave, setCheckedSave] = useState<boolean>(false)
   const { register, handleSubmit, errors } = useForm()
+  const [createOrder] = useMutation(CREATE_ORDER)
   const { data } = useQuery(ART_FOR_ORDER, {
     variables: { artId },
     onError: (error) => console.error(error.message),
@@ -167,7 +189,24 @@ const OrderArt: FC = () => {
 
   const { art } = data
   const { userinfo } = currentUser
-  const onSubmit = async (data: any) => {}
+
+  const onSubmit = async (data: any) => {
+    const result = await createOrder({
+      variables: {
+        artId,
+        address: data.address,
+        checkedSave: data.checkedSave,
+        name: data.name,
+        phone: data.phone,
+      },
+    })
+    if (result.data.createOrder.success) {
+      alert('작품 주문이 완료됐습니다.')
+      window.location.href = '/account/orders'
+    } else {
+      alert(result.data.createOrder.msg)
+    }
+  }
 
   return (
     <main className={classes.main}>
