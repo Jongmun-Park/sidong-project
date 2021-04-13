@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     maxWidth: '1213px',
     minHeight: '100vh',
-    padding: '45px 40px 100px 40px',
+    padding: '35px 24px 100px 24px',
     backgroundColor: 'white',
   },
   categoryTabContainer: {
@@ -40,22 +40,34 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: 500,
     letterSpacing: '0.02857em',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+      maxWidth: '72px',
+      minHeight: '33px',
+      lineHeight: '33px',
+      marginLeft: '10px',
+    },
   },
   avatarContainer: {
     '@media (min-width: 823px)': {
       flex: '0 0 20%',
       maxWidth: '20%',
     },
-    width: '100%',
-    minHeight: '160px',
+    width: '90%',
+    margin: 'auto',
+    minHeight: '140px',
   },
   artistInfo: {
     '@media (min-width: 823px)': {
       flex: '0 0 80%',
       maxWidth: '80%',
     },
-    width: '100%',
-    minHeight: '160px',
+    width: '90%',
+    margin: 'auto',
+    minHeight: '140px',
+    '@media (max-width: 823px)': {
+      fontSize: '12px',
+    },
   },
   avatar: {
     margin: '0 auto 0 auto',
@@ -74,6 +86,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     whiteSpace: 'pre-line',
     padding: '15px 10px 15px 10px',
+    '@media (max-width: 823px)': {
+      fontSize: '14px',
+    },
   },
   posters: {
     display: 'grid',
