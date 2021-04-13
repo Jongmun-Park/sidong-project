@@ -121,15 +121,15 @@ const NavBar: FC = () => {
             >
               {currentUser ? (
                 <div>
-                  <MenuItem onClick={() => (window.location.href = '/account')}>내 계정</MenuItem>
-                  <MenuItem onClick={() => (window.location.href = '/account/likes')}>
-                    관심 목록
-                  </MenuItem>
-                  <MenuItem onClick={() => (window.location.href = '/account/orders')}>
-                    주문 내역
-                  </MenuItem>
                   {isApprovedArtist ? (
                     <>
+                      <MenuItem
+                        onClick={() =>
+                          (window.location.href = `/artist/${currentUser?.artist?.id}`)
+                        }
+                      >
+                        프로필
+                      </MenuItem>
                       <MenuItem onClick={() => (window.location.href = '/art/register')}>
                         작품 등록
                       </MenuItem>
@@ -142,6 +142,13 @@ const NavBar: FC = () => {
                       작가 등록
                     </MenuItem>
                   )}
+                  <MenuItem onClick={() => (window.location.href = '/account')}>내 계정</MenuItem>
+                  <MenuItem onClick={() => (window.location.href = '/account/likes')}>
+                    관심 목록
+                  </MenuItem>
+                  <MenuItem onClick={() => (window.location.href = '/account/orders')}>
+                    주문 내역
+                  </MenuItem>
                   <MenuItem onClick={logout}>로그아웃</MenuItem>
                 </div>
               ) : (

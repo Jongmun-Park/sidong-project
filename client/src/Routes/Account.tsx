@@ -4,6 +4,7 @@ import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
 import LikeContents from '../Components/User/LikingContents'
 import MyArtListTable from '../Components/User/MyArtListTable'
+import MyOrderListTable from '../Components/User/MyOrderListTable'
 
 const useStyles = makeStyles({
   container: {
@@ -114,7 +115,7 @@ const Account: FC = () => {
           {value === 'likes' && <LikeContents />}
         </TabPanel>
         <TabPanel value={value} index={'orders'}>
-          {value === 'orders' && <p>주문 내역</p>}
+          {value === 'orders' && <MyOrderListTable />}
         </TabPanel>
         {isApprovedArtist && (
           <TabPanel value={value} index={'arts'}>

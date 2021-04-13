@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     maxHeight: '470px',
   },
   artName: {
+    textDecoration: 'underline',
     maxWidth: '160px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -112,7 +113,7 @@ const MyArtListTable: FC = () => {
               <TableCell align="center" style={{ width: '14%' }}>
                 등록일
               </TableCell>
-              <TableCell align="center" style={{ width: '40%', maxWidth: '160px' }}>
+              <TableCell align="center" style={{ width: '40%' }}>
                 작품명
               </TableCell>
               <TableCell align="center" style={{ width: '14%' }}>

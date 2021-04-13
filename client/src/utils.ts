@@ -14,6 +14,18 @@ const SALE_STATUS = {
   2: '판매 완료',
 }
 
+const ORDER_STATUS = {
+  1: '대기',
+  2: '실패',
+  3: '성공',
+  4: '배송 준비중',
+  5: '배송 중',
+  6: '배송 완료',
+  7: '환불',
+  8: '환불 완료',
+  9: '구매 확정',
+}
+
 const MEDIUM = {
   0: '회화 (Painting)',
   1: '조각 (Sculpture)',
@@ -50,6 +62,10 @@ export function translateArtistCategory(path: number) {
 
 export function translateSaleStatus(path: number) {
   return get(SALE_STATUS, path)
+}
+
+export function translateOrderStatus(path: number) {
+  return get(ORDER_STATUS, path)
 }
 
 export function translateMedium(path: number) {
