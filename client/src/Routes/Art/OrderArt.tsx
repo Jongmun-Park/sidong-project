@@ -179,8 +179,24 @@ const ART_FOR_ORDER = gql`
 `
 
 const CREATE_ORDER = gql`
-  mutation CreateOrder($artId: ID!, $address: String!, $name: String!, $phone: String!) {
-    createOrder(artId: $artId, address: $address, name: $name, phone: $phone) {
+  mutation CreateOrder(
+    $artId: ID!
+    $address: String!
+    $name: String!
+    $phone: String!
+    $recipientAddress: String!
+    $recipientName: String!
+    $recipientPhone: String!
+  ) {
+    createOrder(
+      artId: $artId
+      address: $address
+      name: $name
+      phone: $phone
+      recipientAddress: $recipientAddress
+      recipientName: $recipientName
+      recipientPhone: $recipientPhone
+    ) {
       success
       msg
     }
@@ -211,24 +227,25 @@ const OrderArt: FC = () => {
   }
 
   const { art } = data
-  console.log('userinfo:', userinfo)
 
   const onSubmit = async (data: any) => {
-    console.log(data)
-    // const result = await createOrder({
-    //   variables: {
-    //     artId,
-    //     address: data.address,
-    //     name: data.name,
-    //     phone: data.phone,
-    //   },
-    // })
-    // if (result.data.createOrder.success) {
-    //   alert('작품 주문이 완료됐습니다.')
-    //   window.location.href = '/account/orders'
-    // } else {
-    //   alert(result.data.createOrder.msg)
-    // }
+    const result = await createOrder({
+      variables: {
+        artId,
+        address: data.address,
+        name: data.name,
+        phone: data.phone,
+        recipientAddress: data.recipientAddress,
+        recipientName: data.recipientName,
+        recipientPhone: data.recipientPhone,
+      },
+    })
+    if (result.data.createOrder.success) {
+      alert('작품 주문이 완료됐습니다.')
+      window.location.href = '/account/orders'
+    } else {
+      alert(result.data.createOrder.msg)
+    }
   }
 
   const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
