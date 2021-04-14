@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from 'react'
+import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   th: {
     color: theme.palette.greyFont.main,
-    width: '40%',
-    padding: '6px 6px 6px 0',
+    width: '23%',
+    padding: '6px',
     fontSize: '0.929em',
     borderBottom: 'none',
     '@media (max-width: 823px)': {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   td: {
-    width: '60%',
+    width: '77%',
     padding: '6px',
     fontSize: '1em',
     fontWeight: 600,
@@ -67,12 +67,22 @@ const ORDER = gql`
   }
 `
 
+const CANCEL_ORDER = gql`
+  mutation CancelOrder($orderId: ID!) {
+    cancelOrder(orderId: $orderId) {
+      success
+      msg
+    }
+  }
+`
+
 const OrderDetail: FC<OrderDetailProps> = ({ openDialog, handleOpenDialog, orderId }) => {
   const classes = useStyles()
   const { data } = useQuery(ORDER, {
     variables: { orderId },
     onError: (error) => console.error(error.message),
   })
+  const [cancelOrder] = useMutation(CANCEL_ORDER)
 
   if (!data) {
     return null
@@ -83,10 +93,20 @@ const OrderDetail: FC<OrderDetailProps> = ({ openDialog, handleOpenDialog, order
     handleOpenDialog(false)
   }
 
-  const handleJoinButton = async () => {}
+  const handleCancelOrder = async (orderId: number) => {
+    if (window.confirm('정말로 취소하시겠습니까?')) {
+      const result = await cancelOrder({ variables: { orderId } })
+      if (result.data.cancelOrder.success) {
+        alert('주문 취소가 완료됐습니다.')
+        window.location.reload()
+      } else {
+        alert(result.data.cancelOrder.msg)
+      }
+    }
+  }
 
   return (
-    <Dialog open={openDialog} onClose={handleClose} aria-labelledby="order-detail-dialog">
+    <Dialog open={openDialog} onClose={handleClose} aria-labelledby="order-detail-dialog" fullWidth>
       <DialogTitle className={classes.dialogTitle} id="order-detail-dialog">
         주문 상세 정보
       </DialogTitle>
@@ -153,7 +173,7 @@ const OrderDetail: FC<OrderDetailProps> = ({ openDialog, handleOpenDialog, order
         </Table>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={() => handleCancelOrder(order.id)} color="primary">
           주문 취소
         </Button>
         <Button onClick={handleClose} color="primary">

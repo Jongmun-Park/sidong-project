@@ -69,7 +69,7 @@ const MyOrderListTable: FC = () => {
     refetch({ page: newPage })
     setPage(newPage)
   }
-  console.log('MyOrderListTable')
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>

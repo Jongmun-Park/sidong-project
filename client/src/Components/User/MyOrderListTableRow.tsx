@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 const MyOrderListTableRow: FC<{ order: Order }> = ({ order }) => {
   const classes = useStyles()
   const [openDialog, setOpenDialog] = useState(false)
-  console.log('MyOrderListTableRow')
+
   return (
     <>
       <TableRow hover tabIndex={-1} key={order.id}>
