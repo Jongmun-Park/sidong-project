@@ -208,6 +208,7 @@ const ArtistDetailPage: FC = () => {
   if (!data) {
     return null
   }
+
   const { artist } = data
   const handleLoadMore = () => {
     if (noMoreArts) {
