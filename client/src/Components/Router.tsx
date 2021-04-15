@@ -22,6 +22,7 @@ class Router extends React.Component {
           <Route exact path="/account/likes" component={Account} />
           <Route exact path="/account/orders" component={Account} />
           <Route exact path="/account/arts" component={Account} />
+          <Route exact path="/account/sales" component={Account} />
 
           <Route exact path="/arts" component={ArtList} />
           <Route exact path="/art/register" component={RegisterArt} />

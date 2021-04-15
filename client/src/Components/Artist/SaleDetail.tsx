@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   th: {
     color: theme.palette.greyFont.main,
-    width: '23%',
+    width: '27%',
     padding: '6px',
     fontSize: '0.929em',
     borderBottom: 'none',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   td: {
-    width: '77%',
+    width: '73%',
     padding: '6px',
     fontSize: '1em',
     fontWeight: 600,
@@ -43,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface OrderDetailProps {
+interface SaleDetailProps {
   openDialog: boolean
   handleOpenDialog: (arg: boolean) => void
   orderId: number
   page: number
-  refetchOrders: (variables: { page: number }) => void
+  refetchSales: (variables: { page: number }) => void
 }
 
 const ORDER = gql`
@@ -65,32 +65,27 @@ const ORDER = gql`
       art {
         id
       }
+      userinfo {
+        id
+        name
+        phone
+      }
     }
   }
 `
 
-const CANCEL_ORDER = gql`
-  mutation CancelOrder($orderId: ID!) {
-    cancelOrder(orderId: $orderId) {
-      success
-      msg
-    }
-  }
-`
-
-const OrderDetail: FC<OrderDetailProps> = ({
+const SaleDetail: FC<SaleDetailProps> = ({
   openDialog,
   handleOpenDialog,
   orderId,
   page,
-  refetchOrders,
+  refetchSales,
 }) => {
   const classes = useStyles()
   const { data } = useQuery(ORDER, {
     variables: { orderId },
     onError: (error) => console.error(error.message),
   })
-  const [cancelOrder] = useMutation(CANCEL_ORDER)
 
   if (!data) {
     return null
@@ -102,21 +97,21 @@ const OrderDetail: FC<OrderDetailProps> = ({
   }
 
   const handleCancelOrder = async (orderId: number) => {
-    if (window.confirm('정말로 취소하시겠습니까?')) {
-      const result = await cancelOrder({ variables: { orderId } })
-      if (result.data.cancelOrder.success) {
-        alert('주문 취소가 완료됐습니다.')
-        refetchOrders({ page })
-      } else {
-        alert(result.data.cancelOrder.msg)
-      }
-    }
+    // if (window.confirm('정말로 취소하시겠습니까?')) {
+    //   const result = await cancelOrder({ variables: { orderId } })
+    //   if (result.data.cancelOrder.success) {
+    //     alert('주문 취소가 완료됐습니다.')
+    //     refetchSales({ page })
+    //   } else {
+    //     alert(result.data.cancelOrder.msg)
+    //   }
+    // }
   }
 
   return (
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="order-detail-dialog" fullWidth>
       <DialogTitle className={classes.dialogTitle} id="order-detail-dialog">
-        주문 상세 정보
+        판매 상세 정보
       </DialogTitle>
       <DialogContent>
         <Table>
@@ -163,19 +158,31 @@ const OrderDetail: FC<OrderDetailProps> = ({
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
-                받는 이
+                주문자
+              </TableCell>
+              <TableCell className={classes.td}>{order.userinfo.name}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                주문자 전화
+              </TableCell>
+              <TableCell className={classes.td}>{order.userinfo.phone}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                <span style={{ backgroundColor: 'antiquewhite' }}>받는 이</span>
               </TableCell>
               <TableCell className={classes.td}>{order.recipientName}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
-                전화 번호
+                <span style={{ backgroundColor: 'antiquewhite' }}>받는 이 전화</span>
               </TableCell>
               <TableCell className={classes.td}>{order.recipientPhone}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
-                배송지
+                <span style={{ backgroundColor: 'antiquewhite' }}>배송지</span>
               </TableCell>
               <TableCell className={classes.td}>{order.recipientAddress}</TableCell>
             </TableRow>
@@ -184,7 +191,7 @@ const OrderDetail: FC<OrderDetailProps> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={() => handleCancelOrder(order.id)} color="primary">
-          주문 취소
+          수정
         </Button>
         <Button onClick={handleClose} color="primary">
           확인
@@ -194,4 +201,4 @@ const OrderDetail: FC<OrderDetailProps> = ({
   )
 }
 
-export default OrderDetail
+export default SaleDetail

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '@material-ui/core'
 import { Order } from '../../types'
-import MyOrderListTableRow from './MyOrderListTableRow'
+import MySaleListTableRow from './MySaleListTableRow'
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +28,9 @@ const useStyles = makeStyles({
   },
 })
 
-const ORDERS = gql`
-  query Orders($page: Int, $pageSize: Int) {
-    orders(page: $page, pageSize: $pageSize) {
+const SALES = gql`
+  query Sales($page: Int, $pageSize: Int) {
+    sales(page: $page, pageSize: $pageSize) {
       totalCount
       orders {
         id
@@ -46,17 +46,17 @@ const ORDERS = gql`
   }
 `
 
-const MyOrderListTable: FC = () => {
+const MySaleListTable: FC = () => {
   const classes = useStyles()
   const [page, setPage] = useState<number>(0)
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [orders, setOrders] = useState<Array<Order> | null>(null)
+  const [sales, setSales] = useState<Array<Order> | null>(null)
 
-  const { data, refetch } = useQuery(ORDERS, {
+  const { data, refetch } = useQuery(SALES, {
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
-      setOrders(data.orders.orders)
-      setTotalCount(data.orders.totalCount)
+      setSales(data.sales.orders)
+      setTotalCount(data.sales.totalCount)
     },
     onError: (error) => console.error(error.message),
   })
@@ -73,7 +73,7 @@ const MyOrderListTable: FC = () => {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table aria-label="나의 주문 목록" size="small" stickyHeader>
+        <Table aria-label="나의 판매 목록" size="small" stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align="center" style={{ width: '20%' }}>
@@ -91,14 +91,9 @@ const MyOrderListTable: FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders &&
-              orders.map((order: Order) => (
-                <MyOrderListTableRow
-                  key={order.id}
-                  order={order}
-                  page={page}
-                  refetchOrders={refetch}
-                />
+            {sales &&
+              sales.map((sale: Order) => (
+                <MySaleListTableRow key={sale.id} sale={sale} page={page} refetchSales={refetch} />
               ))}
           </TableBody>
         </Table>
@@ -115,4 +110,4 @@ const MyOrderListTable: FC = () => {
   )
 }
 
-export default MyOrderListTable
+export default MySaleListTable

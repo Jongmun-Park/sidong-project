@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Box, Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
 import LikeContents from '../Components/User/LikingContents'
-import MyArtListTable from '../Components/User/MyArtListTable'
+import MyArtListTable from '../Components/Artist/MyArtListTable'
+import MySaleListTable from '../Components/Artist/MySaleListTable'
 import MyOrderListTable from '../Components/User/MyOrderListTable'
 
 const useStyles = makeStyles({
@@ -109,6 +110,7 @@ const Account: FC = () => {
         <Tab label="관심 목록" value={'likes'} {...a11yProps('likes')} />
         <Tab label="주문 내역" value={'orders'} {...a11yProps('orders')} />
         {isApprovedArtist && <Tab label="작품 관리" value={'arts'} {...a11yProps('arts')} />}
+        {isApprovedArtist && <Tab label="판매 관리" value={'sales'} {...a11yProps('sales')} />}
       </Tabs>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={'likes'}>
@@ -118,9 +120,14 @@ const Account: FC = () => {
           {value === 'orders' && <MyOrderListTable />}
         </TabPanel>
         {isApprovedArtist && (
-          <TabPanel value={value} index={'arts'}>
-            {value === 'arts' && <MyArtListTable />}
-          </TabPanel>
+          <>
+            <TabPanel value={value} index={'arts'}>
+              {value === 'arts' && <MyArtListTable />}
+            </TabPanel>
+            <TabPanel value={value} index={'sales'}>
+              {value === 'sales' && <MySaleListTable />}
+            </TabPanel>
+          </>
         )}
       </div>
     </main>

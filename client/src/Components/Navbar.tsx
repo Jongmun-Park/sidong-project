@@ -136,13 +136,20 @@ const NavBar: FC = () => {
                       <MenuItem onClick={() => (window.location.href = '/account/arts')}>
                         작품 관리
                       </MenuItem>
+                      <MenuItem onClick={() => (window.location.href = '/account/sales')}>
+                        판매 관리
+                      </MenuItem>
                     </>
                   ) : (
-                    <MenuItem onClick={() => (window.location.href = '/artist/register')}>
-                      작가 등록
-                    </MenuItem>
+                    <>
+                      <MenuItem onClick={() => (window.location.href = '/account')}>
+                        내 계정
+                      </MenuItem>
+                      <MenuItem onClick={() => (window.location.href = '/artist/register')}>
+                        작가 등록
+                      </MenuItem>
+                    </>
                   )}
-                  <MenuItem onClick={() => (window.location.href = '/account')}>내 계정</MenuItem>
                   <MenuItem onClick={() => (window.location.href = '/account/likes')}>
                     관심 목록
                   </MenuItem>
