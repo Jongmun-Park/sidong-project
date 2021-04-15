@@ -15,6 +15,7 @@ const SALE_STATUS = {
 }
 
 const ORDER_STATUS = {
+  0: '취소',
   1: '대기',
   2: '실패',
   3: '성공',

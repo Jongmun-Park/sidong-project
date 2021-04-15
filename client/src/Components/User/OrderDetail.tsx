@@ -47,6 +47,8 @@ interface OrderDetailProps {
   openDialog: boolean
   handleOpenDialog: (arg: boolean) => any
   orderId: number
+  page: number
+  refetchOrders: (variables: { page: number }) => void
 }
 
 const ORDER = gql`
@@ -76,7 +78,13 @@ const CANCEL_ORDER = gql`
   }
 `
 
-const OrderDetail: FC<OrderDetailProps> = ({ openDialog, handleOpenDialog, orderId }) => {
+const OrderDetail: FC<OrderDetailProps> = ({
+  openDialog,
+  handleOpenDialog,
+  orderId,
+  page,
+  refetchOrders,
+}) => {
   const classes = useStyles()
   const { data } = useQuery(ORDER, {
     variables: { orderId },
@@ -98,7 +106,7 @@ const OrderDetail: FC<OrderDetailProps> = ({ openDialog, handleOpenDialog, order
       const result = await cancelOrder({ variables: { orderId } })
       if (result.data.cancelOrder.success) {
         alert('주문 취소가 완료됐습니다.')
-        window.location.reload()
+        refetchOrders({ page })
       } else {
         alert(result.data.cancelOrder.msg)
       }

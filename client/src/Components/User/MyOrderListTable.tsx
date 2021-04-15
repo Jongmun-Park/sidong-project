@@ -92,7 +92,14 @@ const MyOrderListTable: FC = () => {
           </TableHead>
           <TableBody>
             {orders &&
-              orders.map((order: Order) => <MyOrderListTableRow key={order.id} order={order} />)}
+              orders.map((order: Order) => (
+                <MyOrderListTableRow
+                  key={order.id}
+                  order={order}
+                  page={page}
+                  refetchOrders={refetch}
+                />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

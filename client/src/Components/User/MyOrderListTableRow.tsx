@@ -16,7 +16,13 @@ const useStyles = makeStyles({
   },
 })
 
-const MyOrderListTableRow: FC<{ order: Order }> = ({ order }) => {
+interface MyOrderListTableRowProps {
+  order: Order
+  page: number
+  refetchOrders: (variables: { page: number }) => void
+}
+
+const MyOrderListTableRow: FC<MyOrderListTableRowProps> = ({ order, page, refetchOrders }) => {
   const classes = useStyles()
   const [openDialog, setOpenDialog] = useState(false)
 
@@ -31,7 +37,13 @@ const MyOrderListTableRow: FC<{ order: Order }> = ({ order }) => {
         <TableCell align="center">{translateOrderStatus(order.status)}</TableCell>
       </TableRow>
       {openDialog && (
-        <OrderDetail openDialog={openDialog} handleOpenDialog={setOpenDialog} orderId={order.id} />
+        <OrderDetail
+          openDialog={openDialog}
+          handleOpenDialog={setOpenDialog}
+          orderId={order.id}
+          page={page}
+          refetchOrders={refetchOrders}
+        />
       )}
     </>
   )
