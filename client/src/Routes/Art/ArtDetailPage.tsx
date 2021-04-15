@@ -8,12 +8,12 @@ const useStyles = makeStyles({
     '@media (min-width: 1024px)': {
       margin: '0 auto 0 auto',
     },
-    paddingTop: '55px',
+    padding: '55px',
     maxWidth: '1213px',
     minHeight: '100vh',
     backgroundColor: 'white',
     '@media (max-width: 823px)': {
-      paddingTop: '31px',
+      padding: '26px 15px 26px 15px',
     },
   },
 })

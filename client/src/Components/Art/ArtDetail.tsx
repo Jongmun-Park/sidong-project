@@ -12,9 +12,9 @@ import Like from '../../Components/Art/Like'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    '@media (min-width: 1024px)': {
-      margin: '0 auto 0 auto',
-    },
+    // '@media (min-width: 1024px)': {
+    //   margin: '0 auto 0 auto',
+    // },
     display: 'flex',
     flexWrap: 'wrap',
     maxWidth: '1213px',
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   rightBox: {
-    width: '88%',
+    width: '85%',
     margin: 'auto',
     color: theme.palette.lightBlack.main,
   },
@@ -49,8 +49,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   leftBox: {
-    maxWidth: '530px',
-    width: '92%',
+    // maxWidth: '530px',
+    width: '85%',
     margin: 'auto',
   },
   artName: {

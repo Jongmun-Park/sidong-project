@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface OrderDetailProps {
   openDialog: boolean
-  handleOpenDialog: (arg: boolean) => any
+  handleOpenDialog: (arg: boolean) => void
   orderId: number
   page: number
   refetchOrders: (variables: { page: number }) => void

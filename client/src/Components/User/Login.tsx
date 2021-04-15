@@ -12,7 +12,7 @@ import { useMutation } from '@apollo/react-hooks'
 
 interface LoginProps {
   openDialog: boolean
-  handleOpenDialog: (arg: boolean) => any
+  handleOpenDialog: (arg: boolean) => void
 }
 
 interface LoginInputProps {
