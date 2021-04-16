@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
@@ -10,10 +10,12 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  TextField,
 } from '@material-ui/core'
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { currencyFormatter, translateOrderStatus } from '../../utils'
+import { currencyFormatter } from '../../utils'
+import { OrderStatus } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   dialogTitle: {
@@ -70,6 +72,26 @@ const ORDER = gql`
         name
         phone
       }
+      deliveryData
+    }
+  }
+`
+
+const UPDATE_ORDER = gql`
+  mutation UpdateOrder(
+    $deliveryCompany: String
+    $deliveryNumber: String
+    $orderId: ID!
+    $status: ID!
+  ) {
+    updateOrder(
+      deliveryCompany: $deliveryCompany
+      deliveryNumber: $deliveryNumber
+      orderId: $orderId
+      status: $status
+    ) {
+      success
+      msg
     }
   }
 `
@@ -82,8 +104,21 @@ const SaleDetail: FC<SaleDetailProps> = ({
   refetchSales,
 }) => {
   const classes = useStyles()
+  const [status, setStatus] = useState<string>('')
+  const [deliveryCompany, setDeliveryCompany] = useState<string>('')
+  const [deliveryNumber, setDeliveryNumber] = useState<string>('')
+  const [updateOrder] = useMutation(UPDATE_ORDER)
+
   const { data } = useQuery(ORDER, {
     variables: { orderId },
+    onCompleted: (data) => {
+      setStatus(data.order.status)
+      const deliveryData = JSON.parse(data.order.deliveryData)
+      if (deliveryData) {
+        setDeliveryCompany(deliveryData.delivery_company)
+        setDeliveryNumber(deliveryData.delivery_number)
+      }
+    },
     onError: (error) => console.error(error.message),
   })
 
@@ -96,16 +131,23 @@ const SaleDetail: FC<SaleDetailProps> = ({
     handleOpenDialog(false)
   }
 
-  const handleCancelOrder = async (orderId: number) => {
-    // if (window.confirm('정말로 취소하시겠습니까?')) {
-    //   const result = await cancelOrder({ variables: { orderId } })
-    //   if (result.data.cancelOrder.success) {
-    //     alert('주문 취소가 완료됐습니다.')
-    //     refetchSales({ page })
-    //   } else {
-    //     alert(result.data.cancelOrder.msg)
-    //   }
-    // }
+  const handleSave = async (orderId: number) => {
+    if (window.confirm('새로 저장하시겠습니까?')) {
+      const result = await updateOrder({
+        variables: {
+          orderId,
+          status,
+          deliveryCompany,
+          deliveryNumber,
+        },
+      })
+      if (result.data.updateOrder.success) {
+        alert('주문을 새로 저장했습니다.')
+        refetchSales({ page })
+      } else {
+        alert(result.data.updateOrder.msg)
+      }
+    }
   }
 
   return (
@@ -143,13 +185,83 @@ const SaleDetail: FC<SaleDetailProps> = ({
               <TableCell className={classes.td}>{currencyFormatter(order.price)}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className={classes.th} component="th" scope="row">
+              <TableCell
+                className={classes.th}
+                style={{ color: 'crimson' }}
+                component="th"
+                scope="row"
+              >
                 상태
               </TableCell>
-              <TableCell className={classes.td} style={{ color: 'crimson' }}>
-                {translateOrderStatus(order.status)}
+              <TableCell className={classes.td}>
+                <select
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setStatus(e.target.value)
+                  }}
+                  defaultValue={order.status}
+                >
+                  <option disabled value={OrderStatus.CANCEL}>
+                    주문 취소
+                  </option>
+                  <option disabled value={OrderStatus.WAIT}>
+                    대기
+                  </option>
+                  <option disabled value={OrderStatus.FAIL}>
+                    주문 실패
+                  </option>
+                  <option disabled value={OrderStatus.SUCCESS}>
+                    주문 성공
+                  </option>
+                  <option value={OrderStatus.PREPARE_DELIVERY}>배송 준비중</option>
+                  <option value={OrderStatus.ON_DELIVERY}>배송 중</option>
+                  <option value={OrderStatus.DELIVERY_COMPLETED}>배송 완료</option>
+                  <option disabled value={OrderStatus.REFUND}>
+                    환불 요청
+                  </option>
+                  <option disabled value={OrderStatus.REFUND_COMPLETED}>
+                    환불 완료
+                  </option>
+                  <option disabled value={OrderStatus.COMPLETED}>
+                    구매 확정
+                  </option>
+                </select>
               </TableCell>
             </TableRow>
+            {Number(status) >= OrderStatus.ON_DELIVERY && (
+              <>
+                <TableRow>
+                  <TableCell className={classes.th} component="th" scope="row">
+                    택배 회사명
+                  </TableCell>
+                  <TableCell className={classes.td}>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      value={deliveryCompany}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setDeliveryCompany(e.target.value)
+                      }}
+                    />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className={classes.th} component="th" scope="row">
+                    송장 번호
+                  </TableCell>
+                  <TableCell className={classes.td}>
+                    <TextField
+                      margin="dense"
+                      value={deliveryNumber}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setDeliveryNumber(e.target.value)
+                      }}
+                      fullWidth
+                      multiline
+                    />
+                  </TableCell>
+                </TableRow>
+              </>
+            )}
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
                 주문일
@@ -190,8 +302,8 @@ const SaleDetail: FC<SaleDetailProps> = ({
         </Table>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleCancelOrder(order.id)} color="primary">
-          수정
+        <Button onClick={() => handleSave(order.id)} color="primary">
+          저장
         </Button>
         <Button onClick={handleClose} color="primary">
           확인
