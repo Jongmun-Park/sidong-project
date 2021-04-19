@@ -72,7 +72,8 @@ const ORDER = gql`
         name
         phone
       }
-      deliveryData
+      deliveryCompany
+      deliveryNumber
     }
   }
 `
@@ -82,7 +83,7 @@ const UPDATE_ORDER = gql`
     $deliveryCompany: String
     $deliveryNumber: String
     $orderId: ID!
-    $status: ID!
+    $status: Int!
   ) {
     updateOrder(
       deliveryCompany: $deliveryCompany
@@ -108,16 +109,12 @@ const SaleDetail: FC<SaleDetailProps> = ({
   const [deliveryCompany, setDeliveryCompany] = useState<string>('')
   const [deliveryNumber, setDeliveryNumber] = useState<string>('')
   const [updateOrder] = useMutation(UPDATE_ORDER)
-
-  const { data } = useQuery(ORDER, {
+  const { data, refetch } = useQuery(ORDER, {
     variables: { orderId },
     onCompleted: (data) => {
       setStatus(data.order.status)
-      const deliveryData = JSON.parse(data.order.deliveryData)
-      if (deliveryData) {
-        setDeliveryCompany(deliveryData.delivery_company)
-        setDeliveryNumber(deliveryData.delivery_number)
-      }
+      setDeliveryCompany(data.order.deliveryCompany ? data.order.deliveryCompany : '')
+      setDeliveryNumber(data.order.deliveryNumber ? data.order.deliveryNumber : '')
     },
     onError: (error) => console.error(error.message),
   })
@@ -143,6 +140,7 @@ const SaleDetail: FC<SaleDetailProps> = ({
       })
       if (result.data.updateOrder.success) {
         alert('주문을 새로 저장했습니다.')
+        refetch()
         refetchSales({ page })
       } else {
         alert(result.data.updateOrder.msg)
@@ -302,11 +300,11 @@ const SaleDetail: FC<SaleDetailProps> = ({
         </Table>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleSave(order.id)} color="primary">
-          저장
+        <Button onClick={() => handleSave(order.id)} color="secondary">
+          저 장
         </Button>
         <Button onClick={handleClose} color="primary">
-          확인
+          확 인
         </Button>
       </DialogActions>
     </Dialog>

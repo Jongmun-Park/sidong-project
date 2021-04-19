@@ -93,10 +93,10 @@ const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          취소
+          취 소
         </Button>
         <Button onClick={handleLoginButton} color="primary">
-          확인
+          확 인
         </Button>
       </DialogActions>
     </Dialog>

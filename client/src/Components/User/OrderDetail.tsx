@@ -14,6 +14,7 @@ import {
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { currencyFormatter, translateOrderStatus } from '../../utils'
+import { OrderStatus } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   dialogTitle: {
@@ -58,6 +59,8 @@ const ORDER = gql`
       recipientName
       recipientPhone
       recipientAddress
+      deliveryCompany
+      deliveryNumber
       artName
       price
       status
@@ -78,6 +81,15 @@ const CANCEL_ORDER = gql`
   }
 `
 
+const COMPLETE_ORDER = gql`
+  mutation CompleteOrder($orderId: ID!) {
+    completeOrder(orderId: $orderId) {
+      success
+      msg
+    }
+  }
+`
+
 const OrderDetail: FC<OrderDetailProps> = ({
   openDialog,
   handleOpenDialog,
@@ -91,6 +103,7 @@ const OrderDetail: FC<OrderDetailProps> = ({
     onError: (error) => console.error(error.message),
   })
   const [cancelOrder] = useMutation(CANCEL_ORDER)
+  const [completeOrder] = useMutation(COMPLETE_ORDER)
 
   if (!data) {
     return null
@@ -109,6 +122,18 @@ const OrderDetail: FC<OrderDetailProps> = ({
         refetchOrders({ page })
       } else {
         alert(result.data.cancelOrder.msg)
+      }
+    }
+  }
+
+  const handleCompleteOrder = async (orderId: number) => {
+    if (window.confirm('구매를 확정하시겠습니까?')) {
+      const result = await completeOrder({ variables: { orderId } })
+      if (result.data.completeOrder.success) {
+        alert('구매가 확정됐습니다.')
+        refetchOrders({ page })
+      } else {
+        alert(result.data.completeOrder.msg)
       }
     }
   }
@@ -179,15 +204,39 @@ const OrderDetail: FC<OrderDetailProps> = ({
               </TableCell>
               <TableCell className={classes.td}>{order.recipientAddress}</TableCell>
             </TableRow>
+            {order.deliveryCompany && (
+              <>
+                <TableRow>
+                  <TableCell className={classes.th} component="th" scope="row">
+                    <span style={{ backgroundColor: 'antiquewhite' }}>택배 회사</span>
+                  </TableCell>
+                  <TableCell className={classes.td}>{order.deliveryCompany}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className={classes.th} component="th" scope="row">
+                    <span style={{ backgroundColor: 'antiquewhite' }}>송장 번호</span>
+                  </TableCell>
+                  <TableCell className={classes.td}>{order.deliveryNumber}</TableCell>
+                </TableRow>
+              </>
+            )}
           </TableBody>
         </Table>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleCancelOrder(order.id)} color="primary">
-          주문 취소
-        </Button>
+        {Number(order.status) < OrderStatus.ON_DELIVERY && (
+          <Button onClick={() => handleCancelOrder(order.id)} color="secondary">
+            주문 취소
+          </Button>
+        )}
+        {(order.status == OrderStatus.ON_DELIVERY ||
+          order.status == OrderStatus.DELIVERY_COMPLETED) && (
+          <Button onClick={() => handleCompleteOrder(order.id)} color="secondary">
+            구매 확정
+          </Button>
+        )}
         <Button onClick={handleClose} color="primary">
-          확인
+          확 인
         </Button>
       </DialogActions>
     </Dialog>
