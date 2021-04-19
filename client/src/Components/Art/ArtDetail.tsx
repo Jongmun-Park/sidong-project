@@ -12,9 +12,9 @@ import Like from '../../Components/Art/Like'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    // '@media (min-width: 1024px)': {
-    //   margin: '0 auto 0 auto',
-    // },
+    '@media (min-width: 1024px)': {
+      margin: '0 auto 0 auto',
+    },
     display: 'flex',
     flexWrap: 'wrap',
     maxWidth: '1213px',

@@ -9,6 +9,7 @@ import OrderFilter from '../../Components/Artist/OrderFilter'
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
+    justifyContent: 'center',
     '@media (max-width: 823px)': {
       flexDirection: 'column',
     },

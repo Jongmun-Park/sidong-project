@@ -202,13 +202,13 @@ const SaleDetail: FC<SaleDetailProps> = ({
                     주문 취소
                   </option>
                   <option disabled value={OrderStatus.WAIT}>
-                    대기
+                    결제 대기
                   </option>
                   <option disabled value={OrderStatus.FAIL}>
-                    주문 실패
+                    결제 실패
                   </option>
                   <option disabled value={OrderStatus.SUCCESS}>
-                    주문 성공
+                    결제 완료
                   </option>
                   <option value={OrderStatus.PREPARE_DELIVERY}>배송 준비중</option>
                   <option value={OrderStatus.ON_DELIVERY}>배송 중</option>

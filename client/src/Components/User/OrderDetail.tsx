@@ -224,13 +224,13 @@ const OrderDetail: FC<OrderDetailProps> = ({
         </Table>
       </DialogContent>
       <DialogActions>
-        {Number(order.status) < OrderStatus.ON_DELIVERY && (
+        {order.status < OrderStatus.ON_DELIVERY && (
           <Button onClick={() => handleCancelOrder(order.id)} color="secondary">
             주문 취소
           </Button>
         )}
-        {(order.status == OrderStatus.ON_DELIVERY ||
-          order.status == OrderStatus.DELIVERY_COMPLETED) && (
+        {(order.status === OrderStatus.ON_DELIVERY ||
+          order.status === OrderStatus.DELIVERY_COMPLETED) && (
           <Button onClick={() => handleCompleteOrder(order.id)} color="secondary">
             구매 확정
           </Button>
