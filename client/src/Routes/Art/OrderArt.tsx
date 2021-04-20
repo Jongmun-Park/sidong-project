@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
@@ -14,8 +14,8 @@ import {
   TableBody,
   TextField,
 } from '@material-ui/core'
-import { useCurrentUser } from '../../Hooks/User'
 import { currencyFormatter } from '../../utils'
+import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -205,7 +205,8 @@ const CREATE_ORDER = gql`
 
 const OrderArt: FC = () => {
   const classes = useStyles()
-  const { userinfo } = useCurrentUser()
+  const currentUser = useCurrentUser()
+  const userinfo = currentUser?.userinfo ? currentUser.userinfo : null
   const { artId } = useParams<{ artId: string }>()
   const [checkedSameInfo, setCheckedSameInfo] = useState<boolean>(false)
   const [username, setUsername] = useState<string>(userinfo ? userinfo.name : '')
@@ -221,6 +222,14 @@ const OrderArt: FC = () => {
     variables: { artId },
     onError: (error) => console.error(error.message),
   })
+
+  useEffect(() => {
+    if (!currentUser) {
+      alert('로그인이 필요합니다.')
+      window.location.href = '/'
+    }
+    // eslint-disable-next-line
+  }, [])
 
   if (!data) {
     return null

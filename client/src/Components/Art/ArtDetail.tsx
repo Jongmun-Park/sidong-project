@@ -7,8 +7,10 @@ import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
 import { ART } from '../../querys'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
-import ArtInfoTable from '../../Components/Art/InfoTable'
-import Like from '../../Components/Art/Like'
+import ArtInfoTable from './InfoTable'
+import Like from './Like'
+import Login from '../User/Login'
+import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -136,7 +138,9 @@ function a11yProps(index: any) {
 
 const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
   const [value, setValue] = useState<number>(0)
+  const [openLogin, setOpenLogin] = useState(false)
 
   const { data } = useQuery(ART, {
     variables: {
@@ -188,7 +192,12 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
               <div className={classes.price}>{currencyFormatter(art.price)}</div>
               <Button
                 onClick={() => {
-                  window.open(`/order/${art.id}`)
+                  if (!currentUser) {
+                    setOpenLogin(true)
+                    return
+                  } else {
+                    window.open(`/order/${art.id}`)
+                  }
                 }}
                 variant="contained"
                 color="primary"
@@ -226,6 +235,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           Item Three
         </TabPanel>
       </div>
+      {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
     </main>
   )
 }
