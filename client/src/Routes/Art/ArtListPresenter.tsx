@@ -16,13 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
   leftSideBar: {
     color: theme.palette.lightBlack.main,
-    margin: '28px 0px 50px 30px',
+    margin: '61px 0px 0px 40px',
     minWidth: '267px',
     '@media (max-width: 823px)': {
       display: 'none',
-    },
-    '@media (min-width: 1713px)': {
-      margin: '28px 0px 50px 57px',
     },
   },
   orderFilterWrapper: {
@@ -45,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentSection: {
     width: '100%',
-    maxWidth: '1500px',
+    maxWidth: '1413px',
     margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
@@ -65,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 823px)': {
       display: 'none',
     },
-    padding: '10px 27px 4px 27px',
+    padding: '10px 27px 10px 27px',
     top: '49px',
     position: 'sticky',
     zIndex: 1,
