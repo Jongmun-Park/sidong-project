@@ -30,22 +30,29 @@ const useStyles = makeStyles((theme) => ({
       overflowY: 'auto',
     },
   },
+  listBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '10px',
+  },
   chips: {
     margin: '5px 0 8px 0',
     paddingLeft: '18px',
-    '& div.inactive': {
-      backgroundColor: theme.palette.greyFont.main,
-    },
     '& .MuiChip-root': {
       fontSize: '12px',
-      marginBottom: '2px',
+      margin: '0px 2px 2px 0px',
+    },
+    '& div.inactive': {
+      fontWeight: 600,
+      backgroundColor: theme.palette.grey[300],
+      color: theme.palette.lightBlack.main,
     },
   },
   select: {
-    float: 'right',
-    width: '150px',
-    margin: '0 20px 5px 0',
+    width: '115px',
+    alignSelf: 'flex-end',
     fontSize: '13px',
+    marginRight: '16px',
   },
   slider: {
     width: '90%',
@@ -161,73 +168,81 @@ const FilterContainer: FC<FilterContainerProps> = ({
   return (
     <div>
       <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
-        <ListItem>
-          <ListItemText primary="매체 | Medium" />
-        </ListItem>
-        <Select className={classes.select} value={medium} onChange={handleMedium}>
-          <MenuItem value={'all'}>전 체</MenuItem>
-          <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
-          <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
-          <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
-          <MenuItem value={Medium.PRINT}>판화 (Print)</MenuItem>
-          <MenuItem value={Medium.PAPER}>종이 (Paper)</MenuItem>
-          <MenuItem value={Medium.TEXTILE}>섬유 (Textile)</MenuItem>
-          <MenuItem value={Medium.ETC}>기타 매체</MenuItem>
-        </Select>
+        <div className={classes.listBox}>
+          <ListItem>
+            <ListItemText primary="매체 | Medium" />
+          </ListItem>
+          <Select className={classes.select} value={medium} onChange={handleMedium}>
+            <MenuItem value={'all'}>전 체</MenuItem>
+            <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
+            <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
+            <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
+            <MenuItem value={Medium.PRINT}>판화 (Print)</MenuItem>
+            <MenuItem value={Medium.PAPER}>종이 (Paper)</MenuItem>
+            <MenuItem value={Medium.TEXTILE}>섬유 (Textile)</MenuItem>
+            <MenuItem value={Medium.ETC}>기타 매체</MenuItem>
+          </Select>
+        </div>
         {openArtOptions && (
-          <div>
-            <ListItem>
-              <ListItemText primary="주제 | Theme" />
-            </ListItem>
-            <Select
-              className={classes.select}
-              value={theme}
-              onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                setTheme(e.target.value as string)
-              }}
-            >
-              <MenuItem value={'all'}>전 체</MenuItem>
-              {artOptions?.themes.map((theme) => (
-                <MenuItem key={theme.id} value={theme.id}>
-                  {theme.name}
-                </MenuItem>
-              ))}
-            </Select>
-            <ListItem>
-              <ListItemText primary="스타일 | Style" />
-            </ListItem>
-            <Select
-              className={classes.select}
-              value={style}
-              onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                setStyle(e.target.value as string)
-              }}
-            >
-              <MenuItem value={'all'}>전 체</MenuItem>
-              {artOptions?.styles.map((style) => (
-                <MenuItem key={style.id} value={style.id}>
-                  {style.name}
-                </MenuItem>
-              ))}
-            </Select>
-            <ListItem>
-              <ListItemText primary="기법 | Technique" />
-            </ListItem>
-            <Select
-              className={classes.select}
-              value={technique}
-              onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                setTechnique(e.target.value as string)
-              }}
-            >
-              <MenuItem value={'all'}>전 체</MenuItem>
-              {artOptions?.techniques.map((technique) => (
-                <MenuItem key={technique.id} value={technique.id}>
-                  {technique.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </div>
+          <>
+            <div className={classes.listBox}>
+              <ListItem>
+                <ListItemText primary="주제 | Theme" />
+              </ListItem>
+              <Select
+                className={classes.select}
+                value={theme}
+                onChange={(e: ChangeEvent<{ value: unknown }>) => {
+                  setTheme(e.target.value as string)
+                }}
+              >
+                <MenuItem value={'all'}>전 체</MenuItem>
+                {artOptions?.themes.map((theme) => (
+                  <MenuItem key={theme.id} value={theme.id}>
+                    {theme.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className={classes.listBox}>
+              <ListItem>
+                <ListItemText primary="스타일 | Style" />
+              </ListItem>
+              <Select
+                className={classes.select}
+                value={style}
+                onChange={(e: ChangeEvent<{ value: unknown }>) => {
+                  setStyle(e.target.value as string)
+                }}
+              >
+                <MenuItem value={'all'}>전 체</MenuItem>
+                {artOptions?.styles.map((style) => (
+                  <MenuItem key={style.id} value={style.id}>
+                    {style.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className={classes.listBox}>
+              <ListItem>
+                <ListItemText primary="기법 | Technique" />
+              </ListItem>
+              <Select
+                className={classes.select}
+                value={technique}
+                onChange={(e: ChangeEvent<{ value: unknown }>) => {
+                  setTechnique(e.target.value as string)
+                }}
+              >
+                <MenuItem value={'all'}>전 체</MenuItem>
+                {artOptions?.techniques.map((technique) => (
+                  <MenuItem key={technique.id} value={technique.id}>
+                    {technique.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          </>
         )}
         <ListItem
           button
@@ -246,10 +261,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSaleStatus({ ...saleStatus, onSale: true })
-            }}
-            onDelete={() => {
-              setSaleStatus({ ...saleStatus, onSale: false })
+              setSaleStatus({ ...saleStatus, onSale: !saleStatus.onSale })
             }}
           />
           <Chip
@@ -259,10 +271,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSaleStatus({ ...saleStatus, soldOut: true })
-            }}
-            onDelete={() => {
-              setSaleStatus({ ...saleStatus, soldOut: false })
+              setSaleStatus({ ...saleStatus, soldOut: !saleStatus.soldOut })
             }}
           />
           <Chip
@@ -272,10 +281,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSaleStatus({ ...saleStatus, notForSale: true })
-            }}
-            onDelete={() => {
-              setSaleStatus({ ...saleStatus, notForSale: false })
+              setSaleStatus({ ...saleStatus, notForSale: !saleStatus.notForSale })
             }}
           />
         </Collapse>
@@ -321,10 +327,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSize({ ...size, small: true })
-            }}
-            onDelete={() => {
-              setSize({ ...size, small: false })
+              setSize({ ...size, small: !size.small })
             }}
           />
           <Chip
@@ -334,10 +337,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSize({ ...size, medium: true })
-            }}
-            onDelete={() => {
-              setSize({ ...size, medium: false })
+              setSize({ ...size, medium: !size.medium })
             }}
           />
           <Chip
@@ -347,10 +347,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setSize({ ...size, large: true })
-            }}
-            onDelete={() => {
-              setSize({ ...size, large: false })
+              setSize({ ...size, large: !size.large })
             }}
           />
         </Collapse>
@@ -371,10 +368,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setOrientation({ ...orientation, landscape: true })
-            }}
-            onDelete={() => {
-              setOrientation({ ...orientation, landscape: false })
+              setOrientation({ ...orientation, landscape: !orientation.landscape })
             }}
           />
           <Chip
@@ -384,10 +378,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setOrientation({ ...orientation, portrait: true })
-            }}
-            onDelete={() => {
-              setOrientation({ ...orientation, portrait: false })
+              setOrientation({ ...orientation, portrait: !orientation.portrait })
             }}
           />
           <Chip
@@ -397,10 +388,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setOrientation({ ...orientation, square: true })
-            }}
-            onDelete={() => {
-              setOrientation({ ...orientation, square: false })
+              setOrientation({ ...orientation, square: !orientation.square })
             }}
           />
           <Chip
@@ -410,10 +398,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             color="primary"
             size="small"
             onClick={() => {
-              setOrientation({ ...orientation, etc: true })
-            }}
-            onDelete={() => {
-              setOrientation({ ...orientation, etc: false })
+              setOrientation({ ...orientation, etc: !orientation.etc })
             }}
           />
         </Collapse>
