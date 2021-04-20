@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: '10px',
     paddingBottom: '14px',
-    border: '3px double',
+    border: '4px solid',
     borderRadius: '14px',
-    borderColor: theme.palette.lightBlack.main,
+    borderColor: theme.palette.beige.main,
+    backgroundColor: theme.palette.beige.light,
   },
   select: {
     width: '115px',
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     backgroundColor: theme.palette.lightBlack.main,
-    color: theme.palette.primary.light,
+    color: theme.palette.beige.main,
     '&.MuiButton-contained:hover': {
       backgroundColor: theme.palette.lightBlack.light,
     },

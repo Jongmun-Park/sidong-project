@@ -1,14 +1,16 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    greyFont: Palette['primary']
     lightBlack: Palette['primary']
-    lightGrey: Palette['primary']
+    greyFont: Palette['primary']
+    greyBackground: Palette['primary']
+    beige: Palette['primary']
   }
   interface PaletteOptions {
-    greyFont: PaletteOptions['primary']
     lightBlack: PaletteOptions['primary']
-    lightGrey: PaletteOptions['primary']
+    greyFont: PaletteOptions['primary']
+    greyBackground: PaletteOptions['primary']
+    beige: PaletteOptions['primary']
   }
 }
 
@@ -16,7 +18,6 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#6c1714',
-      light: '#f0eadb',
     },
     secondary: {
       main: '#0070b8',
@@ -24,12 +25,16 @@ const theme = createMuiTheme({
     greyFont: {
       main: '#818181',
     },
+    greyBackground: {
+      main: '#f5f6fa',
+    },
     lightBlack: {
       main: '#333333',
       light: '#808080',
     },
-    lightGrey: {
-      main: '#f5f6fa',
+    beige: {
+      main: '#f0eadb',
+      light: '#f7f5ed',
     },
   },
   overrides: {
