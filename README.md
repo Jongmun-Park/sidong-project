@@ -1,2 +1,4 @@
 # sidong-project
-sidong
+
+create-react-app
+node 12.\*
