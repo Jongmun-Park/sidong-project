@@ -11,7 +11,7 @@ import { MemoizedPoster } from '../../Components/Art/Poster'
 const useStyles = makeStyles((theme) => ({
   container: {
     '@media (min-width: 823px)': {
-      padding: '70px 70px 100px 70px',
+      padding: '120px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
     display: 'flex',
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     maxWidth: '1213px',
     minHeight: '100vh',
-    padding: '35px 24px 100px 24px',
+    padding: '85px 24px 100px 24px',
     backgroundColor: 'white',
   },
   categoryTabContainer: {

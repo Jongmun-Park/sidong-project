@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     maxWidth: '1213px',
     minHeight: '100vh',
     backgroundColor: 'white',
+    paddingTop: '50px',
   },
   userName: {
     margin: '40px 0 40px 60px',

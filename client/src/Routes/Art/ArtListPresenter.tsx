@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     justifyContent: 'center',
+    paddingTop: '50px',
     '@media (max-width: 823px)': {
       flexDirection: 'column',
     },

@@ -8,17 +8,15 @@ import { useCurrentUser } from '../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    position: 'fixed',
-    zIndex: 100,
     display: 'flex',
-    width: '100%',
-    height: '49px',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    height: '50px',
+    maxWidth: '1680px',
+    margin: 'auto',
   },
   logoFont: {
-    marginLeft: '60px',
+    marginLeft: '30px',
     color: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: '19px',
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: '60px',
+    marginRight: '50px',
     '@media (max-width: 823px)': {
       marginRight: '3px',
       width: 'auto',

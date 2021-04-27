@@ -6,7 +6,10 @@ import NavBar from './Navbar'
 
 const useStyles = makeStyles({
   navBarContainer: {
-    paddingBottom: '50px',
+    width: '100%',
+    backgroundColor: 'white',
+    position: 'fixed',
+    zIndex: 100,
   },
 })
 
