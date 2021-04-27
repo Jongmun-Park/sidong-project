@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     maxWidth: '1213px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
+    paddingTop: '50px',
   },
   firstSection: {
     paddingTop: '35px',
