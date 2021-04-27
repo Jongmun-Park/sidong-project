@@ -119,6 +119,7 @@ const LikingArts: FC = () => {
               <MemoizedPoster
                 key={art.id}
                 id={art.id}
+                artistId={art.artist.id}
                 name={art.name}
                 width={art.width}
                 height={art.height}
@@ -129,9 +130,11 @@ const LikingArts: FC = () => {
               />
             ))}
           </div>
-          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-            더 보기
-          </Button>
+          {data.userLikingArts.arts.length >= 20 && (
+            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+              더 보기
+            </Button>
+          )}
         </div>
       ) : (
         <p style={{ padding: '15px' }}>관심 작품이 없습니다.</p>

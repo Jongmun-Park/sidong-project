@@ -128,9 +128,11 @@ const LikingArtists: FC = () => {
               />
             ))}
           </div>
-          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-            더 보기
-          </Button>
+          {data.userLikingArtists.artists.length >= 20 && (
+            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+              더 보기
+            </Button>
+          )}
         </div>
       ) : (
         <p style={{ padding: '15px' }}>관심 작가가 없습니다.</p>

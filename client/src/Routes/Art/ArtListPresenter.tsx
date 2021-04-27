@@ -152,9 +152,11 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({
               />
             ))}
           </div>
-          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-            더 보기
-          </Button>
+          {arts.length >= 20 && (
+            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+              더 보기
+            </Button>
+          )}
         </div>
       ) : (
         <div className={classes.contentSection}>

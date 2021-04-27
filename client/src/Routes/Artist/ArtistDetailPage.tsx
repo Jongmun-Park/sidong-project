@@ -255,9 +255,11 @@ const ArtistDetailPage: FC = () => {
               />
             ))}
           </div>
-          <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-            더 보기
-          </Button>
+          {arts.length >= 20 && (
+            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
+              더 보기
+            </Button>
+          )}
         </div>
       ) : (
         <p className={classes.pTag}>아직 등록된 작품이 없습니다.</p>
