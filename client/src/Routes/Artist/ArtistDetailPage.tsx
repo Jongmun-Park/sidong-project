@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
       '@media (max-width: 823px)': {
-        fontSize: '1rem',
+        fontSize: '1.1rem',
       },
     },
   },

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     marginBottom: '11px',
     '@media (max-width: 823px)': {
-      marginBottom: '4px',
+      marginBottom: '9px',
     },
   },
   headText: {
@@ -51,15 +51,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
     color: theme.palette.lightBlack.main,
     cursor: 'pointer',
-    fontSize: '14px',
+    fontSize: '13px',
     fontWeight: 'bold',
+    marginBottom: '1px',
     '@media (max-width: 823px)': {
-      fontSize: '12px',
+      fontSize: '11px',
     },
   },
   artistName: {
     maxWidth: '103px',
-    fontSize: '12px',
+    fontSize: '11px',
     marginBottom: '5px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -80,8 +81,8 @@ const useStyles = makeStyles((theme) => ({
   },
   chipLable: {
     width: '43px',
-    fontSize: '9px',
-    fontWeight: 600,
+    height: '18px',
+    fontSize: '10px',
   },
   like: {
     cursor: 'pointer',
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
       '@media (max-width: 823px)': {
-        fontSize: '1rem',
+        fontSize: '1.1rem',
       },
     },
   },

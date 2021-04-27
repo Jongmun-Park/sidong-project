@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     margin: '0px 50px 18px 0px',
     fontSize: '13px',
     '@media (max-width: 823px)': {
+      width: '85px',
       margin: '0px',
       fontSize: '11px',
     },

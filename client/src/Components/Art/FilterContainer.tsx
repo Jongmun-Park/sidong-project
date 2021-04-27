@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTypography-body1': {
       fontSize: '13px',
       fontWeight: 600,
+      '@media (max-width: 823px)': {
+        fontSize: '11px',
+      },
     },
     '@media (max-width: 823px)': {
       height: '370px',
@@ -39,6 +42,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '14px',
     borderColor: theme.palette.beige.main,
     backgroundColor: theme.palette.beige.light,
+    '&.row': {
+      flexDirection: 'row',
+    },
+    '@media (max-width: 823px)': {
+      paddingBottom: '11px',
+      marginBottom: '5px',
+    },
   },
   chips: {
     padding: '7px 16px 0px 16px',
@@ -57,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'flex-end',
     fontSize: '13px',
     marginRight: '16px',
+    '@media (max-width: 823px)': {
+      fontSize: '11px',
+    },
   },
   slider: {
     width: '90%',
@@ -71,13 +84,17 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonWrapper: {
     float: 'right',
-    marginRight: '5px',
+    margin: '5px 5px 0px 0px',
   },
   button: {
     backgroundColor: theme.palette.lightBlack.main,
     color: theme.palette.beige.main,
     '&.MuiButton-contained:hover': {
       backgroundColor: theme.palette.lightBlack.light,
+    },
+    '@media (max-width: 823px)': {
+      fontSize: '11px',
+      minWidth: '50px',
     },
   },
 }))
@@ -170,11 +187,11 @@ const FilterContainer: FC<FilterContainerProps> = ({
   }
 
   return (
-    <div>
+    <>
       <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
-        <div className={classes.listBox}>
+        <div className={classes.listBox + ' row'}>
           <ListItem>
-            <ListItemText primary="매체 | Medium" />
+            <ListItemText primary="매체" />
           </ListItem>
           <Select className={classes.select} value={medium} onChange={handleMedium}>
             <MenuItem value={'all'}>전 체</MenuItem>
@@ -189,9 +206,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
         </div>
         {openArtOptions && (
           <>
-            <div className={classes.listBox}>
+            <div className={classes.listBox + ' row'}>
               <ListItem>
-                <ListItemText primary="주제 | Theme" />
+                <ListItemText primary="주제" />
               </ListItem>
               <Select
                 className={classes.select}
@@ -208,9 +225,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
                 ))}
               </Select>
             </div>
-            <div className={classes.listBox}>
+            <div className={classes.listBox + ' row'}>
               <ListItem>
-                <ListItemText primary="스타일 | Style" />
+                <ListItemText primary="스타일" />
               </ListItem>
               <Select
                 className={classes.select}
@@ -227,9 +244,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
                 ))}
               </Select>
             </div>
-            <div className={classes.listBox}>
+            <div className={classes.listBox + ' row'}>
               <ListItem>
-                <ListItemText primary="기법 | Technique" />
+                <ListItemText primary="기법" />
               </ListItem>
               <Select
                 className={classes.select}
@@ -431,7 +448,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
           적용하기
         </Button>
       </div>
-    </div>
+    </>
   )
 }
 
