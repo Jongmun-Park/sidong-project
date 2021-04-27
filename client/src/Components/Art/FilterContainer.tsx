@@ -191,7 +191,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
       <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
         <div className={classes.listBox + ' row'}>
           <ListItem>
-            <ListItemText primary="매체" />
+            <ListItemText primary="매 체" />
           </ListItem>
           <Select className={classes.select} value={medium} onChange={handleMedium}>
             <MenuItem value={'all'}>전 체</MenuItem>
@@ -208,7 +208,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
           <>
             <div className={classes.listBox + ' row'}>
               <ListItem>
-                <ListItemText primary="주제" />
+                <ListItemText primary="주 제" />
               </ListItem>
               <Select
                 className={classes.select}
@@ -246,7 +246,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             </div>
             <div className={classes.listBox + ' row'}>
               <ListItem>
-                <ListItemText primary="기법" />
+                <ListItemText primary="기 법" />
               </ListItem>
               <Select
                 className={classes.select}
