@@ -1,4 +1,6 @@
-import React, { FC, ChangeEvent, useState } from 'react'
+import React, { FC } from 'react'
+import { useForm } from 'react-hook-form'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
   TextField,
@@ -10,15 +12,23 @@ import {
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 
+const useStyles = makeStyles({
+  dialogContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '450px',
+    '@media (max-width: 823px)': {
+      minWidth: '300px',
+    },
+  },
+  error: {
+    color: 'red',
+  },
+})
+
 interface SignUpProps {
   openDialog: boolean
   handleOpenDialog: (arg: boolean) => void
-}
-
-interface SignUpInputProps {
-  email: string
-  password: string
-  passwordForCheck: string
 }
 
 const SIGN_UP_MUTATION = gql`
@@ -30,40 +40,24 @@ const SIGN_UP_MUTATION = gql`
 `
 
 const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
+  const classes = useStyles()
+  const { register, handleSubmit, errors } = useForm()
   const [createUser] = useMutation(SIGN_UP_MUTATION)
-  const [inputs, setInputs] = useState<SignUpInputProps>({
-    email: '',
-    password: '',
-    passwordForCheck: '',
-  })
-
   const handleClose = () => {
     handleOpenDialog(false)
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleJoinButton = async () => {
-    if (inputs.password === '') {
-      alert('비밀번호를 입력해주세요.')
-      return
-    }
-
-    if (inputs.password !== inputs.passwordForCheck) {
+  const onSubmit = async (data: any) => {
+    if (data.password !== data.passwordForCheck) {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
 
-    const { data } = await createUser({
-      variables: { email: inputs.email, password: inputs.password },
+    const result = await createUser({
+      variables: { email: data.email, password: data.password },
     })
 
-    if (data.createUser.success) {
+    if (result.data.createUser.success) {
       alert('회원 가입이 완료됐습니다. 감사합니다.')
       handleOpenDialog(false)
     } else {
@@ -74,44 +68,55 @@ const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
   return (
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="sign-up-dialog">
       <DialogTitle id="sign-up-dialog">회원 가입</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="이메일 주소"
-          type="email"
-          name="email"
-          value={inputs.email}
-          onChange={handleInputChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="비밀번호"
-          type="password"
-          name="password"
-          value={inputs.password}
-          onChange={handleInputChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="비밀번호 확인"
-          type="password"
-          name="passwordForCheck"
-          value={inputs.passwordForCheck}
-          onChange={handleInputChange}
-          fullWidth
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          취소
-        </Button>
-        <Button onClick={handleJoinButton} color="primary">
-          가입
-        </Button>
-      </DialogActions>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogContent className={classes.dialogContent}>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="이메일 주소"
+            type="email"
+            name="email"
+            required={true}
+            inputRef={register({
+              pattern: {
+                value: /\S+@\w+\.\w+/,
+                message: '올바른 이메일 형식이 아닙니다.',
+              },
+            })}
+          />
+          {errors.email?.type && <p className={classes.error}>{errors.email?.message}</p>}
+          <TextField
+            margin="dense"
+            label="비밀번호"
+            type="password"
+            name="password"
+            required={true}
+            inputRef={register({
+              minLength: {
+                value: 8,
+                message: '8자 이상으로 입력해주세요.',
+              },
+            })}
+          />
+          {errors.password?.type && <p className={classes.error}>{errors.password?.message}</p>}
+          <TextField
+            margin="dense"
+            label="비밀번호 확인"
+            type="password"
+            name="passwordForCheck"
+            required={true}
+            inputRef={register}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            취 소
+          </Button>
+          <Button type="submit" color="primary">
+            가 입
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   )
 }

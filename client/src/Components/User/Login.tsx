@@ -1,4 +1,5 @@
-import React, { FC, ChangeEvent, useState } from 'react'
+import React, { FC } from 'react'
+import { useForm } from 'react-hook-form'
 import {
   Button,
   TextField,
@@ -15,11 +16,6 @@ interface LoginProps {
   handleOpenDialog: (arg: boolean) => void
 }
 
-interface LoginInputProps {
-  email: string
-  password: string
-}
-
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
     tokenAuth(username: $email, password: $password) {
@@ -28,37 +24,41 @@ const LOGIN_MUTATION = gql`
   }
 `
 
+const CHECK_USER_EMAIL = gql`
+  mutation CheckUserEmail($email: String!) {
+    checkUserEmail(email: $email) {
+      result
+    }
+  }
+`
+
 const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
+  const { register, handleSubmit } = useForm()
+  const [checkUserEmail] = useMutation(CHECK_USER_EMAIL)
   const [loginUser] = useMutation(LOGIN_MUTATION, {
     onError: (error) => {
-      alert('이메일과 비밀번호를 확인해주세요.')
+      alert('비밀번호를 확인해주세요.')
     },
-  })
-
-  const [inputs, setInputs] = useState<LoginInputProps>({
-    email: '',
-    password: '',
   })
 
   const handleClose = () => {
     handleOpenDialog(false)
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
+  const onSubmit = async (data: any) => {
+    const resultOfEmail = await checkUserEmail({
+      variables: {
+        email: data.email,
+      },
     })
-  }
 
-  const handleLoginButton = async () => {
-    if (inputs.password === '') {
-      alert('비밀번호를 입력해주세요.')
+    if (!resultOfEmail.data.checkUserEmail.result) {
+      alert('존재하지 않는 이메일 주소입니다.')
       return
     }
 
     const result = await loginUser({
-      variables: { email: inputs.email, password: inputs.password },
+      variables: { email: data.email, password: data.password },
     })
 
     if (result) {
@@ -70,35 +70,37 @@ const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
   return (
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="login-dialog">
       <DialogTitle id="login-dialog">로그인</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="이메일 주소"
-          type="email"
-          name="email"
-          value={inputs.email}
-          onChange={handleInputChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="비밀번호"
-          type="password"
-          name="password"
-          value={inputs.password}
-          onChange={handleInputChange}
-          fullWidth
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          취 소
-        </Button>
-        <Button onClick={handleLoginButton} color="primary">
-          확 인
-        </Button>
-      </DialogActions>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="이메일 주소"
+            type="email"
+            name="email"
+            required={true}
+            inputRef={register}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="비밀번호"
+            type="password"
+            name="password"
+            required={true}
+            inputRef={register}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            취 소
+          </Button>
+          <Button type="submit" color="primary">
+            확 인
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   )
 }
