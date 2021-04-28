@@ -14,6 +14,7 @@ export interface Artist {
   category: number
   residence: number
   website: string
+  phone: string
 }
 
 export interface Art {

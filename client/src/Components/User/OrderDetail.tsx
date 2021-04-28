@@ -68,6 +68,11 @@ const ORDER = gql`
       art {
         id
       }
+      artist {
+        id
+        realName
+        phone
+      }
     }
   }
 `
@@ -168,6 +173,22 @@ const OrderDetail: FC<OrderDetailProps> = ({
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
+                작가명
+              </TableCell>
+              <TableCell className={classes.td} style={{ color: '#0070b8' }}>
+                {order.artist.realName}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                연락처
+              </TableCell>
+              <TableCell className={classes.td} style={{ color: '#0070b8' }}>
+                {order.artist.phone}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
                 가격
               </TableCell>
               <TableCell className={classes.td}>{currencyFormatter(order.price)}</TableCell>
@@ -194,7 +215,7 @@ const OrderDetail: FC<OrderDetailProps> = ({
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
-                전화 번호
+                연락처
               </TableCell>
               <TableCell className={classes.td}>{order.recipientPhone}</TableCell>
             </TableRow>
@@ -224,7 +245,7 @@ const OrderDetail: FC<OrderDetailProps> = ({
         </Table>
       </DialogContent>
       <DialogActions>
-        {order.status < OrderStatus.ON_DELIVERY && (
+        {order.status !== OrderStatus.CANCEL && order.status < OrderStatus.ON_DELIVERY && (
           <Button onClick={() => handleCancelOrder(order.id)} color="secondary">
             주문 취소
           </Button>
