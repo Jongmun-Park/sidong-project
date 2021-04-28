@@ -10,7 +10,7 @@ import LikingArtists from './LikingArtists'
 const useStyles = makeStyles({
   button: {
     fontWeight: 500,
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: 'small',
     },
   },

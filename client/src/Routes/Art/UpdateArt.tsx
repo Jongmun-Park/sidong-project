@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     padding: '80px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       padding: '70px 23px 100px 23px',
     },
   },

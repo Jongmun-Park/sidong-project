@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     marginTop: '20px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginTop: '10px',
     },
   },

@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '6px',
     fontSize: '0.929em',
     borderBottom: 'none',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
     },
   },
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1em',
     fontWeight: 600,
     borderBottom: 'none',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12.4px',
     },
   },

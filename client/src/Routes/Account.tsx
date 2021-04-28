@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   userName: {
     margin: '40px 0 40px 60px',
     fontWeight: 600,
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '25px 0 25px 33px',
       fontSize: '18px',
     },
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   tabs: {
     width: '100%',
     paddingLeft: '40px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       paddingLeft: '15px',
     },
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     width: '100%',
     '& .MuiBox-root': {
       padding: '20px 50px 20px 50px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         padding: '15px',
       },
     },

@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px',
     backgroundColor: theme.palette.greyBackground.main,
     borderRadius: '10px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       padding: '11px',
     },
   },
   buttonBase: {
     height: '200px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       height: '140px',
     },
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '200px',
     objectFit: 'cover',
     borderRadius: '10px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       maxHeight: '140px',
     },
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '14px',
     paddingLeft: '8px',
     color: theme.palette.lightBlack.main,
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginTop: '10px',
     },
     '& p': {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       marginBottom: '5px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '10px',
         marginBottom: '3px',
       },
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     marginBottom: '5px',
     cursor: 'pointer',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
       marginBottom: '3px',
     },
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'center',
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '1.1rem',
       },
     },

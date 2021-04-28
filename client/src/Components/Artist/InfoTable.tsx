@@ -6,12 +6,12 @@ import { Artist } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       marginLeft: '82px',
     },
   },
   th: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       width: '15%',
     },
     width: '35%',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: 'none',
   },
   td: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       width: '85%',
     },
     width: '65%',

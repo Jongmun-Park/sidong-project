@@ -12,19 +12,19 @@ const useStyles = makeStyles({
   firstSection: {
     paddingTop: '35px',
     margin: '0px 100px 0px 100px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       paddingTop: '16px',
       margin: '0px 45px 0px 45px',
     },
   },
   section: {
     margin: '60px 100px 0px 100px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '50px 45px 0px 45px',
     },
   },
   h2: {
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '1.4em',
     },
   },

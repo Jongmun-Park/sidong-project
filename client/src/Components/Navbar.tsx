@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 900,
     fontSize: '19px',
     letterSpacing: '2px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '15px',
       marginLeft: '10px',
       letterSpacing: '1px',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginRight: '50px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginRight: '3px',
       width: 'auto',
     },
@@ -41,14 +41,14 @@ const useStyles = makeStyles((theme) => ({
   menuFont: {
     fontWeight: 600,
     letterSpacing: '2px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
       letterSpacing: '1px',
     },
   },
   accountCircleIcon: {
     fontSize: 'xx-large',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '27px',
     },
   },

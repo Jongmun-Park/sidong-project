@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     gridGap: '18px',
     justifyContent: 'center',
     marginBottom: '32px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
       gridGap: '12px',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     width: '100%',
     margin: '20px 0px 35px 0px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '11px 0px 25px 0px',
     },
   },

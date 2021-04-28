@@ -24,18 +24,18 @@ const useStyles = makeStyles((theme) => ({
     padding: '80px 60px 100px 60px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       padding: '70px 23px 100px 23px',
     },
   },
   h3: {
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '14px',
     },
   },
   artInfo: {
     marginTop: '45px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginTop: '30px',
     },
   },
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '13px',
     },
   },
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '11px',
     },
   },
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     width: '100%',
     marginTop: '24px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginTop: '19px',
       fontSize: '13px',
     },
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   table: {
     width: '100%',
     marginTop: '24px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginTop: '19px',
     },
   },
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.929em',
     borderBottom: 'none',
     textAlign: 'right',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
     },
   },
@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     borderBottom: 'none',
     textAlign: 'right',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12.4px',
     },
   },
@@ -151,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: 500,
     letterSpacing: '0.02857em',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '13px',
       maxWidth: '72px',
       minHeight: '33px',

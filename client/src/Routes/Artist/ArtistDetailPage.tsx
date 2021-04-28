@@ -10,7 +10,7 @@ import { MemoizedPoster } from '../../Components/Art/Poster'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       padding: '120px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   categoryTabContainer: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       margin: '20px 0 0 20px',
     },
     width: '100%',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: 500,
     letterSpacing: '0.02857em',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
       maxWidth: '72px',
       minHeight: '33px',
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatarContainer: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       flex: '0 0 20%',
       maxWidth: '20%',
     },
@@ -58,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '140px',
   },
   artistInfo: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       flex: '0 0 80%',
       maxWidth: '80%',
     },
     width: '90%',
     margin: 'auto',
     minHeight: '140px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
     },
   },
@@ -73,20 +73,20 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto 0 auto',
     width: theme.spacing(17),
     height: theme.spacing(17),
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       width: theme.spacing(12),
       height: theme.spacing(12),
       margin: '0 auto 0 auto',
     },
   },
   description: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       padding: '24px',
     },
     width: '100%',
     whiteSpace: 'pre-line',
     padding: '15px 10px 15px 10px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '14px',
     },
   },
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     gridGap: '18px',
     justifyContent: 'center',
     marginBottom: '32px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
       gridGap: '12px',
     },
@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '50px 0px 50px 0px',
     display: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '25px 0px 25px 0px',
     },
   },
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.lightBlack.main,
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '1.1rem',
       },
     },

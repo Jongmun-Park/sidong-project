@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     margin: '5px 0 25px 0',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '5px 0 13px 0',
     },
   },
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   artName: {
     fontWeight: 600,
     marginRight: '12px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '17px',
     },
   },
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '6px',
   },
   tab: {
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '12px',
     },
   },
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'center',
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '1.1rem',
       },
     },

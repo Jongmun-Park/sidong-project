@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     maxWidth: '1213px',
     minHeight: '100vh',
     backgroundColor: 'white',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       padding: '76px 15px 26px 15px',
     },
   },

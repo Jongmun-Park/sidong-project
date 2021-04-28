@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 15px 15px 15px',
     backgroundColor: theme.palette.greyBackground.main,
     borderRadius: '10px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       padding: '0 11px 11px 11px',
     },
   },
   buttonBase: {
     height: '200px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       height: '140px',
     },
   },
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '200px',
     objectFit: 'cover',
     borderRadius: '10px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       maxHeight: '140px',
     },
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     marginBottom: '11px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       marginBottom: '9px',
     },
   },
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   realNameBox: {
     width: '103px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       width: '70px',
     },
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '13px',
     fontWeight: 'bold',
     marginBottom: '1px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '11px',
     },
   },
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '10px',
       maxWidth: '70px',
     },
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(8),
     height: theme.spacing(8),
     alignSelf: 'center',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     left: '-1px',
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '1.1rem',
       },
     },

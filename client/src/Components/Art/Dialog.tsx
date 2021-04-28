@@ -29,7 +29,7 @@ const useStyles = makeStyles({
     '& h2': {
       display: 'flex',
       justifyContent: 'space-between',
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '1rem',
       },
     },

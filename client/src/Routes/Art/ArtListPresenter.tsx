@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     paddingTop: '50px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       flexDirection: 'column',
     },
   },
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.lightBlack.main,
     margin: '61px 0px 40px 40px',
     minWidth: '267px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       display: 'none',
     },
   },
   orderFilterWrapper: {
     alignSelf: 'flex-end',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       display: 'none',
     },
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     gridGap: '18px',
     justifyContent: 'center',
     marginBottom: '32px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(157px, auto))',
       margin: '10px 10px 20px 10px',
       gridGap: '10px',
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '25px 25px 50px 25px',
     display: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       margin: '0px 0px 30px 0px',
     },
   },
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
   },
   mobileFilterWrapper: {
-    '@media (min-width: 823px)': {
+    '@media (min-width: 834px)': {
       display: 'none',
     },
     padding: '10px 27px 10px 27px',

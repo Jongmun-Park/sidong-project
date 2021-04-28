@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     minWidth: '450px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       minWidth: '300px',
     },
   },

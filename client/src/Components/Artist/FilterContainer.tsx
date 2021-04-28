@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTypography-body1': {
       fontSize: '13px',
       fontWeight: 600,
-      '@media (max-width: 823px)': {
+      '@media (max-width: 834px)': {
         fontSize: '11px',
       },
     },
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       overflowY: 'auto',
       width: '95%',
       margin: 'auto',
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '14px',
     borderColor: theme.palette.beige.main,
     backgroundColor: theme.palette.beige.light,
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       flexDirection: 'row',
       paddingBottom: '11px',
       marginBottom: '5px',
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'flex-end',
     fontSize: '13px',
     marginRight: '16px',
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       minWidth: '94px',
       fontSize: '11px',
     },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     '&.MuiButton-contained:hover': {
       backgroundColor: theme.palette.lightBlack.light,
     },
-    '@media (max-width: 823px)': {
+    '@media (max-width: 834px)': {
       fontSize: '11px',
       minWidth: '50px',
     },
