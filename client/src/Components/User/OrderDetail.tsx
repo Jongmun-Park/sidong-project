@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 834px)': {
       fontSize: '12.4px',
     },
+    '&.point': {
+      color: theme.palette.secondary.main,
+    },
   },
 }))
 
@@ -175,17 +178,13 @@ const OrderDetail: FC<OrderDetailProps> = ({
               <TableCell className={classes.th} component="th" scope="row">
                 작가명
               </TableCell>
-              <TableCell className={classes.td} style={{ color: '#0070b8' }}>
-                {order.artist.realName}
-              </TableCell>
+              <TableCell className={classes.td + ' point'}>{order.artist.realName}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
                 연락처
               </TableCell>
-              <TableCell className={classes.td} style={{ color: '#0070b8' }}>
-                {order.artist.phone}
-              </TableCell>
+              <TableCell className={classes.td + ' point'}>{order.artist.phone}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
