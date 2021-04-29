@@ -45,6 +45,7 @@ const theme = createMuiTheme({
           '& .MuiMenuItem-root': {
             fontSize: '14px',
             minHeight: 'auto',
+            fontWeight: 500,
           },
           '& .MuiSelect-select.MuiSelect-select': {
             textAlign: 'center',
