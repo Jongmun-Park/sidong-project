@@ -374,7 +374,7 @@ const UpdateArt: FC = () => {
               <FormLabel component="div" className={classes.formLabel}>
                 판매 가격 (배송비 포함)
               </FormLabel>
-              <FormHelperText>- 판매 가격은 10,000원 ~ 5,000,000원 까지</FormHelperText>
+              <FormHelperText>- 판매 가격은 10,000원 ~ 1,500,000원 까지</FormHelperText>
               <FormHelperText>- 배송비를 포함한 가격으로 책정해주세요 :)</FormHelperText>
               <div className={classes.inputElement}>
                 <input
@@ -382,7 +382,7 @@ const UpdateArt: FC = () => {
                   type="number"
                   name="price"
                   min="10000"
-                  max="5000000"
+                  max="1500000"
                   defaultValue={art.price}
                   ref={register({
                     validate: {

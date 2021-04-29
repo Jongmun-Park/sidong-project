@@ -134,7 +134,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
     square: true,
     etc: true,
   })
-  const [price, setPrice] = useState<number[]>([0, 5000000])
+  const [price, setPrice] = useState<number[]>([0, 1500000])
   const [medium, setMedium] = useState<Medium | string>('all')
   const [theme, setTheme] = useState<string>('all')
   const [style, setStyle] = useState<string>('all')
@@ -323,7 +323,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
               className={classes.slider}
               value={price}
               min={0}
-              max={5000000}
+              max={1500000}
               step={100000}
               onChange={handlePriceRange}
               valueLabelDisplay="off"
