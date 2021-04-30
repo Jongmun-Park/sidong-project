@@ -2,9 +2,6 @@ import React, { FC, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Menu, MenuItem, IconButton } from '@material-ui/core'
-import SignUp from './User/SignUp'
-import Login from './User/Login'
-import { useCurrentUser } from '../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   menuIcon: {

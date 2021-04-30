@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Button, Typography } from '@material-ui/core'
+import { Avatar, Typography } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
