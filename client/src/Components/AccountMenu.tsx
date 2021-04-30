@@ -1,6 +1,7 @@
 import React, { FC, useState, MouseEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 import { Menu, MenuItem, IconButton } from '@material-ui/core'
 import SignUp from './User/SignUp'
 import Login from './User/Login'
@@ -94,7 +95,10 @@ const AccountMenu: FC = () => {
                 </MenuItem>
               </>
             )}
-            <MenuItem onClick={() => (window.location.href = '/account/likes')}>관심 목록</MenuItem>
+            <MenuItem onClick={() => (window.location.href = '/account/likes')}>
+              좋아요&nbsp;
+              <FavoriteIcon style={{ fontSize: '13px' }} />
+            </MenuItem>
             <MenuItem onClick={() => (window.location.href = '/account/orders')}>
               주문 내역
             </MenuItem>
