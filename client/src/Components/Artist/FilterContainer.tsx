@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: '10px',
     paddingBottom: '14px',
-    border: '4px solid',
+    border: '2px solid',
     borderRadius: '14px',
     borderColor: theme.palette.beige.main,
     backgroundColor: theme.palette.beige.light,

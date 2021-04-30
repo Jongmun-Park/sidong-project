@@ -5,8 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { useCurrentUser } from '../../Hooks/User'
 import { MemoizedPoster } from '../Art/Poster'
+import LoadMoreButton from '../LoadMoreButton'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   posters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 252px)',
@@ -27,10 +28,7 @@ const useStyles = makeStyles({
       margin: '11px 0px 25px 0px',
     },
   },
-  loadMoreButton: {
-    fontWeight: 'bold',
-  },
-})
+}))
 
 const USER_LIKING_ARTS = gql`
   query UserLikingArts($userId: ID!, $lastLikeId: ID) {
@@ -130,11 +128,7 @@ const LikingArts: FC = () => {
               />
             ))}
           </div>
-          {data.userLikingArts.arts.length >= 20 && (
-            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-              더 보기
-            </Button>
-          )}
+          {data.userLikingArts.arts.length >= 20 && <LoadMoreButton onClick={handleLoadMore} />}
         </div>
       ) : (
         <p style={{ padding: '15px' }}>관심 작품이 없습니다.</p>

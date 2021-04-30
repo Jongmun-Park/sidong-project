@@ -7,10 +7,11 @@ import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
 import Like from '../../Components/Artist/Like'
 import { MemoizedPoster } from '../../Components/Art/Poster'
+import LoadMoreButton from '../../Components/LoadMoreButton'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       padding: '120px 70px 100px 70px',
       margin: '0 auto 0 auto',
     },
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
   },
   categoryTabContainer: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       margin: '20px 0 0 20px',
     },
     width: '100%',
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatarContainer: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       flex: '0 0 20%',
       maxWidth: '20%',
     },
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '140px',
   },
   artistInfo: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       flex: '0 0 80%',
       maxWidth: '80%',
     },
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   description: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       padding: '24px',
     },
     width: '100%',
@@ -109,9 +110,6 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 834px)': {
       margin: '25px 0px 25px 0px',
     },
-  },
-  loadMoreButton: {
-    fontWeight: 'bold',
   },
   pTag: {
     width: '100%',
@@ -255,11 +253,7 @@ const ArtistDetailPage: FC = () => {
               />
             ))}
           </div>
-          {arts.length >= 20 && (
-            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-              더 보기
-            </Button>
-          )}
+          {arts.length >= 20 && <LoadMoreButton onClick={handleLoadMore} />}
         </div>
       ) : (
         <p className={classes.pTag}>아직 등록된 작품이 없습니다.</p>

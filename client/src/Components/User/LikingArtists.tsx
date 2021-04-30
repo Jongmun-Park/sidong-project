@@ -5,8 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { useCurrentUser } from '../../Hooks/User'
 import { MemoizedPoster } from '../Artist/Poster'
+import LoadMoreButton from '../LoadMoreButton'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   posters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 252px)',
@@ -27,10 +28,7 @@ const useStyles = makeStyles({
       margin: '11px 0px 25px 0px',
     },
   },
-  loadMoreButton: {
-    fontWeight: 'bold',
-  },
-})
+}))
 
 const USER_LIKING_ARTISTS = gql`
   query UserLikingArtists($userId: ID!, $lastLikeId: ID) {
@@ -129,9 +127,7 @@ const LikingArtists: FC = () => {
             ))}
           </div>
           {data.userLikingArtists.artists.length >= 20 && (
-            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-              더 보기
-            </Button>
+            <LoadMoreButton onClick={handleLoadMore} />
           )}
         </div>
       ) : (

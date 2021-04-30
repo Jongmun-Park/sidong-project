@@ -5,6 +5,7 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 import FilterContainer from '../../Components/Art/FilterContainer'
 import OrderFilter from '../../Components/Art/OrderFilter'
+import LoadMoreButton from '../../Components/LoadMoreButton'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -51,16 +52,13 @@ const useStyles = makeStyles((theme) => ({
       margin: '0px 0px 30px 0px',
     },
   },
-  loadMoreButton: {
-    fontWeight: 'bold',
-  },
   pTag: {
     textAlign: 'center',
     fontSize: '16px',
     fontWeight: 500,
   },
   mobileFilterWrapper: {
-    '@media (min-width: 834px)': {
+    '@media (min-width: 835px)': {
       display: 'none',
     },
     padding: '10px 27px 10px 27px',
@@ -153,11 +151,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({
               />
             ))}
           </div>
-          {arts.length >= 20 && (
-            <Button className={classes.loadMoreButton} onClick={handleLoadMore}>
-              더 보기
-            </Button>
-          )}
+          {arts.length >= 20 && <LoadMoreButton onClick={handleLoadMore} />}
         </div>
       ) : (
         <div className={classes.contentSection}>

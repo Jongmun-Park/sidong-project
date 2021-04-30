@@ -2,16 +2,19 @@ import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
+import MobileNavbar from './MobileNavbar'
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     height: '50px',
     maxWidth: '1680px',
     width: '100%',
     margin: 'auto',
+    '@media (max-width: 834px)': {
+      display: 'none',
+    },
   },
   logoFont: {
     marginLeft: '30px',
@@ -19,34 +22,25 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 900,
     fontSize: '19px',
     letterSpacing: '2px',
-    '@media (max-width: 834px)': {
-      fontSize: '15px',
-      marginLeft: '10px',
-      letterSpacing: '1px',
-    },
   },
   menus: {
-    // width: '400px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginRight: '50px',
-    '@media (max-width: 834px)': {
-      // marginRight: '3px',
-      width: 'auto',
-    },
   },
   menuFont: {
     fontWeight: 600,
     letterSpacing: '2px',
     marginLeft: '45px',
-    '@media (max-width: 834px)': {
-      fontSize: '12px',
-      letterSpacing: '1px',
-    },
   },
-  accountMenu: {
+  rightArea: {
     margin: '0 30px 0 auto',
+  },
+  mobileNavbar: {
+    display: 'none',
+    '@media (max-width: 834px)': {
+      display: 'block',
+    },
   },
 }))
 
@@ -69,10 +63,13 @@ const NavBar: FC = () => {
             작가
           </Button>
         </div>
-        <div className={classes.accountMenu}>
+        <div className={classes.rightArea}>
           <AccountMenu />
         </div>
       </nav>
+      <div className={classes.mobileNavbar}>
+        <MobileNavbar />
+      </div>
     </header>
   )
 }
