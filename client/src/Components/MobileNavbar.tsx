@@ -23,13 +23,20 @@ const useStyles = makeStyles((theme) => ({
       marginRight: '10px',
     },
   },
+  leftArea: {
+    '@media (min-width: 415px)': {
+      marginLeft: '10px',
+    },
+  },
 }))
 
 const MobileNavbar: FC = () => {
   const classes = useStyles()
   return (
     <nav className={classes.container}>
-      <MobileMenu />
+      <div className={classes.leftArea}>
+        <MobileMenu />
+      </div>
       <Button href="/" className={classes.logoFont}>
         Jakupteo
       </Button>
