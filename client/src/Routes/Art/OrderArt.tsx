@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '170px',
     objectFit: 'contain',
     border: '4px double',
-    borderRadius: '13px',
+    borderRadius: '14px',
     borderColor: theme.palette.beige.main,
     boxShadow: '4px 4px 10px 0 rgb(0 0 0 / 25%)',
   },

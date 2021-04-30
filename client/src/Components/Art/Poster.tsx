@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     padding: '15px',
     backgroundColor: theme.palette.greyBackground.main,
-    borderRadius: '10px',
+    borderRadius: '20px',
     '@media (max-width: 834px)': {
       padding: '11px',
     },
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxHeight: '200px',
     objectFit: 'cover',
-    borderRadius: '10px',
+    borderRadius: '20px',
     '@media (max-width: 834px)': {
       maxHeight: '140px',
     },
