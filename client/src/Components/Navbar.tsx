@@ -58,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
 const NavBar: FC = () => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
+  const isApprovedArtist = currentUser?.artist?.isApproved
+
   return (
     <header>
       <nav className={classes.container}>
@@ -76,20 +78,33 @@ const NavBar: FC = () => {
           </Button>
         </div>
         <div className={classes.rightArea}>
-          <Button
-            className={classes.registerButton}
-            variant="outlined"
-            color="secondary"
-            onClick={() => {
-              if (currentUser) {
-                window.location.href = '/artist/register'
-              } else {
-                alert('로그인 먼저 부탁드립니다 :)')
-              }
-            }}
-          >
-            작가 등록
-          </Button>
+          {isApprovedArtist ? (
+            <Button
+              className={classes.registerButton}
+              variant="outlined"
+              color="secondary"
+              onClick={() => {
+                window.location.href = '/art/register'
+              }}
+            >
+              작품 등록
+            </Button>
+          ) : (
+            <Button
+              className={classes.registerButton}
+              variant="outlined"
+              color="secondary"
+              onClick={() => {
+                if (currentUser) {
+                  window.location.href = '/artist/register'
+                } else {
+                  alert('로그인 먼저 부탁드립니다 :)')
+                }
+              }}
+            >
+              작가 등록
+            </Button>
+          )}
           <div className={classes.accountMenu}>
             <AccountMenu />
           </div>
