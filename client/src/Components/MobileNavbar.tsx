@@ -49,7 +49,9 @@ const MobileNavbar: FC = () => {
           aria-controls="menu"
           aria-haspopup="true"
           aria-label="SearchButton"
-          onClick={() => {}}
+          onClick={() => {
+            alert('검색 서비스 준비 중입니다.\n양해 부탁드립니다.')
+          }}
         >
           <SearchIcon className={classes.searchIcon} />
         </IconButton>

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logoFont: {
-    marginLeft: '62px', // 50 + 12
+    marginLeft: '82px', // 70 + 12
     color: theme.palette.primary.main,
     fontWeight: 900,
     fontSize: '19px',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '45px',
   },
   rightArea: {
-    margin: '0 50px 0 auto',
+    margin: '0 70px 0 auto',
   },
   mobileNavbar: {
     display: 'none',
