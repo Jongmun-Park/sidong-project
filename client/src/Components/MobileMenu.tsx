@@ -5,7 +5,7 @@ import { Menu, MenuItem, IconButton } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   menuIcon: {
-    fontSize: '27px',
+    fontSize: '23px',
   },
 }))
 
