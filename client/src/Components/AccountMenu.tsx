@@ -90,7 +90,10 @@ const AccountMenu: FC = () => {
             ) : (
               <>
                 <MenuItem onClick={() => (window.location.href = '/account')}>내 계정</MenuItem>
-                <MenuItem onClick={() => (window.location.href = '/artist/register')}>
+                <MenuItem
+                  className={classes.pointFont}
+                  onClick={() => (window.location.href = '/artist/register')}
+                >
                   작가 등록
                 </MenuItem>
               </>
@@ -108,6 +111,18 @@ const AccountMenu: FC = () => {
           <div>
             <MenuItem onClick={handleClickLogin}>로그인</MenuItem>
             <MenuItem onClick={handleClickSignUp}>회원 가입</MenuItem>
+            <MenuItem
+              className={classes.pointFont}
+              onClick={() => {
+                if (currentUser) {
+                  window.location.href = '/artist/register'
+                } else {
+                  alert('로그인 먼저 부탁드립니다 :)')
+                }
+              }}
+            >
+              작가 등록
+            </MenuItem>
           </div>
         )}
       </Menu>

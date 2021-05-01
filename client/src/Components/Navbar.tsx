@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileNavbar from './MobileNavbar'
+import { useCurrentUser } from '../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,10 +43,21 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  accountMenu: {
+    display: 'inline-block',
+    marginLeft: '30px',
+  },
+  registerButton: {
+    height: '32px',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderRadius: '14px',
+  },
 }))
 
 const NavBar: FC = () => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
   return (
     <header>
       <nav className={classes.container}>
@@ -64,7 +76,23 @@ const NavBar: FC = () => {
           </Button>
         </div>
         <div className={classes.rightArea}>
-          <AccountMenu />
+          <Button
+            className={classes.registerButton}
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              if (currentUser) {
+                window.location.href = '/artist/register'
+              } else {
+                alert('로그인 먼저 부탁드립니다 :)')
+              }
+            }}
+          >
+            작가 등록
+          </Button>
+          <div className={classes.accountMenu}>
+            <AccountMenu />
+          </div>
         </div>
       </nav>
       <div className={classes.mobileNavbar}>
