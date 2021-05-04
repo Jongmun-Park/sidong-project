@@ -187,6 +187,7 @@ const CREATE_ORDER = gql`
     $recipientAddress: String!
     $recipientName: String!
     $recipientPhone: String!
+    $impUid: String!
   ) {
     createOrder(
       artId: $artId
@@ -196,6 +197,7 @@ const CREATE_ORDER = gql`
       recipientAddress: $recipientAddress
       recipientName: $recipientName
       recipientPhone: $recipientPhone
+      impUid: $impUid
     ) {
       success
       msg
@@ -237,24 +239,48 @@ const OrderArt: FC = () => {
 
   const { art } = data
 
-  const onSubmit = async (data: any) => {
-    const result = await createOrder({
-      variables: {
-        artId,
-        address: data.address,
-        name: data.name,
-        phone: data.phone,
-        recipientAddress: data.recipientAddress,
-        recipientName: data.recipientName,
-        recipientPhone: data.recipientPhone,
-      },
-    })
-    if (result.data.createOrder.success) {
-      alert('작품 주문이 완료됐습니다.')
-      window.location.href = '/account/orders'
-    } else {
-      alert(result.data.createOrder.msg)
+  const onSubmit = (data: any) => {
+    const IMP = window['IMP'] as any
+    IMP.init(process.env.REACT_APP_IMP)
+
+    const paymentData = {
+      pay_method: 'card', // 결제수단
+      merchant_uid: `mid_${art.id}_${new Date().getTime()}`, // 주문번호
+      amount: art.price, // 결제금액
+      name: art.name, // 주문명
+      buyer_name: data.name, // 구매자 이름
+      buyer_tel: data.phone, // 구매자 전화번호
+      buyer_addr: data.address, // 구매자 주소
     }
+
+    const callback = async (response: any) => {
+      const { success, imp_uid, error_msg } = response
+
+      if (success) {
+        const result = await createOrder({
+          variables: {
+            artId,
+            address: data.address,
+            name: data.name,
+            phone: data.phone,
+            recipientAddress: data.recipientAddress,
+            recipientName: data.recipientName,
+            recipientPhone: data.recipientPhone,
+            impUid: imp_uid,
+          },
+        })
+        if (result.data.createOrder.success) {
+          alert('작품 주문이 완료됐습니다.')
+          window.location.href = '/account/orders'
+        } else {
+          alert(result.data.createOrder.msg)
+        }
+      } else {
+        alert(`결제 실패: ${error_msg}`)
+      }
+    }
+
+    IMP.request_pay(paymentData, callback)
   }
 
   const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
