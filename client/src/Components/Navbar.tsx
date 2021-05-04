@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
-    height: '50px',
+    height: '56px',
     maxWidth: '1680px',
     width: '100%',
     margin: 'auto',

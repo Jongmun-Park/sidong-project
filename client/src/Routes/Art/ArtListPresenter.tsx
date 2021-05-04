@@ -11,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: '50px',
+    paddingTop: '56px',
     '@media (max-width: 834px)': {
+      paddingTop: '50px',
       flexDirection: 'column',
     },
   },
