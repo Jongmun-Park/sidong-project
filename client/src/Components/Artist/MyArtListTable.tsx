@@ -132,8 +132,12 @@ const MyArtListTable: FC = () => {
         <Table aria-label="나의 작품 목록" size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell align="center">작품 정보</TableCell>
-              <TableCell align="center">수정/삭제</TableCell>
+              <TableCell style={{ width: '75%' }} align="center">
+                작품 정보
+              </TableCell>
+              <TableCell style={{ width: '25%' }} align="center">
+                수정/삭제
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
