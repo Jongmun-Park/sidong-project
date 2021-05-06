@@ -15,12 +15,12 @@ declare module '@material-ui/core/styles/createPalette' {
   }
 }
 
-const rokaMedium = {
-  fontFamily: 'ROKAMedium',
+const ridiBatang = {
+  fontFamily: 'RIDIBatang',
   fontStyle: 'normal',
   fontWeight: 'normal',
   src: `
-    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKAMedium.woff') format('woff2')
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff')
   `,
 }
 
@@ -48,12 +48,12 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'ROKAMedium',
+    fontFamily: 'RIDIBatang',
   },
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [rokaMedium],
+        '@font-face': [ridiBatang],
         body: {
           backgroundColor: '#f0eadb',
           '& .MuiMenuItem-root': {

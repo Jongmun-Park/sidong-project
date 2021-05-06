@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   artName: {
     fontSize: '15px',
+    fontWeight: 600,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
