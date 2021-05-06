@@ -15,12 +15,12 @@ declare module '@material-ui/core/styles/createPalette' {
   }
 }
 
-const sCoreDreamFont = {
-  fontFamily: 'S-CoreDream-3Light',
+const customFont = {
+  fontFamily: 'SeoulNamsanM',
   fontStyle: 'normal',
   fontWeight: 'normal',
   src: `
-    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff')
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff')
   `,
 }
 
@@ -48,12 +48,12 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'S-CoreDream-3Light',
+    fontFamily: 'SeoulNamsanM',
   },
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [sCoreDreamFont],
+        '@font-face': [customFont],
         body: {
           backgroundColor: '#f0eadb',
           '& .MuiMenuItem-root': {
