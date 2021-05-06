@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& .MuiTypography-body1': {
       fontSize: '13px',
-      fontWeight: 600,
       '@media (max-width: 834px)': {
         fontSize: '11px',
       },

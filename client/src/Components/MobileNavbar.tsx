@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, IconButton } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileMenu from './MobileMenu'
 import SearchIcon from '@material-ui/icons/Search'
+import logo from '../logo-100.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,24 +14,26 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  logoFont: {
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-    fontSize: '15px',
-    letterSpacing: '1px',
-  },
   rightArea: {
     '@media (min-width: 415px)': {
       marginRight: '10px',
     },
   },
   leftArea: {
+    display: 'flex',
+    alignItems: 'center',
     '@media (min-width: 415px)': {
       marginLeft: '10px',
     },
   },
   searchIcon: {
     fontSize: '23px',
+  },
+  logo: {
+    cursor: 'pointer',
+    '@media (min-width: 415px)': {
+      marginLeft: '5px',
+    },
   },
 }))
 
@@ -40,9 +43,14 @@ const MobileNavbar: FC = () => {
     <nav className={classes.container}>
       <div className={classes.leftArea}>
         <MobileMenu />
-        <Button href="/" className={classes.logoFont}>
-          Jakupteo
-        </Button>
+        <div
+          className={classes.logo}
+          onClick={() => {
+            window.location.href = '/'
+          }}
+        >
+          <img style={{ width: '80px' }} src={logo} alt="로고" />
+        </div>
       </div>
       <div className={classes.rightArea}>
         <IconButton

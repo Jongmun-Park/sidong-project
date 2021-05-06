@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.lightBlack.main,
     cursor: 'pointer',
     fontSize: '13px',
-    fontWeight: 'bold',
     marginBottom: '1px',
     '@media (max-width: 834px)': {
       fontSize: '11px',

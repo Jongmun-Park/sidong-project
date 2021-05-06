@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     width: '60%',
     padding: '6px',
     fontSize: '1em',
-    fontWeight: 600,
     borderBottom: 'none',
     '@media (max-width: 834px)': {
       fontSize: '12.4px',

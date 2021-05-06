@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     lightBlack: Palette['primary']
@@ -12,6 +13,15 @@ declare module '@material-ui/core/styles/createPalette' {
     greyBackground: PaletteOptions['primary']
     beige: PaletteOptions['primary']
   }
+}
+
+const rokaMedium = {
+  fontFamily: 'ROKAMedium',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  src: `
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKAMedium.woff') format('woff2')
+  `,
 }
 
 const theme = createMuiTheme({
@@ -37,9 +47,13 @@ const theme = createMuiTheme({
       light: '#f7f5ed',
     },
   },
+  typography: {
+    fontFamily: 'ROKAMedium',
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
+        '@font-face': [rokaMedium],
         body: {
           backgroundColor: '#f0eadb',
           '& .MuiMenuItem-root': {

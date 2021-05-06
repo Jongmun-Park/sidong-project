@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& .MuiTypography-body1': {
       fontSize: '13px',
-      fontWeight: 600,
       '@media (max-width: 834px)': {
         fontSize: '11px',
       },
@@ -57,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
       margin: '0px 2px 2px 0px',
     },
     '& div.inactive': {
-      fontWeight: 600,
       backgroundColor: theme.palette.grey[300],
       color: theme.palette.lightBlack.main,
     },

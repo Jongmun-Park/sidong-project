@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 835px)': {
       display: 'none',
     },
-    padding: '10px 27px 10px 27px',
+    padding: '15px 27px 10px 27px',
     top: '49px',
     position: 'sticky',
     zIndex: 1,

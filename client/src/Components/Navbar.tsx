@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileNavbar from './MobileNavbar'
 import { useCurrentUser } from '../Hooks/User'
+import logo from '../logo-100.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,20 +18,17 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  logoFont: {
+  logo: {
     marginLeft: '82px', // 70 + 12
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-    fontSize: '19px',
-    letterSpacing: '2px',
+    cursor: 'pointer',
   },
   menus: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginLeft: '20px',
   },
   menuFont: {
-    fontWeight: 600,
     letterSpacing: '2px',
     marginLeft: '45px',
   },
@@ -50,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   registerButton: {
     height: '32px',
     fontSize: '14px',
-    fontWeight: 700,
     borderRadius: '14px',
   },
 }))
@@ -63,9 +60,14 @@ const NavBar: FC = () => {
   return (
     <header>
       <nav className={classes.container}>
-        <Button href="/" className={classes.logoFont}>
-          Jakupteo
-        </Button>
+        <div
+          className={classes.logo}
+          onClick={() => {
+            window.location.href = '/'
+          }}
+        >
+          <img src={logo} alt="로고" />
+        </div>
         <div className={classes.menus}>
           <Button className={classes.menuFont} href="/about">
             소개
