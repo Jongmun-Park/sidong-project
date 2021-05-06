@@ -11,30 +11,54 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  IconButton,
+  Button,
 } from '@material-ui/core'
-import { Edit, Delete } from '@material-ui/icons'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { Art } from '../../types'
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    marginTop: '20px',
+    maxWidth: '630px',
+    margin: '20px auto',
     '@media (max-width: 834px)': {
       marginTop: '10px',
     },
   },
-  container: {
-    maxHeight: '470px',
+  artInfo: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  artSpec: {
+    marginLeft: '20px',
+    '@media (max-width: 834px)': {
+      fontSize: '12px',
+    },
   },
   artName: {
+    display: 'inline-block',
     textDecoration: 'underline',
-    maxWidth: '160px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     cursor: 'pointer',
+    maxWidth: '300px',
+    '@media (max-width: 834px)': {
+      maxWidth: '130px',
+    },
+  },
+  image: {
+    height: '90px',
+    width: '90px',
+    '@media (max-width: 834px)': {
+      height: '68px',
+      width: '68px',
+    },
+  },
+  button: {
+    '@media (max-width: 834px)': {
+      fontSize: '12px',
+    },
   },
 })
 
@@ -48,6 +72,7 @@ const CURRENT_USER_ARTS = gql`
         name
         saleStatus
         price
+        representativeImageUrl
       }
     }
   }
@@ -103,31 +128,12 @@ const MyArtListTable: FC = () => {
 
   return (
     <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+      <TableContainer>
         <Table aria-label="나의 작품 목록" size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell align="center" style={{ width: '7%' }}>
-                ID
-              </TableCell>
-              <TableCell align="center" style={{ width: '14%' }}>
-                등록일
-              </TableCell>
-              <TableCell align="center" style={{ width: '40%' }}>
-                작품명
-              </TableCell>
-              <TableCell align="center" style={{ width: '14%' }}>
-                가격
-              </TableCell>
-              <TableCell align="center" style={{ width: '11%' }}>
-                상태
-              </TableCell>
-              <TableCell align="center" style={{ width: '7%' }}>
-                수정
-              </TableCell>
-              <TableCell align="center" style={{ width: '7%' }}>
-                삭제
-              </TableCell>
+              <TableCell align="center">작품 정보</TableCell>
+              <TableCell align="center">수정/삭제</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -135,30 +141,43 @@ const MyArtListTable: FC = () => {
               arts.map((art: Art) => {
                 return (
                   <TableRow hover tabIndex={-1} key={art.id}>
-                    <TableCell align="center">{art.id}</TableCell>
-                    <TableCell align="center">{art.createdAt}</TableCell>
-                    <TableCell
-                      onClick={() => window.open(`/art/${art.id}`)}
-                      className={classes.artName}
-                    >
-                      {art.name}
+                    <TableCell className={classes.artInfo}>
+                      <img
+                        className={classes.image}
+                        src={art.representativeImageUrl}
+                        alt="작품 이미지"
+                      />
+                      <div className={classes.artSpec}>
+                        <div>
+                          [{art.id}] {art.createdAt}
+                        </div>
+                        <div
+                          onClick={() => window.open(`/art/${art.id}`)}
+                          className={classes.artName}
+                        >
+                          {art.name}
+                        </div>
+                        <div> {currencyFormatter(art.price)} </div>
+                        <div> {translateSaleStatus(art.saleStatus)} </div>
+                      </div>
                     </TableCell>
-                    <TableCell align="center">{currencyFormatter(art.price)}</TableCell>
-                    <TableCell align="center">{translateSaleStatus(art.saleStatus)}</TableCell>
                     <TableCell align="center">
-                      <IconButton
+                      <Button
+                        className={classes.button}
                         size="small"
                         onClick={() => {
                           window.location.href = `/art/update/${art.id}`
                         }}
                       >
-                        <Edit />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="center">
-                      <IconButton size="small" onClick={() => handleDeleteButton(art.id)}>
-                        <Delete />
-                      </IconButton>
+                        수 정
+                      </Button>
+                      <Button
+                        className={classes.button}
+                        size="small"
+                        onClick={() => handleDeleteButton(art.id)}
+                      >
+                        삭 제
+                      </Button>
                     </TableCell>
                   </TableRow>
                 )
