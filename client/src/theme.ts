@@ -15,12 +15,12 @@ declare module '@material-ui/core/styles/createPalette' {
   }
 }
 
-const ridiBatang = {
-  fontFamily: 'RIDIBatang',
+const sCoreDreamFont = {
+  fontFamily: 'S-CoreDream-3Light',
   fontStyle: 'normal',
   fontWeight: 'normal',
   src: `
-    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff')
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff')
   `,
 }
 
@@ -48,12 +48,12 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'RIDIBatang',
+    fontFamily: 'S-CoreDream-3Light',
   },
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [ridiBatang],
+        '@font-face': [sCoreDreamFont],
         body: {
           backgroundColor: '#f0eadb',
           '& .MuiMenuItem-root': {
