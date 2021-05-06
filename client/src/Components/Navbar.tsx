@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuFont: {
     letterSpacing: '2px',
+    fontWeight: 600,
     marginLeft: '45px',
   },
   rightArea: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   registerButton: {
     height: '32px',
     fontSize: '14px',
+    fontWeight: 600,
     borderRadius: '14px',
   },
 }))
