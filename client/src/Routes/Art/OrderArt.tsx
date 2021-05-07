@@ -251,6 +251,7 @@ const OrderArt: FC = () => {
       buyer_name: data.name, // 구매자 이름
       buyer_tel: data.phone, // 구매자 전화번호
       buyer_addr: data.address, // 구매자 주소
+      buyer_email: currentUser.username, // 이메일 주소
     }
 
     const callback = async (response: any) => {
