@@ -153,7 +153,7 @@ const MyArtListTable: FC = () => {
                       />
                       <div className={classes.artSpec}>
                         <div>
-                          [{art.id}] {art.createdAt}
+                          [No.{art.id}] {art.createdAt}
                         </div>
                         <div
                           onClick={() => window.open(`/art/${art.id}`)}

@@ -158,9 +158,9 @@ const SaleDetail: FC<SaleDetailProps> = ({
           <TableBody>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
-                주문 번호
+                작품 번호
               </TableCell>
-              <TableCell className={classes.td}>{order.id}</TableCell>
+              <TableCell className={classes.td}>{order.art.id}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
@@ -260,6 +260,12 @@ const SaleDetail: FC<SaleDetailProps> = ({
                 </TableRow>
               </>
             )}
+            <TableRow>
+              <TableCell className={classes.th} component="th" scope="row">
+                주문 번호
+              </TableCell>
+              <TableCell className={classes.td}>{order.id}</TableCell>
+            </TableRow>
             <TableRow>
               <TableCell className={classes.th} component="th" scope="row">
                 주문일
