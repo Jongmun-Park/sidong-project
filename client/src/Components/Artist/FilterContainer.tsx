@@ -49,13 +49,13 @@ const useStyles = makeStyles((theme) => ({
     margin: '5px 5px 0px 0px',
   },
   button: {
-    backgroundColor: theme.palette.lightBlack.main,
-    color: theme.palette.beige.main,
-    '&.MuiButton-contained:hover': {
-      backgroundColor: theme.palette.lightBlack.light,
+    '&.close': {
+      marginRight: '14px',
+      backgroundColor: theme.palette.lightBlack.main,
+      color: theme.palette.beige.main,
     },
     '@media (max-width: 834px)': {
-      fontSize: '11px',
+      fontSize: '12px',
       minWidth: '50px',
     },
   },
@@ -142,16 +142,21 @@ const FilterContainer: FC<FilterContainerProps> = ({
         {setOpenMobileFilter && (
           <Button
             onClick={() => setOpenMobileFilter(false)}
-            className={classes.button}
-            style={{ marginRight: '14px' }}
+            className={classes.button + ' close'}
             variant="contained"
             size="small"
           >
             닫 기
           </Button>
         )}
-        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
-          적용하기
+        <Button
+          onClick={handleApply}
+          color="primary"
+          className={classes.button}
+          variant="contained"
+          size="small"
+        >
+          적 용
         </Button>
       </div>
     </List>

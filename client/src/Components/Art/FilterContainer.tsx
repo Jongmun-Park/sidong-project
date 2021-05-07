@@ -86,13 +86,13 @@ const useStyles = makeStyles((theme) => ({
     margin: '5px 5px 0px 0px',
   },
   button: {
-    backgroundColor: theme.palette.lightBlack.main,
-    color: theme.palette.beige.main,
-    '&.MuiButton-contained:hover': {
-      backgroundColor: theme.palette.lightBlack.light,
+    '&.close': {
+      marginRight: '14px',
+      backgroundColor: theme.palette.lightBlack.main,
+      color: theme.palette.beige.main,
     },
     '@media (max-width: 834px)': {
-      fontSize: '11px',
+      fontSize: '12px',
       minWidth: '50px',
     },
   },
@@ -111,27 +111,30 @@ const FilterContainer: FC<FilterContainerProps> = ({
 }) => {
   const classes = useStyles()
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
-  const [openPrice, setOpenPrice] = useState(true)
+  const [openPrice, setOpenPrice] = useState(false)
   const [openArtOptions, setOpenArtOptions] = useState(false)
   const [openSize, setOpenSize] = useState(false)
   const [openOrientation, setOpenOrientation] = useState(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
 
   const [saleStatus, setSaleStatus] = useState({
-    onSale: true,
-    soldOut: true,
-    notForSale: true,
+    all: true,
+    onSale: false,
+    soldOut: false,
+    notForSale: false,
   })
   const [size, setSize] = useState({
-    small: true,
-    medium: true,
-    large: true,
+    all: true,
+    small: false,
+    medium: false,
+    large: false,
   })
   const [orientation, setOrientation] = useState({
-    landscape: true,
-    portrait: true,
-    square: true,
-    etc: true,
+    all: true,
+    landscape: false,
+    portrait: false,
+    square: false,
+    etc: false,
   })
   const [price, setPrice] = useState<number[]>([0, 1500000])
   const [medium, setMedium] = useState<Medium | string>('all')
@@ -276,6 +279,16 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openSaleStatus} timeout="auto" unmountOnExit>
             <Chip
+              className={saleStatus.all ? '' : 'inactive'}
+              label="전 체"
+              clickable
+              color="primary"
+              size="small"
+              onClick={() => {
+                setSaleStatus({ ...saleStatus, all: !saleStatus.all })
+              }}
+            />
+            <Chip
               className={saleStatus.onSale ? '' : 'inactive'}
               label="판매품"
               clickable
@@ -346,6 +359,16 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openSize} timeout="auto" unmountOnExit>
             <Chip
+              className={size.all ? '' : 'inactive'}
+              label="전 체"
+              clickable
+              color="primary"
+              size="small"
+              onClick={() => {
+                setSize({ ...size, all: !size.all })
+              }}
+            />
+            <Chip
               className={size.small ? '' : 'inactive'}
               label="50cm 이하"
               clickable
@@ -389,8 +412,18 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openOrientation} timeout="auto" unmountOnExit>
             <Chip
+              className={orientation.all ? '' : 'inactive'}
+              label="전 체"
+              clickable
+              color="primary"
+              size="small"
+              onClick={() => {
+                setOrientation({ ...orientation, all: !orientation.all })
+              }}
+            />
+            <Chip
               className={orientation.landscape ? '' : 'inactive'}
-              label="가로가 긴 배치"
+              label="가로가 긴 배치"
               clickable
               color="primary"
               size="small"
@@ -400,7 +433,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             />
             <Chip
               className={orientation.portrait ? '' : 'inactive'}
-              label="세로가 긴 배치"
+              label="세로가 긴 배치"
               clickable
               color="primary"
               size="small"
@@ -420,7 +453,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             />
             <Chip
               className={orientation.etc ? '' : 'inactive'}
-              label="기타"
+              label="기 타"
               clickable
               color="primary"
               size="small"
@@ -435,16 +468,21 @@ const FilterContainer: FC<FilterContainerProps> = ({
         {setOpenMobileFilter && (
           <Button
             onClick={() => setOpenMobileFilter(false)}
-            className={classes.button}
-            style={{ marginRight: '14px' }}
+            className={classes.button + ' close'}
             variant="contained"
             size="small"
           >
             닫 기
           </Button>
         )}
-        <Button onClick={handleApply} className={classes.button} variant="contained" size="small">
-          적용하기
+        <Button
+          onClick={handleApply}
+          color="primary"
+          className={classes.button}
+          variant="contained"
+          size="small"
+        >
+          적 용
         </Button>
       </div>
     </>
