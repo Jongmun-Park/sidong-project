@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row',
     },
     '@media (max-width: 834px)': {
+      margin: '0px auto 7px auto',
+      maxWidth: '530px',
       paddingBottom: '11px',
-      marginBottom: '5px',
     },
   },
   chips: {

@@ -30,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.beige.light,
     '@media (max-width: 834px)': {
       flexDirection: 'row',
+      margin: '0px auto 7px auto',
+      maxWidth: '530px',
       paddingBottom: '11px',
-      marginBottom: '5px',
     },
   },
   select: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonWrapper: {
     float: 'right',
-    margin: '5px 5px 0px 0px',
+    margin: '11px 5px 0px 0px',
   },
   button: {
     '&.close': {
