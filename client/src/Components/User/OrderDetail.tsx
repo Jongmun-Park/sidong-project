@@ -250,7 +250,9 @@ const OrderDetail: FC<OrderDetailProps> = ({
         </Table>
       </DialogContent>
       <DialogActions>
-        {order.status !== OrderStatus.CANCEL && order.status < OrderStatus.ON_DELIVERY && (
+        {(order.status === OrderStatus.WAIT ||
+          order.status === OrderStatus.SUCCESS ||
+          order.status === OrderStatus.PREPARE_DELIVERY) && (
           <Button onClick={() => handleCancelOrder(order.id)} color="secondary">
             주문 취소
           </Button>

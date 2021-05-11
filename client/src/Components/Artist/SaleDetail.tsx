@@ -139,7 +139,7 @@ const SaleDetail: FC<SaleDetailProps> = ({
         },
       })
       if (result.data.updateOrder.success) {
-        alert('주문을 새로 저장했습니다.')
+        alert('상태 변경을 완료했습니다.')
         refetch()
         refetchSales({ page })
       } else {
@@ -307,7 +307,7 @@ const SaleDetail: FC<SaleDetailProps> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={() => handleSave(order.id)} color="secondary">
-          저 장
+          상태 변경
         </Button>
         <Button onClick={handleClose} color="primary">
           확 인

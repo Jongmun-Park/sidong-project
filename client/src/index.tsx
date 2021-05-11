@@ -12,7 +12,7 @@ import App from './Components/App'
 import { CurrentUserProvider } from './Hooks/User'
 
 const link = createUploadLink({
-  uri: process.env.REACT_APP_API_URI,
+  uri: process.env.REACT_APP_API_URI + '/graphql',
 })
 
 const authLink = setContext((_, { headers }) => {

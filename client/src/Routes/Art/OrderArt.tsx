@@ -14,7 +14,7 @@ import {
   TableBody,
   TextField,
 } from '@material-ui/core'
-import { currencyFormatter } from '../../utils'
+import { currencyFormatter, serializeParams } from '../../utils'
 import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
@@ -243,6 +243,16 @@ const OrderArt: FC = () => {
     const IMP = window['IMP'] as any
     IMP.init(process.env.REACT_APP_IMP)
 
+    const orderData = {
+      artId,
+      address: data.address,
+      name: data.name,
+      phone: data.phone,
+      recipientAddress: data.recipientAddress,
+      recipientName: data.recipientName,
+      recipientPhone: data.recipientPhone,
+    }
+
     const paymentData = {
       pay_method: 'card', // 결제수단
       merchant_uid: `mid_${art.id}_${new Date().getTime()}`, // 주문번호
@@ -252,6 +262,8 @@ const OrderArt: FC = () => {
       buyer_tel: data.phone, // 구매자 전화번호
       buyer_addr: data.address, // 구매자 주소
       buyer_email: currentUser.username, // 이메일 주소
+      m_redirect_url:
+        process.env.REACT_APP_API_URI + '/api/create/order?' + serializeParams(orderData),
     }
 
     const callback = async (response: any) => {
@@ -260,13 +272,7 @@ const OrderArt: FC = () => {
       if (success) {
         const result = await createOrder({
           variables: {
-            artId,
-            address: data.address,
-            name: data.name,
-            phone: data.phone,
-            recipientAddress: data.recipientAddress,
-            recipientName: data.recipientName,
-            recipientPhone: data.recipientPhone,
+            ...orderData,
             impUid: imp_uid,
           },
         })

@@ -120,3 +120,11 @@ export function handleImagePreviewList(
 export function currencyFormatter(number: number) {
   return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(number)
 }
+
+export function serializeParams(params: Object) {
+  const keyval: string[] = []
+  for (const [key, value] of Object.entries(params)) {
+    keyval.push(`${key}=${encodeURIComponent(value)}`)
+  }
+  return keyval.join('&')
+}
