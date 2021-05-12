@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileMenu from './MobileMenu'
 import SearchIcon from '@material-ui/icons/Search'
-import logo from '../logo-100.png'
+import logo from '../logo100.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {

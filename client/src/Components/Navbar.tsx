@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileNavbar from './MobileNavbar'
 import { useCurrentUser } from '../Hooks/User'
-import logo from '../logo-100.png'
+import logo from '../logo100.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {
