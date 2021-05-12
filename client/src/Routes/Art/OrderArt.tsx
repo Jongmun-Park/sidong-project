@@ -263,7 +263,9 @@ const OrderArt: FC = () => {
       buyer_addr: data.address, // 구매자 주소
       buyer_email: currentUser.username, // 이메일 주소
       m_redirect_url:
-        process.env.REACT_APP_API_URI + '/api/create/order?' + serializeParams(orderData),
+        process.env.REACT_APP_API_URI +
+        '/api/create/order?' +
+        serializeParams({ ...orderData, userId: currentUser.id }),
     }
 
     const callback = async (response: any) => {
