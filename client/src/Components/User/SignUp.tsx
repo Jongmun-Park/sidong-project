@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     minWidth: '450px',
+    '&.MuiDialogContent-root:first-child': {
+      paddingTop: '0px',
+    },
     '@media (max-width: 834px)': {
       minWidth: '300px',
     },

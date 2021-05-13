@@ -51,8 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   leftBox: {
-    // maxWidth: '530px',
-    width: '85%',
+    width: '80%',
     margin: 'auto',
   },
   artName: {
@@ -164,6 +163,8 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
       <div className={classes.leftArea}>
         <div className={classes.leftBox}>
           <Carousel
+            dynamicHeight={true}
+            thumbWidth={45}
             onClickItem={(index) => {
               window.open(art.imageUrls[index].url)
             }}

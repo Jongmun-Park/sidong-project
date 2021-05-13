@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
   TextField,
@@ -10,6 +11,14 @@ import {
 } from '@material-ui/core'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+
+const useStyles = makeStyles({
+  dialogContent: {
+    '&.MuiDialogContent-root:first-child': {
+      paddingTop: '0px',
+    },
+  },
+})
 
 interface LoginProps {
   openDialog: boolean
@@ -33,6 +42,7 @@ const CHECK_USER_EMAIL = gql`
 `
 
 const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
+  const classes = useStyles()
   const { register, handleSubmit } = useForm()
   const [checkUserEmail] = useMutation(CHECK_USER_EMAIL)
   const [loginUser] = useMutation(LOGIN_MUTATION, {
@@ -71,7 +81,7 @@ const Login: FC<LoginProps> = ({ openDialog, handleOpenDialog }) => {
     <Dialog open={openDialog} onClose={handleClose} aria-labelledby="login-dialog">
       <DialogTitle id="login-dialog">로그인</DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogContent>
+        <DialogContent className={classes.dialogContent}>
           <TextField
             autoFocus
             margin="dense"
