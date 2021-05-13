@@ -13,6 +13,16 @@ import ArtDetail from './ArtDetail'
 
 const useStyles = makeStyles({
   dialog: {
+    '& .MuiDialogTitle-root': {
+      '@media (max-width: 834px)': {
+        padding: '12px 24px',
+      },
+    },
+    '& .MuiDialogActions-root': {
+      '@media (max-width: 834px)': {
+        padding: '4px',
+      },
+    },
     '& .MuiDialog-paperWidthSm': {
       width: '95%',
       maxWidth: 'none',
@@ -29,8 +39,9 @@ const useStyles = makeStyles({
     '& h2': {
       display: 'flex',
       justifyContent: 'space-between',
+      fontSize: '1rem',
       '@media (max-width: 834px)': {
-        fontSize: '1rem',
+        fontSize: '14px',
       },
     },
     '& .MuiIconButton-root': {
@@ -61,7 +72,7 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artId, artNa
       aria-labelledby="art-dialog-title"
     >
       <DialogTitle id="art-dialog-title">
-        <span>{artName}</span>
+        <span>작품 상세 정보</span>
         <IconButton onClick={handleClose}>
           <Close />
         </IconButton>
