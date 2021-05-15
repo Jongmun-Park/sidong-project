@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxHeight: '370px',
     objectFit: 'contain',
-    borderRadius: '4px',
+    borderRadius: '8px',
   },
   errorMessage: {
     color: 'red',

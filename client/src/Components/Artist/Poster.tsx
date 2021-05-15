@@ -8,7 +8,7 @@ import Like from './Like'
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '0 15px 15px 15px',
-    borderRadius: '20px',
+    borderRadius: '8px',
     '@media (max-width: 834px)': {
       padding: '0 11px 11px 11px',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxHeight: '200px',
     objectFit: 'cover',
-    borderRadius: '20px',
+    borderRadius: '8px',
     '@media (max-width: 834px)': {
       maxHeight: '140px',
     },
@@ -117,7 +117,7 @@ const Poster: FC<ArtistPosterProps> = ({
 }) => {
   const classes = useStyles()
   return (
-    <Paper className={classes.paper} elevation={2}>
+    <Paper className={classes.paper} elevation={0}>
       <span className={classes.like}>
         <Like artistId={id} />
       </span>

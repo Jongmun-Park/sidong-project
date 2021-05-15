@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '10px',
     paddingBottom: '14px',
     border: '2px solid',
-    borderRadius: '14px',
+    borderRadius: '8px',
     borderColor: theme.palette.BgColor.main,
     backgroundColor: 'white',
     '@media (max-width: 834px)': {

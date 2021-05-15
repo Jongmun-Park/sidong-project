@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     padding: '15px',
-    borderRadius: '20px',
+    borderRadius: '8px',
     '@media (max-width: 834px)': {
       padding: '11px',
     },
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxHeight: '200px',
     objectFit: 'cover',
-    borderRadius: '20px',
+    borderRadius: '8px',
     '@media (max-width: 834px)': {
       maxHeight: '140px',
     },
@@ -108,7 +108,7 @@ const Poster: FC<ArtPosterProps> = ({
   const [openDialog, setOpenDialog] = useState(false)
   return (
     <div>
-      <Paper className={classes.paper} elevation={2}>
+      <Paper className={classes.paper} elevation={0}>
         <ButtonBase
           className={classes.buttonBase}
           onClick={() => {

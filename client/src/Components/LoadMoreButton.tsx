@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     fontWeight: 500,
     backgroundColor: theme.palette.primary.light,
-    borderRadius: '14px',
+    borderRadius: '8px',
     '@media (max-width: 834px)': {
       height: '33px',
       fontSize: '12px',
