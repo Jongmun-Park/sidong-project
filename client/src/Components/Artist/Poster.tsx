@@ -8,7 +8,6 @@ import Like from './Like'
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '0 15px 15px 15px',
-    backgroundColor: theme.palette.greyBackground.main,
     borderRadius: '20px',
     '@media (max-width: 834px)': {
       padding: '0 11px 11px 11px',

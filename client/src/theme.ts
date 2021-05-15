@@ -4,14 +4,12 @@ declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     lightBlack: Palette['primary']
     greyFont: Palette['primary']
-    greyBackground: Palette['primary']
-    beige: Palette['primary']
+    BgColor: Palette['primary']
   }
   interface PaletteOptions {
     lightBlack: PaletteOptions['primary']
     greyFont: PaletteOptions['primary']
-    greyBackground: PaletteOptions['primary']
-    beige: PaletteOptions['primary']
+    BgColor: PaletteOptions['primary']
   }
 }
 
@@ -35,16 +33,12 @@ const theme = createMuiTheme({
     greyFont: {
       main: '#818181',
     },
-    greyBackground: {
-      main: '#f5f6fa',
-    },
     lightBlack: {
       main: '#333333',
       light: '#808080',
     },
-    beige: {
-      main: '#f0eadb',
-      light: '#f7f5ed',
+    BgColor: {
+      main: '#efefef',
     },
   },
   typography: {
@@ -55,7 +49,7 @@ const theme = createMuiTheme({
       '@global': {
         '@font-face': [customFont],
         body: {
-          backgroundColor: '#f0eadb',
+          backgroundColor: '#efefef',
           '& .MuiMenuItem-root': {
             fontSize: '14px',
             minHeight: 'auto',

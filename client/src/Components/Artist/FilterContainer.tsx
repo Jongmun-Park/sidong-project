@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '14px',
     border: '2px solid',
     borderRadius: '14px',
-    borderColor: theme.palette.beige.main,
-    backgroundColor: theme.palette.beige.light,
+    borderColor: theme.palette.BgColor.main,
+    backgroundColor: 'white',
     '@media (max-width: 834px)': {
       flexDirection: 'row',
       margin: '0px auto 7px auto',
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     '&.close': {
       marginRight: '14px',
       backgroundColor: theme.palette.lightBlack.main,
-      color: theme.palette.beige.main,
+      color: theme.palette.BgColor.main,
     },
     '@media (max-width: 834px)': {
       fontSize: '12px',

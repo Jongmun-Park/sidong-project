@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'contain',
     border: '4px double',
     borderRadius: '14px',
-    borderColor: theme.palette.beige.main,
+    borderColor: theme.palette.BgColor.main,
     boxShadow: '4px 4px 10px 0 rgb(0 0 0 / 25%)',
   },
   figcaption: {
