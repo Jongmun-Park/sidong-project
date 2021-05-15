@@ -1,13 +1,15 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Button,
+  Checkbox,
   TextField,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
 } from '@material-ui/core'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
@@ -27,6 +29,12 @@ const useStyles = makeStyles({
   error: {
     color: 'red',
   },
+  checkBox: {
+    marginTop: '8px',
+    '& .MuiTypography-body1': {
+      fontSize: '12px',
+    },
+  },
 })
 
 interface SignUpProps {
@@ -44,15 +52,26 @@ const SIGN_UP_MUTATION = gql`
 
 const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
   const classes = useStyles()
+  const [checkedPolicy, setCheckedPolicy] = useState<boolean>(false)
   const { register, handleSubmit, errors } = useForm()
   const [createUser] = useMutation(SIGN_UP_MUTATION)
+
   const handleClose = () => {
     handleOpenDialog(false)
+  }
+
+  const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckedPolicy(event.target.checked)
   }
 
   const onSubmit = async (data: any) => {
     if (data.password !== data.passwordForCheck) {
       alert('비밀번호가 일치하지 않습니다.')
+      return
+    }
+
+    if (!checkedPolicy) {
+      alert('이용약관과 개인정보 취급방침에 동의하셔야 가입이 가능합니다.')
       return
     }
 
@@ -109,6 +128,23 @@ const SignUp: FC<SignUpProps> = ({ openDialog, handleOpenDialog }) => {
             name="passwordForCheck"
             required={true}
             inputRef={register}
+          />
+          <FormControlLabel
+            className={classes.checkBox}
+            control={
+              <Checkbox
+                size="small"
+                checked={checkedPolicy}
+                onChange={handleCheckBox}
+                color="primary"
+              />
+            }
+            label={
+              <div>
+                <a href="/service-policy.html">이용약관</a>과{' '}
+                <a href="/privacy-policy.html">개인정보 취급방침</a>에 동의합니다.
+              </div>
+            }
           />
         </DialogContent>
         <DialogActions>
