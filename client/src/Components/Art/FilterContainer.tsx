@@ -113,8 +113,8 @@ const FilterContainer: FC<FilterContainerProps> = ({
   const [openSaleStatus, setOpenSaleStatus] = useState(true)
   const [openPrice, setOpenPrice] = useState(setOpenMobileFilter ? false : true)
   const [openArtOptions, setOpenArtOptions] = useState(false)
-  const [openSize, setOpenSize] = useState(false)
-  const [openOrientation, setOpenOrientation] = useState(false)
+  const [openSize, setOpenSize] = useState(setOpenMobileFilter ? false : true)
+  const [openOrientation, setOpenOrientation] = useState(setOpenMobileFilter ? false : true)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [price, setPrice] = useState<number[]>([0, 1500000])
 
