@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     '@media (max-width: 834px)': {
-      height: '370px',
+      height: '345px',
       overflowY: 'auto',
     },
   },
@@ -84,16 +84,15 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonWrapper: {
     float: 'right',
-    margin: '5px 5px 0px 0px',
+    margin: '20px 15px 0px 0px',
   },
   button: {
     '&.close': {
-      marginRight: '14px',
       backgroundColor: theme.palette.lightBlack.main,
       color: theme.palette.BgColor.main,
     },
     '@media (max-width: 834px)': {
-      fontSize: '12px',
+      fontSize: '11px',
       minWidth: '50px',
     },
   },
@@ -117,31 +116,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
   const [openSize, setOpenSize] = useState(false)
   const [openOrientation, setOpenOrientation] = useState(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
-
-  const [saleStatus, setSaleStatus] = useState({
-    all: true,
-    onSale: false,
-    soldOut: false,
-    notForSale: false,
-  })
-  const [size, setSize] = useState({
-    all: true,
-    small: false,
-    medium: false,
-    large: false,
-  })
-  const [orientation, setOrientation] = useState({
-    all: true,
-    landscape: false,
-    portrait: false,
-    square: false,
-    etc: false,
-  })
   const [price, setPrice] = useState<number[]>([0, 1500000])
-  const [medium, setMedium] = useState<Medium | string>('all')
-  const [theme, setTheme] = useState<string>('all')
-  const [style, setStyle] = useState<string>('all')
-  const [technique, setTechnique] = useState<string>('all')
 
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
@@ -155,10 +130,13 @@ const FilterContainer: FC<FilterContainerProps> = ({
   }
 
   const handleMedium = (e: ChangeEvent<{ value: unknown }>) => {
-    setMedium(e.target.value as Medium | string)
-    setTheme('all')
-    setStyle('all')
-    setTechnique('all')
+    setFilters({
+      ...filters,
+      medium: e.target.value as Medium | string,
+      theme: 'all',
+      style: 'all',
+      technique: 'all',
+    })
 
     if (e.target.value !== 'all') {
       changeArtOptions({
@@ -172,23 +150,6 @@ const FilterContainer: FC<FilterContainerProps> = ({
     }
   }
 
-  const handleApply = () => {
-    setFilters({
-      ...filters,
-      saleStatus,
-      size,
-      orientation,
-      price,
-      medium,
-      theme,
-      style,
-      technique,
-    })
-    if (setOpenMobileFilter) {
-      setOpenMobileFilter(false)
-    }
-  }
-
   return (
     <>
       <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
@@ -196,7 +157,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
           <ListItem>
             <ListItemText primary="매 체" />
           </ListItem>
-          <Select className={classes.select} value={medium} onChange={handleMedium}>
+          <Select className={classes.select} value={filters.medium} onChange={handleMedium}>
             <MenuItem value={'all'}>전 체</MenuItem>
             <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
             <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
@@ -216,9 +177,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
               </ListItem>
               <Select
                 className={classes.select}
-                value={theme}
+                value={filters.theme}
                 onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                  setTheme(e.target.value as string)
+                  setFilters({ ...filters, theme: e.target.value as string })
                 }}
               >
                 <MenuItem value={'all'}>전 체</MenuItem>
@@ -235,9 +196,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
               </ListItem>
               <Select
                 className={classes.select}
-                value={style}
+                value={filters.style}
                 onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                  setStyle(e.target.value as string)
+                  setFilters({ ...filters, style: e.target.value as string })
                 }}
               >
                 <MenuItem value={'all'}>전 체</MenuItem>
@@ -254,9 +215,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
               </ListItem>
               <Select
                 className={classes.select}
-                value={technique}
+                value={filters.technique}
                 onChange={(e: ChangeEvent<{ value: unknown }>) => {
-                  setTechnique(e.target.value as string)
+                  setFilters({ ...filters, technique: e.target.value as string })
                 }}
               >
                 <MenuItem value={'all'}>전 체</MenuItem>
@@ -281,43 +242,78 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openSaleStatus} timeout="auto" unmountOnExit>
             <Chip
-              className={saleStatus.all ? '' : 'inactive'}
+              className={filters.saleStatus.all ? '' : 'inactive'}
               label="전 체"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSaleStatus({ ...saleStatus, all: !saleStatus.all })
+                const otherSaleStatus = !filters.saleStatus.all
+                  ? {
+                      onSale: false,
+                      soldOut: false,
+                      notForSale: false,
+                    }
+                  : filters.saleStatus
+
+                setFilters({
+                  ...filters,
+                  saleStatus: {
+                    ...otherSaleStatus,
+                    all: !filters.saleStatus.all,
+                  },
+                })
               }}
             />
             <Chip
-              className={saleStatus.onSale ? '' : 'inactive'}
+              className={filters.saleStatus.onSale ? '' : 'inactive'}
               label="판매품"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSaleStatus({ ...saleStatus, onSale: !saleStatus.onSale })
+                setFilters({
+                  ...filters,
+                  saleStatus: {
+                    ...filters.saleStatus,
+                    onSale: !filters.saleStatus.onSale,
+                    all: false,
+                  },
+                })
               }}
             />
             <Chip
-              className={saleStatus.soldOut ? '' : 'inactive'}
+              className={filters.saleStatus.soldOut ? '' : 'inactive'}
               label="판매 완료"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSaleStatus({ ...saleStatus, soldOut: !saleStatus.soldOut })
+                setFilters({
+                  ...filters,
+                  saleStatus: {
+                    ...filters.saleStatus,
+                    soldOut: !filters.saleStatus.soldOut,
+                    all: false,
+                  },
+                })
               }}
             />
             <Chip
-              className={saleStatus.notForSale ? '' : 'inactive'}
+              className={filters.saleStatus.notForSale ? '' : 'inactive'}
               label="비매품"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSaleStatus({ ...saleStatus, notForSale: !saleStatus.notForSale })
+                setFilters({
+                  ...filters,
+                  saleStatus: {
+                    ...filters.saleStatus,
+                    notForSale: !filters.saleStatus.notForSale,
+                    all: false,
+                  },
+                })
               }}
             />
           </Collapse>
@@ -347,6 +343,17 @@ const FilterContainer: FC<FilterContainerProps> = ({
               <Typography variant="caption">{currencyFormatter(price[0])} ~</Typography>
               <Typography variant="caption"> {currencyFormatter(price[1])}</Typography>
             </div>
+            <Button
+              onClick={() => {
+                setFilters({ ...filters, price: price })
+              }}
+              color="primary"
+              className={classes.button}
+              variant="contained"
+              size="small"
+            >
+              적용하기
+            </Button>
           </Collapse>
         </div>
         <div className={classes.listBox}>
@@ -361,43 +368,59 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openSize} timeout="auto" unmountOnExit>
             <Chip
-              className={size.all ? '' : 'inactive'}
+              className={filters.size.all ? '' : 'inactive'}
               label="전 체"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSize({ ...size, all: !size.all })
+                const otherSizes = !filters.size.all
+                  ? {
+                      small: false,
+                      medium: false,
+                      large: false,
+                    }
+                  : filters.size
+                setFilters({ ...filters, size: { ...otherSizes, all: !filters.size.all } })
               }}
             />
             <Chip
-              className={size.small ? '' : 'inactive'}
+              className={filters.size.small ? '' : 'inactive'}
               label="50cm 이하"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSize({ ...size, small: !size.small })
+                setFilters({
+                  ...filters,
+                  size: { ...filters.size, small: !filters.size.small, all: false },
+                })
               }}
             />
             <Chip
-              className={size.medium ? '' : 'inactive'}
+              className={filters.size.medium ? '' : 'inactive'}
               label="50~150cm"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSize({ ...size, medium: !size.medium })
+                setFilters({
+                  ...filters,
+                  size: { ...filters.size, medium: !filters.size.medium, all: false },
+                })
               }}
             />
             <Chip
-              className={size.large ? '' : 'inactive'}
+              className={filters.size.large ? '' : 'inactive'}
               label="150cm 초과"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setSize({ ...size, large: !size.large })
+                setFilters({
+                  ...filters,
+                  size: { ...filters.size, large: !filters.size.large, all: false },
+                })
               }}
             />
           </Collapse>
@@ -414,53 +437,92 @@ const FilterContainer: FC<FilterContainerProps> = ({
           </ListItem>
           <Collapse className={classes.chips} in={openOrientation} timeout="auto" unmountOnExit>
             <Chip
-              className={orientation.all ? '' : 'inactive'}
+              className={filters.orientation.all ? '' : 'inactive'}
               label="전 체"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setOrientation({ ...orientation, all: !orientation.all })
+                const otherOrientations = !filters.orientation.all
+                  ? {
+                      landscape: false,
+                      portrait: false,
+                      square: false,
+                      etc: false,
+                    }
+                  : filters.orientation
+                setFilters({
+                  ...filters,
+                  orientation: { ...otherOrientations, all: !filters.orientation.all },
+                })
               }}
             />
             <Chip
-              className={orientation.landscape ? '' : 'inactive'}
+              className={filters.orientation.landscape ? '' : 'inactive'}
               label="가로가 긴 배치"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setOrientation({ ...orientation, landscape: !orientation.landscape })
+                setFilters({
+                  ...filters,
+                  orientation: {
+                    ...filters.orientation,
+                    landscape: !filters.orientation.landscape,
+                    all: false,
+                  },
+                })
               }}
             />
             <Chip
-              className={orientation.portrait ? '' : 'inactive'}
+              className={filters.orientation.portrait ? '' : 'inactive'}
               label="세로가 긴 배치"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setOrientation({ ...orientation, portrait: !orientation.portrait })
+                setFilters({
+                  ...filters,
+                  orientation: {
+                    ...filters.orientation,
+                    portrait: !filters.orientation.portrait,
+                    all: false,
+                  },
+                })
               }}
             />
             <Chip
-              className={orientation.square ? '' : 'inactive'}
+              className={filters.orientation.square ? '' : 'inactive'}
               label="정사각형"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setOrientation({ ...orientation, square: !orientation.square })
+                setFilters({
+                  ...filters,
+                  orientation: {
+                    ...filters.orientation,
+                    square: !filters.orientation.square,
+                    all: false,
+                  },
+                })
               }}
             />
             <Chip
-              className={orientation.etc ? '' : 'inactive'}
+              className={filters.orientation.etc ? '' : 'inactive'}
               label="기 타"
               clickable
               color="primary"
               size="small"
               onClick={() => {
-                setOrientation({ ...orientation, etc: !orientation.etc })
+                setFilters({
+                  ...filters,
+                  orientation: {
+                    ...filters.orientation,
+                    etc: !filters.orientation.etc,
+                    all: false,
+                  },
+                })
               }}
             />
           </Collapse>
@@ -477,15 +539,6 @@ const FilterContainer: FC<FilterContainerProps> = ({
             닫 기
           </Button>
         )}
-        <Button
-          onClick={handleApply}
-          color="primary"
-          className={classes.button}
-          variant="contained"
-          size="small"
-        >
-          적 용
-        </Button>
       </div>
     </>
   )

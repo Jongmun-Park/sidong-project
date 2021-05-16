@@ -46,7 +46,33 @@ const ARTS = gql`
 const ArtList: FC = () => {
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
-  const [filters, setFilters] = useState<any>(null)
+  const [filters, setFilters] = useState<any>({
+    saleStatus: {
+      all: true,
+      onSale: false,
+      soldOut: false,
+      notForSale: false,
+    },
+    size: {
+      all: true,
+      small: false,
+      medium: false,
+      large: false,
+    },
+    orientation: {
+      all: true,
+      landscape: false,
+      portrait: false,
+      square: false,
+      etc: false,
+    },
+    price: [0, 1500000],
+    medium: 'all',
+    theme: 'all',
+    style: 'all',
+    technique: 'all',
+  })
+
   const [page, setPage] = useState<number>(0)
 
   const { data } = useQuery(ARTS, {
