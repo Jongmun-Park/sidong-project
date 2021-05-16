@@ -95,6 +95,7 @@ export enum ArtistCategory {
 export enum Medium {
   PAINTING,
   SCULPTURE,
+  PICTURE,
   DRAWING,
   PRINT,
   PAPER,

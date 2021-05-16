@@ -200,6 +200,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             <MenuItem value={'all'}>전 체</MenuItem>
             <MenuItem value={Medium.PAINTING}>회화 (Painting)</MenuItem>
             <MenuItem value={Medium.SCULPTURE}>조각 (Sculpture)</MenuItem>
+            <MenuItem value={Medium.PICTURE}>사진 (Picture)</MenuItem>
             <MenuItem value={Medium.DRAWING}>소묘 (Drawing)</MenuItem>
             <MenuItem value={Medium.PRINT}>판화 (Print)</MenuItem>
             <MenuItem value={Medium.PAPER}>종이 (Paper)</MenuItem>

@@ -30,11 +30,12 @@ const ORDER_STATUS = {
 const MEDIUM = {
   0: '회화 (Painting)',
   1: '조각 (Sculpture)',
-  2: '소묘 (Drawing)',
-  3: '판화 (Print)',
-  4: '종이 (Paper)',
-  5: '섬유 (Texttile)',
-  6: '기타 매체',
+  2: '사진 (Picture)',
+  3: '소묘 (Drawing)',
+  4: '판화 (Print)',
+  5: '종이 (Paper)',
+  6: '섬유 (Texttile)',
+  7: '기타 매체',
 }
 
 const RESIDENCE = {
