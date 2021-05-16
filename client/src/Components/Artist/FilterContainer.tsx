@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Button, List, ListItem, ListItemText, MenuItem, Select } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { ArtistCategory, Residence } from '../../types'
@@ -51,12 +51,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     '&.close': {
-      marginRight: '14px',
       backgroundColor: theme.palette.lightBlack.main,
       color: theme.palette.BgColor.main,
     },
     '@media (max-width: 834px)': {
-      fontSize: '12px',
+      fontSize: '11px',
       minWidth: '50px',
     },
   },
@@ -74,19 +73,6 @@ const FilterContainer: FC<FilterContainerProps> = ({
   setOpenMobileFilter,
 }) => {
   const classes = useStyles()
-  const [category, setCategory] = useState<ArtistCategory | string>('all')
-  const [residence, setResidence] = useState<Residence | string>('all')
-
-  const handleApply = () => {
-    setFilters({
-      ...filters,
-      category,
-      residence,
-    })
-    if (setOpenMobileFilter) {
-      setOpenMobileFilter(false)
-    }
-  }
 
   return (
     <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
@@ -96,9 +82,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
         </ListItem>
         <Select
           className={classes.select}
-          value={category}
+          value={filters.category}
           onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
-            setCategory(e.target.value as string)
+            setFilters({ ...filters, category: e.target.value as string })
           }}
         >
           <MenuItem value={'all'}>전 체</MenuItem>
@@ -114,9 +100,9 @@ const FilterContainer: FC<FilterContainerProps> = ({
         </ListItem>
         <Select
           className={classes.select}
-          value={residence}
+          value={filters.residence}
           onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
-            setResidence(e.target.value as string)
+            setFilters({ ...filters, residence: e.target.value as string })
           }}
         >
           <MenuItem value={'all'}>전 체</MenuItem>
@@ -150,15 +136,6 @@ const FilterContainer: FC<FilterContainerProps> = ({
             닫 기
           </Button>
         )}
-        <Button
-          onClick={handleApply}
-          color="primary"
-          className={classes.button}
-          variant="contained"
-          size="small"
-        >
-          적 용
-        </Button>
       </div>
     </List>
   )

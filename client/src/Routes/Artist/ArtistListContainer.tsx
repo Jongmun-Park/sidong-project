@@ -30,7 +30,10 @@ const ARTISTS = gql`
 const ArtistList: FC = () => {
   const [artists, setArtists] = useState<Array<any>>([])
   const [noMoreArtist, setNoMoreArtist] = useState<boolean>(false)
-  const [filters, setFilters] = useState<any>(null)
+  const [filters, setFilters] = useState<any>({
+    category: 'all',
+    residence: 'all',
+  })
   const [page, setPage] = useState<number>(0)
 
   const { data } = useQuery(ARTISTS, {
