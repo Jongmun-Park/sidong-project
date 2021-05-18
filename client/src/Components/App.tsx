@@ -12,6 +12,9 @@ const useStyles = makeStyles({
     position: 'fixed',
     zIndex: 100,
   },
+  router: {
+    minHeight: 'calc(100vh - 73px)',
+  },
 })
 
 const App: FC = () => {
@@ -21,7 +24,9 @@ const App: FC = () => {
       <div className={classes.navBarContainer}>
         <NavBar />
       </div>
-      <Router />
+      <div className={classes.router}>
+        <Router />
+      </div>
       <Footer />
     </>
   )
