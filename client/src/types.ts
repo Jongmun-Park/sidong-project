@@ -44,6 +44,7 @@ export interface Art {
   saleStatus: SaleStatus
   isFramed: boolean
   price: number
+  deliveryFee: number
   width: number
   height: number
   representativeImageUrl: string

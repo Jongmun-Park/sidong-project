@@ -88,6 +88,7 @@ const REGISTER_ART_MUTATION = gql`
     $name: String!
     $orientation: ID!
     $price: Int
+    $deliveryFee: Int
     $saleStatus: ID!
     $style: ID!
     $technique: ID!
@@ -103,6 +104,7 @@ const REGISTER_ART_MUTATION = gql`
       name: $name
       orientation: $orientation
       price: $price
+      deliveryFee: $deliveryFee
       saleStatus: $saleStatus
       style: $style
       technique: $technique
@@ -157,6 +159,7 @@ const RegisterArt: FC = () => {
         name: data.name,
         orientation: data.orientation,
         price: data.price,
+        deliveryFee: data.deliveryFee,
         saleStatus: data.saleStatus,
         style: data.style,
         technique: data.technique,
@@ -308,30 +311,63 @@ const RegisterArt: FC = () => {
             />
           </div>
           {isForSale && (
-            <div className={classes.inputBox}>
-              <FormLabel component="div" className={classes.formLabel}>
-                판매 가격 (배송비 포함)
-              </FormLabel>
-              <FormHelperText>- 판매 가격은 10,000원 ~ 1,500,000원 까지</FormHelperText>
-              <FormHelperText>- 배송비를 포함한 가격으로 책정해주세요 :)</FormHelperText>
-              <div className={classes.inputElement}>
-                <input
-                  style={{ width: '85px' }}
-                  type="number"
-                  name="price"
-                  min="10000"
-                  max="1500000"
-                  ref={register({
-                    validate: {
-                      positive: (value) => value > 0 || '판매 가격을 입력해주세요.',
-                    },
-                  })}
-                ></input>
-                &nbsp;원
+            <>
+              <div className={classes.inputBox}>
+                <FormLabel component="div" className={classes.formLabel}>
+                  판매 가격
+                </FormLabel>
+                <FormHelperText>- 판매 가격은 10,000원 ~ 1,500,000원 까지</FormHelperText>
+                <div className={classes.inputElement}>
+                  <input
+                    style={{ width: '85px' }}
+                    type="number"
+                    name="price"
+                    min="10000"
+                    max="1500000"
+                    ref={register({
+                      validate: {
+                        positive: (value) => value > 0 || '판매 가격을 입력해주세요.',
+                      },
+                    })}
+                  ></input>
+                  &nbsp;원
+                </div>
               </div>
-            </div>
+              {errors.price?.type && (
+                <p className={classes.errorMessage}>{errors.price?.message}</p>
+              )}
+              <div className={classes.inputBox}>
+                <FormLabel component="div" className={classes.formLabel}>
+                  배송비
+                </FormLabel>
+                <FormHelperText>- 작품 운송에 소요될 배송비를 정확히 입력해주세요.</FormHelperText>
+                <FormHelperText>
+                  - 단순 변심에 의한 환불 시, 구매자에게 청구될 금액입니다.
+                </FormHelperText>
+                <FormHelperText>
+                  - 과도한 배송비는 작품 판매에 부정적인 영향을 미칠 수 있습니다.
+                </FormHelperText>
+                <div className={classes.inputElement}>
+                  <input
+                    style={{ width: '85px' }}
+                    type="number"
+                    name="deliveryFee"
+                    min="0"
+                    max="100000"
+                    ref={register({
+                      validate: {
+                        positive: (value) => value > 0 || '배송비를 입력해주세요.',
+                      },
+                    })}
+                  ></input>
+                  &nbsp;원
+                </div>
+              </div>
+              {errors.deliveryFee?.type && (
+                <p className={classes.errorMessage}>{errors.deliveryFee?.message}</p>
+              )}
+            </>
           )}
-          {errors.price?.type && <p className={classes.errorMessage}>{errors.price?.message}</p>}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
               방향 및 크기

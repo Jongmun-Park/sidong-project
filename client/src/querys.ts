@@ -47,6 +47,7 @@ export const ART = gql`
       isFramed
       orientation
       price
+      deliveryFee
       width
       height
       imageUrls {
