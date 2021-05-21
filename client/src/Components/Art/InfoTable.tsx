@@ -6,7 +6,7 @@ import { Art } from '../../types'
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    marginBottom: '33px',
+    marginBottom: '25px',
   },
   th: {
     color: theme.palette.greyFont.main,

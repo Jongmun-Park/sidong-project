@@ -4,18 +4,10 @@ import { useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useForm } from 'react-hook-form'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-  TextField,
-} from '@material-ui/core'
-import { currencyFormatter, serializeParams } from '../../utils'
+import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core'
+import { serializeParams } from '../../utils'
 import { useCurrentUser } from '../../Hooks/User'
+import PriceInfoTable from '../../Components/Art/PriceInfoTable'
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -112,28 +104,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '19px',
     },
   },
-  th: {
-    color: theme.palette.greyFont.main,
-    width: '60%',
-    padding: '6px 6px 6px 0',
-    fontSize: '0.929em',
-    borderBottom: 'none',
-    textAlign: 'right',
-    '@media (max-width: 834px)': {
-      fontSize: '12px',
-    },
-  },
-  td: {
-    width: '40%',
-    padding: '6px',
-    fontSize: '1em',
-    fontWeight: 400,
-    borderBottom: 'none',
-    textAlign: 'right',
-    '@media (max-width: 834px)': {
-      fontSize: '12.4px',
-    },
-  },
   categoryTabContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -171,6 +141,7 @@ const ART_FOR_ORDER = gql`
       }
       name
       price
+      deliveryFee
       width
       height
       representativeImageUrl
@@ -462,28 +433,9 @@ const OrderArt: FC = () => {
           required={true}
           inputRef={register}
         />
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow>
-              <TableCell className={classes.th} component="th" scope="row">
-                작품 가격
-              </TableCell>
-              <TableCell className={classes.td}>{currencyFormatter(art.price)}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className={classes.th} component="th" scope="row">
-                배송비
-              </TableCell>
-              <TableCell className={classes.td}>{currencyFormatter(0)}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className={classes.th} component="th" scope="row">
-                총 금액
-              </TableCell>
-              <TableCell className={classes.td}>{currencyFormatter(art.price)}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <div className={classes.table}>
+          <PriceInfoTable artPrice={art.price} deliveryFee={art.deliveryFee} />
+        </div>
         <Button type="submit" color="primary" variant="contained" className={classes.submitButton}>
           결제하기
         </Button>

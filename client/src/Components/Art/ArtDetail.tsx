@@ -6,10 +6,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
 import { ART } from '../../querys'
-import { currencyFormatter, translateSaleStatus } from '../../utils'
+import { translateSaleStatus } from '../../utils'
 import ArtInfoTable from './InfoTable'
 import Like from './Like'
 import Login from '../User/Login'
+import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '17px',
     },
   },
+  table: {
+    marginBottom: '25px',
+  },
   tabs: {
     width: '100%',
     margin: '0px 30px 0px 30px',
@@ -90,12 +94,6 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     whiteSpace: 'pre-line',
-  },
-  price: {
-    fontSize: '15px',
-    fontWeight: 500,
-    textAlign: 'right',
-    marginBottom: '18px',
   },
 }))
 
@@ -190,7 +188,9 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (
             <div>
-              <div className={classes.price}>{currencyFormatter(art.price)}</div>
+              <div className={classes.table}>
+                <PriceInfoTable artPrice={art.price} deliveryFee={art.deliveryFee} />
+              </div>
               <Button
                 onClick={() => {
                   if (!currentUser) {
