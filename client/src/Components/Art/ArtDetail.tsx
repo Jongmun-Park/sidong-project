@@ -95,6 +95,11 @@ const useStyles = makeStyles((theme) => ({
   description: {
     whiteSpace: 'pre-line',
   },
+  saleStatus: {
+    textAlign: 'right',
+    fontWeight: 600,
+    color: theme.palette.secondary.main,
+  },
 }))
 
 interface TabPanelProps {
@@ -208,7 +213,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
               </Button>
             </div>
           ) : (
-            <div>{translateSaleStatus(art.saleStatus)}</div>
+            <div className={classes.saleStatus}>{translateSaleStatus(art.saleStatus)}</div>
           )}
         </div>
       </div>

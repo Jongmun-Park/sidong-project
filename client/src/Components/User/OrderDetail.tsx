@@ -98,6 +98,15 @@ const COMPLETE_ORDER = gql`
   }
 `
 
+const REQUEST_REFUND = gql`
+  mutation RequestRefund($orderId: ID!) {
+    requestRefund(orderId: $orderId) {
+      success
+      msg
+    }
+  }
+`
+
 const OrderDetail: FC<OrderDetailProps> = ({
   openDialog,
   handleOpenDialog,
@@ -112,6 +121,7 @@ const OrderDetail: FC<OrderDetailProps> = ({
   })
   const [cancelOrder] = useMutation(CANCEL_ORDER)
   const [completeOrder] = useMutation(COMPLETE_ORDER)
+  const [requestRefund] = useMutation(REQUEST_REFUND)
 
   if (!data) {
     return null
@@ -142,6 +152,18 @@ const OrderDetail: FC<OrderDetailProps> = ({
         refetchOrders({ page })
       } else {
         alert(result.data.completeOrder.msg)
+      }
+    }
+  }
+
+  const handleRequestRefund = async (orderId: number) => {
+    if (window.confirm('환불 요청하시겠습니까?')) {
+      const result = await requestRefund({ variables: { orderId } })
+      if (result.data.requestRefund.success) {
+        alert('환불 요청이 완료됐습니다. 휴대전화로 안내 메시지 드리겠습니다.')
+        refetchOrders({ page })
+      } else {
+        alert(result.data.requestRefund.msg)
       }
     }
   }
@@ -259,9 +281,14 @@ const OrderDetail: FC<OrderDetailProps> = ({
         )}
         {(order.status === OrderStatus.ON_DELIVERY ||
           order.status === OrderStatus.DELIVERY_COMPLETED) && (
-          <Button onClick={() => handleCompleteOrder(order.id)} color="secondary">
-            구매 확정
-          </Button>
+          <>
+            <Button onClick={() => handleRequestRefund(order.id)} color="default">
+              환불 요청
+            </Button>
+            <Button onClick={() => handleCompleteOrder(order.id)} color="secondary">
+              구매 확정
+            </Button>
+          </>
         )}
         <Button onClick={handleClose} color="primary">
           확 인

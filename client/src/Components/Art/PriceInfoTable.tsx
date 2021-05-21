@@ -53,7 +53,9 @@ const PriceInfoTable: FC<PriceInfoTableProps> = ({ artPrice, deliveryFee }) => {
           <TableCell className={classes.th} component="th" scope="row">
             총 금액
           </TableCell>
-          <TableCell className={classes.td}>{currencyFormatter(artPrice + deliveryFee)}</TableCell>
+          <TableCell className={classes.td} style={{ fontWeight: 600 }}>
+            {currencyFormatter(artPrice + deliveryFee)}
+          </TableCell>
         </TableRow>
       </TableBody>
     </Table>
