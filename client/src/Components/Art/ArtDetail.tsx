@@ -238,7 +238,24 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          기본적으로 작품 특성상 추가 재고가 없기 때문에 교환이 불가합니다.
+          <br />
+          <br />
+          작품을 수령한 후 7영업일 이내에 반품할 수 있습니다.
+          <br />
+          <br />
+          아래 사항에 해당하는 경우는 배송비는 작가가 부담합니다.
+          <br />
+          - 실제 작품의 내용이 작품 상세 정보에 표기된 내용과 상이한 경우
+          <br />
+          - 배송 중 파손되었을 경우
+          <br />
+          - 위작 또는 명시되지 않은 모작의 경우
+          <br />
+          <br />
+          <span style={{ fontWeight: 600 }}>
+            * 단순 변심에 의한 반품(환불)은 왕복 배송비를 제한 금액만 환불됩니다.
+          </span>
         </TabPanel>
       </div>
       {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
