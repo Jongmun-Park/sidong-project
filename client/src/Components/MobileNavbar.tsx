@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileMenu from './MobileMenu'
 import SearchIcon from '@material-ui/icons/Search'
-import logo from '../logo100.png'
+import logo from '../logo.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     cursor: 'pointer',
+    width: '105px',
     '@media (min-width: 415px)': {
       marginLeft: '5px',
     },
@@ -43,14 +44,14 @@ const MobileNavbar: FC = () => {
     <nav className={classes.container}>
       <div className={classes.leftArea}>
         <MobileMenu />
-        <div
+        <img
           className={classes.logo}
           onClick={() => {
             window.location.href = '/'
           }}
-        >
-          <img style={{ width: '80px' }} src={logo} alt="로고" />
-        </div>
+          src={logo}
+          alt="로고"
+        />
       </div>
       <div className={classes.rightArea}>
         <IconButton

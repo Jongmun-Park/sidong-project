@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileNavbar from './MobileNavbar'
 import { useCurrentUser } from '../Hooks/User'
-import logo from '../logo100.png'
+import logo from '../logo.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     marginLeft: '82px', // 70 + 12
     cursor: 'pointer',
+    width: '130px',
   },
   menus: {
     display: 'flex',
@@ -62,14 +63,14 @@ const NavBar: FC = () => {
   return (
     <header>
       <nav className={classes.container}>
-        <div
+        <img
           className={classes.logo}
           onClick={() => {
             window.location.href = '/'
           }}
-        >
-          <img src={logo} alt="로고" />
-        </div>
+          src={logo}
+          alt="로고"
+        />
         <div className={classes.menus}>
           <Button className={classes.menuFont} href="/about">
             소개
