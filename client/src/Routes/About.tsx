@@ -19,13 +19,13 @@ const useStyles = makeStyles({
     },
   },
   firstSection: {
-    padding: '35px 100px 0px 165px',
+    padding: '35px 10% 0px 13%',
     '@media (max-width: 834px)': {
       padding: '16px 45px 0px 45px',
     },
   },
   section: {
-    padding: '35px 100px 70px 165px',
+    padding: '35px 10% 70px 13%',
     '@media (max-width: 834px)': {
       padding: '16px 45px 45px 45px',
     },
