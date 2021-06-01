@@ -225,7 +225,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           onChange={handleChange}
           aria-label="작품 페이지 탭"
         >
-          <Tab className={classes.tab} label="작가의 작품 설명" {...a11yProps(0)} />
+          <Tab className={classes.tab} label="작품 설명" {...a11yProps(0)} />
           <Tab className={classes.tab} label="구매 및 배송" {...a11yProps(1)} />
           <Tab className={classes.tab} label="교환 및 환불" {...a11yProps(2)} />
         </Tabs>
