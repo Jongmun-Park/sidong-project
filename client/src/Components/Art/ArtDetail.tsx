@@ -252,7 +252,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
             <br />
             <span style={{ fontWeight: 600 }}>
               * 구매자의 단순 변심에 의한 환불시, <br />
-              &emsp;환불 금액 = 결제 금액 - 반품 배송비(편도)
+              &emsp;환불 금액 = 결제 금액 - 편도 배송비
             </span>
             <br />
             * 아래 사항에 해당하는 경우에만 작가가 반품 배송비를 부담합니다.

@@ -1,6 +1,7 @@
 import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
+  Checkbox,
   TextField,
   Button,
   FormControlLabel,
@@ -76,6 +77,16 @@ const useStyles = makeStyles({
   errorMessage: {
     color: 'red',
   },
+  highlightFont: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  checkBox: {
+    marginTop: '8px',
+    '& .MuiTypography-body1': {
+      fontSize: '12px',
+    },
+  },
 })
 
 const REGISTER_ART_MUTATION = gql`
@@ -122,6 +133,7 @@ const RegisterArt: FC = () => {
   const currentUser = useCurrentUser()
   const [isForSale, setIsForSale] = useState<boolean>(false)
   const [isFramed, setIsFramed] = useState<boolean>(false)
+  const [checkedPolicy, setCheckedPolicy] = useState<boolean>(false)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [imagePreviewList, setImagePreviewList] = useState<Array<string>>([])
   const [registerArt] = useMutation(REGISTER_ART_MUTATION)
@@ -149,6 +161,11 @@ const RegisterArt: FC = () => {
   }
 
   const onSubmit = async (data: any) => {
+    if (!checkedPolicy) {
+      alert('작품 관리 및 판매 정책에 동의하셔야 작품 등록이 가능합니다.')
+      return
+    }
+
     const registerResult = await registerArt({
       variables: {
         artImages: data.artImages,
@@ -197,6 +214,10 @@ const RegisterArt: FC = () => {
     } else {
       setIsFramed(false)
     }
+  }
+
+  const handleCheckBox = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedPolicy(event.target.checked)
   }
 
   return (
@@ -420,7 +441,7 @@ const RegisterArt: FC = () => {
               <span style={{ color: 'crimson' }}>사진 순서는 등록 후 수정 가능합니다.</span>
             </FormHelperText>
             <FormHelperText>
-              - 앞, 뒤, 옆면 등 다양한 각도에서 작품을 보여주면 좋습니다 :)
+              - 앞, 뒤, 옆면 등 다양한 각도에서 작품을 보여주면 좋습니다.
             </FormHelperText>
             <input
               className={classes.inputFile}
@@ -451,6 +472,45 @@ const RegisterArt: FC = () => {
                 />
               </Paper>
             ))}
+          </div>
+          <div className={classes.inputBox}>
+            <FormLabel component="div" className={classes.formLabel}>
+              작품 관리 및 판매 정책
+            </FormLabel>
+            <FormHelperText>
+              -{' '}
+              <span className={classes.highlightFont}>
+                작품 판매 수수료는 작품 가격의 6% 입니다.
+              </span>
+            </FormHelperText>
+            <FormHelperText>- 판매 수수료는 대금 정산시 반영됩니다.</FormHelperText>
+            <FormHelperText>
+              - 타인의 작품을 도용하거나 허위로 작품을 등록할 경우(위작, 모작) 그에 따라 법적 책임을
+              집니다.
+            </FormHelperText>
+            <FormHelperText>
+              <span className={classes.highlightFont}>
+                - 아래 예시와 같이 작품이 작업터 성격과 맞지 않는 경우, 해당 작품은 노출되지 않거나
+                임의 삭제될 수 있습니다.
+              </span>
+            </FormHelperText>
+            <FormHelperText>
+              &ensp;예1) 작품의 이미지가 선명치 않아 작품을 확인하기 힘든 경우
+            </FormHelperText>
+            <FormHelperText>&ensp;예2) 위작 또는 모작으로 추정되거나 신고 받은 경우</FormHelperText>
+            <FormHelperText>&ensp;예3) 작가가 직접 만들지 않은 상품의 경우</FormHelperText>
+            <FormControlLabel
+              className={classes.checkBox}
+              control={
+                <Checkbox
+                  size="small"
+                  checked={checkedPolicy}
+                  onChange={handleCheckBox}
+                  color="primary"
+                />
+              }
+              label="'작품 관리 및 판매 정책' 에 동의합니다."
+            />
           </div>
           {currentUser?.artist?.isApproved ? (
             <Button
