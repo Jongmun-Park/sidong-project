@@ -12,6 +12,11 @@ const useStyles = makeStyles({
     '@media (max-width: 834px)': {
       paddingTop: '50px',
     },
+    '@media (min-width: 835px)': {
+      '& p': {
+        fontSize: '15px',
+      },
+    },
   },
   firstSection: {
     padding: '35px 100px 0px 165px',
