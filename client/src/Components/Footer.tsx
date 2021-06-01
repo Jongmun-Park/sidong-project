@@ -27,7 +27,13 @@ const Footer: FC = () => {
         <span>개인정보관리책임자: 박종문 |&ensp;</span>
         <span>전화: 010-2725-1365 |&ensp;</span>
         <span>이메일: jakupteo@gmail.com |&ensp;</span>
-        <span>사업자등록번호: 693-62-00440</span>
+        <span>사업자등록번호: 693-62-00440 |&ensp;</span>
+        <span>
+          <a href="/service-policy.html">서비스 이용약관</a> |&ensp;
+        </span>
+        <span>
+          <a href="/privacy-policy.html">개인정보 취급방침</a>
+        </span>
       </div>
     </div>
   )
