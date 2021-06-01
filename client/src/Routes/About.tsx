@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import aboutImage from '../about-image.jpg'
 
 const useStyles = makeStyles({
   centerArea: {
-    height: '100vh',
-    maxWidth: '1213px',
+    minHeight: '100vh',
+    maxWidth: '1440px',
     margin: '0px auto 0px auto',
     backgroundColor: 'white',
     paddingTop: '56px',
@@ -13,23 +14,26 @@ const useStyles = makeStyles({
     },
   },
   firstSection: {
-    paddingTop: '35px',
-    margin: '0px 100px 0px 100px',
+    padding: '35px 100px 0px 165px',
     '@media (max-width: 834px)': {
-      paddingTop: '16px',
-      margin: '0px 45px 0px 45px',
+      padding: '16px 45px 0px 45px',
     },
   },
   section: {
-    margin: '60px 100px 0px 100px',
+    padding: '35px 100px 70px 165px',
     '@media (max-width: 834px)': {
-      margin: '50px 45px 0px 45px',
+      padding: '16px 45px 45px 45px',
     },
   },
   h2: {
     '@media (max-width: 834px)': {
       fontSize: '1.4em',
     },
+  },
+  image: {
+    width: '100%',
+    maxHeight: '316px',
+    objectFit: 'cover',
   },
 })
 
@@ -38,6 +42,7 @@ const About: FC = () => {
 
   return (
     <main className={classes.centerArea}>
+      <img className={classes.image} src={aboutImage} alt="서비스 소개 이미지" />
       <section className={classes.firstSection}>
         <h2 className={classes.h2}>우리 모두 작가가 될 수 있습니다.</h2>
         <p>작업터는 작가의 이력이나 학력을 묻지 않습니다.</p>
