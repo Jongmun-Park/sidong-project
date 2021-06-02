@@ -235,7 +235,23 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           <div className={classes.description}>{art.description}</div>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <div style={{ lineHeight: '25px' }}>
+            <span style={{ fontWeight: 600 }}>
+              * 아래 절차가 진행될 때마다 구매자에게 안내 문자를 보내드립니다.
+            </span>
+            <br />
+            <br />
+            1. 작품 구매와 동시에 작업터에서 작가에게 '작품 판매됨'를 알립니다.
+            <br />
+            2. 작가가 작품 배송을 준비합니다. (배송 준비 중)
+            <br />
+            3. 배송이 시작됩니다. (배송 중)
+            <br />
+            4. 작품이 '작품 보증서'와 함께 도착합니다. (배송 완료)
+            <br />
+            5. 구매자는 작품 수취 후 7일 이내에 '구매 확정' 또는 '환불' 여부를 결정합니다. (7일 이후
+            자동으로 '구매 확정' 됩니다.)
+          </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
           <div style={{ lineHeight: '25px' }}>
@@ -248,11 +264,10 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
             <br />
             [ 환불 안내 ]
             <br />
-            * 작품을 수령한 후 7영업일 이내에 환불 요청할 수 있습니다.
+            * 작품을 수령한 후 7일 이내에 환불 요청할 수 있습니다.
             <br />
             <span style={{ fontWeight: 600 }}>
-              * 구매자의 단순 변심에 의한 환불시, <br />
-              &emsp;환불 금액 = 결제 금액 - 편도 배송비
+              * 구매자의 단순 변심에 의한 환불시, 환불 금액은 (결제 금액 - 편도 배송비) 입니다.
             </span>
             <br />
             * 아래 사항에 해당하는 경우에만 작가가 반품 배송비를 부담합니다.
