@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '0 15px 15px 15px',
     borderRadius: '8px',
+    border: '1px solid',
+    borderColor: theme.palette.lightBlack.light,
     '@media (max-width: 834px)': {
       padding: '0 11px 11px 11px',
     },

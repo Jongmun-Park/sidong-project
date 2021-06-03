@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: '10px',
     paddingBottom: '14px',
-    border: '2px solid',
+    border: '1px solid',
     borderRadius: '8px',
-    borderColor: theme.palette.BgColor.main,
+    borderColor: theme.palette.lightBlack.light,
     backgroundColor: 'white',
     '@media (max-width: 834px)': {
       flexDirection: 'row',

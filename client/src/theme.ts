@@ -38,7 +38,7 @@ const theme = createMuiTheme({
       light: '#808080',
     },
     BgColor: {
-      main: '#e4e4e4',
+      main: '#F0F0F0',
     },
   },
   typography: {
@@ -49,7 +49,7 @@ const theme = createMuiTheme({
       '@global': {
         '@font-face': [customFont],
         body: {
-          backgroundColor: '#e4e4e4',
+          backgroundColor: '#F0F0F0',
           '& .MuiMenuItem-root': {
             fontSize: '14px',
             minHeight: 'auto',

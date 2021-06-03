@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     padding: '15px',
     borderRadius: '8px',
+    border: '1px solid',
+    borderColor: theme.palette.lightBlack.light,
     '@media (max-width: 834px)': {
       padding: '11px',
     },
