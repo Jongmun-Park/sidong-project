@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   image: {
     width: '100%',
     maxHeight: '200px',
-    objectFit: 'cover',
+    objectFit: 'contain',
     borderRadius: '8px',
     '@media (max-width: 834px)': {
       maxHeight: '140px',
