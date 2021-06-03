@@ -54,6 +54,19 @@ const useStyles = makeStyles((theme) => ({
   leftBox: {
     width: '80%',
     margin: 'auto',
+    '& .carousel.carousel-slider': {
+      maxHeight: '450px',
+      '@media (max-width: 834px)': {
+        maxHeight: '310px',
+      },
+    },
+    '& .carousel img': {
+      maxHeight: '450px',
+      objectFit: 'contain',
+      '@media (max-width: 834px)': {
+        maxHeight: '310px',
+      },
+    },
   },
   artName: {
     fontWeight: 600,

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '15px',
+    padding: '10px',
     borderRadius: '8px',
     border: '1px solid',
     borderColor: theme.palette.lightBlack.light,
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBase: {
     height: '200px',
+    marginTop: '6px',
     '@media (max-width: 834px)': {
       height: '140px',
     },
