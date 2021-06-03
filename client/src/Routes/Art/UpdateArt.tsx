@@ -384,6 +384,7 @@ const UpdateArt: FC = () => {
                   <input
                     style={{ width: '85px' }}
                     type="number"
+                    step="100"
                     name="price"
                     min="10000"
                     max="1500000"
@@ -415,6 +416,7 @@ const UpdateArt: FC = () => {
                   <input
                     style={{ width: '85px' }}
                     type="number"
+                    step="100"
                     name="deliveryFee"
                     min="0"
                     max="100000"
@@ -456,6 +458,7 @@ const UpdateArt: FC = () => {
               <input
                 ref={register}
                 type="number"
+                step="0.1"
                 name="width"
                 required={true}
                 min="1"
@@ -469,6 +472,7 @@ const UpdateArt: FC = () => {
               <input
                 ref={register}
                 type="number"
+                step="0.1"
                 name="height"
                 required={true}
                 min="1"
