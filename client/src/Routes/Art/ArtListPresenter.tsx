@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: '56px',
+    paddingTop: '47px',
     '@media (max-width: 834px)': {
-      paddingTop: '50px',
+      paddingTop: '42px',
       flexDirection: 'column',
     },
   },
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 835px)': {
       display: 'none',
     },
-    padding: '15px 27px 10px 27px',
+    padding: '10px 27px 10px 27px',
     top: '49px',
     position: 'sticky',
     zIndex: 1,
