@@ -117,9 +117,10 @@ const FilterContainer: FC<FilterContainerProps> = ({
   const [openOrientation, setOpenOrientation] = useState(setOpenMobileFilter ? false : true)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
   const [price, setPrice] = useState<number[]>([0, 1500000])
-
+  console.log('artOptions:', artOptions)
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
+      console.log('data.artOptions:', data.artOptions)
       setArtOptions(data.artOptions)
     },
     onError: (error) => console.error(error.message),
