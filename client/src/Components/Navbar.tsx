@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '1680px',
     width: '100%',
     margin: 'auto',
-    borderBottom: '1px solid',
-    borderBottomColor: theme.palette.lightBlack.light,
     '@media (max-width: 834px)': {
       display: 'none',
     },

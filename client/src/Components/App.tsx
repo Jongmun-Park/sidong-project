@@ -5,17 +5,19 @@ import Router from './Router'
 import NavBar from './Navbar'
 import Footer from './Footer'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   navBarContainer: {
     width: '100%',
     backgroundColor: 'white',
     position: 'fixed',
     zIndex: 100,
+    borderBottom: '1px solid',
+    borderBottomColor: theme.palette.lightBlack.light,
   },
   router: {
     minHeight: 'calc(100vh - 73px)',
   },
-})
+}))
 
 const App: FC = () => {
   const classes = useStyles()

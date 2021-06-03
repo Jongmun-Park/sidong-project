@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.lightBlack.main,
     margin: '61px 0px 40px 40px',
     minWidth: '267px',
+    maxWidth: '310px',
     '@media (max-width: 834px)': {
       display: 'none',
     },

@@ -13,8 +13,6 @@ const useStyles = makeStyles((theme) => ({
     height: '50px',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: '1px solid',
-    borderBottomColor: theme.palette.lightBlack.light,
   },
   rightArea: {
     '@media (min-width: 415px)': {
