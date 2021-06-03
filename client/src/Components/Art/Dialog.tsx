@@ -1,13 +1,6 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-} from '@material-ui/core/'
+import { Dialog, DialogContent, DialogTitle, IconButton } from '@material-ui/core/'
 import { Close } from '@material-ui/icons'
 import ArtDetail from './ArtDetail'
 
@@ -80,11 +73,11 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artId, artNa
       <DialogContent dividers={true}>
         <ArtDetail artId={artId} />
       </DialogContent>
-      <DialogActions>
+      {/* <DialogActions>
         <Button onClick={handleClose} color="primary">
           닫 기
         </Button>
-      </DialogActions>
+      </DialogActions> */}
     </Dialog>
   )
 }

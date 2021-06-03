@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     display: 'flex',
     flexWrap: 'wrap',
+    alignContent: 'baseline',
     maxWidth: '1213px',
     minHeight: '100vh',
     backgroundColor: 'white',
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 1024px)': {
       flex: '0 0 60%',
       maxWidth: '60%',
+      maxHeight: '580px',
     },
     width: '100%',
   },
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width: 1024px)': {
       flex: '0 0 40%',
       maxWidth: '40%',
+      maxHeight: '580px',
     },
     width: '100%',
   },
@@ -80,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     width: '100%',
-    margin: '0px 30px 0px 30px',
+    margin: '10px 30px 0px 30px',
     '@media (max-width: 1024px)': {
       margin: '22px 17px 0px 17px',
     },
