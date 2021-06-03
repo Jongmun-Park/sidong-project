@@ -278,7 +278,7 @@ const UpdateArt: FC = () => {
                 <option value={Medium.SCULPTURE}>조각(sculpture)</option>
                 <option value={Medium.PICTURE}>사진(picture)</option>
                 <option value={Medium.DRAWING}>소묘(drawing)</option>
-                <option value={Medium.PRINT}>판화(print)</option>
+                <option value={Medium.PRINT}>인쇄(print)</option>
                 <option value={Medium.PAPER}>종이(paper)</option>
                 <option value={Medium.TEXTILE}>섬유(textile)</option>
                 <option value={Medium.ETC}>기타 매체</option>

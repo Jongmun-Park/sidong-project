@@ -32,7 +32,7 @@ const MEDIUM = {
   1: '조각 (Sculpture)',
   2: '사진 (Picture)',
   3: '소묘 (Drawing)',
-  4: '판화 (Print)',
+  4: '인쇄 (Print)',
   5: '종이 (Paper)',
   6: '섬유 (Texttile)',
   7: '기타 매체',
