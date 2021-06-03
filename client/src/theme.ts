@@ -39,6 +39,7 @@ const theme = createMuiTheme({
     },
     BgColor: {
       main: '#F0F0F0',
+      light: '#f9f9f9',
     },
   },
   typography: {

@@ -10,19 +10,17 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '10px',
     borderRadius: '8px',
-    border: '1px solid',
-    borderColor: theme.palette.lightBlack.light,
-    '@media (max-width: 834px)': {
-      padding: '11px',
-    },
+    border: '4px solid',
+    borderColor: theme.palette.BgColor.light,
   },
   buttonBase: {
-    height: '200px',
-    marginTop: '6px',
+    height: '230px',
+    padding: '15px',
+    backgroundColor: theme.palette.BgColor.light,
     '@media (max-width: 834px)': {
-      height: '140px',
+      height: '162px',
+      padding: '11px',
     },
   },
   image: {
@@ -37,11 +35,13 @@ const useStyles = makeStyles((theme) => ({
   textArea: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '14px',
-    paddingLeft: '8px',
+    padding: '15px 17px 15px 17px',
+    border: '1px solid white',
+    borderBottomLeftRadius: '8px',
+    borderBottomRightRadius: '8px',
     color: theme.palette.lightBlack.main,
     '@media (max-width: 834px)': {
-      marginTop: '10px',
+      padding: '11px 13px 11px 13px',
     },
     '& p': {
       fontSize: '12px',
@@ -147,14 +147,14 @@ const Poster: FC<ArtPosterProps> = ({
             {width}x{height}cm
           </Typography>
           {saleStatus === SaleStatus.ON_SALE ? (
-            <Typography variant="body2">
+            <Typography variant="body2" style={{ fontWeight: 600 }}>
               {currencyFormatter(price)}
               <span className={classes.like}>
                 <Like artId={id} />
               </span>
             </Typography>
           ) : (
-            <Typography variant="body2">
+            <Typography variant="body2" style={{ fontWeight: 600 }}>
               {translateSaleStatus(saleStatus)}
               <span className={classes.like}>
                 <Like artId={id} />

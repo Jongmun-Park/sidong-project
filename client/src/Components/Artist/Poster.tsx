@@ -7,18 +7,17 @@ import Like from './Like'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: '0 15px 15px 15px',
     borderRadius: '8px',
-    border: '1px solid',
-    borderColor: theme.palette.lightBlack.light,
-    '@media (max-width: 834px)': {
-      padding: '0 11px 11px 11px',
-    },
+    border: '4px solid',
+    borderColor: theme.palette.BgColor.light,
   },
   buttonBase: {
-    height: '200px',
+    width: '100%',
+    height: '230px',
+    padding: '15px',
     '@media (max-width: 834px)': {
-      height: '140px',
+      height: '162px',
+      padding: '11px',
     },
   },
   image: {
@@ -28,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     '@media (max-width: 834px)': {
       maxHeight: '140px',
+    },
+  },
+  topArea: {
+    backgroundColor: theme.palette.BgColor.light,
+    color: theme.palette.lightBlack.main,
+    padding: '3px 15px 15px 15px',
+    '@media (max-width: 834px)': {
+      padding: '2px 11px 11px 11px',
     },
   },
   head: {
@@ -50,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
   },
   realName: {
     display: 'inline',
-    color: theme.palette.lightBlack.main,
     cursor: 'pointer',
     fontSize: '13px',
     fontWeight: 600,
@@ -87,7 +93,6 @@ const useStyles = makeStyles((theme) => ({
   },
   like: {
     cursor: 'pointer',
-    color: theme.palette.lightBlack.main,
     position: 'relative',
     top: '10px',
     left: '-1px',
@@ -120,29 +125,31 @@ const Poster: FC<ArtistPosterProps> = ({
   const classes = useStyles()
   return (
     <Paper className={classes.paper} elevation={0}>
-      <span className={classes.like}>
-        <Like artistId={id} />
-      </span>
-      <div className={classes.head}>
-        <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
-        <div className={classes.headText}>
-          <Typography
-            className={classes.realName}
-            variant="subtitle1"
-            onClick={() => {
-              window.open('/artist/' + id)
-            }}
-          >
-            {realName}
-          </Typography>
-          <Typography className={classes.artistName} variant="body2">
-            {artistName}
-          </Typography>
-          <Chip
-            className={classes.chipLable}
-            size="small"
-            label={translateArtistCategory(category)}
-          />
+      <div className={classes.topArea}>
+        <span className={classes.like}>
+          <Like artistId={id} />
+        </span>
+        <div className={classes.head}>
+          <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
+          <div className={classes.headText}>
+            <Typography
+              className={classes.realName}
+              variant="subtitle1"
+              onClick={() => {
+                window.open('/artist/' + id)
+              }}
+            >
+              {realName}
+            </Typography>
+            <Typography className={classes.artistName} variant="body2">
+              {artistName}
+            </Typography>
+            <Chip
+              className={classes.chipLable}
+              size="small"
+              label={translateArtistCategory(category)}
+            />
+          </div>
         </div>
       </div>
       <ButtonBase
