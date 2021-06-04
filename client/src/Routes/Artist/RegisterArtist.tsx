@@ -306,21 +306,21 @@ const RegisterArtist: FC = () => {
           {errors.representativeWork?.type && (
             <p className={classes.errorMessage}>{errors.representativeWork?.message}</p>
           )}
-          <div className={classes.inputDiv} style={{ minHeight: '183px' }}>
+          <div className={classes.inputDiv}>
             <p className={classes.highlightFont}>
               - 추후 작가의 활동이나 작품이 작업터에 부적합하다고 판단되는 경우, 작가 권한이 박탈될
               수 있습니다.
             </p>
             <p className={classes.highlightFont}>- 작업터의 작가로 등록해주셔서 감사합니다.</p>
-            <Button
-              className={classes.submitButton}
-              type="submit"
-              color="primary"
-              variant="contained"
-            >
-              등록하기
-            </Button>
           </div>
+          <Button
+            className={classes.submitButton}
+            type="submit"
+            color="primary"
+            variant="contained"
+          >
+            등록하기
+          </Button>
         </form>
       </div>
     </div>
