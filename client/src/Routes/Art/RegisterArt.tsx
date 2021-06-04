@@ -490,7 +490,7 @@ const RegisterArt: FC = () => {
             <FormHelperText>- 판매 수수료는 대금 정산시 반영됩니다.</FormHelperText>
             <FormHelperText>
               - 타인의 작품을 도용하거나 허위로 작품을 등록할 경우(위작, 모작) 그에 따라 법적 책임을
-              집니다.
+              질 수 있습니다.
             </FormHelperText>
             <FormHelperText>
               <span className={classes.highlightFont}>
@@ -503,6 +503,7 @@ const RegisterArt: FC = () => {
             </FormHelperText>
             <FormHelperText>&ensp;예2) 위작 또는 모작으로 추정되거나 신고 받은 경우</FormHelperText>
             <FormHelperText>&ensp;예3) 작가가 직접 만들지 않은 상품의 경우</FormHelperText>
+            <FormHelperText>&ensp;예4) 무성의한 작품이라 판단되는 경우</FormHelperText>
             <FormControlLabel
               className={classes.checkBox}
               control={

@@ -9,7 +9,7 @@ import { ART } from '../../querys'
 import { translateSaleStatus } from '../../utils'
 import ArtInfoTable from './InfoTable'
 import Like from './Like'
-import Login from '../User/Login'
+// import Login from '../User/Login'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 
@@ -158,7 +158,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const [value, setValue] = useState<number>(0)
-  const [openLogin, setOpenLogin] = useState(false)
+  // const [openLogin, setOpenLogin] = useState(false)
 
   const { data } = useQuery(ART, {
     variables: {
@@ -215,8 +215,9 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
               <Button
                 onClick={() => {
                   if (!currentUser) {
-                    setOpenLogin(true)
-                    return
+                    alert('로그인 부탁드립니다.')
+                    // setOpenLogin(true)
+                    // return
                   } else {
                     window.open(`/order/${art.id}`)
                   }
@@ -296,7 +297,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           </div>
         </TabPanel>
       </div>
-      {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />}
+      {/* {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />} */}
     </main>
   )
 }

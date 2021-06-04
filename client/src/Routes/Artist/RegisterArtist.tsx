@@ -6,7 +6,6 @@ import {
   Button,
   FormLabel,
   FormControlLabel,
-  FormHelperText,
   Radio,
   RadioGroup,
   Paper,
@@ -74,6 +73,11 @@ const useStyles = makeStyles((theme) => ({
   },
   errorMessage: {
     color: 'red',
+  },
+  highlightFont: {
+    fontSize: '13px',
+    fontWeight: 'bold',
+    color: 'black',
   },
 }))
 
@@ -303,12 +307,11 @@ const RegisterArtist: FC = () => {
             <p className={classes.errorMessage}>{errors.representativeWork?.message}</p>
           )}
           <div className={classes.inputDiv} style={{ minHeight: '183px' }}>
-            <FormHelperText>- 작가 등록 후, 승인된 작가는 작품 등록이 가능합니다.</FormHelperText>
-            <FormHelperText>- 관리자가 24시간 내로 최대한 빠르게 승인하겠습니다.</FormHelperText>
-            <FormHelperText>
-              - 작가 승인 절차는 부적합한 컨텐츠를 방지하기 위함입니다.
-            </FormHelperText>
-            <FormHelperText>- 양해 부탁드립니다. 감사합니다.</FormHelperText>
+            <p className={classes.highlightFont}>
+              - 추후 작가의 활동이나 작품이 작업터에 부적합하다고 판단되는 경우, 작가 권한이 박탈될
+              수 있습니다.
+            </p>
+            <p className={classes.highlightFont}>- 작업터의 작가로 등록해주셔서 감사합니다.</p>
             <Button
               className={classes.submitButton}
               type="submit"
