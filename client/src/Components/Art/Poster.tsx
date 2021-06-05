@@ -35,13 +35,13 @@ const useStyles = makeStyles((theme) => ({
   textArea: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '15px 17px 15px 17px',
+    padding: '15px 17px 10px 17px',
     border: '1px solid white',
     borderBottomLeftRadius: '8px',
     borderBottomRightRadius: '8px',
     color: theme.palette.lightBlack.main,
     '@media (max-width: 834px)': {
-      padding: '11px 13px 11px 13px',
+      padding: '11px 13px 5px 13px',
     },
     '& p': {
       fontSize: '12px',
