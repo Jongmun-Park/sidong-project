@@ -252,33 +252,56 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           <div className={classes.description}>{art.description}</div>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <div style={{ lineHeight: '25px' }}>
-            <span style={{ fontWeight: 600 }}>
+          <div style={{ lineHeight: '27px' }}>
+            <div style={{ fontWeight: 600 }}>
               * 아래 절차가 진행될 때마다 구매자에게 안내 문자를 보내드립니다.
-            </span>
-            <br />
-            <br />
-            1. 작품 구매와 동시에 작업터에서 작가에게 '작품 판매됨'를 알립니다.
-            <br />
-            2. 작가가 작품 배송을 준비합니다. (배송 준비 중)
-            <br />
-            3. 배송이 시작됩니다. (배송 중)
-            <br />
-            4. 작품이 '작품 보증서'와 함께 도착합니다. (배송 완료)
-            <br />
-            5. 구매자는 작품 수취 후 7일 이내에 '구매 확정' 또는 '환불' 여부를 결정합니다. (7일 이후
-            자동으로 '구매 확정' 됩니다.)
+            </div>
+            <div style={{ height: '15px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>1. 작가에게 판매 알림</span>
+              <br />
+              작품 구매와 동시에 작업터에서 작가에게 '작품이 판매됨'를 알립니다.
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>2. 배송 준비</span>
+              <br />
+              작가가 '작품 보증서'를 포함한 작품 배송을 준비합니다.
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>3. 배송 시작</span>
+              <br />
+              작품 배송이 시작됩니다.
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>4. 배송 완료</span>
+              <br />
+              작품이 '작품 보증서'와 함께 도착합니다.
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>5. 구매 결정</span>
+              <br />
+              구매자는 작품 수취 후 7일 이내에 '구매 확정' 또는 '환불' 여부를 결정합니다. (7일 이후
+              자동으로 '구매 확정' 됩니다.)
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <div>
+              <span style={{ fontWeight: 600 }}>6. 작품 금액 전달</span>
+              <br />
+              구매 확정시 정산일에 작품 금액이 작가에게 전달됩니다.
+            </div>
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <div style={{ lineHeight: '25px' }}>
+          <div style={{ lineHeight: '27px' }}>
             [ 교환 안내 ]
-            <br />
-            <span style={{ fontWeight: 600 }}>
+            <div style={{ fontWeight: 600 }}>
               * 작품 특성상 추가 재고가 없기 때문에 '교환'은 불가능합니다.
-            </span>
-            <br />
-            <br />
+            </div>
+            <div style={{ height: '15px' }}></div>
             [ 환불 안내 ]
             <br />
             * 작품을 수령한 후 7일 이내에 환불 요청할 수 있습니다.
