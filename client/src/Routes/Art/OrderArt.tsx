@@ -86,10 +86,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submitButton: {
     width: '100%',
-    marginTop: '24px',
+    marginTop: '30px',
     '@media (max-width: 834px)': {
-      marginTop: '19px',
       fontSize: '13px',
+      // marginTop: '19px',
     },
   },
   checkBox: {
@@ -99,24 +99,22 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     width: '100%',
-    marginTop: '24px',
-    '@media (max-width: 834px)': {
-      marginTop: '19px',
-    },
+    marginTop: '30px',
+    // '@media (max-width: 834px)': {
+    //   marginTop: '19px',
+    // },
   },
   categoryTabContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: '20px',
+    marginTop: '30px',
   },
   categoryTab: {
     color: theme.palette.primary.main,
     borderStyle: 'none none solid none',
     borderWidth: '2px',
-    maxWidth: '100px',
-    minWidth: '72px',
-    minHeight: '40px',
+    minWidth: '78px',
     lineHeight: '40px',
     textAlign: 'center',
     fontWeight: 500,
@@ -433,6 +431,34 @@ const OrderArt: FC = () => {
           required={true}
           inputRef={register}
         />
+        <div className={classes.categoryTabContainer}>
+          <div className={classes.categoryTab} style={{ width: '100px' }}>
+            교환 및 환불
+          </div>
+        </div>
+        <div style={{ lineHeight: '25px', padding: '1em', fontSize: '12px' }}>
+          [ 교환 안내 ]
+          <div style={{ fontWeight: 600 }}>
+            * 작품 특성상 추가 재고가 없기 때문에 '교환'은 불가능합니다.
+          </div>
+          <div style={{ height: '1em' }}></div>
+          [ 환불 안내 ]
+          <br />
+          * 작품을 수령한 후 7일 이내에 환불 요청할 수 있습니다.
+          <br />
+          <span style={{ fontWeight: 600 }}>
+            * 구매자의 단순 변심에 의한 환불시, 결제 금액에서 왕복 배송비를 차감한 금액이
+            환불됩니다.
+          </span>
+          <br />
+          * 아래 사항에 해당하는 경우에만 작가가 왕복 배송비를 부담합니다.
+          <br />
+          &emsp;1) 실제 작품의 내용이 작품 상세 정보에 표기된 내용과 상이한 경우
+          <br />
+          &emsp;2) 배송 중 파손되었을 경우
+          <br />
+          &emsp;3) 위작 또는 명시되지 않은 모작의 경우
+        </div>
         <div className={classes.table}>
           <PriceInfoTable artPrice={art.price} deliveryFee={art.deliveryFee} />
         </div>

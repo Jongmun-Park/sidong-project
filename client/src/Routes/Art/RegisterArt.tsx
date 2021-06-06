@@ -484,7 +484,7 @@ const RegisterArt: FC = () => {
             <FormHelperText>
               -{' '}
               <span className={classes.highlightFont}>
-                작품 판매 수수료는 작품 가격의 6% 입니다.
+                작품 판매 수수료는 작품 가격의 7% 입니다. (카드 결제 수수료 포함)
               </span>
             </FormHelperText>
             <FormHelperText>- 판매 수수료는 대금 정산시 반영됩니다.</FormHelperText>

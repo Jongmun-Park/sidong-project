@@ -9,7 +9,6 @@ import { ART } from '../../querys'
 import { translateSaleStatus } from '../../utils'
 import ArtInfoTable from './InfoTable'
 import Like from './Like'
-// import Login from '../User/Login'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 
