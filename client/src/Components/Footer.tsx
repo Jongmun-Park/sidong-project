@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     minHeight: '73px',
     backgroundColor: 'white',
-    padding: '20px',
+    padding: '26px 125px 26px 125px',
+    '@media (max-width: 834px)': {
+      padding: '26px',
+    },
   },
   content: {
     margin: 'auto',
