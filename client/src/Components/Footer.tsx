@@ -25,8 +25,9 @@ const Footer: FC = () => {
         <span>상호: 작업터 |&ensp;</span>
         <span>대표: 박종문 |&ensp;</span>
         <span>개인정보관리책임자: 박종문 |&ensp;</span>
-        {/* <span>전화: 010-2725-1365 |&ensp;</span> */}
+        <span>전화: 0505-333-1365 |&ensp;</span>
         <span>이메일: jakupteo@gmail.com |&ensp;</span>
+        <span>사업장주소지: 서울특별시 관악구 은천로2길 34 402호 |&ensp;</span>
         <span>사업자등록번호: 693-62-00440 |&ensp;</span>
         <span>
           <a href="/service-policy.html">서비스 이용약관</a> |&ensp;
