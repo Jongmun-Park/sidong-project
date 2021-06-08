@@ -152,7 +152,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
 
   return (
     <>
-      <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
+      <List component="nav" aria-label="조건 검색 목록" className={classes.list}>
         <div className={classes.listBox + ' row'}>
           <ListItem>
             <ListItemText primary="매 체" />

@@ -120,7 +120,7 @@ const ArtListPresenter: FC<ArtListPresenterProps> = ({
             color="primary"
             onClick={() => setOpenMobileFilter(!openMobileFilter)}
           >
-            검색 조건
+            조건 검색
           </Button>
           <OrderFilter filters={filters} setFilters={setFilters} />
         </div>

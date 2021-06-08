@@ -75,7 +75,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
   const classes = useStyles()
 
   return (
-    <List component="nav" aria-label="검색 조건 목록" className={classes.list}>
+    <List component="nav" aria-label="조건 검색 목록" className={classes.list}>
       <div className={classes.listBox}>
         <ListItem>
           <ListItemText primary="분 야" />
