@@ -225,7 +225,7 @@ const OrderArt: FC = () => {
     const paymentData = {
       pay_method: 'card', // 결제수단
       merchant_uid: `mid_${art.id}_${new Date().getTime()}`, // 주문번호
-      amount: art.price, // 결제금액
+      amount: art.price + art.deliveryFee, // 결제금액
       name: art.name, // 주문명
       buyer_name: data.name, // 구매자 이름
       buyer_tel: data.phone, // 구매자 전화번호
