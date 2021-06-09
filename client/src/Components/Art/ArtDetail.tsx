@@ -183,7 +183,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
         <title>{art.name}</title>
         <meta
           name="description"
-          content={`${art.name} - ${art.artist.realName}(${art.artist.artistName})`}
+          content={`${art.name} - ${art.artist.realName}(${art.artist.artistName}) 작품 상세 정보`}
         />
       </Helmet>
       <div className={classes.leftArea}>
