@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Typography } from '@material-ui/core'
@@ -223,6 +224,15 @@ const ArtistDetailPage: FC = () => {
 
   return (
     <main className={classes.container}>
+      <Helmet>
+        <title>
+          {artist.realName}({artist.artistName})
+        </title>
+        <meta
+          name="description"
+          content={`${artist.realName}(${artist.artistName}) 작가의 페이지`}
+        />
+      </Helmet>
       <div className={classes.avatarContainer}>
         <Avatar alt="작가 프로필 사진" className={classes.avatar} src={artist.thumbnail.url} />
         <span className={classes.like}>

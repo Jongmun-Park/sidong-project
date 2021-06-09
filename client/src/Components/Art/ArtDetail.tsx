@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Box, Tabs, Tab, Typography } from '@material-ui/core'
@@ -178,6 +179,13 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
 
   return (
     <main className={classes.container}>
+      <Helmet>
+        <title>{art.name}</title>
+        <meta
+          name="description"
+          content={`${art.name} - ${art.artist.realName}(${art.artist.artistName})`}
+        />
+      </Helmet>
       <div className={classes.leftArea}>
         <div className={classes.leftBox}>
           <Carousel
