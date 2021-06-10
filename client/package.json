@@ -26,7 +26,6 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
-    "postbuild": "react-snap",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -56,7 +55,6 @@
     "customize-cra": "^1.0.0",
     "prettier": "2.2.1",
     "react-app-rewired": "^2.1.6",
-    "react-snap": "^1.23.0",
     "typescript": "^4.1.2"
   }
 }
