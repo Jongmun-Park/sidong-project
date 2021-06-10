@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { createUploadLink } from 'apollo-upload-client'
 import { setContext } from 'apollo-link-context'
 import React from 'react'
-import { render } from 'react-dom'
+import { render, hydrate } from 'react-dom'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme'
@@ -42,4 +42,12 @@ const BaseApp = () => (
   </ApolloProvider>
 )
 
-render(<BaseApp />, document.getElementById('root'))
+const rootElement = document.getElementById('root')
+
+if (rootElement?.hasChildNodes()) {
+  hydrate(<BaseApp />, rootElement)
+} else {
+  render(<BaseApp />, rootElement)
+}
+
+// render(<BaseApp />, document.getElementById('root'))
