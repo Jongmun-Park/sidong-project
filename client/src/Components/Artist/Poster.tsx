@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   largeAvatar: {
+    cursor: 'pointer',
     width: theme.spacing(8),
     height: theme.spacing(8),
     alignSelf: 'center',
@@ -130,7 +131,14 @@ const Poster: FC<ArtistPosterProps> = ({
           <Like artistId={id} />
         </span>
         <div className={classes.head}>
-          <Avatar alt="작가 프로필 사진" className={classes.largeAvatar} src={thumbnailUrl} />
+          <Avatar
+            alt="작가 프로필 사진"
+            className={classes.largeAvatar}
+            src={thumbnailUrl}
+            onClick={() => {
+              window.open('/artist/' + id)
+            }}
+          />
           <div className={classes.headText}>
             <Typography
               className={classes.realName}
