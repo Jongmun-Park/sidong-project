@@ -45,8 +45,10 @@ const BaseApp = () => (
 const rootElement = document.getElementById('root')
 
 if (rootElement?.hasChildNodes()) {
+  console.log('hydrate!')
   hydrate(<BaseApp />, rootElement)
 } else {
+  console.log('render!')
   render(<BaseApp />, rootElement)
 }
 
