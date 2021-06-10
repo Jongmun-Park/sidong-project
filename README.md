@@ -1,4 +1,5 @@
-# sidong-project
+# jakupteo project
 
 create-react-app
+
 node 12.\*
