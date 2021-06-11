@@ -25,8 +25,8 @@ const App: FC = () => {
   return (
     <>
       <Helmet>
-        <title>작업터 - 예술 작품 및 그림 구매를 위한 아트 플랫폼</title>
-        <meta name="description" content="작품 구매와 판매, 그림 구매와 판매를 위한 아트 플랫폼" />
+        <title>작업터 - 예술 작품 및 그림 구매</title>
+        {/* <meta name="description" content="예술 작품 및 그림을 구매하고 판매하는 아트 플랫폼" /> */}
       </Helmet>
       <div className={classes.navBarContainer}>
         <NavBar />

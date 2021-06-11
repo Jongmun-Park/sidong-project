@@ -181,10 +181,11 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
     <main className={classes.container}>
       <Helmet>
         <title>{art.name}</title>
-        <meta
+        {/* <meta
           name="description"
           content={`${art.name} - ${art.artist.realName}(${art.artist.artistName}) 작품 상세 정보`}
         />
+        <meta property="og:title" content={art.name} /> */}
       </Helmet>
       <div className={classes.leftArea}>
         <div className={classes.leftBox}>

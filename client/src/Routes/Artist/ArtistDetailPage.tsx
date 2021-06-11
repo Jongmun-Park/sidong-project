@@ -228,10 +228,11 @@ const ArtistDetailPage: FC = () => {
         <title>
           {artist.realName}({artist.artistName})
         </title>
-        <meta
+        {/* <meta
           name="description"
           content={`${artist.realName}(${artist.artistName}) 작가의 페이지`}
         />
+        <meta property="og:title" content={`${artist.realName}(${artist.artistName})`} /> */}
       </Helmet>
       <div className={classes.avatarContainer}>
         <Avatar alt="작가 프로필 사진" className={classes.avatar} src={artist.thumbnail.url} />
