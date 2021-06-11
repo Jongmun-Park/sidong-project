@@ -1,5 +1,5 @@
 # jakupteo project
 
-create-react-app + next.js
+create-react-app
 
 node 12.13.0
