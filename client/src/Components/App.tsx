@@ -26,7 +26,7 @@ const App: FC = () => {
     <>
       <Helmet>
         <title>작업터 - 예술 작품 및 그림 구매</title>
-        {/* <meta name="description" content="예술 작품 및 그림을 구매하고 판매하는 아트 플랫폼" /> */}
+        {/* <meta name="description" content="작업터는 예술 작품 및 그림을 구매하고 판매할 수 있는 아트 플랫폼입니다" /> */}
       </Helmet>
       <div className={classes.navBarContainer}>
         <NavBar />
