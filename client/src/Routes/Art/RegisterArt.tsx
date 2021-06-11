@@ -481,17 +481,22 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               작품 관리 및 판매 정책
             </FormLabel>
+            <div style={{ height: '10px' }}></div>
             <FormHelperText>
-              -{' '}
               <span className={classes.highlightFont}>
-                작품 판매 수수료는 작품 가격의 7% 입니다. (카드 결제 수수료 포함)
+                - 작품 판매 수수료는 작품 가격의 5% 입니다.(카드 결제 수수료 포함)
               </span>
             </FormHelperText>
             <FormHelperText>- 판매 수수료는 대금 정산시 반영됩니다.</FormHelperText>
             <FormHelperText>
+              - 정산은 매월 마지막 주에 이뤄지며 등록하신 정산 계좌로 입금 후 문자 안내드립니다.
+            </FormHelperText>
+            <div style={{ height: '10px' }}></div>
+            <FormHelperText>
               - 타인의 작품을 도용하거나 허위로 작품을 등록할 경우(위작, 모작) 그에 따라 법적 책임을
               질 수 있습니다.
             </FormHelperText>
+            <div style={{ height: '10px' }}></div>
             <FormHelperText>
               <span className={classes.highlightFont}>
                 - 아래 예시와 같이 작품이 작업터 성격과 맞지 않는 경우, 해당 작품은 노출되지 않거나
