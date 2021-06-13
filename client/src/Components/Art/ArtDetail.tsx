@@ -268,7 +268,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
             <div>
               <span style={{ fontWeight: 600 }}>1. 작가에게 판매 알림</span>
               <br />
-              작품 구매와 동시에 작업터에서 작가에게 '작품이 판매됨'를 알립니다.
+              작품 구매와 동시에 Jakupteo에서 작가에게 '작품이 판매됨'를 알립니다.
             </div>
             <div style={{ height: '10px' }}></div>
             <div>

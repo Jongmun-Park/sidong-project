@@ -499,8 +499,8 @@ const RegisterArt: FC = () => {
             <div style={{ height: '10px' }}></div>
             <FormHelperText>
               <span className={classes.highlightFont}>
-                - 아래 예시와 같이 작품이 작업터 성격과 맞지 않는 경우, 해당 작품은 노출되지 않거나
-                임의 삭제될 수 있습니다.
+                - 아래 예시와 같이 작품이 Jakupteo 정책과 맞지 않는 경우, 해당 작품은 노출되지
+                않거나 임의 삭제될 수 있습니다.
               </span>
             </FormHelperText>
             <FormHelperText>

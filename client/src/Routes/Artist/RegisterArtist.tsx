@@ -308,10 +308,10 @@ const RegisterArtist: FC = () => {
           )}
           <div className={classes.inputDiv}>
             <p className={classes.highlightFont}>
-              - 추후 작가의 활동이나 작품이 작업터에 부적합하다고 판단되는 경우, 작가 권한이 박탈될
-              수 있습니다.
+              - 추후 작가의 활동이나 작품이 Jakupteo에 부적합하다고 판단되는 경우, 작가 권한이
+              박탈될 수 있습니다.
             </p>
-            <p className={classes.highlightFont}>- 작업터의 작가로 등록해주셔서 감사합니다.</p>
+            <p className={classes.highlightFont}>- Jakupteo의 작가로 등록해주셔서 감사합니다.</p>
           </div>
           <Button
             className={classes.submitButton}
