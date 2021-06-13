@@ -25,7 +25,7 @@ const App: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Jakupteo - 예술 작품 및 그림 구매</title>
+        <title>Jakupteo(작업터) - 예술 작품 및 그림 구매</title>
         {/* <meta name="description" content="Jakupteo는 예술 작품 및 그림을 구매하고 판매할 수 있는 아트 플랫폼입니다" /> */}
       </Helmet>
       <div className={classes.navBarContainer}>
