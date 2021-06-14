@@ -14,7 +14,7 @@ import {
   Button,
 } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
-import { Art } from '../../types'
+import { Art, SaleStatus } from '../../types'
 
 const useStyles = makeStyles({
   root: {
@@ -166,15 +166,17 @@ const MyArtListTable: FC = () => {
                       </div>
                     </TableCell>
                     <TableCell align="center">
-                      <Button
-                        className={classes.button}
-                        size="small"
-                        onClick={() => {
-                          window.location.href = `/art/update/${art.id}`
-                        }}
-                      >
-                        수 정
-                      </Button>
+                      {art.saleStatus !== SaleStatus.SOLD_OUT && (
+                        <Button
+                          className={classes.button}
+                          size="small"
+                          onClick={() => {
+                            window.location.href = `/art/update/${art.id}`
+                          }}
+                        >
+                          수 정
+                        </Button>
+                      )}
                       <Button
                         className={classes.button}
                         size="small"
