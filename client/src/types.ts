@@ -86,6 +86,12 @@ export interface ArtOptions {
   }>
 }
 
+export interface ArtistAccountInfo {
+  bankName: string
+  master: string
+  number: string
+}
+
 export enum ArtistCategory {
   PAINTER,
   SCULPTOR,

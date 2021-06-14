@@ -14,23 +14,21 @@ import {
   TableRow,
 } from '@material-ui/core'
 import GetAppIcon from '@material-ui/icons/GetApp'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import { Order } from '../../types'
 import MySaleListTableRow from './MySaleListTableRow'
+import AccountInfo from './AccountInfo'
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    // marginTop: '20px',
-    // '@media (max-width: 834px)': {
-    //   marginTop: '10px',
-    // },
   },
   container: {
     maxHeight: '470px',
   },
-  downloadButton: {
+  button: {
+    margin: '15px',
     float: 'right',
-    marginBottom: '15px',
   },
 })
 
@@ -56,6 +54,7 @@ const MySaleListTable: FC = () => {
   const classes = useStyles()
   const [page, setPage] = useState<number>(0)
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [openAccountInfo, setOpenAccountInfo] = useState<boolean>(false)
   const [sales, setSales] = useState<Array<Order> | null>(null)
 
   const { data, refetch } = useQuery(SALES, {
@@ -77,54 +76,75 @@ const MySaleListTable: FC = () => {
   }
 
   return (
-    <Paper className={classes.root}>
-      <Button
-        className={classes.downloadButton}
-        startIcon={<GetAppIcon />}
-        variant="outlined"
-        color="secondary"
-        onClick={() => {
-          window.location.href =
-            'https://s3.ap-northeast-2.amazonaws.com/assets.storage.jakupsil.co.kr/sample/Certificate_Form(Jakupteo).xlsx'
-        }}
-      >
-        작품보증서 양식
-      </Button>
-      <TableContainer className={classes.container}>
-        <Table aria-label="나의 판매 목록" size="small" stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center" style={{ width: '20%' }}>
-                주문일
-              </TableCell>
-              <TableCell align="center" style={{ width: '40%' }}>
-                작품명
-              </TableCell>
-              <TableCell align="center" style={{ width: '20%' }}>
-                가격
-              </TableCell>
-              <TableCell align="center" style={{ width: '20%' }}>
-                상태
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sales &&
-              sales.map((sale: Order) => (
-                <MySaleListTableRow key={sale.id} sale={sale} page={page} refetchSales={refetch} />
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[]}
-        component="div"
-        count={totalCount}
-        rowsPerPage={10}
-        page={page}
-        onChangePage={handleChangePage}
-      />
-    </Paper>
+    <>
+      <Paper className={classes.root}>
+        <Button
+          className={classes.button}
+          startIcon={<AttachMoneyIcon />}
+          variant="outlined"
+          color="primary"
+          onClick={() => {
+            setOpenAccountInfo(true)
+          }}
+        >
+          정산 계좌 관리
+        </Button>
+        <Button
+          className={classes.button}
+          startIcon={<GetAppIcon />}
+          variant="outlined"
+          color="default"
+          onClick={() => {
+            window.location.href =
+              'https://s3.ap-northeast-2.amazonaws.com/assets.storage.jakupsil.co.kr/sample/Certificate_Form(Jakupteo).xlsx'
+          }}
+        >
+          작품보증서 양식
+        </Button>
+        <TableContainer className={classes.container}>
+          <Table aria-label="나의 판매 목록" size="small" stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" style={{ width: '20%' }}>
+                  주문일
+                </TableCell>
+                <TableCell align="center" style={{ width: '40%' }}>
+                  작품명
+                </TableCell>
+                <TableCell align="center" style={{ width: '20%' }}>
+                  가격
+                </TableCell>
+                <TableCell align="center" style={{ width: '20%' }}>
+                  상태
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sales &&
+                sales.map((sale: Order) => (
+                  <MySaleListTableRow
+                    key={sale.id}
+                    sale={sale}
+                    page={page}
+                    refetchSales={refetch}
+                  />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[]}
+          component="div"
+          count={totalCount}
+          rowsPerPage={10}
+          page={page}
+          onChangePage={handleChangePage}
+        />
+      </Paper>
+      {openAccountInfo && (
+        <AccountInfo openDialog={openAccountInfo} handleOpenDialog={setOpenAccountInfo} />
+      )}
+    </>
   )
 }
 

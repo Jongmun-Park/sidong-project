@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useEffect } from 'react'
+import React, { FC, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
@@ -139,6 +139,15 @@ const UpdateArt: FC = () => {
 
   const { data } = useQuery(ART, {
     variables: { artId },
+    onCompleted: (data) => {
+      const { art } = data
+      setTheme(art.theme.id)
+      setStyle(art.style.id)
+      setTechnique(art.technique.id)
+      setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
+      setIsFramed(art.isFramed)
+      setImagePreviewList(art.imageUrls)
+    },
     onError: (error) => console.error(error.message),
   })
 
@@ -159,17 +168,17 @@ const UpdateArt: FC = () => {
     onError: (error) => console.error(error.message),
   })
 
-  useEffect(() => {
-    if (data) {
-      const { art } = data
-      setTheme(art.theme.id)
-      setStyle(art.style.id)
-      setTechnique(art.technique.id)
-      setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
-      setIsFramed(art.isFramed)
-      setImagePreviewList(art.imageUrls)
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     const { art } = data
+  //     setTheme(art.theme.id)
+  //     setStyle(art.style.id)
+  //     setTechnique(art.technique.id)
+  //     setIsForSale(art.saleStatus === SaleStatus.ON_SALE ? true : false)
+  //     setIsFramed(art.isFramed)
+  //     setImagePreviewList(art.imageUrls)
+  //   }
+  // }, [data])
 
   if (!data) {
     return null
