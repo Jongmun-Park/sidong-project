@@ -79,8 +79,8 @@ const AccountInfo: FC<AccountInfoProps> = ({ openDialog, handleOpenDialog }) => 
     })
 
     if (result.data.registerAccountInfo.success) {
-      alert('정산 계좌 등록이 완료됐습니다.')
       refetch()
+      alert('정산 계좌 등록이 완료됐습니다.')
     } else {
       alert('등록 중 문제가 발생했습니다. (관리자 문의)')
     }

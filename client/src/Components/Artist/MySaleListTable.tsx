@@ -27,8 +27,11 @@ const useStyles = makeStyles({
     maxHeight: '470px',
   },
   button: {
-    margin: '15px',
     float: 'right',
+    margin: '15px',
+    '@media (max-width: 414px)': {
+      margin: '9px',
+    },
   },
 })
 
@@ -83,6 +86,7 @@ const MySaleListTable: FC = () => {
           startIcon={<AttachMoneyIcon />}
           variant="outlined"
           color="primary"
+          size="small"
           onClick={() => {
             setOpenAccountInfo(true)
           }}
@@ -94,6 +98,7 @@ const MySaleListTable: FC = () => {
           startIcon={<GetAppIcon />}
           variant="outlined"
           color="default"
+          size="small"
           onClick={() => {
             window.location.href =
               'https://s3.ap-northeast-2.amazonaws.com/assets.storage.jakupsil.co.kr/sample/Certificate_Form(Jakupteo).xlsx'
