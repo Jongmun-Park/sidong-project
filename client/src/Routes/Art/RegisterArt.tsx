@@ -97,7 +97,6 @@ const REGISTER_ART_MUTATION = gql`
     $isFramed: Boolean!
     $medium: ID!
     $name: String!
-    $orientation: ID!
     $price: Int
     $deliveryFee: Int
     $saleStatus: ID!
@@ -113,7 +112,6 @@ const REGISTER_ART_MUTATION = gql`
       isFramed: $isFramed
       medium: $medium
       name: $name
-      orientation: $orientation
       price: $price
       deliveryFee: $deliveryFee
       saleStatus: $saleStatus
@@ -174,7 +172,6 @@ const RegisterArt: FC = () => {
         isFramed: data.isFramed,
         medium: data.medium,
         name: data.name,
-        orientation: data.orientation,
         price: data.price,
         deliveryFee: data.deliveryFee,
         saleStatus: data.saleStatus,
@@ -393,17 +390,9 @@ const RegisterArt: FC = () => {
           )}
           <div className={classes.inputBox}>
             <FormLabel component="div" className={classes.formLabel}>
-              방향 및 크기
+              작품 크기
             </FormLabel>
             <FormHelperText>- 가로/세로 최대 길이는 500cm</FormHelperText>
-            <div className={classes.inputElement}>
-              <select name="orientation" required={true} ref={register}>
-                <option value={Orientation.LANDSCAPE}>가로가 긴 배치</option>
-                <option value={Orientation.PORTRAIT}>세로가 긴 배치</option>
-                <option value={Orientation.SQUARE}>정사각형</option>
-                <option value={Orientation.ETC}>기타</option>
-              </select>
-            </div>
             <div className={classes.inputElement}>
               가로 &nbsp;
               <input
