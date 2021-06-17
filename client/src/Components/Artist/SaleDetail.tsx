@@ -233,7 +233,6 @@ const SaleDetail: FC<SaleDetailProps> = ({
                   </TableCell>
                   <TableCell className={classes.td}>
                     <TextField
-                      autoFocus
                       margin="dense"
                       value={deliveryCompany}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {

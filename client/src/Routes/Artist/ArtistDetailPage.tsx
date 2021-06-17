@@ -2,13 +2,16 @@ import React, { FC, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Typography } from '@material-ui/core'
+import { Avatar, Typography, Button } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
 import { useParams } from 'react-router-dom'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import ArtistInfoTable from '../../Components/Artist/InfoTable'
 import Like from '../../Components/Artist/Like'
 import { MemoizedPoster } from '../../Components/Art/Poster'
 import LoadMoreButton from '../../Components/LoadMoreButton'
+import { ARTIST } from '../../querys'
+import { useCurrentUser } from '../../Hooks/User'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -128,25 +131,13 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  editButton: {
+    float: 'right',
+    '@media (max-width: 834px)': {
+      marginBottom: '15px',
+    },
+  },
 }))
-
-const ARTIST = gql`
-  query Artist($artistId: ID!) {
-    artist(artistId: $artistId) {
-      id
-      realName
-      artistName
-      description
-      thumbnail {
-        id
-        url
-      }
-      category
-      residence
-      website
-    }
-  }
-`
 
 const ARTS_BY_ARTIST = gql`
   query ArtsByArtist($artistId: ID!, $lastArtId: ID) {
@@ -164,6 +155,7 @@ const ARTS_BY_ARTIST = gql`
 
 const ArtistDetailPage: FC = () => {
   const classes = useStyles()
+  const currentUser = useCurrentUser()
   const { artistId } = useParams<{ artistId: string }>()
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
@@ -234,6 +226,25 @@ const ArtistDetailPage: FC = () => {
         />
         <meta property="og:title" content={`${artist.realName}(${artist.artistName})`} /> */}
       </Helmet>
+      {
+        // eslint-disable-next-line
+        currentUser?.artist?.id == Number(artistId) && (
+          <div style={{ width: '100%' }}>
+            <Button
+              startIcon={<EditIcon />}
+              size="small"
+              variant="outlined"
+              color="default"
+              className={classes.editButton}
+              onClick={() => {
+                window.location.href = `/artist/update/${artist.id}`
+              }}
+            >
+              프로필 수정
+            </Button>
+          </div>
+        )
+      }
       <div className={classes.avatarContainer}>
         <Avatar alt="작가 프로필 사진" className={classes.avatar} src={artist.thumbnail.url} />
         <span className={classes.like}>

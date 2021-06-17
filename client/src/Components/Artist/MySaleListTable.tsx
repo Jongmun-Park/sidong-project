@@ -17,7 +17,7 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import { Order } from '../../types'
 import MySaleListTableRow from './MySaleListTableRow'
-import AccountInfo from './AccountInfo'
+import AccountInfoDialog from './AccountInfoDialog'
 
 const useStyles = makeStyles({
   root: {
@@ -147,7 +147,7 @@ const MySaleListTable: FC = () => {
         />
       </Paper>
       {openAccountInfo && (
-        <AccountInfo openDialog={openAccountInfo} handleOpenDialog={setOpenAccountInfo} />
+        <AccountInfoDialog openDialog={openAccountInfo} handleOpenDialog={setOpenAccountInfo} />
       )}
     </>
   )

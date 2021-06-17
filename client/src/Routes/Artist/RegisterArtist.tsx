@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '10px',
   },
   largeAvatar: {
+    margin: 'auto',
     width: theme.spacing(10),
     height: theme.spacing(10),
   },
@@ -135,7 +136,7 @@ const RegisterArtist: FC = () => {
       },
     })
     if (registerResult.data.createArtist.success) {
-      alert('작가 등록이 완료됐습니다. 감사합니다.\n관리자가 24시간 내로 확인 후 승인하겠습니다.')
+      alert('작가 등록이 완료됐습니다. 감사합니다.')
       window.location.href = '/artists'
     } else {
       alert(registerResult.data.createArtist.msg)
@@ -270,11 +271,7 @@ const RegisterArtist: FC = () => {
                 required: '프로필 이미지를 등록해주세요.',
               })}
             />
-            <Avatar
-              style={{ margin: 'auto' }}
-              src={thumbnailPreview}
-              className={classes.largeAvatar}
-            />
+            <Avatar src={thumbnailPreview} className={classes.largeAvatar} />
           </div>
           {errors.thumbnail?.type && (
             <p className={classes.errorMessage}>{errors.thumbnail?.message}</p>

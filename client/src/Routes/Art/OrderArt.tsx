@@ -298,7 +298,6 @@ const OrderArt: FC = () => {
         <TextField
           size="small"
           className={classes.inputBox}
-          autoFocus
           name="name"
           label="성명"
           variant="outlined"

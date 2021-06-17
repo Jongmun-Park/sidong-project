@@ -11,7 +11,7 @@ export interface Artist {
     id: number
     url: string
   }
-  category: number
+  category: ArtistCategory
   residence: number
   website: string
   phone: string

@@ -15,7 +15,7 @@ import {
   Switch,
   FormHelperText,
 } from '@material-ui/core'
-import { Medium, SaleStatus, Orientation, ArtOptions, Art } from '../../types'
+import { Medium, SaleStatus, ArtOptions, Art } from '../../types'
 import { ART_OPTIONS, ART } from '../../querys'
 import { ArrowUpward, ArrowDownward } from '@material-ui/icons'
 

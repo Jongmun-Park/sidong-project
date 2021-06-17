@@ -57,3 +57,26 @@ export const ART = gql`
     }
   }
 `
+
+export const ARTIST = gql`
+  query Artist($artistId: ID!) {
+    artist(artistId: $artistId) {
+      id
+      realName
+      artistName
+      description
+      thumbnail {
+        id
+        url
+      }
+      representativeWork {
+        id
+        url
+      }
+      category
+      residence
+      website
+      phone
+    }
+  }
+`

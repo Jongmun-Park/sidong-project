@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { handleImagePreviewList } from '../../utils'
-import { Medium, SaleStatus, Orientation, ArtOptions } from '../../types'
+import { Medium, SaleStatus, ArtOptions } from '../../types'
 import { ART_OPTIONS } from '../../querys'
 import { useCurrentUser } from '../../Hooks/User'
 

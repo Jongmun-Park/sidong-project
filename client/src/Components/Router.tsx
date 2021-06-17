@@ -10,6 +10,7 @@ import OrderArt from '../Routes/Art/OrderArt'
 import ArtistList from '../Routes/Artist/ArtistListContainer'
 import ArtistDetailPage from '../Routes/Artist/ArtistDetailPage'
 import RegisterArtist from '../Routes/Artist/RegisterArtist'
+import UpdateArtist from '../Routes/Artist/UpdateArtist'
 
 class Router extends React.Component {
   render() {
@@ -32,6 +33,7 @@ class Router extends React.Component {
 
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/artist/register" component={RegisterArtist} />
+          <Route exact path="/artist/update/:artistId" component={UpdateArtist} />
           <Route exact path="/artist/:artistId" component={ArtistDetailPage} />
 
           <Redirect from="*" to="/" />

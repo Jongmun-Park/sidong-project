@@ -50,7 +50,7 @@ const REGISTER_ACCOUNT_INFO = gql`
   }
 `
 
-const AccountInfo: FC<AccountInfoProps> = ({ openDialog, handleOpenDialog }) => {
+const AccountInfoDialog: FC<AccountInfoProps> = ({ openDialog, handleOpenDialog }) => {
   const classes = useStyles()
   const [accountInfo, setAccountInfo] = useState<ArtistAccountInfo>({
     bankName: '',
@@ -92,7 +92,6 @@ const AccountInfo: FC<AccountInfoProps> = ({ openDialog, handleOpenDialog }) => 
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent className={classes.dialogContent}>
           <TextField
-            autoFocus
             margin="dense"
             label="은행명"
             name="bankName"
@@ -148,4 +147,4 @@ const AccountInfo: FC<AccountInfoProps> = ({ openDialog, handleOpenDialog }) => 
   )
 }
 
-export default AccountInfo
+export default AccountInfoDialog
