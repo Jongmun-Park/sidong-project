@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ShareButton: FC = () => {
+interface ShareButtonProps {
+  shareUrl: string
+}
+
+const ShareButton: FC<ShareButtonProps> = ({ shareUrl }) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const inputEl = useRef(null)
@@ -53,7 +57,7 @@ const ShareButton: FC = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="share-dialog-text">
-            <input ref={inputEl} type="text" value="dlrjffh ehlwmssl qkRNjtj" readOnly />
+            <input ref={inputEl} type="text" defaultValue={shareUrl} />
           </DialogContentText>
         </DialogContent>
         <DialogActions>

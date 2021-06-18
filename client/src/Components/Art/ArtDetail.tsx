@@ -159,7 +159,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const [value, setValue] = useState<number>(0)
-  // const [openLogin, setOpenLogin] = useState(false)
+  const shareUrl = `${window.location.origin}/art/${artId}`
 
   const { data } = useQuery(ART, {
     variables: {
@@ -182,11 +182,17 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
     <main className={classes.container}>
       <Helmet>
         <title>{art.name}</title>
-        {/* <meta
+        <meta
           name="description"
           content={`${art.name} - ${art.artist.realName}(${art.artist.artistName}) 작품 상세 정보`}
         />
-        <meta property="og:title" content={art.name} /> */}
+        <meta property="og:title" content={art.name} />
+        <meta property="og:url" content={shareUrl} />
+        <meta
+          property="og:description"
+          content={`${art.name} - ${art.artist.realName}(${art.artist.artistName}) 작품 상세 정보`}
+        />
+        <meta property="og:image" content={art.representativeImageUrl} />
       </Helmet>
       <div className={classes.leftArea}>
         <div className={classes.leftBox}>
@@ -216,7 +222,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
                 <LikeArt artId={artId} />
               </div>
               <div style={{ marginLeft: '15px' }}>
-                <ShareButton />
+                <ShareButton shareUrl={shareUrl} />
               </div>
             </div>
           </div>

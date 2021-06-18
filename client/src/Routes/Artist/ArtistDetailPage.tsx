@@ -160,6 +160,7 @@ const ArtistDetailPage: FC = () => {
   const [arts, setArts] = useState<Array<any>>([])
   const [noMoreArts, setNoMoreArts] = useState<boolean>(false)
   const [lastArtId, setLastArtId] = useState<string>('')
+  const shareUrl = `${window.location.origin}/artist/${artistId}`
 
   const { data } = useQuery(ARTIST, {
     variables: {
@@ -201,6 +202,7 @@ const ArtistDetailPage: FC = () => {
   }
 
   const { artist } = data
+
   const handleLoadMore = () => {
     if (noMoreArts) {
       alert('더 불러올 작품이 없습니다.')
@@ -220,11 +222,17 @@ const ArtistDetailPage: FC = () => {
         <title>
           {artist.realName}({artist.artistName})
         </title>
-        {/* <meta
+        <meta
           name="description"
           content={`${artist.realName}(${artist.artistName}) 작가의 페이지`}
         />
-        <meta property="og:title" content={`${artist.realName}(${artist.artistName})`} /> */}
+        <meta property="og:title" content={`${artist.realName}(${artist.artistName})`} />
+        <meta property="og:url" content={shareUrl} />
+        <meta
+          property="og:description"
+          content={`${artist.realName}(${artist.artistName}) 작가의 페이지`}
+        />
+        <meta property="og:image" content={artist.representativeWork.url} />
       </Helmet>
       {
         // eslint-disable-next-line

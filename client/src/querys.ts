@@ -48,6 +48,7 @@ export const ART = gql`
       orientation
       price
       deliveryFee
+      representativeImageUrl
       width
       height
       imageUrls {
