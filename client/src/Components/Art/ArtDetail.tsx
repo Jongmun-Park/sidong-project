@@ -9,9 +9,10 @@ import { Art, SaleStatus } from '../../types'
 import { ART } from '../../querys'
 import { translateSaleStatus } from '../../utils'
 import ArtInfoTable from './InfoTable'
-import Like from './Like'
+import LikeArt from './LikeArt'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
+import ShareButton from '../ShareButton'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   rightBoxHeader: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     margin: '5px 0 25px 0',
     '@media (max-width: 834px)': {
       margin: '5px 0 13px 0',
@@ -97,10 +99,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '12px',
     },
   },
-  like: {
-    float: 'right',
+  iconButtons: {
+    display: 'flex',
     cursor: 'pointer',
-    alignSelf: 'center',
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
       '@media (max-width: 834px)': {
@@ -210,9 +211,14 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
             <Typography className={classes.artName} variant="h6">
               {art.name}
             </Typography>
-            <span className={classes.like}>
-              <Like artId={artId} />
-            </span>
+            <div className={classes.iconButtons}>
+              <div style={{ paddingTop: '2px' }}>
+                <LikeArt artId={artId} />
+              </div>
+              <div style={{ marginLeft: '15px' }}>
+                <ShareButton />
+              </div>
+            </div>
           </div>
           <ArtInfoTable art={art} />
           {art.saleStatus === SaleStatus.ON_SALE ? (

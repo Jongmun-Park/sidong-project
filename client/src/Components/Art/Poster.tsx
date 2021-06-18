@@ -4,7 +4,7 @@ import { Paper, Typography, ButtonBase } from '@material-ui/core'
 import { currencyFormatter, translateSaleStatus } from '../../utils'
 import { SaleStatus } from '../../types'
 import ArtDialog from './Dialog'
-import Like from './Like'
+import LikeArt from './LikeArt'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
   like: {
     float: 'right',
     cursor: 'pointer',
-    alignSelf: 'center',
     '& .MuiSvgIcon-root': {
       fontSize: '19px',
       '@media (max-width: 834px)': {
@@ -150,14 +149,14 @@ const Poster: FC<ArtPosterProps> = ({
             <Typography variant="body2" style={{ fontWeight: 600 }}>
               {currencyFormatter(price)}
               <span className={classes.like}>
-                <Like artId={id} />
+                <LikeArt artId={id} />
               </span>
             </Typography>
           ) : (
             <Typography variant="body2" style={{ fontWeight: 600 }}>
               {translateSaleStatus(saleStatus)}
               <span className={classes.like}>
-                <Like artId={id} />
+                <LikeArt artId={id} />
               </span>
             </Typography>
           )}

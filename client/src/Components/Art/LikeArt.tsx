@@ -4,6 +4,13 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { useCurrentUser } from '../../Hooks/User'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  likeArt: {
+    color: theme.palette.lightBlack.light,
+  },
+}))
 
 interface LikeProps {
   artId: number
@@ -34,7 +41,8 @@ const CANCEL_LIKE_ART_MUTATION = gql`
   }
 `
 
-const Like: FC<LikeProps> = ({ artId }) => {
+const LikeArt: FC<LikeProps> = ({ artId }) => {
+  const classes = useStyles()
   const currentUser = useCurrentUser()
   const [likeArt] = useMutation(LIKE_ART_MUTATION)
   const [cancelLikeArt] = useMutation(CANCEL_LIKE_ART_MUTATION)
@@ -77,10 +85,10 @@ const Like: FC<LikeProps> = ({ artId }) => {
   }
 
   return (
-    <span>
+    <span className={classes.likeArt}>
       {like ? <FavoriteIcon onClick={cancelLike} /> : <FavoriteBorderIcon onClick={handleLike} />}
     </span>
   )
 }
 
-export default Like
+export default LikeArt
