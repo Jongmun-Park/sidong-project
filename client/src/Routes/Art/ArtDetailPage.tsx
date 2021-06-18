@@ -15,6 +15,9 @@ const useStyles = makeStyles({
     '@media (max-width: 834px)': {
       padding: '76px 15px 26px 15px',
     },
+    '& .MuiIconButton-root': {
+      padding: '0',
+    },
   },
 })
 
