@@ -73,11 +73,6 @@ const ArtDialog: FC<ArtDialogProps> = ({ openDialog, setOpenDialog, artId, artNa
       <DialogContent dividers={true}>
         <ArtDetail artId={artId} />
       </DialogContent>
-      {/* <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          닫 기
-        </Button>
-      </DialogActions> */}
     </Dialog>
   )
 }

@@ -80,7 +80,7 @@ const MobileNavbar: FC = () => {
         </div>
       </nav>
       <div className={`searchFieldWrapper ${openSearchField ? '' : 'inactive'}`}>
-        <SearchField />
+        <SearchField setOpenSearchField={setOpenSearchField} />
       </div>
     </div>
   )
