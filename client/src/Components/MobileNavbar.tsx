@@ -1,12 +1,21 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { IconButton } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
 import MobileMenu from './MobileMenu'
+import SearchField from './SearchField'
 import SearchIcon from '@material-ui/icons/Search'
 import logo from '../logo.png'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .searchFieldWrapper': {
+      height: '40px',
+      '&.inactive': {
+        display: 'none',
+      },
+    },
+  },
   container: {
     display: 'flex',
     width: '100%',
@@ -40,33 +49,40 @@ const useStyles = makeStyles((theme) => ({
 
 const MobileNavbar: FC = () => {
   const classes = useStyles()
+  const [openSearchField, setOpenSearchField] = useState<boolean>(false)
+
   return (
-    <nav className={classes.container}>
-      <div className={classes.leftArea}>
-        <MobileMenu />
-        <img
-          className={classes.logo}
-          onClick={() => {
-            window.location.href = '/'
-          }}
-          src={logo}
-          alt="로고"
-        />
+    <div className={classes.root}>
+      <nav className={classes.container}>
+        <div className={classes.leftArea}>
+          <MobileMenu />
+          <img
+            className={classes.logo}
+            onClick={() => {
+              window.location.href = '/'
+            }}
+            src={logo}
+            alt="로고"
+          />
+        </div>
+        <div className={classes.rightArea}>
+          <IconButton
+            aria-controls="menu"
+            aria-haspopup="true"
+            aria-label="SearchButton"
+            onClick={() => {
+              setOpenSearchField(!openSearchField)
+            }}
+          >
+            <SearchIcon className={classes.searchIcon} />
+          </IconButton>
+          <AccountMenu />
+        </div>
+      </nav>
+      <div className={`searchFieldWrapper ${openSearchField ? '' : 'inactive'}`}>
+        <SearchField />
       </div>
-      <div className={classes.rightArea}>
-        <IconButton
-          aria-controls="menu"
-          aria-haspopup="true"
-          aria-label="SearchButton"
-          onClick={() => {
-            alert('검색 서비스 준비 중입니다.\n양해 부탁드립니다.')
-          }}
-        >
-          <SearchIcon className={classes.searchIcon} />
-        </IconButton>
-        <AccountMenu />
-      </div>
-    </nav>
+    </div>
   )
 }
 
