@@ -5,10 +5,10 @@ import ClearIcon from '@material-ui/icons/Clear'
 
 const useStyles = makeStyles((theme) => ({
   search: {
-    width: '85%',
-    maxWidth: '300px',
+    width: '93%',
+    maxWidth: '353px',
     height: '100%',
-    margin: 'auto 15px auto auto',
+    margin: 'auto 10px auto auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,9 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '5px',
     transition: theme.transitions.create('width'),
     width: '100%',
-    '&:focus': {
-      backgroundColor: fade(theme.palette.primary.main, 0.1),
-    },
+    backgroundColor: fade(theme.palette.primary.main, 0.1),
   },
 }))
 
@@ -51,8 +49,22 @@ const SearchField: FC<SearchFieldProps> = ({ setOpenSearchField }) => {
         }}
         inputProps={{ 'aria-label': 'search' }}
       />
-      <Button color="primary">search</Button>
+      <Button
+        variant="outlined"
+        color="primary"
+        style={{ padding: '0px' }}
+        onClick={() => {
+          if (searchWord === '') {
+            alert('검색어를 입력해주세요.')
+            return
+          }
+          window.location.href = `/search?word=${searchWord}`
+        }}
+      >
+        search
+      </Button>
       <IconButton
+        style={{ marginLeft: '3px' }}
         size="small"
         onClick={() => {
           setOpenSearchField(false)

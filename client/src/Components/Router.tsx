@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import About from '../Routes/About'
 import Account from '../Routes/Account'
+import SearchResult from '../Routes/SearchResult'
 import ArtList from '../Routes/Art/ArtListContainer'
 import ArtDetailPage from '../Routes/Art/ArtDetailPage'
 import RegisterArt from '../Routes/Art/RegisterArt'
@@ -19,6 +20,7 @@ class Router extends React.Component {
         <Switch>
           <Route exact path="/" component={ArtList} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/search" component={SearchResult} />
           <Route exact path="/account" component={Account} />
           <Route exact path="/account/likes" component={Account} />
           <Route exact path="/account/orders" component={Account} />

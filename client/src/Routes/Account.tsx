@@ -1,11 +1,12 @@
 import React, { FC, useState, ChangeEvent } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Tabs, Tab, Typography } from '@material-ui/core'
+import { Tabs, Tab, Typography } from '@material-ui/core'
 import { useCurrentUser } from '../Hooks/User'
 import LikeContents from '../Components/User/LikingContents'
 import MyArtListTable from '../Components/Artist/MyArtListTable'
 import MySaleListTable from '../Components/Artist/MySaleListTable'
 import MyOrderListTable from '../Components/User/MyOrderListTable'
+import TabPanel from '../Components/TabPanel'
 
 const useStyles = makeStyles({
   container: {
@@ -47,32 +48,6 @@ const useStyles = makeStyles({
     },
   },
 })
-
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: any
-  value: any
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  )
-}
 
 function a11yProps(index: any) {
   return {

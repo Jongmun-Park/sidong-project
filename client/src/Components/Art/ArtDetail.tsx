@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Box, Tabs, Tab, Typography } from '@material-ui/core'
+import { Button, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { Art, SaleStatus } from '../../types'
@@ -13,6 +13,7 @@ import LikeArt from './LikeArt'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 import ShareButton from '../ShareButton'
+import TabPanel from '../TabPanel'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -119,33 +120,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: any
-  value: any
-}
 interface ArtDetailParams {
   artId: number
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  )
 }
 
 function a11yProps(index: any) {
