@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import AccountMenu from './AccountMenu'
-import MobileNavbar from './MobileNavbar'
-import { useCurrentUser } from '../Hooks/User'
+import MobileNavbar from './Mobile/MobileNavbar'
+import SearchField from './SearchField'
+// import { useCurrentUser } from '../Hooks/User'
 import logo from '../logo.png'
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '45px',
   },
   rightArea: {
+    display: 'flex',
+    alignItems: 'center',
     margin: '0 70px 0 auto',
   },
   mobileNavbar: {
@@ -57,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar: FC = () => {
   const classes = useStyles()
-  const currentUser = useCurrentUser()
-  const isApprovedArtist = currentUser?.artist?.isApproved
+  // const currentUser = useCurrentUser()
+  // const isApprovedArtist = currentUser?.artist?.isApproved
 
   return (
     <header>
@@ -83,7 +86,8 @@ const NavBar: FC = () => {
           </Button>
         </div>
         <div className={classes.rightArea}>
-          {isApprovedArtist ? (
+          <SearchField />
+          {/* {isApprovedArtist ? (
             <Button
               className={classes.registerButton}
               variant="outlined"
@@ -109,7 +113,7 @@ const NavBar: FC = () => {
             >
               작가 등록
             </Button>
-          )}
+          )} */}
           <div className={classes.accountMenu}>
             <AccountMenu />
           </div>

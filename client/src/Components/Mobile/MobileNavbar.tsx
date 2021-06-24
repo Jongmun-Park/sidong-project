@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { IconButton } from '@material-ui/core'
-import AccountMenu from './AccountMenu'
+import AccountMenu from '../AccountMenu'
 import MobileMenu from './MobileMenu'
-import SearchField from './SearchField'
+import MobileSearchField from './MobileSearchField'
 import SearchIcon from '@material-ui/icons/Search'
-import logo from '../logo.png'
+import logo from '../../logo.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +80,7 @@ const MobileNavbar: FC = () => {
         </div>
       </nav>
       <div className={`searchFieldWrapper ${openSearchField ? '' : 'inactive'}`}>
-        <SearchField setOpenSearchField={setOpenSearchField} />
+        <MobileSearchField setOpenSearchField={setOpenSearchField} />
       </div>
     </div>
   )

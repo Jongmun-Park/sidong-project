@@ -1,34 +1,36 @@
 import React, { FC, useState } from 'react'
-import { InputBase } from '@material-ui/core'
+import { InputBase, Button, IconButton } from '@material-ui/core'
 import { makeStyles, fade } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const useStyles = makeStyles((theme) => ({
   search: {
-    width: '320px',
+    width: '93%',
+    maxWidth: '353px',
+    height: '100%',
+    margin: 'auto 10px auto auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  searchIcon: {
-    width: '30px',
-    height: '35px',
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: fade(theme.palette.primary.main, 0.1),
-    borderRadius: '0 3px 3px 0',
-    cursor: 'pointer',
+  inputRoot: {
+    color: 'inherit',
+    width: '100%',
   },
   inputInput: {
-    borderRadius: '3px 0 0 3px',
-    width: '272px',
-    padding: '8px 8px 8px 10px',
+    padding: '8px',
+    marginRight: '5px',
     transition: theme.transitions.create('width'),
+    width: '100%',
     backgroundColor: fade(theme.palette.primary.main, 0.1),
   },
 }))
 
-const SearchField: FC = () => {
+interface SearchFieldProps {
+  setOpenSearchField: (arg0: boolean) => void
+}
+
+const MobileSearchField: FC<SearchFieldProps> = ({ setOpenSearchField }) => {
   const classes = useStyles()
   const [searchWord, setSearchWord] = useState<string>('')
 
@@ -36,7 +38,9 @@ const SearchField: FC = () => {
     <div className={classes.search}>
       <InputBase
         placeholder="search art, artist"
+        autoFocus={true}
         classes={{
+          root: classes.inputRoot,
           input: classes.inputInput,
         }}
         value={searchWord}
@@ -54,8 +58,10 @@ const SearchField: FC = () => {
         }}
         inputProps={{ 'aria-label': 'search' }}
       />
-      <div
-        className={classes.searchIcon}
+      <Button
+        variant="outlined"
+        color="primary"
+        style={{ padding: '0px' }}
         onClick={() => {
           if (searchWord === '') {
             alert('검색어를 입력해주세요.')
@@ -64,10 +70,19 @@ const SearchField: FC = () => {
           window.location.href = `/search?word=${searchWord}`
         }}
       >
-        <SearchIcon />
-      </div>
+        search
+      </Button>
+      <IconButton
+        style={{ marginLeft: '3px' }}
+        size="small"
+        onClick={() => {
+          setOpenSearchField(false)
+        }}
+      >
+        <ClearIcon fontSize="small" />
+      </IconButton>
     </div>
   )
 }
 
-export default SearchField
+export default MobileSearchField
