@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import { makeStyles } from '@material-ui/core/styles'
 import { Tabs, Tab, Typography } from '@material-ui/core'
 import TabPanel from '../Components/TabPanel'
+import ArtSearchResult from '../Components/Art/ArtSearchResult'
 
 const useStyles = makeStyles({
   container: {
@@ -121,7 +122,7 @@ const SearchResult: FC = () => {
       </Tabs>
       <div className={classes.tabPanel}>
         <TabPanel value={value} index={'arts'}>
-          <div>art</div>
+          <ArtSearchResult word={word} />
         </TabPanel>
         <TabPanel value={value} index={'artists'}>
           <div>artist</div>

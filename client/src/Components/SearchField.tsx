@@ -47,6 +47,11 @@ const SearchField: FC<SearchFieldProps> = ({ setOpenSearchField }) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setSearchWord(e.target.value)
         }}
+        onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          if (e.key === 'Enter') {
+            window.location.href = `/search?word=${searchWord}`
+          }
+        }}
         inputProps={{ 'aria-label': 'search' }}
       />
       <Button
