@@ -335,6 +335,9 @@ const RegisterArt: FC = () => {
                   판매 가격
                 </FormLabel>
                 <FormHelperText>- 판매 가격은 10,000원 ~ 1,500,000원 까지</FormHelperText>
+                <FormHelperText>
+                  - 1,500,000원을 초과하는 고가의 작품은 등록할 수 없습니다.
+                </FormHelperText>
                 <div className={classes.inputElement}>
                   <input
                     style={{ width: '85px' }}
@@ -392,7 +395,10 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               작품 크기
             </FormLabel>
-            <FormHelperText>- 가로/세로 최대 길이는 500cm</FormHelperText>
+            <FormHelperText>- 가로/세로 최대 길이는 250cm</FormHelperText>
+            <FormHelperText>
+              - 한 면의 길이가 250cm를 초과하는 대형 작품은 등록할 수 없습니다.
+            </FormHelperText>
             <div className={classes.inputElement}>
               가로 &nbsp;
               <input
@@ -402,7 +408,7 @@ const RegisterArt: FC = () => {
                 name="width"
                 required={true}
                 min="1"
-                max="500"
+                max="250"
               ></input>
               &nbsp;cm
             </div>
@@ -415,7 +421,7 @@ const RegisterArt: FC = () => {
                 name="height"
                 required={true}
                 min="1"
-                max="500"
+                max="250"
               ></input>
               &nbsp;cm
             </div>

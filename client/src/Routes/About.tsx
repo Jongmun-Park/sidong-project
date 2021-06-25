@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import aboutImage from '../about-image.jpg'
+import aboutImage from '../Images/about-image.jpg'
 
 const useStyles = makeStyles({
   centerArea: {

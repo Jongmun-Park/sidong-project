@@ -5,7 +5,7 @@ import AccountMenu from './AccountMenu'
 import MobileNavbar from './Mobile/MobileNavbar'
 import SearchField from './SearchField'
 // import { useCurrentUser } from '../Hooks/User'
-import logo from '../logo.png'
+import logo from '../Images/logo.png'
 
 const useStyles = makeStyles((theme) => ({
   container: {

@@ -5,7 +5,7 @@ import AccountMenu from '../AccountMenu'
 import MobileMenu from './MobileMenu'
 import MobileSearchField from './MobileSearchField'
 import SearchIcon from '@material-ui/icons/Search'
-import logo from '../../logo.png'
+import logo from '../../Images/logo.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
