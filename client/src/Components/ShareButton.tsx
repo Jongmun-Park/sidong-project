@@ -61,7 +61,14 @@ const ShareButton: FC<ShareButtonProps> = ({ shareUrl }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button id="copyButton" color="primary" size="small">
+          <Button
+            id="copyButton"
+            color="primary"
+            size="small"
+            onClick={() => {
+              alert('주소 복사 완료!')
+            }}
+          >
             복사하기
           </Button>
         </DialogActions>

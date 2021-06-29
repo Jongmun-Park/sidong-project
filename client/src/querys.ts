@@ -51,6 +51,7 @@ export const ART = gql`
       representativeImageUrl
       width
       height
+      size
       imageUrls {
         id
         url

@@ -42,6 +42,7 @@ export interface Art {
     name: string
   }
   saleStatus: SaleStatus
+  size: String
   isFramed: boolean
   price: number
   deliveryFee: number

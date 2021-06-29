@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useRef, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useQuery } from '@apollo/react-hooks'
 import { makeStyles } from '@material-ui/core/styles'
@@ -12,8 +12,10 @@ import ArtInfoTable from './InfoTable'
 import LikeArt from './LikeArt'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
+import mediumBackground from '../../Images/medium-size-background.jpeg'
 import ShareButton from '../ShareButton'
 import TabPanel from '../TabPanel'
+import { debounce } from 'lodash'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -118,6 +120,28 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     color: theme.palette.secondary.main,
   },
+  displayImage: {
+    width: '100%',
+    maxWidth: '650px',
+  },
+  displayImageWrapper: {
+    width: '100%',
+    maxWidth: '650px',
+    margin: '70px auto',
+    position: 'relative',
+    '@media (max-width: 834px)': {
+      margin: '50px auto',
+    },
+  },
+  representativeImgWrapper: {
+    position: 'absolute',
+    width: '100%',
+    top: '7%',
+    textAlign: 'center',
+  },
+  representativeImg: {
+    boxShadow: '0 6px 10px -1px #333',
+  },
 }))
 
 interface ArtDetailParams {
@@ -134,15 +158,56 @@ function a11yProps(index: any) {
 const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
-  const [value, setValue] = useState<number>(0)
   const shareUrl = `${window.location.origin}/art/${artId}`
+  const mediumBackgroundRealSize = 200 // 200cm
+
+  const displayImageDiv = useRef<HTMLDivElement>(null)
+  const [tabIndex, setTabIndex] = useState<number>(0)
+  const [artSize, setArtSize] = useState({
+    width: 0,
+    height: 0,
+  })
+  const [representativeImgSize, setRepresentativeImgSize] = useState({
+    width: 0,
+    height: 0,
+  })
 
   const { data } = useQuery(ART, {
     variables: {
       artId,
     },
+    onCompleted: (data) => {
+      const { art } = data
+      if (displayImageDiv.current) {
+        const pixelRatio = displayImageDiv.current.clientWidth / mediumBackgroundRealSize
+        setArtSize({
+          width: art.width,
+          height: art.height,
+        })
+        setRepresentativeImgSize({
+          width: art.width * pixelRatio,
+          height: art.height * pixelRatio,
+        })
+      }
+    },
     onError: (error) => console.error(error.message),
   })
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      if (displayImageDiv.current) {
+        const pixelRatio = displayImageDiv.current.clientWidth / mediumBackgroundRealSize
+        setRepresentativeImgSize({
+          width: artSize.width * pixelRatio,
+          height: artSize.height * pixelRatio,
+        })
+      }
+    }, 1000)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [artSize])
 
   if (!data) {
     return null
@@ -151,7 +216,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const { art }: { art: Art } = data
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue)
+    setTabIndex(newValue)
   }
 
   return (
@@ -234,7 +299,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
         <Tabs
           indicatorColor="primary"
           textColor="primary"
-          value={value}
+          value={tabIndex}
           onChange={handleChange}
           aria-label="작품 페이지 탭"
         >
@@ -244,10 +309,24 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
         </Tabs>
       </div>
       <div className={classes.tabPanel}>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={tabIndex} index={0}>
           <div className={classes.description}>{art.description}</div>
+          {art.size === 'MEDIUM' && (
+            <div className={classes.displayImageWrapper} ref={displayImageDiv}>
+              <img className={classes.displayImage} src={mediumBackground} alt="전시 배경 이미지" />
+              <div className={classes.representativeImgWrapper}>
+                <img
+                  className={classes.representativeImg}
+                  src={art.representativeImageUrl}
+                  alt="작품 대표 이미지"
+                  width={representativeImgSize.width}
+                  height={representativeImgSize.height}
+                />
+              </div>
+            </div>
+          )}
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel value={tabIndex} index={1}>
           <div style={{ lineHeight: '27px' }}>
             <div style={{ fontWeight: 600 }}>
               * 아래 절차가 진행될 때마다 구매자에게 안내 문자를 보내드립니다.
@@ -291,7 +370,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
             </div>
           </div>
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={tabIndex} index={2}>
           <div style={{ lineHeight: '27px' }}>
             [ 교환 안내 ]
             <div style={{ fontWeight: 600 }}>
@@ -317,7 +396,6 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
           </div>
         </TabPanel>
       </div>
-      {/* {openLogin && <Login openDialog={openLogin} handleOpenDialog={setOpenLogin} />} */}
     </main>
   )
 }
