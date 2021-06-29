@@ -399,7 +399,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             />
             <Chip
               className={filters.size.medium ? '' : 'inactive'}
-              label="50~150cm"
+              label="50~100cm"
               clickable
               color="primary"
               size="small"
@@ -412,7 +412,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
             />
             <Chip
               className={filters.size.large ? '' : 'inactive'}
-              label="150cm 초과"
+              label="100cm 초과"
               clickable
               color="primary"
               size="small"

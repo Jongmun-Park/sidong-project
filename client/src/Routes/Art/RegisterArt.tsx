@@ -395,9 +395,9 @@ const RegisterArt: FC = () => {
             <FormLabel component="div" className={classes.formLabel}>
               작품 크기
             </FormLabel>
-            <FormHelperText>- 가로/세로 최대 길이는 250cm</FormHelperText>
+            <FormHelperText>- 가로/세로 최대 길이는 200cm</FormHelperText>
             <FormHelperText>
-              - 한 면의 길이가 250cm를 초과하는 대형 작품은 등록할 수 없습니다.
+              - 한 면의 길이가 200cm를 초과하는 대형 작품은 등록할 수 없습니다.
             </FormHelperText>
             <div className={classes.inputElement}>
               가로 &nbsp;
@@ -408,7 +408,7 @@ const RegisterArt: FC = () => {
                 name="width"
                 required={true}
                 min="1"
-                max="250"
+                max="200"
               ></input>
               &nbsp;cm
             </div>
@@ -421,7 +421,7 @@ const RegisterArt: FC = () => {
                 name="height"
                 required={true}
                 min="1"
-                max="250"
+                max="200"
               ></input>
               &nbsp;cm
             </div>
