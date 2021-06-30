@@ -13,6 +13,7 @@ import LikeArt from './LikeArt'
 import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 import mediumBackground from '../../Images/medium-size-background.jpeg'
+import smallBackground from '../../Images/small-size-background.jpeg'
 import ShareButton from '../ShareButton'
 import TabPanel from '../TabPanel'
 import { debounce } from 'lodash'
@@ -160,12 +161,14 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const currentUser = useCurrentUser()
   const shareUrl = `${window.location.origin}/art/${artId}`
   const mediumBackgroundRealSize = 200 // 200cm
+  const smallBackgroundRealSize = 184 // 184cm
 
   const displayImageDiv = useRef<HTMLDivElement>(null)
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [artSize, setArtSize] = useState({
     width: 0,
     height: 0,
+    size: 'SMALL',
   })
   const [representativeImgSize, setRepresentativeImgSize] = useState({
     width: 0,
@@ -179,10 +182,14 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
     onCompleted: (data) => {
       const { art } = data
       if (displayImageDiv.current) {
-        const pixelRatio = displayImageDiv.current.clientWidth / mediumBackgroundRealSize
+        const pixelRatio =
+          displayImageDiv.current.clientWidth /
+          (art.size === 'SMALL' ? smallBackgroundRealSize : mediumBackgroundRealSize)
+
         setArtSize({
           width: art.width,
           height: art.height,
+          size: art.size,
         })
         setRepresentativeImgSize({
           width: art.width * pixelRatio,
@@ -196,7 +203,10 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   useEffect(() => {
     const handleResize = debounce(() => {
       if (displayImageDiv.current) {
-        const pixelRatio = displayImageDiv.current.clientWidth / mediumBackgroundRealSize
+        const pixelRatio =
+          displayImageDiv.current.clientWidth /
+          (artSize.size === 'SMALL' ? smallBackgroundRealSize : mediumBackgroundRealSize)
+
         setRepresentativeImgSize({
           width: artSize.width * pixelRatio,
           height: artSize.height * pixelRatio,
@@ -311,9 +321,13 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
       <div className={classes.tabPanel}>
         <TabPanel value={tabIndex} index={0}>
           <div className={classes.description}>{art.description}</div>
-          {art.size === 'MEDIUM' && (
+          {art.size !== 'LARGE' && (
             <div className={classes.displayImageWrapper} ref={displayImageDiv}>
-              <img className={classes.displayImage} src={mediumBackground} alt="전시 배경 이미지" />
+              <img
+                className={classes.displayImage}
+                src={art.size === 'SMALL' ? smallBackground : mediumBackground}
+                alt="전시 배경 이미지"
+              />
               <div className={classes.representativeImgWrapper}>
                 <img
                   className={classes.representativeImg}
