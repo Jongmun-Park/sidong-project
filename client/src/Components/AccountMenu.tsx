@@ -105,6 +105,13 @@ const AccountMenu: FC = () => {
             <MenuItem onClick={() => (window.location.href = '/account/orders')}>
               주문 내역
             </MenuItem>
+            <MenuItem
+              onClick={() => {
+                window.open('https://forms.gle/VkaPuV4yaY2rSPkR7')
+              }}
+            >
+              고객 센터
+            </MenuItem>
             <MenuItem onClick={logout}>로그아웃</MenuItem>
           </div>
         ) : (
@@ -122,6 +129,13 @@ const AccountMenu: FC = () => {
               }}
             >
               작가 등록
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                window.open('https://forms.gle/VkaPuV4yaY2rSPkR7')
+              }}
+            >
+              고객 센터
             </MenuItem>
           </div>
         )}
