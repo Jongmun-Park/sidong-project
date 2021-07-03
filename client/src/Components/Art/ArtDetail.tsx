@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button, Tabs, Tab, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
-import { Art, SaleStatus } from '../../types'
+import { Art, SaleStatus, Medium } from '../../types'
 import { ART } from '../../querys'
 import { translateSaleStatus } from '../../utils'
 import ArtInfoTable from './InfoTable'
@@ -14,6 +14,7 @@ import PriceInfoTable from './PriceInfoTable'
 import { useCurrentUser } from '../../Hooks/User'
 import mediumBackground from '../../Images/medium-size-background.jpeg'
 import smallBackground from '../../Images/small-size-background.jpeg'
+import largeBackground from '../../Images/large-size-background.jpg'
 import ShareButton from '../ShareButton'
 import TabPanel from '../TabPanel'
 import { debounce } from 'lodash'
@@ -156,13 +157,30 @@ function a11yProps(index: any) {
   }
 }
 
+function getBackgroundImageRealSize(size: String) {
+  if (size === 'SMALL') {
+    return 184
+  } else if (size === 'MEDIUM') {
+    return 200
+  } else {
+    return 300 // size === 'LARGE'
+  }
+}
+
+function getBackgroundImage(size: String) {
+  if (size === 'SMALL') {
+    return smallBackground
+  } else if (size === 'MEDIUM') {
+    return mediumBackground
+  } else {
+    return largeBackground
+  }
+}
+
 const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
   const classes = useStyles()
   const currentUser = useCurrentUser()
   const shareUrl = `${window.location.origin}/art/${artId}`
-  const mediumBackgroundRealSize = 200 // 200cm
-  const smallBackgroundRealSize = 184 // 184cm
-
   const displayImageDiv = useRef<HTMLDivElement>(null)
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [artSize, setArtSize] = useState({
@@ -183,8 +201,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
       const { art } = data
       if (displayImageDiv.current) {
         const pixelRatio =
-          displayImageDiv.current.clientWidth /
-          (art.size === 'SMALL' ? smallBackgroundRealSize : mediumBackgroundRealSize)
+          displayImageDiv.current.clientWidth / getBackgroundImageRealSize(art.size)
 
         setArtSize({
           width: art.width,
@@ -204,8 +221,7 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
     const handleResize = debounce(() => {
       if (displayImageDiv.current) {
         const pixelRatio =
-          displayImageDiv.current.clientWidth /
-          (artSize.size === 'SMALL' ? smallBackgroundRealSize : mediumBackgroundRealSize)
+          displayImageDiv.current.clientWidth / getBackgroundImageRealSize(artSize.size)
 
         setRepresentativeImgSize({
           width: artSize.width * pixelRatio,
@@ -321,11 +337,11 @@ const ArtDetail: FC<ArtDetailParams> = ({ artId }) => {
       <div className={classes.tabPanel}>
         <TabPanel value={tabIndex} index={0}>
           <div className={classes.description}>{art.description}</div>
-          {art.size !== 'LARGE' && (
+          {art.medium !== Medium.SCULPTURE && (
             <div className={classes.displayImageWrapper} ref={displayImageDiv}>
               <img
                 className={classes.displayImage}
-                src={art.size === 'SMALL' ? smallBackground : mediumBackground}
+                src={getBackgroundImage(art.size)}
                 alt="전시 배경 이미지"
               />
               <div className={classes.representativeImgWrapper}>
