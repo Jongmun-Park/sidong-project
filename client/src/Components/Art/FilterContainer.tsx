@@ -116,7 +116,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
   const [openSize, setOpenSize] = useState(setOpenMobileFilter ? false : true)
   const [openOrientation, setOpenOrientation] = useState(setOpenMobileFilter ? false : true)
   const [artOptions, setArtOptions] = useState<ArtOptions | null>(null)
-  const [price, setPrice] = useState<number[]>([0, 1500000])
+  const [price, setPrice] = useState<number[]>([0, 2000000])
 
   const [changeArtOptions] = useLazyQuery(ART_OPTIONS, {
     onCompleted: (data) => {
@@ -333,7 +333,7 @@ const FilterContainer: FC<FilterContainerProps> = ({
               className={classes.slider}
               value={price}
               min={0}
-              max={1500000}
+              max={2000000}
               step={100000}
               onChange={handlePriceRange}
               valueLabelDisplay="off"

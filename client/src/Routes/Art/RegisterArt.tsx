@@ -334,9 +334,9 @@ const RegisterArt: FC = () => {
                 <FormLabel component="div" className={classes.formLabel}>
                   판매 가격
                 </FormLabel>
-                <FormHelperText>- 판매 가격은 10,000원 ~ 1,500,000원 까지</FormHelperText>
+                <FormHelperText>- 판매 가격은 10,000원 ~ 2,000,000원 까지</FormHelperText>
                 <FormHelperText>
-                  - 1,500,000원을 초과하는 고가의 작품은 등록할 수 없습니다.
+                  - 2,000,000원을 초과하는 고가의 작품은 등록할 수 없습니다.
                 </FormHelperText>
                 <div className={classes.inputElement}>
                   <input
@@ -345,7 +345,7 @@ const RegisterArt: FC = () => {
                     step="100"
                     name="price"
                     min="10000"
-                    max="1500000"
+                    max="2000000"
                     ref={register({
                       validate: {
                         positive: (value) => value > 0 || '판매 가격을 입력해주세요.',

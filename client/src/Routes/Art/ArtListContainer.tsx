@@ -66,7 +66,7 @@ const ArtList: FC = () => {
       square: false,
       etc: false,
     },
-    price: [0, 1500000],
+    price: [0, 2000000],
     medium: 'all',
     theme: 'all',
     style: 'all',
